@@ -1,0 +1,519 @@
+:root {
+  color-scheme: dark;
+  --bg: #0d0f0e;
+  --panel: rgba(17, 22, 20, 0.88);
+  --panel-solid: #151b19;
+  --line: rgba(227, 230, 218, 0.14);
+  --text: #edf0e8;
+  --muted: #aeb6a9;
+  --accent: #d9b15f;
+  --danger: #c94d46;
+  --good: #75b985;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+button {
+  border: 1px solid var(--line);
+  background: #222a25;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: rgba(217, 177, 95, 0.75);
+  background: #2a332d;
+}
+
+#game {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: clamp(2.4rem, 6vw, 5.6rem);
+  line-height: 0.9;
+}
+
+h2 {
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.stats,
+.hud-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.stats span,
+.hud-strip span {
+  min-width: 86px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+}
+
+.stats b,
+.hud-strip b {
+  color: var(--text);
+}
+
+.base-hud {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  pointer-events: none;
+}
+
+.base-hud > div,
+.base-panel__body,
+.mission-hud > div {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(12, 15, 14, 0.78);
+  backdrop-filter: blur(12px);
+}
+
+.base-hud > div {
+  padding: 12px 14px;
+}
+
+.base-hud strong,
+.base-hud span {
+  display: block;
+}
+
+.base-hud > div > span {
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.base-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(5, 7, 6, 0.36);
+}
+
+.base-panel__body {
+  width: min(760px, 100%);
+  max-height: min(720px, calc(100vh - 32px));
+  overflow: auto;
+  padding: 18px;
+  background: rgba(15, 19, 17, 0.92);
+}
+
+.base-panel__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.base-panel__header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.icon-button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 6px;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.panel-block {
+  min-height: 120px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.panel-block h3 {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+}
+
+.item-list,
+.upgrade-list,
+.craft-list,
+.action-list,
+.bonus-list {
+  display: grid;
+  gap: 8px;
+}
+
+.item-row,
+.upgrade,
+.craft-row,
+.action-row,
+.bonus-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+}
+
+.upgrade span,
+.craft-row span,
+.action-row span,
+.bonus-row span {
+  color: var(--accent);
+}
+
+.locations {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.location {
+  display: grid;
+  min-height: 128px;
+  padding: 14px;
+  text-align: left;
+  border-radius: 8px;
+  align-content: space-between;
+}
+
+.location strong,
+.location span {
+  display: block;
+}
+
+.location span {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.stars {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.mission-hud {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  pointer-events: none;
+}
+
+#missionName,
+#missionMeta {
+  display: block;
+}
+
+#missionMeta {
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.prompt {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 3;
+  width: min(520px, calc(100% - 32px));
+  transform: translateX(-50%);
+  padding: 12px 14px;
+  border: 1px solid rgba(217, 177, 95, 0.6);
+  border-radius: 8px;
+  background: rgba(18, 22, 20, 0.9);
+  text-align: center;
+  color: var(--text);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 7, 6, 0.66);
+}
+
+.inventory-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  background: rgba(4, 6, 5, 0.72);
+}
+
+.inventory-window {
+  width: min(640px, calc(100vw - 28px));
+  max-height: calc(100vh - 28px);
+  overflow: auto;
+  padding: 14px;
+  border: 2px solid rgba(237, 240, 232, 0.2);
+  border-radius: 8px;
+  background: rgba(18, 22, 20, 0.96);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+}
+
+.inventory-header,
+.inventory-pack__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.inventory-header {
+  margin-bottom: 10px;
+}
+
+.inventory-header h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.inventory-layout {
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: 12px;
+}
+
+.survivor-preview {
+  display: grid;
+  align-content: space-between;
+  min-height: 224px;
+  padding: 12px;
+  border: 2px solid rgba(42, 166, 79, 0.9);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(42, 166, 79, 0.12), transparent 44%),
+    rgba(255, 255, 255, 0.03);
+  justify-items: center;
+}
+
+.inventory-sprite {
+  width: 124px;
+  height: 124px;
+  margin-top: 18px;
+  background-image: url("../assets/player_idle_south_sheet.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: 992px 124px;
+  image-rendering: pixelated;
+  animation: inventory-idle 1.6s steps(8) infinite;
+}
+
+.survivor-stats {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.survivor-stats span {
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--muted);
+}
+
+.survivor-stats b {
+  color: var(--text);
+}
+
+@keyframes inventory-idle {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -992px;
+  }
+}
+
+.equipment-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  grid-template-rows: 68px 84px;
+  gap: 10px;
+}
+
+.equipment-slot,
+.inventory-slot {
+  display: grid;
+  align-content: space-between;
+  min-height: 64px;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.equipment-slot {
+  border: 2px solid rgba(42, 166, 79, 0.95);
+  background: rgba(42, 166, 79, 0.06);
+}
+
+.equipment-slot--wide {
+  grid-column: 1;
+}
+
+.equipment-slot--backpack {
+  grid-row: span 2;
+  border-color: #ffe000;
+  background: rgba(255, 224, 0, 0.07);
+}
+
+.equipment-slot span,
+.inventory-slot span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.equipment-slot b,
+.inventory-slot b {
+  color: var(--text);
+  font-size: 0.84rem;
+}
+
+.inventory-pack {
+  grid-column: span 2;
+  padding-top: 2px;
+}
+
+.inventory-pack__header {
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+
+.inventory-slots {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border: 2px solid #ff7b2b;
+}
+
+.inventory-slots--six {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.inventory-slot {
+  min-height: 58px;
+  border: 1px solid #ff7b2b;
+  background: rgba(255, 123, 43, 0.05);
+}
+
+.inventory-slot:disabled,
+.equipment-slot:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.modal__body {
+  width: min(440px, calc(100% - 32px));
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-solid);
+}
+
+.modal button {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 6px;
+}
+
+@media (max-width: 760px) {
+  .panel-grid,
+  .inventory-layout,
+  .locations {
+    grid-template-columns: 1fr;
+  }
+
+  .inventory-pack {
+    grid-column: auto;
+  }
+
+  .equipment-grid,
+  .inventory-slots {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .base-hud,
+  .mission-hud {
+    flex-direction: column;
+  }
+}
