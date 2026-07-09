@@ -10,12 +10,11 @@ except ImportError:
 ASSET_DIR = Path(__file__).resolve().parents[1] / "assets"
 
 SOURCES = {
-    "idle_south": "player_src_idle_south.gif",
+    "breathing_south": "player_src_breathing_south.gif",
     "breathing_north": "player_src_breathing_north.gif",
     "breathing_north_east": "player_src_breathing_north_east.gif",
     "breathing_east": "player_src_breathing_east.gif",
     "breathing_south_east": "player_src_breathing_south_east.gif",
-    "breathing_south": "player_src_breathing_south.gif",
     "breathing_south_west": "player_src_breathing_south_west.gif",
     "breathing_west": "player_src_breathing_west.gif",
     "breathing_north_west": "player_src_breathing_north_west.gif",

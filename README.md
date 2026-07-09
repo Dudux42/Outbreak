@@ -73,6 +73,24 @@ The repository includes source GIFs and generated sprite sheets for the player a
 
 Texture generation helpers live in `tools/generate_game_textures.py`. Generated textures and item icons are committed under `assets/`.
 
+## Current Issues and Future Plans
+
+This build is still in heavy prototype mode. The handgun aiming animation state is wired into the debug panel, but the current aim sheets are visually subtle and still need art polish before they read clearly in-game. The `Y` debug panel shows the active player animation state, selected sprite sheet, loaded texture, quickbar slot, and held weapon to help track animation problems during testing.
+
+Short-term work:
+
+- Replace placeholder or rough weapon-ready animations with final sprite sheets for handgun, melee, and shotgun states.
+- Continue cleaning up inventory, item box, quickbar, and drag-and-drop behavior.
+- Balance movement, aiming, reloading, melee reach, zombie pressure, and ammo availability.
+- Expand loot tables by map type and connect station upgrades to real gameplay effects.
+
+Long-term work:
+
+- Split `src/main.js` into smaller gameplay, UI, world, and entity modules.
+- Add save data, crafting, station upgrades, and more mission location types.
+- Improve performance with broader spatial partitioning and AI update budgets.
+- Add automated checks for sprite-sheet assets, item definitions, and animation state coverage.
+
 ## Prototype Status
 
 This is an active prototype. The current codebase still keeps most gameplay systems in `src/main.js`; modularization, deeper station upgrades, loot balancing, crafting, save data, and full combat polish are planned future passes.

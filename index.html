@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Outbreak Run Prototype</title>
-    <link rel="stylesheet" href="./src/styles.css?v=inventory-prompt-2" />
+    <link rel="stylesheet" href="./src/styles.css?v=ammo-reload" />
   </head>
   <body>
     <main id="app">
@@ -17,7 +17,6 @@
         </div>
         <div class="hud-strip">
           <span>HP <b id="baseHealth">100</b></span>
-          <span>Ammo <b id="baseAmmo">12</b></span>
           <span>Pack <b id="basePack">0/8</b></span>
         </div>
       </section>
@@ -36,21 +35,41 @@
       </section>
 
       <section id="missionHud" class="mission-hud hidden">
-        <div>
-          <strong id="missionName">Location</strong>
-          <span id="missionMeta">1 star</span>
-        </div>
-        <div class="hud-strip">
-          <span>HP <b id="hudHealth">100</b></span>
-          <span>Ammo <b id="hudAmmo">12</b></span>
-          <span>Pack <b id="hudPack">0/8</b></span>
-          <span>Keys <b id="hudKeys">0</b></span>
+        <div class="health-widget">
+          <div class="health-widget__header">
+            <strong id="missionName">Location</strong>
+            <span id="missionMeta">1 star</span>
+          </div>
+          <div class="health-bar" aria-label="Health">
+            <span id="hudHealthFill"></span>
+          </div>
+          <div class="health-widget__footer">
+            <span>HP <b id="hudHealth">100</b></span>
+            <span>Pack <b id="hudPack">0/8</b></span>
+            <span>Keys <b id="hudKeys">0</b></span>
+          </div>
         </div>
       </section>
 
       <section id="prompt" class="prompt hidden"></section>
 
       <section id="quickbar" class="quickbar" aria-label="Quick access bar"></section>
+
+      <section id="weaponHud" class="weapon-hud hidden" aria-label="Held weapon">
+        <img id="weaponHudIcon" alt="" />
+        <div>
+          <strong id="weaponHudName">Hands Empty</strong>
+          <span id="weaponHudAmmo">-</span>
+        </div>
+      </section>
+
+      <section id="debugPanel" class="debug-panel hidden" aria-label="Debug panel">
+        <header>
+          <strong>Debug</strong>
+          <span>Y</span>
+        </header>
+        <pre id="debugPanelContent"></pre>
+      </section>
 
       <section id="inventoryOverlay" class="inventory-overlay hidden">
         <div class="inventory-window">

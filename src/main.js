@@ -12,6 +12,9 @@ const inventoryOverlay = document.querySelector("#inventoryOverlay");
 const closeInventoryButton = document.querySelector("#closeInventory");
 const runEnd = document.querySelector("#runEnd");
 const returnBaseButton = document.querySelector("#returnBase");
+const weaponHud = document.querySelector("#weaponHud");
+const debugPanel = document.querySelector("#debugPanel");
+const debugPanelContent = document.querySelector("#debugPanelContent");
 const quantityPrompt = document.querySelector("#quantityPrompt");
 const quantityPromptForm = document.querySelector("#quantityPromptForm");
 const quantityPromptTitle = document.querySelector("#quantityPromptTitle");
@@ -21,14 +24,16 @@ const quantityPromptCancel = document.querySelector("#quantityPromptCancel");
 
 const ui = {
   baseHealth: document.querySelector("#baseHealth"),
-  baseAmmo: document.querySelector("#baseAmmo"),
   basePack: document.querySelector("#basePack"),
   missionName: document.querySelector("#missionName"),
   missionMeta: document.querySelector("#missionMeta"),
   hudHealth: document.querySelector("#hudHealth"),
-  hudAmmo: document.querySelector("#hudAmmo"),
+  hudHealthFill: document.querySelector("#hudHealthFill"),
   hudPack: document.querySelector("#hudPack"),
   hudKeys: document.querySelector("#hudKeys"),
+  weaponHudIcon: document.querySelector("#weaponHudIcon"),
+  weaponHudName: document.querySelector("#weaponHudName"),
+  weaponHudAmmo: document.querySelector("#weaponHudAmmo"),
   inventoryHp: document.querySelector("#inventoryHp"),
   inventoryArmor: document.querySelector("#inventoryArmor"),
   inventoryCapacity: document.querySelector("#inventoryCapacity"),
@@ -61,7 +66,24 @@ const EQUIPMENT_SLOTS = Object.freeze({
 });
 
 const MAX_FRAME_DT = 0.05;
-const COLLIDER_CELL_SIZE = 4;
+const COLLIDER_CELL_SIZE = 12;
+const AMMO_STACK_LIMIT = 60;
+const HANDGUN_AIM_ASSET_VERSION = "handgun-aim-4";
+const PLAYER_ANIMATION_STATES = Object.freeze({
+  IDLE_BREATHING: "idle_breathing",
+  WALK: "walk",
+  RUN: "run",
+  IDLE_AIMING_HANDGUN: "idle_aiming_handgun",
+  WALK_AIMING_HANDGUN: "walk_aiming_handgun",
+  IDLE_AIMING_MELEE: "idle_aiming_melee",
+  WALK_AIMING_MELEE: "walk_aiming_melee",
+  IDLE_AIMING_SHOTGUN: "idle_aiming_shotgun",
+  WALK_AIMING_SHOTGUN: "walk_aiming_shotgun",
+  TAKING_DAMAGE: "taking_damage",
+  INTERACTING: "interacting",
+  PICK_UP_ITEM: "pick_up_item",
+  DEATH: "death",
+});
 
 const locations = [
   {
@@ -69,7 +91,7 @@ const locations = [
     name: "Abandoned House",
     stars: 1,
     lootType: "Food, tools, basic medicine",
-    loot: ["Can of Beans", "Apple", "Bandages", "Spare Parts", "Kitchen Knife", "Water Bottle"],
+    loot: ["Can of Beans", "Apple", "Bandages", "Spare Parts", "Kitchen Knife", "Water Bottle", "Handgun Ammo"],
     rooms: 7,
     mapX: 43,
     mapY: 32,
@@ -102,7 +124,7 @@ const locations = [
     name: "Police Station",
     stars: 4,
     lootType: "Weapons, ammo, armor, comms",
-    loot: ["Handgun", "Shotgun", "Combat Knife", "Body Armor Level 1", "Body Armor Level 2", "Body Armor Level 3"],
+    loot: ["Handgun", "Shotgun", "Handgun Ammo", "Shotgun Ammo", "Combat Knife", "Body Armor Level 1", "Body Armor Level 2", "Body Armor Level 3"],
     rooms: 13,
     mapX: 70,
     mapY: 64,
@@ -113,7 +135,7 @@ const locations = [
     name: "Freight Warehouse",
     stars: 3,
     lootType: "Parts, batteries, storage gear",
-    loot: ["Spare Parts", "Hammer", "Crowbar", "Axe", "Baseball Bat", "Simple Backpack", "Large Backpack"],
+    loot: ["Spare Parts", "Handgun Ammo", "Shotgun Ammo", "Hammer", "Crowbar", "Axe", "Baseball Bat", "Simple Backpack", "Large Backpack"],
     rooms: 12,
     mapX: 24,
     mapY: 43,
@@ -124,7 +146,7 @@ const locations = [
     name: "Riverside Clinic",
     stars: 5,
     lootType: "Rare medicine and trauma supplies",
-    loot: ["Bandages", "Antibiotics Bottle", "Rubbing Alcohol Bottle", "Water Bottle", "Body Armor Level 1"],
+    loot: ["Antibiotics Bottle", "Rubbing Alcohol Bottle", "Med Kit", "Body Armor Level 3", "Body Armor Level 4"],
     rooms: 15,
     mapX: 78,
     mapY: 27,
@@ -159,17 +181,28 @@ const playerAnimations = {
   run_north_west: { src: "./assets/player_run_north_west_sheet.png", frames: 8, frameDuration: 0.11 },
 };
 
-validatePlayerAnimations(playerAnimations);
+for (const direction of DIRECTIONS) {
+  playerAnimations[`aim_idle_${direction}`] = {
+    src: `./assets/player_handgun_${direction}_sheet.png?v=${HANDGUN_AIM_ASSET_VERSION}`,
+    frames: 8,
+    frameDuration: 0.12,
+  };
+  playerAnimations[`aim_walk_${direction}`] = {
+    src: `./assets/player_handgun_walk_${direction}_sheet.png?v=${HANDGUN_AIM_ASSET_VERSION}`,
+    frames: 8,
+    frameDuration: 0.2,
+  };
+}
 
 const itemCatalog = {
   "Spare Parts": { label: "Spare Parts", texture: "spareParts" },
-  "Kitchen Knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Kitchen Knife", texture: "kitchenKnife" },
+  "Kitchen Knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Kitchen Knife", texture: "kitchenKnife", damage: 18, reach: 1.45, attackSpeed: 0.45, staminaCost: 8, knockback: 0.35 },
   Bandages: { label: "Bandages", texture: "bandages", healHp: 25 },
   "Antibiotics Bottle": { label: "Antibiotics Bottle", texture: "antibioticsBottle", healHp: 40, cureInfection: true },
   "Rubbing Alcohol Bottle": { label: "Rubbing Alcohol Bottle", texture: "rubbingAlcoholBottle", healHp: 5, disinfect: true },
-  "Combat Knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Combat Knife", texture: "combatKnife" },
-  Handgun: { slot: EQUIPMENT_SLOTS.SIDEARM, label: "Handgun", texture: "handgun" },
-  Shotgun: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Shotgun", texture: "shotgun" },
+  "Combat Knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Combat Knife", texture: "combatKnife", damage: 24, reach: 1.55, attackSpeed: 0.4, staminaCost: 9, knockback: 0.4 },
+  Handgun: { slot: EQUIPMENT_SLOTS.SIDEARM, label: "Handgun", texture: "handgun", ammoType: "Handgun Ammo", magazineSize: 15, reserveAmmo: 30, damage: 45, range: 9, fireRate: 0.35 },
+  Shotgun: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Shotgun", texture: "shotgun", ammoType: "Shotgun Ammo", magazineSize: 6, reserveAmmo: 18, damage: 65, range: 7, spread: 8, pellets: 6, fireRate: 0.9 },
   "Body Armor Level 1": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Body Armor Lv.1", armorClass: 1, texture: "bodyArmorLevel1" },
   "Body Armor Level 2": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Body Armor Lv.2", armorClass: 2, texture: "bodyArmorLevel2" },
   "Body Armor Level 3": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Police Vest", armorClass: 3, texture: "bodyArmorLevel3" },
@@ -183,10 +216,10 @@ const itemCatalog = {
   Apple: { label: "Apple", texture: "apple", healHp: 12 },
   Banana: { label: "Banana", texture: "banana", healHp: 10 },
   "Box of Mac'n'Cheese": { label: "Box of Mac'n'Cheese", texture: "macNCheeseBox", healHp: 22 },
-  Hammer: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Hammer", texture: "hammer" },
-  Crowbar: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Crowbar", texture: "crowbar" },
-  Axe: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Axe", texture: "axe" },
-  "Baseball Bat": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Baseball Bat", texture: "baseballBat" },
+  Hammer: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Hammer", texture: "hammer", damage: 32, reach: 1.75, attackSpeed: 0.75, staminaCost: 15, knockback: 0.75 },
+  Crowbar: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Crowbar", texture: "crowbar", damage: 38, reach: 1.85, attackSpeed: 0.85, staminaCost: 17, knockback: 0.85 },
+  Axe: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Axe", texture: "axe", damage: 52, reach: 1.95, attackSpeed: 1.0, staminaCost: 22, knockback: 1.0 },
+  "Baseball Bat": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Baseball Bat", texture: "baseballBat", damage: 30, reach: 2.05, attackSpeed: 0.7, staminaCost: 14, knockback: 1.05 },
   "Simple Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Simple Backpack", slots: 6, texture: "simpleBackpack" },
   "Small Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Small Backpack", slots: 6, texture: "simpleBackpack" },
   "Large Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Large Backpack", slots: 8, texture: "largeBackpack" },
@@ -196,7 +229,8 @@ const itemCatalog = {
   Water: { label: "Water", texture: "waterBottle", healHp: 10 },
   Bandage: { label: "Bandage", texture: "bandages", healHp: 25 },
   Parts: { label: "Parts", texture: "spareParts" },
-  Ammo: { label: "Ammo" },
+  "Handgun Ammo": { label: "Handgun Ammo", texture: "handgunAmmo", ammoType: "Handgun Ammo", ammoQty: 15, stackLimit: AMMO_STACK_LIMIT },
+  "Shotgun Ammo": { label: "Shotgun Ammo", texture: "shotgunAmmo", ammoType: "Shotgun Ammo", ammoQty: 6, stackLimit: AMMO_STACK_LIMIT },
   Painkillers: { label: "Painkillers" },
   "Med Kit": { label: "Med Kit" },
   Alcohol: { label: "Alcohol", texture: "rubbingAlcoholBottle" },
@@ -210,12 +244,15 @@ const itemCatalog = {
 const state = {
   mode: "base",
   health: 100,
-  ammo: 12,
   keys: 0,
   runSeed: Date.now() >>> 0,
   inventory: [],
   quickbar: Array(9).fill(null),
   activeQuickSlot: null,
+  magazines: {
+    Handgun: 15,
+    Shotgun: 0,
+  },
   equipment: {
     primary: null,
     sidearm: "Handgun",
@@ -224,7 +261,10 @@ const state = {
   },
   stash: [
     { name: "Bandage", qty: 2 },
-    { name: "Ammo", qty: 12 },
+    { name: "Handgun Ammo", qty: 30 },
+    { name: "Shotgun Ammo", qty: 6 },
+    { name: "Shotgun", qty: 1 },
+    { name: "Axe", qty: 1 },
     { name: "Parts", qty: 3 },
   ],
   upgrades: {
@@ -307,7 +347,9 @@ const itemTexturePaths = {
   rubbingAlcoholBottle: "./assets/items/rubbing_alcohol_bottle.png",
   combatKnife: "./assets/items/combat_knife.png",
   handgun: "./assets/items/handgun.png",
+  handgunAmmo: "./assets/items/handgun_ammo.png",
   shotgun: "./assets/items/shotgun.png",
+  shotgunAmmo: "./assets/items/shotgun_ammo.png",
   bodyArmorLevel1: "./assets/items/body_armor_level_1.png",
   bodyArmorLevel2: "./assets/items/body_armor_level_2.png",
   bodyArmorLevel3: "./assets/items/body_armor_level_3.png",
@@ -343,12 +385,14 @@ const DIRECTION_VECTORS = Object.freeze({
 
 function validatePlayerAnimations(animations) {
   for (const direction of DIRECTIONS) {
-    for (const prefix of ["idle", "walk", "run"]) {
+    for (const prefix of ["idle", "walk", "run", "aim_idle", "aim_walk"]) {
       const key = `${prefix}_${direction}`;
       if (!animations[key]) throw new Error(`[Outbreak] Missing player animation: ${key}`);
     }
   }
 }
+
+validatePlayerAnimations(playerAnimations);
 
 let scene;
 let camera;
@@ -378,6 +422,8 @@ let baseInteractables = [];
 let hoveredBaseObject = null;
 let interactTarget = null;
 let isAiming = false;
+let isDebugPanelOpen = false;
+let debugAimMarker = null;
 let hoveredInventoryIndex = null;
 let rng = createSeededRng(state.runSeed);
 let baseRoutine = {
@@ -399,6 +445,11 @@ window.addEventListener("keydown", (event) => {
     toggleInventory();
     return;
   }
+  if (event.code === "KeyY") {
+    event.preventDefault();
+    toggleDebugPanel();
+    return;
+  }
   if (!inventoryOverlay.classList.contains("hidden")) {
     if (/^Digit[3-9]$/.test(event.code)) {
       bindHoveredInventoryItemToQuickbar(Number(event.code.slice(5)));
@@ -412,6 +463,7 @@ window.addEventListener("keydown", (event) => {
   }
   keys.add(event.code);
   if (event.code === "KeyE") interact();
+  if (event.code === "KeyR") reloadHeldWeapon();
   if (event.code === "Space") attack();
 });
 window.addEventListener("keyup", (event) => keys.delete(event.code));
@@ -438,6 +490,7 @@ function handleMouseWheelZoom(event) {
 }
 window.addEventListener("click", (event) => {
   if (event.target !== canvas) return;
+  if (event.button !== 0) return;
   if (isInventoryOpen()) return;
   setPointerFromEvent(event);
   if (state.mode === "base") handleBaseClick();
@@ -511,6 +564,7 @@ function loadTextureWithFallback(src) {
       texture.needsUpdate = true;
     }
   );
+  texture.userData.sourcePath = src;
   return texture;
 }
 
@@ -529,7 +583,6 @@ function createFallbackTextureCanvas() {
 
 function renderBaseHud() {
   ui.baseHealth.textContent = state.health;
-  ui.baseAmmo.textContent = state.ammo;
   ui.basePack.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
   renderQuickbar();
 }
@@ -974,7 +1027,7 @@ function renderItemBoxPanel() {
           ${inventoryCells}
         </div>
         <div class="storage-quickbar">
-          ${Array.from({ length: 9 }, (_, index) => renderQuickbarCell(index + 1, true)).join("")}
+          ${Array.from({ length: 7 }, (_, index) => renderQuickbarCell(index + 3, true)).join("")}
         </div>
       </section>
 
@@ -999,13 +1052,16 @@ function renderStashCell(index) {
 }
 
 function renderTransferInventoryCell(index) {
-  const itemName = state.inventory[index];
-  if (!itemName) {
+  const entry = state.inventory[index];
+  const itemName = getInventoryEntryName(entry);
+  const qty = getInventoryEntryQty(entry);
+  if (!entry) {
     return `<div class="storage-cell storage-cell--empty" data-drop-target="inventory" data-index="${index}"></div>`;
   }
   return `
     <button class="storage-cell" draggable="true" data-source="inventory" data-index="${index}" title="${getItemLabel(itemName)}">
       <img src="${getItemIconPath(itemName)}" alt="" />
+      ${qty > 1 ? `<span class="storage-cell__qty">${qty}</span>` : ""}
     </button>
   `;
 }
@@ -1028,10 +1084,11 @@ function wireItemBoxPanel() {
     cell.addEventListener("dragstart", (event) => {
       const itemName = cell.dataset.source === "stash"
         ? state.stash[Number(cell.dataset.index)]?.name
-        : state.inventory[Number(cell.dataset.index)];
+        : getInventoryEntryName(state.inventory[Number(cell.dataset.index)]);
       event.dataTransfer.setData("text/plain", JSON.stringify({
         source: cell.dataset.source,
         index: Number(cell.dataset.index),
+        itemName,
       }));
       setItemDragImage(event, itemName);
     });
@@ -1045,14 +1102,15 @@ function wireItemBoxPanel() {
 
 async function handleItemBoxDrop(event) {
   event.preventDefault();
+  event.stopPropagation();
   const raw = event.dataTransfer.getData("text/plain");
   if (!raw) return;
   const payload = JSON.parse(raw);
   let changed = true;
-  if (event.currentTarget.dataset.dropTarget === "stash") moveInventoryItemToStash(payload);
+  if (event.currentTarget.dataset.dropTarget === "stash") changed = moveInventoryItemToStash(payload);
   else if (event.currentTarget.dataset.dropTarget === "inventory") changed = await moveStashItemToInventory(payload);
-  else if (event.currentTarget.dataset.equipmentSlot) moveItemToEquipment(payload, event.currentTarget.dataset.equipmentSlot);
-  else if (event.currentTarget.dataset.quickSlot) assignItemToQuickbar(payload, Number(event.currentTarget.dataset.quickSlot));
+  else if (event.currentTarget.dataset.equipmentSlot) changed = moveItemToEquipment(payload, event.currentTarget.dataset.equipmentSlot);
+  else if (event.currentTarget.dataset.quickSlot) changed = assignItemToQuickbar(payload, Number(event.currentTarget.dataset.quickSlot));
   if (!changed) return;
   renderItemBoxPanel();
   renderInventoryIfOpen();
@@ -1064,15 +1122,17 @@ async function handleItemBoxDrop(event) {
 async function moveStashItemToInventory(payload) {
   if (payload.source !== "stash") return false;
   const stack = state.stash[payload.index];
-  if (!stack || state.inventory.length >= getInventoryCapacity()) {
+  if (stack?.name !== payload.itemName) return false;
+  if (!stack || getAvailableInventorySpaceForItem(stack.name) <= 0) {
     showPrompt("No inventory space available.");
     return false;
   }
-  const openSlots = getInventoryCapacity() - state.inventory.length;
+  const openSlots = getAvailableInventorySpaceForItem(stack.name);
   const qty = await promptForStashMoveQuantity(stack, openSlots);
   if (qty <= 0) return false;
-  for (let count = 0; count < qty; count++) state.inventory.push(stack.name);
-  stack.qty -= qty;
+  const added = addInventoryQuantity(stack.name, qty);
+  if (added <= 0) return false;
+  stack.qty -= added;
   if (stack.qty <= 0) state.stash.splice(payload.index, 1);
   return true;
 }
@@ -1088,21 +1148,23 @@ async function promptForStashMoveQuantity(stack, openSlots) {
 }
 
 function moveInventoryItemToStash(payload) {
-  if (payload.source !== "inventory") return;
-  const itemName = state.inventory[payload.index];
-  if (!itemName) return;
+  if (payload.source !== "inventory") return false;
+  const entry = state.inventory[payload.index];
+  const itemName = getInventoryEntryName(entry);
+  if (!entry || itemName !== payload.itemName) return false;
   state.inventory.splice(payload.index, 1);
   cleanQuickbarAssignments();
-  addToStash(itemName, 1);
+  addToStash(itemName, getInventoryEntryQty(entry));
+  return true;
 }
 
 function moveItemToEquipment(payload, slot) {
-  if (payload.source !== "inventory") return;
-  const itemName = state.inventory[payload.index];
+  if (payload.source !== "inventory") return false;
+  const itemName = getInventoryEntryName(state.inventory[payload.index]);
   const item = getItem(itemName);
-  if (!itemName || item.slot !== slot) {
+  if (!itemName || itemName !== payload.itemName || item.slot !== slot) {
     showPrompt("That item does not fit there.");
-    return;
+    return false;
   }
   state.inventory.splice(payload.index, 1);
   cleanQuickbarAssignments();
@@ -1111,13 +1173,15 @@ function moveItemToEquipment(payload, slot) {
   if (previous) addItemToInventory(previous) || addToStash(previous, 1);
   trimInventoryToCapacity();
   normalizeQuickbarSelection();
+  return true;
 }
 
 function assignItemToQuickbar(payload, slot) {
-  if (slot <= 2 || payload.source !== "inventory") return;
-  const itemName = state.inventory[payload.index];
-  if (!itemName) return;
+  if (slot <= 2 || payload.source !== "inventory") return false;
+  const itemName = getInventoryEntryName(state.inventory[payload.index]);
+  if (!itemName || itemName !== payload.itemName) return false;
   state.quickbar[slot - 1] = itemName;
+  return true;
 }
 
 function requestQuantityPrompt({ title, text, max }) {
@@ -1391,7 +1455,9 @@ function renderInventory() {
   ui.inventorySlots.innerHTML = "";
   const capacity = getInventoryCapacity();
   for (let index = 0; index < capacity; index++) {
-    const itemName = state.inventory[index];
+    const entry = state.inventory[index];
+    const itemName = getInventoryEntryName(entry);
+    const qty = getInventoryEntryQty(entry);
     const slot = document.createElement("div");
     slot.className = "inventory-slot";
     slot.dataset.dropTarget = "inventory";
@@ -1402,7 +1468,7 @@ function renderInventory() {
     slot.addEventListener("mouseleave", () => {
       if (hoveredInventoryIndex === index) hoveredInventoryIndex = null;
     });
-    if (!itemName) {
+    if (!entry) {
       slot.classList.add("inventory-slot--empty");
       slot.innerHTML = `<span>Empty Slot</span><b>-</b>`;
       ui.inventorySlots.append(slot);
@@ -1415,6 +1481,7 @@ function renderInventory() {
     slot.title = getItemLabel(itemName);
     slot.innerHTML = `
       <img class="inventory-slot__icon" src="${getItemIconPath(itemName)}" alt="" />
+      ${qty > 1 ? `<span class="inventory-slot__qty">${qty}</span>` : ""}
       <span>${getItemTypeLabel(itemName)}</span>
       <b>${getItemLabel(itemName)}</b>
       <div class="inventory-slot__actions"></div>
@@ -1447,7 +1514,7 @@ function renderInventoryEquipmentSlots() {
 function wireInventoryDragAndDrop() {
   for (const item of ui.inventorySlots.querySelectorAll("[draggable='true']")) {
     item.addEventListener("dragstart", (event) => {
-      const itemName = state.inventory[Number(item.dataset.index)];
+      const itemName = getInventoryEntryName(state.inventory[Number(item.dataset.index)]);
       event.dataTransfer.setData("text/plain", JSON.stringify({
         source: "inventory",
         index: Number(item.dataset.index),
@@ -1477,6 +1544,56 @@ function formatUpgradeCost(cost) {
   return `${cost.qty} ${cost.item}`;
 }
 
+function makeInventoryEntry(itemName, qty = 1) {
+  return isStackableInventoryItem(itemName) ? { name: itemName, qty } : itemName;
+}
+
+function getInventoryEntryName(entry) {
+  return typeof entry === "string" ? entry : entry?.name;
+}
+
+function getInventoryEntryQty(entry) {
+  return typeof entry === "string" ? 1 : entry?.qty || 0;
+}
+
+function isAmmoItem(itemName) {
+  return Boolean(getItem(itemName).ammoType && getItem(itemName).stackLimit);
+}
+
+function isStackableInventoryItem(itemName) {
+  return isAmmoItem(itemName);
+}
+
+function getInventoryAmmoCount(ammoType) {
+  return state.inventory.reduce((total, entry) => {
+    const itemName = getInventoryEntryName(entry);
+    return itemName === ammoType ? total + getInventoryEntryQty(entry) : total;
+  }, 0);
+}
+
+function consumeInventoryAmmo(ammoType, amount) {
+  let remaining = amount;
+  for (let index = 0; index < state.inventory.length && remaining > 0; index++) {
+    const entry = state.inventory[index];
+    if (getInventoryEntryName(entry) !== ammoType) continue;
+    const qty = getInventoryEntryQty(entry);
+    const used = Math.min(qty, remaining);
+    remaining -= used;
+    if (typeof entry === "string" || qty === used) {
+      state.inventory.splice(index, 1);
+      index -= 1;
+    } else {
+      entry.qty -= used;
+    }
+  }
+  cleanQuickbarAssignments();
+  return amount - remaining;
+}
+
+function inventoryHasItem(itemName) {
+  return state.inventory.some((entry) => getInventoryEntryName(entry) === itemName);
+}
+
 function makeInventoryActionButton(label, onClick) {
   const button = document.createElement("button");
   button.type = "button";
@@ -1489,7 +1606,7 @@ function makeInventoryActionButton(label, onClick) {
 }
 
 function useInventoryItem(index) {
-  const itemName = state.inventory[index];
+  const itemName = getInventoryEntryName(state.inventory[index]);
   const item = getItem(itemName);
   if (!item.healHp) return;
   const previousHealth = state.health;
@@ -1507,8 +1624,9 @@ function useInventoryItem(index) {
 }
 
 function dropInventoryItem(index) {
-  const itemName = state.inventory[index];
-  if (!itemName) return;
+  const entry = state.inventory[index];
+  const itemName = getInventoryEntryName(entry);
+  if (!entry) return;
   state.inventory.splice(index, 1);
   cleanQuickbarAssignments();
   if (state.mode === "mission") dropItemNearPlayer(itemName);
@@ -1519,7 +1637,7 @@ function dropInventoryItem(index) {
 }
 
 function equipInventoryItem(index) {
-  const itemName = state.inventory[index];
+  const itemName = getInventoryEntryName(state.inventory[index]);
   const item = getItem(itemName);
   const slot = item.slot;
   if (!slot) {
@@ -1560,19 +1678,56 @@ function unequipItem(slot) {
   updateHud();
 }
 
-function addItemToInventory(itemName) {
-  if (state.inventory.length >= getInventoryCapacity()) return false;
-  state.inventory.push(itemName);
+function addItemToInventory(itemName, qty = 1) {
+  const added = addInventoryQuantity(itemName, qty);
   renderBaseHud();
   updateHud();
   if (!inventoryOverlay.classList.contains("hidden")) renderInventory();
-  return true;
+  return added === qty;
+}
+
+function addInventoryQuantity(itemName, qty = 1) {
+  let remaining = qty;
+  if (isStackableInventoryItem(itemName)) {
+    for (const entry of state.inventory) {
+      if (remaining <= 0) break;
+      if (getInventoryEntryName(entry) !== itemName || typeof entry === "string") continue;
+      const limit = getItem(itemName).stackLimit || AMMO_STACK_LIMIT;
+      const room = limit - entry.qty;
+      if (room <= 0) continue;
+      const added = Math.min(room, remaining);
+      entry.qty += added;
+      remaining -= added;
+    }
+  }
+
+  while (remaining > 0 && state.inventory.length < getInventoryCapacity()) {
+    if (isStackableInventoryItem(itemName)) {
+      const added = Math.min(getItem(itemName).stackLimit || AMMO_STACK_LIMIT, remaining);
+      state.inventory.push(makeInventoryEntry(itemName, added));
+      remaining -= added;
+    } else {
+      state.inventory.push(itemName);
+      remaining -= 1;
+    }
+  }
+
+  return qty - remaining;
+}
+
+function getAvailableInventorySpaceForItem(itemName) {
+  if (!isStackableInventoryItem(itemName)) return getInventoryCapacity() - state.inventory.length;
+  const stackRoom = state.inventory.reduce((total, entry) => {
+    if (getInventoryEntryName(entry) !== itemName || typeof entry === "string") return total;
+    return total + Math.max(0, (getItem(itemName).stackLimit || AMMO_STACK_LIMIT) - entry.qty);
+  }, 0);
+  return stackRoom + Math.max(0, getInventoryCapacity() - state.inventory.length) * (getItem(itemName).stackLimit || AMMO_STACK_LIMIT);
 }
 
 function trimInventoryToCapacity() {
   const capacity = getInventoryCapacity();
   while (state.inventory.length > capacity) {
-    dropItemNearPlayer(state.inventory.pop());
+    dropItemNearPlayer(getInventoryEntryName(state.inventory.pop()));
   }
 }
 
@@ -1647,7 +1802,7 @@ function renderQuickbar() {
 
 function bindHoveredInventoryItemToQuickbar(slot) {
   if (slot < 3 || slot > 9) return;
-  const itemName = state.inventory[hoveredInventoryIndex];
+  const itemName = getInventoryEntryName(state.inventory[hoveredInventoryIndex]);
   if (!itemName) {
     showPrompt("Hover an inventory item first.");
     return;
@@ -1681,7 +1836,7 @@ function getQuickbarItem(slot = state.activeQuickSlot) {
   if (slot === 2) return state.equipment.sidearm;
   if (!slot) return null;
   const itemName = state.quickbar[slot - 1];
-  return state.inventory.includes(itemName) ? itemName : null;
+  return inventoryHasItem(itemName) ? itemName : null;
 }
 
 function selectQuickSlot(slot) {
@@ -1697,10 +1852,11 @@ function selectQuickSlot(slot) {
   state.activeQuickSlot = slot;
   showPrompt(`Holding ${getItemLabel(itemName)}`);
   renderQuickbar();
+  updateHeldWeaponHud();
 }
 
 function useQuickbarItem(itemName, slot) {
-  const index = state.inventory.indexOf(itemName);
+  const index = state.inventory.findIndex((entry) => getInventoryEntryName(entry) === itemName);
   const item = getItem(itemName);
   if (index < 0) {
     state.quickbar[slot - 1] = null;
@@ -1709,7 +1865,7 @@ function useQuickbarItem(itemName, slot) {
   }
   if (item.healHp) {
     useInventoryItem(index);
-    if (!state.inventory.includes(itemName)) state.quickbar[slot - 1] = null;
+    if (!inventoryHasItem(itemName)) state.quickbar[slot - 1] = null;
     renderQuickbar();
   } else {
     showPrompt(`${getItemLabel(itemName)} is ready, but has no quick use yet.`);
@@ -1723,7 +1879,7 @@ function normalizeQuickbarSelection() {
 
 function cleanQuickbarAssignments() {
   for (let index = 2; index < state.quickbar.length; index++) {
-    if (state.quickbar[index] && !state.inventory.includes(state.quickbar[index])) state.quickbar[index] = null;
+    if (state.quickbar[index] && !inventoryHasItem(state.quickbar[index])) state.quickbar[index] = null;
   }
 }
 
@@ -2196,7 +2352,17 @@ function createSpriteSheetAnimator(clips) {
     texture: preparedClips.idle_south.texture,
     setClip(name, material) {
       const nextName = preparedClips[name] ? name : "idle_south";
-      if (nextName === activeName) return;
+      if (!preparedClips[name]) console.warn(`[Outbreak] Missing animation clip: ${name}`);
+      if (nextName === activeName) {
+        if (material && material.map !== preparedClips[activeName].texture) {
+          material.map = preparedClips[activeName].texture;
+          material.needsUpdate = true;
+        }
+        if (player && material === player.material) {
+          player.userData.animationClip = activeName;
+        }
+        return;
+      }
       activeName = nextName;
       frame = 0;
       elapsed = 0;
@@ -2204,6 +2370,9 @@ function createSpriteSheetAnimator(clips) {
       setSheetFrame(preparedClips[activeName], frame);
       material.map = preparedClips[activeName].texture;
       material.needsUpdate = true;
+      if (player && material === player.material) {
+        player.userData.animationClip = activeName;
+      }
     },
     update(dt) {
       const activeClip = preparedClips[activeName];
@@ -2227,6 +2396,26 @@ function createSpriteSheetAnimator(clips) {
       frame = Math.floor((distanceAccumulator / cycleDistance) * activeClip.frames);
       setSheetFrame(activeClip, frame);
     },
+    getActiveName() {
+      return activeName;
+    },
+    hasClip(name) {
+      return Boolean(preparedClips[name]);
+    },
+    getActiveClipInfo() {
+      return getSpriteSheetClipInfo(activeName, preparedClips[activeName]);
+    },
+    getClipInfo(name) {
+      return getSpriteSheetClipInfo(name, preparedClips[name]);
+    },
+    forceClipTexture(name, material) {
+      if (!preparedClips[name] || !material) return false;
+      if (material.map !== preparedClips[name].texture) {
+        material.map = preparedClips[name].texture;
+        material.needsUpdate = true;
+      }
+      return true;
+    },
   };
 }
 
@@ -2242,6 +2431,7 @@ function createSpriteSheetClip(loader, clip) {
 
   return {
     texture,
+    src: clip.src,
     frames: clip.frames,
     frameDuration: clip.frameDuration,
   };
@@ -2249,6 +2439,25 @@ function createSpriteSheetClip(loader, clip) {
 
 function setSheetFrame(clip, frame) {
   clip.texture.offset.x = frame / clip.frames;
+}
+
+function getSpriteSheetClipInfo(name, clip) {
+  if (!clip) return { name, exists: false };
+  const image = clip.texture.image || clip.texture.source?.data || null;
+  const source = image?.currentSrc || image?.src || clip.texture.userData?.sourcePath || clip.src;
+  return {
+    name,
+    exists: true,
+    src: clip.src,
+    activeSource: source,
+    loaded: Boolean(image?.width || image?.naturalWidth),
+    width: image?.width || image?.naturalWidth || null,
+    height: image?.height || image?.naturalHeight || null,
+    frames: clip.frames,
+    frameDuration: clip.frameDuration,
+    offsetX: clip.texture.offset.x,
+    repeatX: clip.texture.repeat.x,
+  };
 }
 
 function addLoot(location) {
@@ -2487,6 +2696,7 @@ function animate() {
       findInteraction();
       updateHud();
     }
+    updateDebugPanel();
     renderer.render(scene, camera);
   } catch (err) {
     console.error("[Outbreak] Render error:", err);
@@ -2502,10 +2712,15 @@ function updatePlayer(dt) {
   const aimDirection = getMouseDirectionVector();
   const facing = getDirectionName(aimDirection);
   lastAimDirection = facing;
+  const heldItem = getQuickbarItem();
 
   if (movement.lengthSq() === 0) {
-    playerAnimator?.setClip(`idle_${facing}`, player.material);
-    playerAnimator?.update(dt);
+    applyPlayerAnimationState({
+      stateName: getPlayerAnimationState({ isMoving: false, isRunning: false, heldItem }),
+      facing,
+      dt,
+      distance: 0,
+    });
     playerFacingDirection = facing;
     runMoveDirection.lerp(aimDirection, 1 - Math.exp(-dt * 8));
     if (runMoveDirection.lengthSq() > 0.01) runMoveDirection.normalize();
@@ -2520,11 +2735,179 @@ function updatePlayer(dt) {
   const runSpeed = walkSpeed * 1.25;
   const speed = (isRunning ? runSpeed : walkSpeed) * backpedalMultiplier;
   const animationFacing = isRunning ? getDirectionName(direction) : facing;
+  const stateName = getPlayerAnimationState({ isMoving: true, isRunning, heldItem });
   playerFacingDirection = animationFacing;
-  playerAnimator?.setClip(`${isRunning ? "run" : "walk"}_${animationFacing}`, player.material);
   const before = player.position.clone();
   moveWithSlide(player, direction.multiplyScalar(speed * dt), player.userData.radius);
-  playerAnimator?.advanceByDistance(player.position.distanceTo(before));
+  applyPlayerAnimationState({
+    stateName,
+    facing: animationFacing,
+    dt,
+    distance: player.position.distanceTo(before),
+  });
+}
+
+function getPlayerAnimationState({ isMoving, isRunning, heldItem }) {
+  if (isRunning) return PLAYER_ANIMATION_STATES.RUN;
+  if (!isAiming || !heldItem) return isMoving ? PLAYER_ANIMATION_STATES.WALK : PLAYER_ANIMATION_STATES.IDLE_BREATHING;
+  if (heldItem === "Handgun") {
+    return isMoving ? PLAYER_ANIMATION_STATES.WALK_AIMING_HANDGUN : PLAYER_ANIMATION_STATES.IDLE_AIMING_HANDGUN;
+  }
+  if (heldItem === "Shotgun") {
+    return isMoving ? PLAYER_ANIMATION_STATES.WALK_AIMING_SHOTGUN : PLAYER_ANIMATION_STATES.IDLE_AIMING_SHOTGUN;
+  }
+  if (isWeaponItem(heldItem)) {
+    return isMoving ? PLAYER_ANIMATION_STATES.WALK_AIMING_MELEE : PLAYER_ANIMATION_STATES.IDLE_AIMING_MELEE;
+  }
+  return isMoving ? PLAYER_ANIMATION_STATES.WALK : PLAYER_ANIMATION_STATES.IDLE_BREATHING;
+}
+
+function applyPlayerAnimationState({ stateName, facing, dt, distance }) {
+  const clipName = getPlayerClipForState(stateName, facing);
+  playerAnimator?.setClip(clipName, player.material);
+  playerAnimator?.forceClipTexture(clipName, player.material);
+  player.userData.animationState = stateName;
+  player.userData.animationClip = playerAnimator?.getActiveName() || clipName;
+  player.userData.activeWeapon = getQuickbarItem();
+  if (distance > 0) playerAnimator?.advanceByDistance(distance);
+  else playerAnimator?.update(dt);
+  updateDebugAimMarker();
+}
+
+function getPlayerClipForState(stateName, facing) {
+  const fallbackIdle = `idle_${facing}`;
+  const fallbackWalk = `walk_${facing}`;
+  const fallbackRun = `run_${facing}`;
+  const clipByState = {
+    [PLAYER_ANIMATION_STATES.IDLE_BREATHING]: fallbackIdle,
+    [PLAYER_ANIMATION_STATES.WALK]: fallbackWalk,
+    [PLAYER_ANIMATION_STATES.RUN]: fallbackRun,
+    [PLAYER_ANIMATION_STATES.IDLE_AIMING_HANDGUN]: `aim_idle_${facing}`,
+    [PLAYER_ANIMATION_STATES.WALK_AIMING_HANDGUN]: `aim_walk_${facing}`,
+    [PLAYER_ANIMATION_STATES.IDLE_AIMING_MELEE]: fallbackIdle,
+    [PLAYER_ANIMATION_STATES.WALK_AIMING_MELEE]: fallbackWalk,
+    [PLAYER_ANIMATION_STATES.IDLE_AIMING_SHOTGUN]: fallbackIdle,
+    [PLAYER_ANIMATION_STATES.WALK_AIMING_SHOTGUN]: fallbackWalk,
+    [PLAYER_ANIMATION_STATES.TAKING_DAMAGE]: fallbackIdle,
+    [PLAYER_ANIMATION_STATES.INTERACTING]: fallbackIdle,
+    [PLAYER_ANIMATION_STATES.PICK_UP_ITEM]: fallbackIdle,
+    [PLAYER_ANIMATION_STATES.DEATH]: fallbackIdle,
+  };
+  return clipByState[stateName] || fallbackIdle;
+}
+
+window.outbreakDebug = function outbreakDebug() {
+  return getDebugSnapshot();
+};
+
+function toggleDebugPanel() {
+  if (!debugPanel) return;
+  debugPanel.classList.toggle("hidden");
+  isDebugPanelOpen = !debugPanel.classList.contains("hidden");
+  updateDebugAimMarker();
+  updateDebugPanel();
+}
+
+function updateDebugPanel() {
+  if (!debugPanel || !debugPanelContent || debugPanel.classList.contains("hidden")) return;
+  updateDebugAimMarker();
+  debugPanelContent.textContent = JSON.stringify(getDebugSnapshot(), null, 2);
+}
+
+function getDebugSnapshot() {
+  const map = player?.material?.map;
+  const heldItem = getQuickbarItem();
+  const movementKeys = ["KeyW", "KeyA", "KeyS", "KeyD"];
+  const isMoving = movementKeys.some((code) => keys.has(code));
+  const isRunning = keys.has("ShiftLeft") || keys.has("ShiftRight");
+  const facing = getDirectionName(getMouseDirectionVector());
+  const expectedState = getPlayerAnimationState({ isMoving, isRunning, heldItem });
+  const expectedClip = getPlayerClipForState(expectedState, isRunning ? playerFacingDirection : facing);
+  const activeClipInfo = playerAnimator?.getActiveClipInfo() || null;
+  const expectedClipInfo = playerAnimator?.getClipInfo(expectedClip) || null;
+  const mapSource = map?.source?.data?.currentSrc || map?.image?.currentSrc || map?.image?.src || map?.userData?.sourcePath || null;
+  return {
+    mode: state.mode,
+    isAiming,
+    activeQuickSlot: state.activeQuickSlot,
+    heldItem,
+    sidearm: state.equipment.sidearm,
+    primary: state.equipment.primary,
+    facing,
+    isMoving,
+    isRunning,
+    expectedState,
+    expectedClip,
+    aimDiagnosis: getAimDebugDiagnosis({ heldItem, expectedState, expectedClip, activeClipInfo, expectedClipInfo }),
+    animationState: player?.userData.animationState,
+    animationClip: player?.userData.animationClip,
+    activeClipInfo,
+    expectedClipInfo,
+    playerMap: mapSource,
+    materialMatchesActiveClip: Boolean(activeClipInfo?.activeSource && mapSource && activeClipInfo.activeSource === mapSource),
+    textureOffsetX: map?.offset?.x,
+    textureRepeatX: map?.repeat?.x,
+    playerVisible: player?.visible,
+  };
+}
+
+function getAimDebugDiagnosis({ heldItem, expectedState, expectedClip, activeClipInfo, expectedClipInfo }) {
+  if (state.mode !== "mission") return "Aim animations only update during missions.";
+  if (!isAiming) return "Right mouse is not held, so the player stays in normal idle/walk/run animation.";
+  if (!heldItem) return "No active held item. Press 1 or 2 before aiming.";
+  if (heldItem !== "Handgun") return `Active held item is ${heldItem}; handgun aim sheets are not expected.`;
+  if (!expectedClipInfo?.exists) return `Expected handgun aim clip ${expectedClip} is not registered.`;
+  if (!expectedClipInfo.loaded) return `Expected clip ${expectedClip} exists, but its image has not loaded yet.`;
+  if (player?.userData.animationState !== expectedState) {
+    return `Expected state ${expectedState}, but player reports ${player?.userData.animationState || "none"}.`;
+  }
+  if (activeClipInfo?.name !== expectedClip) {
+    return `Expected clip ${expectedClip}, but animator is using ${activeClipInfo?.name || "none"}.`;
+  }
+  return `Handgun aiming animation is active: ${expectedClip}.`;
+}
+
+function updateDebugAimMarker() {
+  if (!scene || !player) return;
+  const shouldShow = isDebugPanelOpen && state.mode === "mission";
+  if (!shouldShow) {
+    if (debugAimMarker) debugAimMarker.visible = false;
+    return;
+  }
+  if (!debugAimMarker) {
+    const canvas = document.createElement("canvas");
+    canvas.width = 128;
+    canvas.height = 32;
+    const context = canvas.getContext("2d");
+    context.imageSmoothingEnabled = false;
+    context.fillStyle = "rgba(0, 0, 0, 0.68)";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.strokeStyle = "#e2b66b";
+    context.strokeRect(1, 1, canvas.width - 2, canvas.height - 2);
+    context.fillStyle = "#f2dca8";
+    context.font = "bold 12px monospace";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText("AIM SHEET", canvas.width / 2, canvas.height / 2);
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.magFilter = THREE.NearestFilter;
+    texture.minFilter = THREE.NearestFilter;
+    debugAimMarker = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+        depthTest: false,
+        depthWrite: false,
+      })
+    );
+    debugAimMarker.scale.set(1.6, 0.4, 1);
+    debugAimMarker.renderOrder = 100;
+    scene.add(debugAimMarker);
+  }
+  const activeClip = playerAnimator?.getActiveName() || "";
+  debugAimMarker.visible = activeClip.startsWith("aim_");
+  debugAimMarker.position.copy(player.position);
+  debugAimMarker.position.y += 1.55;
 }
 
 function getRunDirection(targetDirection, dt) {
@@ -2718,8 +3101,9 @@ function interact() {
   if (lootNodes.includes(interactTarget)) {
     if (interactTarget.userData.item === "Key") {
       state.keys += 1;
-    } else if (addItemToInventory(interactTarget.userData.item)) {
-      showPrompt(`Picked up ${getItemLabel(interactTarget.userData.item)}`);
+    } else if (addItemToInventory(interactTarget.userData.item, getItem(interactTarget.userData.item).ammoQty || 1)) {
+      const qty = getItem(interactTarget.userData.item).ammoQty || 1;
+      showPrompt(`Picked up ${qty > 1 ? `${qty}x ` : ""}${getItemLabel(interactTarget.userData.item)}`);
     } else {
       showPrompt("Inventory full. Item left on the floor.");
       return;
@@ -2747,18 +3131,19 @@ function attack() {
     return;
   }
   const ranged = isRangedWeapon(heldItem);
-  if (ranged && state.ammo <= 0) {
-    showPrompt("No ammo.");
+  const heldData = getItem(heldItem);
+  if (ranged && getMagazineAmmo(heldItem) <= 0) {
+    showPrompt(`Magazine empty. Press R to reload ${getItemLabel(heldItem)}.`);
     return;
   }
-  if (ranged) state.ammo -= 1;
+  if (ranged) state.magazines[heldItem] = getMagazineAmmo(heldItem) - 1;
   raycaster.setFromCamera(pointer, camera);
   const hit = raycaster.intersectObject(floorPlane)[0];
   const target = hit ? hit.point : player.position.clone().add(new THREE.Vector3(1, 0, 0));
   const direction = target.sub(player.position).setY(0).normalize();
-  const attackRange = ranged ? 9 : 2.1;
+  const attackRange = heldData.range || heldData.reach || (ranged ? 9 : 2.1);
   const attackDot = ranged ? 0.86 : 0.66;
-  const damage = ranged ? (heldItem === "Shotgun" ? 65 : 45) : 35;
+  const damage = heldData.damage || (ranged ? 45 : 35);
 
   let best = null;
   let bestDot = attackDot;
@@ -2780,18 +3165,51 @@ function attack() {
     scene.remove(best);
     zombies = zombies.filter((zombie) => zombie !== best);
   }
+  updateHud();
+}
+
+function getMagazineAmmo(weaponName) {
+  if (!state.magazines[weaponName]) state.magazines[weaponName] = 0;
+  return state.magazines[weaponName];
+}
+
+function reloadHeldWeapon() {
+  if (state.mode !== "mission") return;
+  const heldItem = getQuickbarItem();
+  if (!heldItem || !isRangedWeapon(heldItem)) {
+    showPrompt("Hold a ranged weapon before reloading.");
+    return;
+  }
+  const weapon = getItem(heldItem);
+  const current = getMagazineAmmo(heldItem);
+  const needed = weapon.magazineSize - current;
+  if (needed <= 0) {
+    showPrompt(`${getItemLabel(heldItem)} magazine is already full.`);
+    return;
+  }
+  const available = getInventoryAmmoCount(weapon.ammoType);
+  if (available <= 0) {
+    showPrompt(`No ${getItemLabel(weapon.ammoType)} in inventory.`);
+    return;
+  }
+  const loaded = consumeInventoryAmmo(weapon.ammoType, Math.min(needed, available));
+  state.magazines[heldItem] = current + loaded;
+  showPrompt(`Reloaded ${loaded} ${getItemLabel(weapon.ammoType)}.`);
+  renderInventoryIfOpen();
+  updateHud();
 }
 
 function endRun(extracted) {
   state.mode = "ended";
   if (extracted) {
-    for (const name of state.inventory) addToStash(name, 1);
+    const recovered = state.inventory.map((entry) => `${getInventoryEntryQty(entry) > 1 ? `${getInventoryEntryQty(entry)}x ` : ""}${getInventoryEntryName(entry)}`);
+    for (const entry of state.inventory) addToStash(getInventoryEntryName(entry), getInventoryEntryQty(entry));
     ui.runEndTitle.textContent = "Extraction Successful";
-    ui.runEndText.textContent = `Recovered ${state.inventory.length} item(s): ${state.inventory.join(", ") || "nothing"}.`;
+    ui.runEndText.textContent = `Recovered ${state.inventory.length} item stack(s): ${recovered.join(", ") || "nothing"}.`;
     state.inventory = [];
   } else {
     state.inventory = [];
-    state.ammo = 12;
+    state.magazines = { Handgun: 15, Shotgun: 0 };
     state.health = 100;
     ui.runEndTitle.textContent = "You Died";
     ui.runEndText.textContent = "You woke up back at base. Carried gear and loot were lost.";
@@ -2804,6 +3222,7 @@ function returnToBase() {
   state.health = Math.max(state.health, 45);
   promptEl.classList.add("hidden");
   missionHud.classList.add("hidden");
+  weaponHud.classList.add("hidden");
   runEnd.classList.add("hidden");
   baseHud.classList.remove("hidden");
   closeBasePanel();
@@ -2819,10 +3238,37 @@ function addToStash(name, qty) {
 
 function updateHud() {
   ui.hudHealth.textContent = state.health;
-  ui.hudAmmo.textContent = state.ammo;
+  ui.hudHealthFill.style.width = `${THREE.MathUtils.clamp(state.health, 0, 100)}%`;
   ui.hudPack.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
   ui.hudKeys.textContent = state.keys;
   renderQuickbar();
+  updateHeldWeaponHud();
+  updateDebugPanel();
+}
+
+function updateHeldWeaponHud() {
+  if (!weaponHud) return;
+  const heldItem = getQuickbarItem();
+  weaponHud.classList.toggle("hidden", state.mode !== "mission");
+  if (state.mode !== "mission") return;
+
+  if (!heldItem) {
+    ui.weaponHudIcon.removeAttribute("src");
+    ui.weaponHudName.textContent = "Hands Empty";
+    ui.weaponHudAmmo.textContent = "Press 1 or 2 to hold a weapon";
+    return;
+  }
+
+  const item = getItem(heldItem);
+  ui.weaponHudIcon.src = getItemIconPath(heldItem);
+  ui.weaponHudName.textContent = getItemLabel(heldItem);
+  if (isRangedWeapon(heldItem)) {
+    ui.weaponHudAmmo.textContent = `${getMagazineAmmo(heldItem)} / ${item.magazineSize} | ${getInventoryAmmoCount(item.ammoType)} ${getItemLabel(item.ammoType)}`;
+  } else if (isWeaponItem(heldItem)) {
+    ui.weaponHudAmmo.textContent = `Melee | ${item.damage || 0} dmg`;
+  } else {
+    ui.weaponHudAmmo.textContent = "Quick item";
+  }
 }
 
 function showPrompt(text) {

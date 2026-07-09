@@ -96,8 +96,10 @@ def shadow(draw):
     draw.ellipse((6, 24, 26, 29), fill=(0, 0, 0, 70))
 
 
-def save_item(name, draw_fn):
+def save_item(name, draw_fn, overwrite=True):
     ITEM_DIR.mkdir(parents=True, exist_ok=True)
+    if not overwrite and (ITEM_DIR / f"{name}.png").exists():
+        return
     img, d = item_canvas()
     shadow(d)
     draw_fn(d)
@@ -131,8 +133,10 @@ def generate_items():
     save_item("antibiotics_bottle", lambda d: [bottle(d, "#dfe7ef", "#f7f2e8", "#f0d58b"), d.rectangle((15, 16, 17, 18), fill=rgba("#6f352f"))])
     save_item("rubbing_alcohol_bottle", lambda d: bottle(d, "#a9d2e7", "#eeeeee", "#f4f0dc"))
     save_item("combat_knife", lambda d: blade(d, "#9da9aa", "#1f2b22"))
-    save_item("handgun", lambda d: [d.rectangle((8, 11, 23, 16), fill=rgba("#33383c"), outline=rgba("#111315")), d.rectangle((19, 15, 24, 21), fill=rgba("#33383c"), outline=rgba("#111315")), d.rectangle((6, 12, 9, 14), fill=rgba("#1f2326"))])
-    save_item("shotgun", lambda d: [d.rectangle((4, 13, 27, 15), fill=rgba("#33251b"), outline=rgba("#17100b")), d.rectangle((9, 11, 28, 13), fill=rgba("#22282b")), d.rectangle((25, 9, 30, 12), fill=rgba("#22282b"))])
+    save_item("handgun", lambda d: [d.rectangle((8, 11, 23, 16), fill=rgba("#33383c"), outline=rgba("#111315")), d.rectangle((19, 15, 24, 21), fill=rgba("#33383c"), outline=rgba("#111315")), d.rectangle((6, 12, 9, 14), fill=rgba("#1f2326"))], overwrite=False)
+    save_item("handgun_ammo", lambda d: [d.rectangle((8, 15, 25, 25), fill=rgba("#6b4f2b"), outline=rgba("#21170e")), d.rectangle((10, 18, 23, 21), fill=rgba("#9a743e")), *[d.rectangle((x, 7, x + 3, 19), fill=rgba("#b47a36"), outline=rgba("#20160d")) for x in (11, 16, 21)], *[d.polygon((x, 7, x + 1, 4, x + 3, 7), fill=rgba("#d8b25a")) for x in (11, 16, 21)]], overwrite=False)
+    save_item("shotgun", lambda d: [d.rectangle((4, 13, 27, 15), fill=rgba("#33251b"), outline=rgba("#17100b")), d.rectangle((9, 11, 28, 13), fill=rgba("#22282b")), d.rectangle((25, 9, 30, 12), fill=rgba("#22282b"))], overwrite=False)
+    save_item("shotgun_ammo", lambda d: [d.rectangle((8, 16, 25, 25), fill=rgba("#672728"), outline=rgba("#211010")), d.rectangle((10, 18, 23, 21), fill=rgba("#9a3935")), *[d.rectangle((x, 7, x + 4, 21), fill=rgba("#9e302e"), outline=rgba("#201010")) for x in (10, 16, 22)], *[d.rectangle((x, 7, x + 4, 10), fill=rgba("#cda34f")) for x in (10, 16, 22)]], overwrite=False)
     save_item("body_armor_level_1", lambda d: vest(d, "#4d5b53", "#3d4843"))
     save_item("body_armor_level_2", lambda d: vest(d, "#3d4b50", "#263137"))
     save_item("body_armor_level_3", lambda d: [vest(d, "#26394a", "#1c2833"), d.rectangle((12, 11, 20, 13), fill=rgba("#d8dde0"))])
