@@ -1,6 +1,7 @@
 import * as THREE from "./vendor/three.module.js";
 
 const canvas = document.querySelector("#game");
+canvas.addEventListener("contextmenu", (event) => event.preventDefault());
 const baseHud = document.querySelector("#baseHud");
 const basePanel = document.querySelector("#basePanel");
 const basePanelTitle = document.querySelector("#basePanelTitle");
@@ -223,18 +224,12 @@ const itemCatalog = {
   "Simple Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Simple Backpack", slots: 6, texture: "simpleBackpack" },
   "Small Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Small Backpack", slots: 6, texture: "simpleBackpack" },
   "Large Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Large Backpack", slots: 8, texture: "largeBackpack" },
-  Armor: { slot: EQUIPMENT_SLOTS.ARMOR, label: "Body Armor", armorClass: 1, texture: "bodyArmorLevel1" },
-  Backpack: { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Large Backpack", slots: 8, texture: "largeBackpack" },
   Food: { label: "Food", texture: "canOfBeans" },
-  Water: { label: "Water", texture: "waterBottle", healHp: 10 },
-  Bandage: { label: "Bandage", texture: "bandages", healHp: 25 },
   Parts: { label: "Parts", texture: "spareParts" },
   "Handgun Ammo": { label: "Handgun Ammo", texture: "handgunAmmo", ammoType: "Handgun Ammo", ammoQty: 15, stackLimit: AMMO_STACK_LIMIT },
   "Shotgun Ammo": { label: "Shotgun Ammo", texture: "shotgunAmmo", ammoType: "Shotgun Ammo", ammoQty: 6, stackLimit: AMMO_STACK_LIMIT },
   Painkillers: { label: "Painkillers" },
   "Med Kit": { label: "Med Kit" },
-  Alcohol: { label: "Alcohol", texture: "rubbingAlcoholBottle" },
-  Antibiotics: { label: "Antibiotics", texture: "antibioticsBottle" },
   Battery: { label: "Battery" },
   "Duct Tape": { label: "Duct Tape" },
   "Radio Parts": { label: "Radio Parts" },
@@ -260,7 +255,7 @@ const state = {
     backpack: "Small Backpack",
   },
   stash: [
-    { name: "Bandage", qty: 2 },
+    { name: "Bandages", qty: 2 },
     { name: "Handgun Ammo", qty: 30 },
     { name: "Shotgun Ammo", qty: 6 },
     { name: "Shotgun", qty: 1 },
@@ -399,7 +394,6 @@ let camera;
 let renderer;
 let player;
 let playerAnimator;
-let baseSurvivorPathTime = 0;
 let lastAimDirection = "south";
 let playerFacingDirection = "south";
 let runMoveDirection = new THREE.Vector3(0, 0, 1);
@@ -469,9 +463,17 @@ window.addEventListener("keydown", (event) => {
 window.addEventListener("keyup", (event) => keys.delete(event.code));
 window.addEventListener("pointermove", setPointerFromEvent);
 window.addEventListener("wheel", handleMouseWheelZoom, { passive: false });
-window.addEventListener("contextmenu", (event) => {
-  if (event.target === canvas) event.preventDefault();
+window.addEventListener("contextmenu", suppressCanvasContextMenu);
+window.addEventListener("blur", resetAimingInput);
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) resetAimingInput();
 });
+function suppressCanvasContextMenu(event) {
+  if (event.target === canvas) event.preventDefault();
+}
+function resetAimingInput() {
+  isAiming = false;
+}
 function setPointerFromEvent(event) {
   pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -490,7 +492,6 @@ function handleMouseWheelZoom(event) {
 }
 window.addEventListener("click", (event) => {
   if (event.target !== canvas) return;
-  if (event.button !== 0) return;
   if (isInventoryOpen()) return;
   setPointerFromEvent(event);
   if (state.mode === "base") handleBaseClick();
@@ -500,8 +501,8 @@ window.addEventListener("pointerdown", (event) => {
   if (event.target !== canvas || isInventoryOpen()) return;
   setPointerFromEvent(event);
   if (event.button === 2 && state.mode === "mission") {
-    isAiming = true;
     event.preventDefault();
+    isAiming = true;
   }
 });
 window.addEventListener("pointerup", (event) => {
@@ -554,17 +555,19 @@ function createTextureMaterial(src, repeatX = 1, repeatY = 1, color = "#ffffff")
 }
 
 function loadTextureWithFallback(src) {
+  const sourcePath = src.split("?")[0];
   const texture = textureLoader.load(
-    src,
+    sourcePath,
     undefined,
     undefined,
     () => {
-      console.warn(`[Outbreak] Missing texture: ${src}`);
+      console.warn(`[Outbreak] Missing texture: ${sourcePath}`);
       texture.image = createFallbackTextureCanvas();
       texture.needsUpdate = true;
     }
   );
-  texture.userData.sourcePath = src;
+  texture.userData.sourcePath = sourcePath;
+  texture.userData.requestedPath = src;
   return texture;
 }
 
@@ -917,7 +920,6 @@ function getBaseHoverHit() {
 }
 
 function updateBase(dt) {
-  baseSurvivorPathTime += dt;
   updateBaseSurvivorRoutine(dt);
 
   const hit = getBaseHoverHit();
@@ -966,7 +968,8 @@ function updateBaseSurvivorRoutine(dt) {
 function pickNextBaseStationIndex(currentIndex) {
   if (baseStationPoints.length <= 1) return currentIndex;
   let nextIndex = currentIndex;
-  while (nextIndex === currentIndex) {
+  let safety = 0;
+  while (nextIndex === currentIndex && ++safety < 200) {
     nextIndex = randomInt(0, baseStationPoints.length - 1);
   }
   return nextIndex;
@@ -1237,7 +1240,7 @@ function renderWorkbenchPanel() {
         <h3>Available Crafts</h3>
         <div class="craft-list">
           <div class="craft-row"><b>Handgun Ammo x6</b><span>2 Parts + 1 Powder</span></div>
-          <div class="craft-row"><b>Pipe Bomb</b><span>4 Parts + 1 Alcohol</span></div>
+          <div class="craft-row"><b>Pipe Bomb</b><span>4 Parts + 1 Rubbing Alcohol Bottle</span></div>
           <div class="craft-row"><b>Weapon Repair</b><span>3 Parts</span></div>
         </div>
       </section>
@@ -1257,7 +1260,7 @@ function renderMedicalPanel() {
       <section class="panel-block">
         <h3>Available Actions</h3>
         <div class="action-list">
-          <button class="action-row" data-action="heal"><b>Patch Wounds</b><span>1 Bandage</span></button>
+          <button class="action-row" data-action="heal"><b>Patch Wounds</b><span>1 Bandages</span></button>
           <button class="action-row" data-action="stabilize"><b>Stabilize Trauma</b><span>2 Meds</span></button>
           <div class="action-row"><b>Current Health</b><span>${state.health}/100</span></div>
         </div>
@@ -1900,6 +1903,7 @@ function startMission(location) {
   rng = createSeededRng(state.runSeed);
   isAiming = false;
   state.activeQuickSlot = null;
+  resetEquippedWeaponMagazines();
   playerFacingDirection = lastAimDirection;
   runMoveDirection.copy(getDirectionVectorFromName(playerFacingDirection));
   baseHud.classList.add("hidden");
@@ -1909,6 +1913,17 @@ function startMission(location) {
   runEnd.classList.add("hidden");
   buildMission(location);
   updateHud();
+}
+
+function resetEquippedWeaponMagazines() {
+  for (const slot of [EQUIPMENT_SLOTS.PRIMARY, EQUIPMENT_SLOTS.SIDEARM]) {
+    const weaponName = state.equipment[slot];
+    if (!weaponName) continue;
+    const weapon = itemCatalog[weaponName];
+    if (weapon?.magazineSize !== undefined) {
+      state.magazines[weaponName] = weapon.magazineSize;
+    }
+  }
 }
 
 function buildMission(location) {
@@ -2782,8 +2797,8 @@ function getPlayerClipForState(stateName, facing) {
     [PLAYER_ANIMATION_STATES.IDLE_BREATHING]: fallbackIdle,
     [PLAYER_ANIMATION_STATES.WALK]: fallbackWalk,
     [PLAYER_ANIMATION_STATES.RUN]: fallbackRun,
-    [PLAYER_ANIMATION_STATES.IDLE_AIMING_HANDGUN]: `aim_idle_${facing}`,
-    [PLAYER_ANIMATION_STATES.WALK_AIMING_HANDGUN]: `aim_walk_${facing}`,
+    [PLAYER_ANIMATION_STATES.IDLE_AIMING_HANDGUN]: getAimClipKey(false, facing),
+    [PLAYER_ANIMATION_STATES.WALK_AIMING_HANDGUN]: getAimClipKey(true, facing),
     [PLAYER_ANIMATION_STATES.IDLE_AIMING_MELEE]: fallbackIdle,
     [PLAYER_ANIMATION_STATES.WALK_AIMING_MELEE]: fallbackWalk,
     [PLAYER_ANIMATION_STATES.IDLE_AIMING_SHOTGUN]: fallbackIdle,
@@ -2794,6 +2809,10 @@ function getPlayerClipForState(stateName, facing) {
     [PLAYER_ANIMATION_STATES.DEATH]: fallbackIdle,
   };
   return clipByState[stateName] || fallbackIdle;
+}
+
+function getAimClipKey(isMoving, facingDirection) {
+  return `${isMoving ? "aim_walk" : "aim_idle"}_${facingDirection}`;
 }
 
 window.outbreakDebug = function outbreakDebug() {
