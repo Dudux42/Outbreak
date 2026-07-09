@@ -40,29 +40,67 @@ const locations = [
     id: "house",
     name: "Abandoned House",
     stars: 1,
-    loot: ["Food", "Bandage", "Parts", "Kitchen Knife", "Water"],
+    lootType: "Food, tools, basic medicine",
+    loot: ["Can of Beans", "Apple", "Bandages", "Spare Parts", "Kitchen Knife", "Water Bottle"],
     rooms: 7,
+    mapX: 43,
+    mapY: 32,
+    intelRequired: 0,
   },
   {
     id: "pharmacy",
     name: "Corner Pharmacy",
     stars: 2,
-    loot: ["Bandage", "Painkillers", "Med Kit", "Alcohol", "Antibiotics"],
+    lootType: "Medicine and recovery supplies",
+    loot: ["Bandages", "Antibiotics Bottle", "Rubbing Alcohol Bottle", "Water Bottle", "Juice Box"],
     rooms: 9,
+    mapX: 58,
+    mapY: 40,
+    intelRequired: 0,
   },
   {
     id: "supermarket",
     name: "Supermarket",
     stars: 3,
-    loot: ["Food", "Water", "Battery", "Duct Tape", "Backpack"],
+    lootType: "Food, water, bags, utility items",
+    loot: ["Water Bottle", "Soda Can", "Juice Box", "Can of Tuna", "Bag of Chips", "Can of Beans", "Apple", "Banana", "Box of Mac'n'Cheese"],
     rooms: 11,
+    mapX: 35,
+    mapY: 61,
+    intelRequired: 1,
   },
   {
     id: "police",
     name: "Police Station",
     stars: 4,
-    loot: ["Ammo", "Handgun", "Armor", "Baton", "Radio Parts"],
+    lootType: "Weapons, ammo, armor, comms",
+    loot: ["Handgun", "Shotgun", "Combat Knife", "Body Armor Level 1", "Body Armor Level 2", "Body Armor Level 3"],
     rooms: 13,
+    mapX: 70,
+    mapY: 64,
+    intelRequired: 2,
+  },
+  {
+    id: "warehouse",
+    name: "Freight Warehouse",
+    stars: 3,
+    lootType: "Parts, batteries, storage gear",
+    loot: ["Spare Parts", "Hammer", "Crowbar", "Axe", "Baseball Bat", "Simple Backpack", "Large Backpack"],
+    rooms: 12,
+    mapX: 24,
+    mapY: 43,
+    intelRequired: 1,
+  },
+  {
+    id: "clinic",
+    name: "Riverside Clinic",
+    stars: 5,
+    lootType: "Rare medicine and trauma supplies",
+    loot: ["Bandages", "Antibiotics Bottle", "Rubbing Alcohol Bottle", "Water Bottle", "Body Armor Level 1"],
+    rooms: 15,
+    mapX: 78,
+    mapY: 27,
+    intelRequired: 3,
   },
 ];
 
@@ -83,24 +121,56 @@ const playerAnimations = {
   walk_south_west: { src: "./assets/player_walk_south_west_sheet.png", frames: 8, frameDuration: 0.2 },
   walk_west: { src: "./assets/player_walk_west_sheet.png", frames: 8, frameDuration: 0.2 },
   walk_north_west: { src: "./assets/player_walk_north_west_sheet.png", frames: 8, frameDuration: 0.2 },
+  run_north: { src: "./assets/player_run_north_sheet.png", frames: 8, frameDuration: 0.11 },
+  run_north_east: { src: "./assets/player_run_north_east_sheet.png", frames: 8, frameDuration: 0.11 },
+  run_east: { src: "./assets/player_run_east_sheet.png", frames: 8, frameDuration: 0.11 },
+  run_south_east: { src: "./assets/player_run_south_east_sheet.png", frames: 8, frameDuration: 0.11 },
+  run_south: { src: "./assets/player_run_south_sheet.png", frames: 8, frameDuration: 0.11 },
+  run_south_west: { src: "./assets/player_run_south_west_sheet.png", frames: 8, frameDuration: 0.11 },
+  run_west: { src: "./assets/player_run_west_sheet.png", frames: 8, frameDuration: 0.11 },
+  run_north_west: { src: "./assets/player_run_north_west_sheet.png", frames: 8, frameDuration: 0.11 },
 };
 
 const itemCatalog = {
-  Handgun: { slot: "sidearm", label: "Handgun" },
-  Baton: { slot: "primary", label: "Baton" },
-  "Kitchen Knife": { slot: "primary", label: "Kitchen Knife" },
-  Armor: { slot: "armor", label: "Body Armor", armorClass: 1 },
-  Backpack: { slot: "backpack", label: "Large Backpack", slots: 8 },
-  "Small Backpack": { slot: "backpack", label: "Small Backpack", slots: 6 },
-  Food: { label: "Food" },
-  Water: { label: "Water" },
-  Bandage: { label: "Bandage" },
-  Parts: { label: "Parts" },
+  "Spare Parts": { label: "Spare Parts", texture: "spareParts" },
+  "Kitchen Knife": { slot: "primary", label: "Kitchen Knife", texture: "kitchenKnife" },
+  Bandages: { label: "Bandages", texture: "bandages" },
+  "Antibiotics Bottle": { label: "Antibiotics Bottle", texture: "antibioticsBottle" },
+  "Rubbing Alcohol Bottle": { label: "Rubbing Alcohol Bottle", texture: "rubbingAlcoholBottle" },
+  "Combat Knife": { slot: "primary", label: "Combat Knife", texture: "combatKnife" },
+  Handgun: { slot: "sidearm", label: "Handgun", texture: "handgun" },
+  Shotgun: { slot: "primary", label: "Shotgun", texture: "shotgun" },
+  "Body Armor Level 1": { slot: "armor", label: "Body Armor Lv.1", armorClass: 1, texture: "bodyArmorLevel1" },
+  "Body Armor Level 2": { slot: "armor", label: "Body Armor Lv.2", armorClass: 2, texture: "bodyArmorLevel2" },
+  "Body Armor Level 3": { slot: "armor", label: "Police Vest", armorClass: 3, texture: "bodyArmorLevel3" },
+  "Body Armor Level 4": { slot: "armor", label: "Military Vest", armorClass: 4, texture: "bodyArmorLevel4" },
+  "Water Bottle": { label: "Water Bottle", texture: "waterBottle" },
+  "Soda Can": { label: "Soda Can", texture: "sodaCan" },
+  "Juice Box": { label: "Juice Box", texture: "juiceBox" },
+  "Can of Tuna": { label: "Can of Tuna", texture: "canOfTuna" },
+  "Bag of Chips": { label: "Bag of Chips", texture: "bagOfChips" },
+  "Can of Beans": { label: "Can of Beans", texture: "canOfBeans" },
+  Apple: { label: "Apple", texture: "apple" },
+  Banana: { label: "Banana", texture: "banana" },
+  "Box of Mac'n'Cheese": { label: "Box of Mac'n'Cheese", texture: "macNCheeseBox" },
+  Hammer: { slot: "primary", label: "Hammer", texture: "hammer" },
+  Crowbar: { slot: "primary", label: "Crowbar", texture: "crowbar" },
+  Axe: { slot: "primary", label: "Axe", texture: "axe" },
+  "Baseball Bat": { slot: "primary", label: "Baseball Bat", texture: "baseballBat" },
+  "Simple Backpack": { slot: "backpack", label: "Simple Backpack", slots: 6, texture: "simpleBackpack" },
+  "Small Backpack": { slot: "backpack", label: "Small Backpack", slots: 6, texture: "simpleBackpack" },
+  "Large Backpack": { slot: "backpack", label: "Large Backpack", slots: 8, texture: "largeBackpack" },
+  Armor: { slot: "armor", label: "Body Armor", armorClass: 1, texture: "bodyArmorLevel1" },
+  Backpack: { slot: "backpack", label: "Large Backpack", slots: 8, texture: "largeBackpack" },
+  Food: { label: "Food", texture: "canOfBeans" },
+  Water: { label: "Water", texture: "waterBottle" },
+  Bandage: { label: "Bandage", texture: "bandages" },
+  Parts: { label: "Parts", texture: "spareParts" },
   Ammo: { label: "Ammo" },
   Painkillers: { label: "Painkillers" },
   "Med Kit": { label: "Med Kit" },
-  Alcohol: { label: "Alcohol" },
-  Antibiotics: { label: "Antibiotics" },
+  Alcohol: { label: "Alcohol", texture: "rubbingAlcoholBottle" },
+  Antibiotics: { label: "Antibiotics", texture: "antibioticsBottle" },
   Battery: { label: "Battery" },
   "Duct Tape": { label: "Duct Tape" },
   "Radio Parts": { label: "Radio Parts" },
@@ -160,10 +230,30 @@ const pointer = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
 const clock = new THREE.Clock();
 const textureLoader = new THREE.TextureLoader();
+const itemTextureCache = new Map();
+const cameraConfig = {
+  desktopDefaultView: 7.2,
+  mobileDefaultView: 6.2,
+  minView: 3.6,
+  zoomStep: 0.7,
+  view: 7.2,
+};
+const baseCameraOffset = new THREE.Vector3(7.2, 9, 7.2);
+const missionCameraOffset = new THREE.Vector3(8.2, 10.6, 8.2);
+const playerSpriteScale = 2.65;
+const playerSpriteY = 1.35;
+const baseStationPoints = [
+  { id: "itemBox", label: "Item Box", x: -4.4, z: -1.55, facing: "south" },
+  { id: "workbench", label: "Workbench", x: -0.2, z: -2.05, facing: "south" },
+  { id: "medical", label: "Medical Unit", x: 3.9, z: -1.45, facing: "south_east" },
+  { id: "intel", label: "Intel Center", x: -4.35, z: 1.25, facing: "north_west" },
+  { id: "map", label: "Map Table", x: 3.35, z: 1.15, facing: "north_east" },
+];
 
 const texturePaths = {
   floor: "./assets/textures/floor_concrete.png",
   wall: "./assets/textures/wall_stained.png",
+  pillar: "./assets/textures/pillar_concrete.png",
   door: "./assets/textures/door_worn.png",
   baseFloor: "./assets/textures/base_floor_wood.png",
   baseWall: "./assets/textures/base_wall_wallpaper.png",
@@ -175,6 +265,37 @@ const texturePaths = {
   medical: "./assets/textures/base_med_unit.png",
 };
 
+const itemTexturePaths = {
+  spareParts: "./assets/items/spare_parts.png",
+  kitchenKnife: "./assets/items/kitchen_knife.png",
+  bandages: "./assets/items/bandages.png",
+  antibioticsBottle: "./assets/items/antibiotics_bottle.png",
+  rubbingAlcoholBottle: "./assets/items/rubbing_alcohol_bottle.png",
+  combatKnife: "./assets/items/combat_knife.png",
+  handgun: "./assets/items/handgun.png",
+  shotgun: "./assets/items/shotgun.png",
+  bodyArmorLevel1: "./assets/items/body_armor_level_1.png",
+  bodyArmorLevel2: "./assets/items/body_armor_level_2.png",
+  bodyArmorLevel3: "./assets/items/body_armor_level_3.png",
+  bodyArmorLevel4: "./assets/items/body_armor_level_4.png",
+  waterBottle: "./assets/items/water_bottle.png",
+  sodaCan: "./assets/items/soda_can.png",
+  juiceBox: "./assets/items/juice_box.png",
+  canOfTuna: "./assets/items/can_of_tuna.png",
+  bagOfChips: "./assets/items/bag_of_chips.png",
+  canOfBeans: "./assets/items/can_of_beans.png",
+  apple: "./assets/items/apple.png",
+  banana: "./assets/items/banana.png",
+  macNCheeseBox: "./assets/items/mac_n_cheese_box.png",
+  hammer: "./assets/items/hammer.png",
+  crowbar: "./assets/items/crowbar.png",
+  axe: "./assets/items/axe.png",
+  baseballBat: "./assets/items/baseball_bat.png",
+  simpleBackpack: "./assets/items/simple_backpack.png",
+  largeBackpack: "./assets/items/large_backpack.png",
+  key: "./assets/items/key.png",
+};
+
 let scene;
 let camera;
 let renderer;
@@ -182,6 +303,8 @@ let player;
 let playerAnimator;
 let baseSurvivorPathTime = 0;
 let lastAimDirection = "south";
+let playerFacingDirection = "south";
+let runMoveDirection = new THREE.Vector3(0, 0, 1);
 let floorPlane;
 let colliders = [];
 let lootNodes = [];
@@ -192,9 +315,17 @@ let lockedDoors = [];
 let openingDoors = [];
 let missionRooms = [];
 let missionBounds = null;
+let roomFogTiles = [];
+let pillarKeys = new Set();
 let baseInteractables = [];
 let hoveredBaseObject = null;
 let interactTarget = null;
+let isAiming = false;
+let baseRoutine = {
+  targetIndex: 0,
+  pauseTimer: 0,
+  facing: "south",
+};
 
 initThree();
 buildBaseScene();
@@ -215,9 +346,25 @@ window.addEventListener("keydown", (event) => {
 });
 window.addEventListener("keyup", (event) => keys.delete(event.code));
 window.addEventListener("pointermove", setPointerFromEvent);
+window.addEventListener("wheel", handleMouseWheelZoom, { passive: false });
+window.addEventListener("contextmenu", (event) => {
+  if (event.target === canvas) event.preventDefault();
+});
 function setPointerFromEvent(event) {
   pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+function handleMouseWheelZoom(event) {
+  if (event.target !== canvas || isPaused()) return;
+  event.preventDefault();
+  const defaultView = getDefaultCameraView();
+  const direction = event.deltaY < 0 ? -1 : 1;
+  cameraConfig.view = THREE.MathUtils.clamp(
+    cameraConfig.view + direction * cameraConfig.zoomStep,
+    cameraConfig.minView,
+    defaultView
+  );
+  applyCameraProjection();
 }
 window.addEventListener("click", (event) => {
   if (event.target !== canvas) return;
@@ -225,6 +372,17 @@ window.addEventListener("click", (event) => {
   setPointerFromEvent(event);
   if (state.mode === "base") handleBaseClick();
   else attack();
+});
+window.addEventListener("pointerdown", (event) => {
+  if (event.target !== canvas || isInventoryOpen()) return;
+  setPointerFromEvent(event);
+  if (event.button === 2 && state.mode === "mission") {
+    isAiming = true;
+    event.preventDefault();
+  }
+});
+window.addEventListener("pointerup", (event) => {
+  if (event.button === 2) isAiming = false;
 });
 closeBasePanelButton.addEventListener("click", closeBasePanel);
 closeInventoryButton.addEventListener("click", closeInventory);
@@ -287,7 +445,10 @@ function buildBaseScene() {
 
   const floorMaterial = createTextureMaterial(texturePaths.baseFloor, 3, 2, "#9a7a55");
   const wallMaterial = createTextureMaterial(texturePaths.baseWall, 2, 1, "#8a897b");
+  const pillarMaterial = createTextureMaterial(texturePaths.pillar, 1, 1, "#7d7d70");
   const boardedWindowMaterial = createTextureMaterial(texturePaths.boardedWindow, 1, 1, "#8b6846");
+  const baseDoorMaterial = createTextureMaterial(texturePaths.door, 1, 1, "#9b7a59");
+  baseDoorMaterial.emissive = new THREE.Color("#2a1a0d");
 
   const floor = new THREE.Mesh(new THREE.BoxGeometry(15, 0.2, 10), floorMaterial);
   floor.position.y = -0.1;
@@ -296,23 +457,33 @@ function buildBaseScene() {
 
   addBaseWall(0, -5, 7.5, 0.25, wallMaterial);
   addBaseWall(-7.5, 0, 0.25, 5, wallMaterial);
-  addBaseWall(7.5, 0, 0.25, 5, wallMaterial);
-  addBaseWall(-4.8, 5, 2.7, 0.25, wallMaterial);
-  addBaseWall(4.8, 5, 2.7, 0.25, wallMaterial);
-  addBarricadedWindow(-1.8, 5.06, boardedWindowMaterial);
-  addBarricadedWindow(1.8, 5.06, boardedWindowMaterial);
+  addBaseWall(7.5, -2.45, 0.25, 2.55, wallMaterial);
+  addBaseWall(7.5, 3.65, 0.25, 1.35, wallMaterial);
+  addBaseWall(0, 5, 7.5, 0.25, wallMaterial);
+  addBaseWallPosts(pillarMaterial);
+  addBarricadedWindow(-2.2, 4.72, boardedWindowMaterial, "north");
+  addBarricadedWindow(2.2, 4.72, boardedWindowMaterial, "north");
+  addBarricadedWindow(-7.22, -2.3, boardedWindowMaterial, "west");
+  addBarricadedWindow(-7.22, 2.1, boardedWindowMaterial, "west");
+  addBarricadedWindow(7.22, -2.4, boardedWindowMaterial, "east");
+  addBaseDoubleDoor(7.5, 1.12, baseDoorMaterial);
 
-  addBaseStation("itemBox", "Item Box", -5.7, -2.7, "#57636c", () => makeCrate(1.7, 1.0, 1.1));
-  addBaseStation("workbench", "Workbench", 0, -3.55, "#8a6238", () => makeBench());
-  addBaseStation("medical", "Medical Unit", 5.6, -2.6, "#d6d7cf", () => makeMedUnit());
-  addBaseStation("intel", "Intel Center", -5.7, 2.55, "#334a5b", () => makeIntelDesk());
-  addBaseStation("map", "Map Table", 4.6, 2.35, "#7b5d38", () => makeMapTable());
+  addBaseStation("itemBox", "Item Box", -4.6, -2.5, "#57636c", () => makeCrate(1.75, 1.0, 1.1));
+  addBaseStation("workbench", "Workbench", -0.25, -3.1, "#8a6238", () => makeBench({ detailed: true }));
+  addBaseStation("medical", "Medical Unit", 3.9, -2.65, "#d6d7cf", () => makeMedUnit());
+  addBaseStation("intel", "Intel Center", -4.65, 2.25, "#334a5b", () => makeIntelDesk());
+  addBaseStation("map", "Map Table", 3.45, 2.05, "#7b5d38", () => makeMapTable());
 
   addBaseProps();
   addPlayer(0);
-  player.position.set(-1.6, 1.2, 0.7);
-  player.scale.set(2.1, 2.1, 1);
+  player.position.set(-1.6, playerSpriteY, 0.7);
+  player.scale.set(playerSpriteScale, playerSpriteScale, 1);
   playerAnimator?.setClip("idle_south", player.material);
+  baseRoutine = {
+    targetIndex: randomInt(0, baseStationPoints.length - 1),
+    pauseTimer: 0.8,
+    facing: "south",
+  };
   updateBaseCamera();
   showPrompt("Click a station in the safehouse");
 }
@@ -326,20 +497,84 @@ function addBaseWall(x, z, width, depth, material) {
   return wall;
 }
 
-function addBarricadedWindow(x, z, material) {
+function addBaseWallPosts(material) {
+  const posts = [
+    [-7.5, -5],
+    [7.5, -5],
+    [-7.5, 5],
+    [7.5, 5],
+    [7.5, 0],
+    [7.5, 2.25],
+    [-7.5, 0],
+  ];
+  for (const [x, z] of posts) {
+    const post = new THREE.Mesh(new THREE.BoxGeometry(0.42, 2.65, 0.42), material);
+    post.position.set(x, 1.32, z);
+    post.castShadow = true;
+    post.receiveShadow = true;
+    scene.add(post);
+  }
+}
+
+function addBarricadedWindow(x, z, material, side = "south") {
+  const onVerticalWall = side === "east" || side === "west";
+  const xOffset = side === "east" ? -0.05 : side === "west" ? 0.05 : 0;
+  const zOffset = side === "south" ? -0.05 : side === "north" ? 0.05 : 0;
   const darkGlass = new THREE.Mesh(
-    new THREE.BoxGeometry(1.55, 1.05, 0.08),
+    new THREE.BoxGeometry(onVerticalWall ? 0.08 : 1.55, 1.05, onVerticalWall ? 1.55 : 0.08),
     new THREE.MeshStandardMaterial({ color: "#101817", emissive: "#080b0a", roughness: 0.6 })
   );
-  darkGlass.position.set(x, 1.35, z);
+  darkGlass.position.set(x + xOffset, 1.35, z + zOffset);
   scene.add(darkGlass);
 
   for (let i = 0; i < 3; i++) {
-    const board = new THREE.Mesh(new THREE.BoxGeometry(1.85, 0.16, 0.12), material);
-    board.position.set(x, 1.0 + i * 0.32, z + 0.05);
+    const board = new THREE.Mesh(
+      new THREE.BoxGeometry(onVerticalWall ? 0.12 : 1.85, 0.16, onVerticalWall ? 1.85 : 0.12),
+      material
+    );
+    board.position.set(x + xOffset * 2, 1.0 + i * 0.32, z + zOffset * 2);
     board.rotation.z = i % 2 === 0 ? 0.18 : -0.12;
     board.castShadow = true;
     scene.add(board);
+  }
+}
+
+function addBaseDoubleDoor(x, z, material) {
+  const group = new THREE.Group();
+  group.position.set(x, 0, z);
+  scene.add(group);
+
+  const trimMaterial = new THREE.MeshStandardMaterial({ color: "#3c2819", emissive: "#120905", roughness: 0.78 });
+  const frame = new THREE.Mesh(
+    new THREE.BoxGeometry(0.16, 2.35, 2.05),
+    new THREE.MeshStandardMaterial({ color: "#1b1d19", roughness: 0.82 })
+  );
+  frame.position.set(-0.04, 1.18, 0);
+  group.add(frame);
+
+  for (const zOffset of [-0.52, 0.52]) {
+    const panel = new THREE.Mesh(new THREE.BoxGeometry(0.18, 2.05, 0.95), material);
+    panel.position.set(-0.12, 1.05, zOffset);
+    panel.castShadow = true;
+    panel.receiveShadow = true;
+    group.add(panel);
+
+    const rail = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.08, 0.76), trimMaterial);
+    rail.position.set(-0.24, 1.08, zOffset);
+    rail.castShadow = true;
+    group.add(rail);
+
+    const stile = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.72, 0.05), trimMaterial);
+    stile.position.set(-0.25, 1.05, zOffset > 0 ? zOffset - 0.43 : zOffset + 0.43);
+    stile.castShadow = true;
+    group.add(stile);
+
+    const handle = new THREE.Mesh(
+      new THREE.BoxGeometry(0.08, 0.12, 0.08),
+      new THREE.MeshStandardMaterial({ color: "#d4b16a", emissive: "#221600", roughness: 0.35 })
+    );
+    handle.position.set(-0.24, 1.08, zOffset > 0 ? zOffset - 0.24 : zOffset + 0.24);
+    group.add(handle);
   }
 }
 
@@ -374,10 +609,25 @@ function makeCrate(width, height, depth) {
   crate.position.y = height / 2;
   crate.castShadow = true;
   group.add(crate);
+  const strapMaterial = new THREE.MeshStandardMaterial({ color: "#3b241a", roughness: 0.82 });
+  const frontStrap = new THREE.Mesh(new THREE.BoxGeometry(width + 0.04, 0.08, 0.08), strapMaterial);
+  frontStrap.position.set(0, height * 0.67, -depth / 2 - 0.03);
+  frontStrap.castShadow = true;
+  group.add(frontStrap);
+  const sideStrap = new THREE.Mesh(new THREE.BoxGeometry(0.1, height + 0.04, depth + 0.04), strapMaterial);
+  sideStrap.position.set(-width * 0.36, height / 2, 0);
+  sideStrap.castShadow = true;
+  group.add(sideStrap);
+  const latch = new THREE.Mesh(
+    new THREE.BoxGeometry(0.22, 0.16, 0.08),
+    new THREE.MeshStandardMaterial({ color: "#a98048", roughness: 0.42 })
+  );
+  latch.position.set(0.38, height * 0.68, -depth / 2 - 0.08);
+  group.add(latch);
   return group;
 }
 
-function makeBench() {
+function makeBench(options = {}) {
   const group = new THREE.Group();
   const top = new THREE.Mesh(
     new THREE.BoxGeometry(2.5, 0.24, 1.1),
@@ -397,34 +647,57 @@ function makeBench() {
       group.add(leg);
     }
   }
+  if (options.detailed) addWorkbenchDetails(group);
   return group;
 }
 
+function addWorkbenchDetails(group) {
+  const metal = new THREE.MeshStandardMaterial({ color: "#8a8f8d", roughness: 0.58 });
+  const wire = new THREE.MeshStandardMaterial({ color: "#bb6a3a", roughness: 0.7 });
+  const dark = new THREE.MeshStandardMaterial({ color: "#1d201d", roughness: 0.8 });
+  addBox(group, 0.34, 0.1, 0.22, -0.82, 1.02, -0.08, metal);
+  addBox(group, 0.22, 0.1, 0.18, -0.45, 1.02, 0.16, metal);
+  addBox(group, 0.42, 0.24, 0.32, 0.82, 0.2, 0.0, dark);
+  addCylinder(group, 0.1, 0.04, -0.1, 1.06, 0.22, wire, Math.PI / 2);
+  addCylinder(group, 0.12, 0.06, 0.1, 1.06, 0.18, wire, Math.PI / 2);
+  addTableLamp(group, 0.75, 1.03, -0.3);
+  const rack = addBox(group, 1.2, 0.08, 0.08, 0, 1.52, -0.58, new THREE.MeshStandardMaterial({ color: "#2a2d2c", roughness: 0.7 }));
+  rack.rotation.x = -0.15;
+  for (const x of [-0.42, -0.08, 0.26, 0.5]) {
+    const tool = addBox(group, 0.06, 0.36, 0.04, x, 1.3, -0.6, metal);
+    tool.rotation.z = x > 0.2 ? -0.12 : 0.08;
+  }
+}
+
 function makeMedUnit() {
-  const group = makeCrate(1.6, 1.25, 0.8);
-  group.traverse((child) => {
-    if (child.isMesh) child.material = createTextureMaterial(texturePaths.medical, 1, 1, "#d8d3c8");
-  });
-  const crossBar = new THREE.Mesh(
-    new THREE.BoxGeometry(0.72, 0.14, 0.08),
-    new THREE.MeshStandardMaterial({ color: "#b5453f", roughness: 0.6 })
-  );
-  crossBar.position.set(0, 1.35, -0.43);
-  group.add(crossBar);
-  const crossStem = crossBar.clone();
-  crossStem.rotation.z = Math.PI / 2;
-  group.add(crossStem);
+  const group = new THREE.Group();
+  const surface = createTextureMaterial(texturePaths.medical, 1, 1, "#d8d3c8");
+  addBox(group, 2.25, 0.22, 1.0, 0, 0.82, 0, surface);
+  addBox(group, 0.62, 0.74, 0.86, -0.76, 0.38, 0, surface);
+  for (const y of [0.22, 0.43, 0.64]) {
+    addBox(group, 0.56, 0.04, 0.88, -0.76, y, -0.01, new THREE.MeshStandardMaterial({ color: "#7c746b", roughness: 0.75 }));
+    addBox(group, 0.06, 0.04, 0.2, -0.43, y + 0.02, -0.22, new THREE.MeshStandardMaterial({ color: "#4f4943", roughness: 0.7 }));
+  }
+  for (const x of [0.0, 0.8]) {
+    addBox(group, 0.14, 0.82, 0.14, x, 0.41, -0.35, new THREE.MeshStandardMaterial({ color: "#6c645c", roughness: 0.8 }));
+    addBox(group, 0.14, 0.82, 0.14, x, 0.41, 0.35, new THREE.MeshStandardMaterial({ color: "#6c645c", roughness: 0.8 }));
+  }
+  addBox(group, 0.6, 0.1, 0.34, 0.1, 1.0, -0.18, new THREE.MeshStandardMaterial({ color: "#ede5d6", roughness: 0.7 }));
+  addCylinder(group, 0.1, 0.4, 0.58, 1.08, 0.02, new THREE.MeshStandardMaterial({ color: "#9bc1d9", roughness: 0.45 }));
+  addCylinder(group, 0.04, 0.45, 0.28, 1.05, 0.25, new THREE.MeshStandardMaterial({ color: "#dce8ea", roughness: 0.35 }), Math.PI / 2);
+  addTableLamp(group, 0.88, 1.03, -0.3);
   return group;
 }
 
 function makeIntelDesk() {
   const group = makeBench();
-  const monitor = new THREE.Mesh(
-    new THREE.BoxGeometry(1.2, 0.8, 0.1),
-    createTextureMaterial(texturePaths.intel, 1, 1, "#27414a")
-  );
-  monitor.position.set(0, 1.25, -0.36);
-  group.add(monitor);
+  const intelMaterial = createTextureMaterial(texturePaths.intel, 1, 1, "#27414a");
+  addBox(group, 0.85, 0.62, 0.1, 0.4, 1.24, -0.42, intelMaterial);
+  addBox(group, 0.5, 0.08, 0.36, 0.4, 0.94, -0.12, new THREE.MeshStandardMaterial({ color: "#151b1d", roughness: 0.8 }));
+  addBox(group, 0.72, 0.42, 0.52, -0.58, 1.08, -0.08, intelMaterial);
+  addCylinder(group, 0.09, 0.18, -0.86, 1.2, -0.08, new THREE.MeshStandardMaterial({ color: "#121718", roughness: 0.7 }), Math.PI / 2);
+  const antenna = addBox(group, 0.035, 1.0, 0.035, -0.9, 1.68, -0.1, new THREE.MeshStandardMaterial({ color: "#b1b8aa", roughness: 0.55 }));
+  antenna.rotation.z = -0.35;
   return group;
 }
 
@@ -437,6 +710,34 @@ function makeMapTable() {
   map.position.set(0, 0.97, 0);
   group.add(map);
   return group;
+}
+
+function addBox(group, width, height, depth, x, y, z, material) {
+  const mesh = new THREE.Mesh(new THREE.BoxGeometry(width, height, depth), material);
+  mesh.position.set(x, y, z);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  group.add(mesh);
+  return mesh;
+}
+
+function addCylinder(group, radius, height, x, y, z, material, rotationZ = 0) {
+  const mesh = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, height, 16), material);
+  mesh.position.set(x, y, z);
+  mesh.rotation.z = rotationZ;
+  mesh.castShadow = true;
+  group.add(mesh);
+  return mesh;
+}
+
+function addTableLamp(group, x, y, z) {
+  const stemMaterial = new THREE.MeshStandardMaterial({ color: "#2a2d2c", roughness: 0.55 });
+  const shadeMaterial = new THREE.MeshStandardMaterial({ color: "#d9b15f", emissive: "#5c3b10", roughness: 0.5 });
+  addCylinder(group, 0.035, 0.5, x, y + 0.22, z, stemMaterial);
+  addCylinder(group, 0.18, 0.22, x, y + 0.55, z, shadeMaterial);
+  const light = new THREE.PointLight("#f0bf68", 0.7, 2.4, 2);
+  light.position.set(x, y + 0.55, z);
+  group.add(light);
 }
 
 function addBaseProps() {
@@ -466,13 +767,7 @@ function getBaseHoverHit() {
 
 function updateBase(dt) {
   baseSurvivorPathTime += dt;
-  if (player) {
-    const x = -1.15 + Math.sin(baseSurvivorPathTime * 0.45) * 0.9;
-    const z = 0.65 + Math.cos(baseSurvivorPathTime * 0.32) * 0.45;
-    player.position.set(x, 1.2, z);
-    playerAnimator?.setClip("walk_south_east", player.material);
-    playerAnimator?.update(dt);
-  }
+  updateBaseSurvivorRoutine(dt);
 
   const hit = getBaseHoverHit();
   const nextHover = hit?.object?.userData?.baseAction || null;
@@ -484,8 +779,50 @@ function updateBase(dt) {
   updateBaseCamera();
 }
 
+function updateBaseSurvivorRoutine(dt) {
+  if (!player) return;
+  const target = baseStationPoints[baseRoutine.targetIndex];
+  const targetPosition = new THREE.Vector3(target.x, playerSpriteY, target.z);
+  const toTarget = targetPosition.clone().sub(player.position).setY(0);
+
+  if (baseRoutine.pauseTimer > 0) {
+    baseRoutine.pauseTimer -= dt;
+    const idleFacing = target.facing || baseRoutine.facing;
+    baseRoutine.facing = idleFacing;
+    playerAnimator?.setClip(`idle_${idleFacing}`, player.material);
+    playerAnimator?.update(dt);
+    return;
+  }
+
+  if (toTarget.lengthSq() < 0.08) {
+    baseRoutine.pauseTimer = randomFloat(1.4, 3.2);
+    baseRoutine.targetIndex = pickNextBaseStationIndex(baseRoutine.targetIndex);
+    playerAnimator?.setClip(`idle_${target.facing || baseRoutine.facing}`, player.material);
+    playerAnimator?.update(dt);
+    return;
+  }
+
+  const direction = toTarget.normalize();
+  const facing = getDirectionName(direction);
+  baseRoutine.facing = facing;
+  playerAnimator?.setClip(`walk_${facing}`, player.material);
+  const before = player.position.clone();
+  player.position.add(direction.multiplyScalar(2.2 * dt));
+  player.position.y = playerSpriteY;
+  playerAnimator?.advanceByDistance(player.position.distanceTo(before));
+}
+
+function pickNextBaseStationIndex(currentIndex) {
+  if (baseStationPoints.length <= 1) return currentIndex;
+  let nextIndex = currentIndex;
+  while (nextIndex === currentIndex) {
+    nextIndex = randomInt(0, baseStationPoints.length - 1);
+  }
+  return nextIndex;
+}
+
 function updateBaseCamera() {
-  camera.position.lerp(new THREE.Vector3(8.5, 10.5, 8.5), 0.12);
+  camera.position.lerp(baseCameraOffset, 0.12);
   camera.lookAt(0, 0, 0);
 }
 
@@ -584,13 +921,14 @@ function renderMedicalPanel() {
 function renderIntelPanel() {
   basePanelTitle.textContent = "Intel Center";
   const level = state.upgrades.intel;
+  const knownLocations = getAvailableLocations().length;
   basePanelContent.innerHTML = `
     <div class="panel-grid">
       <section class="panel-block">
         <h3>Active Bonuses</h3>
         <div class="bonus-list">
           <div class="bonus-row"><b>Search Radius</b><span>+${level * 15}%</span></div>
-          <div class="bonus-row"><b>Known Locations</b><span>${Math.min(locations.length, 2 + level)}/${locations.length}</span></div>
+          <div class="bonus-row"><b>Known Locations</b><span>${knownLocations}/${locations.length}</span></div>
           <div class="bonus-row"><b>Threat Forecast</b><span>${level >= 2 ? "Active" : "Offline"}</span></div>
         </div>
       </section>
@@ -606,14 +944,43 @@ function renderIntelPanel() {
 function renderMapPanel() {
   basePanelTitle.textContent = "Map";
   basePanelContent.innerHTML = `
-    <div class="locations">
+    <div class="world-map" aria-label="Outbreak area map">
+      <div class="map-sector map-sector--docks">Docks</div>
+      <div class="map-sector map-sector--old-town">Old Town</div>
+      <div class="map-sector map-sector--industrial">Industrial</div>
+      ${renderMapBuildings()}
+      <div class="map-road map-road--main-x"></div>
+      <div class="map-road map-road--main-y"></div>
+      <div class="map-road map-road--north"></div>
+      <div class="map-road map-road--east"></div>
+      <div class="map-road map-road--south"></div>
+      <div class="map-road map-road--west"></div>
+      <div class="map-river"></div>
+      <div class="map-district map-district--north"></div>
+      <div class="map-district map-district--south"></div>
+      <div class="map-district map-district--east"></div>
+      <span class="map-threat map-threat--west">!</span>
+      <span class="map-threat map-threat--north">!</span>
+      <span class="map-threat map-threat--east">!</span>
+      <div class="map-base" style="left: 50%; top: 50%;">
+        <span>Base</span>
+      </div>
       ${locations.map((location) => `
-        <button class="location" data-location="${location.id}">
-          <span>
+        <button
+          class="map-location ${isLocationAvailable(location) ? "" : "map-location--locked"}"
+          data-location="${location.id}"
+          style="left: ${location.mapX}%; top: ${location.mapY}%;"
+          aria-disabled="${isLocationAvailable(location) ? "false" : "true"}"
+          aria-label="${location.name}"
+        >
+          <span class="map-location__dot"></span>
+          <span class="map-location__label">${location.name}</span>
+          <span class="map-tooltip">
             <strong>${location.name}</strong>
-            <span>${location.loot.slice(0, 3).join(" / ")}</span>
+            <span>${renderStars(location.stars)}</span>
+            <span>${location.lootType}</span>
+            ${isLocationAvailable(location) ? "<em>Click to scout</em>" : `<em>Requires Intel Lv.${location.intelRequired}</em>`}
           </span>
-          <span class="stars">${"*".repeat(location.stars)}${"-".repeat(5 - location.stars)}</span>
         </button>
       `).join("")}
     </div>
@@ -622,9 +989,44 @@ function renderMapPanel() {
   for (const button of basePanelContent.querySelectorAll("[data-location]")) {
     button.addEventListener("click", () => {
       const location = locations.find((item) => item.id === button.dataset.location);
-      if (location) startMission(location);
+      if (location && isLocationAvailable(location)) startMission(location);
     });
   }
+}
+
+function renderMapBuildings() {
+  const buildings = [];
+  const columns = 18;
+  const rows = 10;
+  for (let row = 0; row < rows; row++) {
+    for (let column = 0; column < columns; column++) {
+      const seed = (row + 3) * 37 + (column + 5) * 17;
+      if (seed % 7 === 0 || (column > 13 && row > 5)) continue;
+      const left = 5 + column * 5.05 + (seed % 5) * 0.3;
+      const top = 7 + row * 8.6 + (seed % 4) * 0.45;
+      if (Math.abs(left - 50) < 9 && Math.abs(top - 50) < 9) continue;
+      const width = 2.1 + (seed % 4) * 0.55;
+      const height = 3.2 + (seed % 5) * 0.62;
+      const tone = seed % 3;
+      const variant = seed % 11 === 0 ? " map-building--ruined" : tone === 0 ? " map-building--light" : "";
+      buildings.push(
+        `<span class="map-building${variant}" style="left:${left.toFixed(1)}%; top:${top.toFixed(1)}%; width:${width.toFixed(1)}%; height:${height.toFixed(1)}%;"></span>`
+      );
+    }
+  }
+  return buildings.join("");
+}
+
+function isLocationAvailable(location) {
+  return state.upgrades.intel >= location.intelRequired;
+}
+
+function getAvailableLocations() {
+  return locations.filter(isLocationAvailable);
+}
+
+function renderStars(count) {
+  return `${"*".repeat(count)}${"-".repeat(5 - count)}`;
 }
 
 function renderUpgradeButton(type) {
@@ -803,6 +1205,9 @@ function startMission(location) {
   state.mode = "mission";
   state.activeLocation = location;
   state.keys = 0;
+  isAiming = false;
+  playerFacingDirection = lastAimDirection;
+  runMoveDirection.copy(getDirectionVectorFromName(playerFacingDirection));
   baseHud.classList.add("hidden");
   basePanel.classList.add("hidden");
   promptEl.classList.add("hidden");
@@ -842,6 +1247,8 @@ function buildMission(location) {
   addLoot(location);
   addZombies(location);
   addExits();
+  addRoomFog(layout.rooms);
+  updateFogOfWar();
 
   ui.missionName.textContent = location.name;
   ui.missionMeta.textContent = `${location.stars} star threat / ${location.loot.join(", ")}`;
@@ -861,7 +1268,10 @@ function clearScene() {
   openingDoors = [];
   missionRooms = [];
   missionBounds = null;
+  roomFogTiles = [];
+  pillarKeys = new Set();
   interactTarget = null;
+  isAiming = false;
 }
 
 function addGrid(size) {
@@ -984,10 +1394,12 @@ function validateMissionLayout(layout) {
 
 function generateRooms(layout) {
   const wallMaterial = createTextureMaterial(texturePaths.wall, 1.5, 1, "#777b6e");
+  const pillarMaterial = createTextureMaterial(texturePaths.pillar, 1, 1, "#868779");
   const doorMaterial = createTextureMaterial(texturePaths.door, 1, 1, "#8a735a");
 
   for (const room of layout.rooms) {
     addRoomWalls(room, wallMaterial);
+    addRoomPillars(room, pillarMaterial);
   }
 
   for (const edge of layout.edges) {
@@ -1040,28 +1452,83 @@ function addWallWithDoorOpening(room, side, material) {
   }
 }
 
+function addRoomPillars(room, material) {
+  const corners = [
+    [room.x - room.halfW, room.z - room.halfH],
+    [room.x + room.halfW, room.z - room.halfH],
+    [room.x - room.halfW, room.z + room.halfH],
+    [room.x + room.halfW, room.z + room.halfH],
+  ];
+  for (const [x, z] of corners) addPillar(x, z, material, 0.42);
+
+  for (const side of ["north", "south", "east", "west"]) {
+    const hasOpening = room.doors.some((item) => item.side === side) || room.exteriorDoor === side;
+    if (!hasOpening) continue;
+    const openingHalf = 1.35 / 2;
+    if (side === "north" || side === "south") {
+      const z = room.z + (side === "north" ? -room.halfH : room.halfH);
+      addPillar(room.x - openingHalf, z, material, 0.32);
+      addPillar(room.x + openingHalf, z, material, 0.32);
+    } else {
+      const x = room.x + (side === "west" ? -room.halfW : room.halfW);
+      addPillar(x, room.z - openingHalf, material, 0.32);
+      addPillar(x, room.z + openingHalf, material, 0.32);
+    }
+  }
+}
+
+function addPillar(x, z, material, size = 0.38) {
+  const key = `${x.toFixed(2)},${z.toFixed(2)},${size.toFixed(2)}`;
+  if (pillarKeys.has(key)) return null;
+  pillarKeys.add(key);
+  const pillar = new THREE.Mesh(new THREE.BoxGeometry(size, 2.36, size), material);
+  pillar.position.set(x, 1.18, z);
+  pillar.castShadow = true;
+  pillar.receiveShadow = true;
+  pillar.userData.blocksSight = true;
+  scene.add(pillar);
+  return pillar;
+}
+
 function addDoor(edge, material) {
   const from = edge.from;
   const to = edge.to;
   const x = (from.x + to.x) / 2;
   const z = (from.z + to.z) / 2;
   const vertical = from.x !== to.x;
+  const doorWidth = 1.35;
+  const doorThickness = 0.3;
+  const hingeSign = vertical ? (to.z >= from.z ? -1 : 1) : (to.x >= from.x ? -1 : 1);
+  const hinge = new THREE.Group();
+  hinge.position.set(
+    x + (vertical ? 0 : hingeSign * doorWidth / 2),
+    0,
+    z + (vertical ? hingeSign * doorWidth / 2 : 0)
+  );
+  hinge.userData.isDoorHinge = true;
+  scene.add(hinge);
+
   const door = new THREE.Mesh(
-    new THREE.BoxGeometry(vertical ? 0.3 : 1.35, 2.0, vertical ? 1.35 : 0.3),
+    new THREE.BoxGeometry(vertical ? doorThickness : doorWidth, 2.0, vertical ? doorWidth : doorThickness),
     material
   );
-  door.position.set(x, 1.0, z);
+  door.position.set(
+    vertical ? 0 : -hingeSign * doorWidth / 2,
+    1.0,
+    vertical ? -hingeSign * doorWidth / 2 : 0
+  );
   door.castShadow = true;
   door.receiveShadow = true;
   door.userData.locked = edge.locked;
   door.userData.isDoor = true;
+  door.userData.blocksSight = true;
   door.userData.isOpen = false;
   door.userData.keyRoomId = edge.keyRoom?.id;
   door.userData.vertical = vertical;
-  door.userData.closedPosition = door.position.clone();
-  door.userData.openOffset = new THREE.Vector3(vertical ? 0 : 1.05, 0, vertical ? 1.05 : 0);
-  door.userData.openRotation = vertical ? Math.PI / 2 : -Math.PI / 2;
-  scene.add(door);
+  door.userData.hinge = hinge;
+  door.userData.closedRotationY = 0;
+  door.userData.openRotation = hingeSign * Math.PI / 2;
+  hinge.add(door);
   colliders.push(door);
   doorNodes.push(door);
   if (door.userData.locked) lockedDoors.push(door);
@@ -1074,14 +1541,11 @@ function toggleDoor(door) {
   door.userData.openTarget = opening ? 1 : 0;
   door.userData.openProgress = opening ? 0 : 1;
   door.userData.animTime = 0;
-  door.userData.startRotationY = door.rotation.y;
-  door.userData.startPosition = door.position.clone();
-  door.userData.endRotationY = opening ? door.userData.openRotation : 0;
-  door.userData.endPosition = opening
-    ? door.userData.closedPosition.clone().add(door.userData.openOffset)
-    : door.userData.closedPosition.clone();
+  door.userData.startRotationY = door.userData.hinge.rotation.y;
+  door.userData.endRotationY = opening ? door.userData.openRotation : door.userData.closedRotationY;
   if (opening) colliders = colliders.filter((node) => node !== door);
   else if (!colliders.includes(door)) colliders.push(door);
+  door.userData.blocksSight = !opening;
   openingDoors.push(door);
 }
 
@@ -1089,8 +1553,7 @@ function updateOpeningDoors(dt) {
   for (const door of [...openingDoors]) {
     door.userData.animTime = Math.min(1, door.userData.animTime + dt * 2.8);
     const t = easeOutCubic(door.userData.animTime);
-    door.rotation.y = THREE.MathUtils.lerp(door.userData.startRotationY, door.userData.endRotationY, t);
-    door.position.lerpVectors(door.userData.startPosition, door.userData.endPosition, t);
+    door.userData.hinge.rotation.y = THREE.MathUtils.lerp(door.userData.startRotationY, door.userData.endRotationY, t);
     if (door.userData.animTime >= 1) {
       door.userData.opening = false;
       door.userData.isOpen = door.userData.openTarget === 1;
@@ -1122,9 +1585,31 @@ function addWall(x, z, width, depth, material) {
   wall.castShadow = true;
   wall.receiveShadow = true;
   wall.userData.radius = Math.max(width, depth);
+  wall.userData.blocksSight = true;
   scene.add(wall);
   colliders.push(wall);
   return wall;
+}
+
+function addRoomFog(rooms) {
+  roomFogTiles = rooms.map((room) => {
+    const fog = new THREE.Mesh(
+      new THREE.PlaneGeometry(room.halfW * 2 - 0.32, room.halfH * 2 - 0.32),
+      new THREE.MeshBasicMaterial({
+        color: "#020303",
+        transparent: true,
+        opacity: 0.9,
+        depthWrite: false,
+      })
+    );
+    fog.rotation.x = -Math.PI / 2;
+    fog.position.set(room.x, 2.55, room.z);
+    fog.userData.roomId = room.id;
+    fog.renderOrder = 20;
+    room.fogTile = fog;
+    scene.add(fog);
+    return fog;
+  });
 }
 
 function addPlayer(size, spawnPosition = null) {
@@ -1132,14 +1617,16 @@ function addPlayer(size, spawnPosition = null) {
   const material = new THREE.SpriteMaterial({
     map: playerAnimator.texture,
     transparent: true,
-    alphaTest: 0.08,
-    depthWrite: false,
+    alphaTest: 0.45,
+    depthWrite: true,
+    depthTest: true,
   });
   playerAnimator.holdFrame(`idle_${lastAimDirection}`, material, 0);
   player = new THREE.Sprite(material);
   if (spawnPosition) player.position.copy(spawnPosition);
-  else player.position.set(0, 1.2, size - 1.2);
-  player.scale.set(2.25, 2.25, 1);
+  else player.position.set(0, playerSpriteY, size - 1.2);
+  player.position.y = playerSpriteY;
+  player.scale.set(playerSpriteScale, playerSpriteScale, 1);
   player.userData.radius = 0.45;
   scene.add(player);
 }
@@ -1198,6 +1685,7 @@ function createSpriteSheetClip(loader, clip) {
   const texture = loader.load(clip.src);
   texture.magFilter = THREE.NearestFilter;
   texture.minFilter = THREE.NearestFilter;
+  texture.generateMipmaps = false;
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.ClampToEdgeWrapping;
   texture.repeat.set(1 / clip.frames, 1);
@@ -1232,20 +1720,44 @@ function getRandomPointInRoom(room, inset = 0.9, y = 0.24) {
 
 function createLootNode(itemName, position) {
   const isKey = itemName === "Key";
-  const node = new THREE.Mesh(
-    isKey ? new THREE.BoxGeometry(0.55, 0.2, 0.25) : new THREE.BoxGeometry(0.7, 0.45, 0.7),
-    new THREE.MeshStandardMaterial({
-      color: isKey ? "#87c4ff" : getLootColor(itemName),
-      emissive: isKey ? "#143044" : "#000000",
-      roughness: 0.55,
+  const item = isKey ? { texture: "key" } : getItem(itemName);
+  const node = new THREE.Sprite(
+    new THREE.SpriteMaterial({
+      map: getItemTexture(item),
+      color: "#ffffff",
+      transparent: true,
+      alphaTest: 0.08,
+      depthWrite: true,
     })
   );
   node.position.copy(position);
+  node.position.y = 0.58;
+  node.scale.set(isKey ? 0.62 : getLootScale(itemName), isKey ? 0.62 : getLootScale(itemName), 1);
   node.castShadow = true;
   node.userData.item = itemName;
   scene.add(node);
   lootNodes.push(node);
   return node;
+}
+
+function getItemTexture(item) {
+  const textureKey = item.texture || "spareParts";
+  const src = itemTexturePaths[textureKey] || itemTexturePaths.spareParts;
+  if (!itemTextureCache.has(src)) {
+    const texture = textureLoader.load(src);
+    texture.magFilter = THREE.NearestFilter;
+    texture.minFilter = THREE.NearestFilter;
+    texture.generateMipmaps = false;
+    itemTextureCache.set(src, texture);
+  }
+  return itemTextureCache.get(src);
+}
+
+function getLootScale(itemName) {
+  const item = getItem(itemName);
+  if (item.slot === "primary") return 0.95;
+  if (item.slot === "armor" || item.slot === "backpack") return 1.05;
+  return 0.78;
 }
 
 function getLootColor(itemName) {
@@ -1286,22 +1798,117 @@ function addExits() {
   const farRoom = sortedRooms[0] || startRoom;
   const secondFarRoom = sortedRooms.find((room) => room.id !== farRoom.id && room.depth > 1) || farRoom;
   const positions = [
-    new THREE.Vector3(startRoom.x, 0.06, startRoom.z + startRoom.halfH - 0.8),
-    new THREE.Vector3(farRoom.x, 0.06, farRoom.z - farRoom.halfH + 0.8),
+    getSafeExitPosition(startRoom, new THREE.Vector3(startRoom.x, 0.06, startRoom.z)),
+    getSafeExitPosition(farRoom, new THREE.Vector3(farRoom.x, 0.06, farRoom.z)),
   ];
   if (missionRooms.length > 8) {
-    positions.push(new THREE.Vector3(secondFarRoom.x + secondFarRoom.halfW - 0.8, 0.06, secondFarRoom.z));
+    positions.push(getSafeExitPosition(secondFarRoom, new THREE.Vector3(secondFarRoom.x, 0.06, secondFarRoom.z)));
   }
   for (const position of positions) {
-    const exit = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.95, 0.95, 0.12, 24),
-      new THREE.MeshStandardMaterial({ color: "#75b985", emissive: "#14321c" })
-    );
+    const exit = createExtractionGrid();
     exit.position.copy(position);
-    exit.userData.type = "exit";
     scene.add(exit);
     exits.push(exit);
   }
+}
+
+function getSafeExitPosition(room, preferred) {
+  const insetX = Math.max(0.9, Math.min(room.halfW - 1.0, 1.6));
+  const insetZ = Math.max(0.9, Math.min(room.halfH - 1.0, 1.6));
+  const awayFromDoor = getExitPositionAwayFromNearestDoor(room);
+  const candidates = [
+    awayFromDoor,
+    preferred,
+    new THREE.Vector3(room.x, 0.06, room.z),
+    new THREE.Vector3((awayFromDoor.x + room.x) / 2, 0.06, (awayFromDoor.z + room.z) / 2),
+    new THREE.Vector3(room.x - insetX, 0.06, room.z - insetZ),
+    new THREE.Vector3(room.x + insetX, 0.06, room.z + insetZ),
+    new THREE.Vector3(room.x - insetX, 0.06, room.z + insetZ),
+    new THREE.Vector3(room.x + insetX, 0.06, room.z - insetZ),
+    new THREE.Vector3(room.x - insetX, 0.06, room.z),
+    new THREE.Vector3(room.x + insetX, 0.06, room.z),
+    new THREE.Vector3(room.x, 0.06, room.z - insetZ),
+    new THREE.Vector3(room.x, 0.06, room.z + insetZ),
+  ].filter((point) => isPointInRoom(point, room));
+
+  return candidates
+    .map((point, index) => ({ point, score: getDoorClearanceScore(point) - index * 0.03 }))
+    .sort((a, b) => b.score - a.score)[0]?.point || preferred;
+}
+
+function getExitPositionAwayFromNearestDoor(room) {
+  const center = new THREE.Vector3(room.x, 0.06, room.z);
+  if (!doorNodes.length) return center;
+  const nearestDoor = doorNodes
+    .map((door) => getObjectWorldPosition(door))
+    .sort((a, b) => a.distanceTo(center) - b.distanceTo(center))[0];
+  const direction = center.clone().sub(nearestDoor).setY(0);
+  if (direction.lengthSq() < 0.01) direction.set(1, 0, 1);
+  direction.normalize();
+  const distance = Math.min(2.0, room.halfW - 0.9, room.halfH - 0.9);
+  return clampPointToRoom(center.add(direction.multiplyScalar(Math.max(1.1, distance))), room, 1.0);
+}
+
+function clampPointToRoom(point, room, inset = 0.8) {
+  point.x = THREE.MathUtils.clamp(point.x, room.x - room.halfW + inset, room.x + room.halfW - inset);
+  point.z = THREE.MathUtils.clamp(point.z, room.z - room.halfH + inset, room.z + room.halfH - inset);
+  return point;
+}
+
+function getDoorClearanceScore(point) {
+  const doorClearance = doorNodes.length
+    ? Math.min(...doorNodes.map((door) => getObjectWorldPosition(door).distanceTo(point)))
+    : 10;
+  const room = getRoomAtPosition(point);
+  const centerDistance = room ? point.distanceTo(new THREE.Vector3(room.x, point.y, room.z)) : 0;
+  const centerPenalty = Math.abs(centerDistance - 1.8) * 0.2;
+  return doorClearance - centerPenalty;
+}
+
+function createExtractionGrid() {
+  const group = new THREE.Group();
+  group.userData.type = "exit";
+  const size = 2.4;
+  const half = size / 2;
+
+  const pad = new THREE.Mesh(
+    new THREE.PlaneGeometry(size, size),
+    new THREE.MeshBasicMaterial({
+      color: "#6dff82",
+      transparent: true,
+      opacity: 0.62,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    })
+  );
+  pad.rotation.x = -Math.PI / 2;
+  pad.position.y = 0.16;
+  pad.renderOrder = 30;
+  group.add(pad);
+
+  const lineMaterial = new THREE.MeshStandardMaterial({
+    color: "#c7ffd0",
+    emissive: "#2d9b43",
+    roughness: 0.5,
+  });
+  for (const offset of [-half, -0.4, 0.4, half]) {
+    const xLine = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.08, size), lineMaterial);
+    xLine.position.set(offset, 0.2, 0);
+    group.add(xLine);
+
+    const zLine = new THREE.Mesh(new THREE.BoxGeometry(size, 0.08, 0.07), lineMaterial);
+    zLine.position.set(0, 0.2, offset);
+    group.add(zLine);
+  }
+  for (const x of [-half, half]) {
+    for (const z of [-half, half]) {
+      const corner = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.2, 0.22), lineMaterial);
+      corner.position.set(x, 0.28, z);
+      group.add(corner);
+    }
+  }
+
+  return group;
 }
 
 function animate() {
@@ -1318,6 +1925,7 @@ function animate() {
     updateOpeningDoors(dt);
     updateZombies(dt);
     updateCamera();
+    updateFogOfWar();
     findInteraction();
     updateHud();
   }
@@ -1330,19 +1938,40 @@ function updatePlayer(dt) {
   if (keys.has("KeyS")) movement.z += 1;
   if (keys.has("KeyA")) movement.x -= 1;
   if (keys.has("KeyD")) movement.x += 1;
-  const facing = getMouseFacingDirection();
+  const aimDirection = getMouseDirectionVector();
+  const facing = getDirectionName(aimDirection);
+  lastAimDirection = facing;
 
   if (movement.lengthSq() === 0) {
     playerAnimator?.setClip(`idle_${facing}`, player.material);
     playerAnimator?.update(dt);
+    playerFacingDirection = facing;
+    runMoveDirection.lerp(aimDirection, 1 - Math.exp(-dt * 8));
+    if (runMoveDirection.lengthSq() > 0.01) runMoveDirection.normalize();
     return;
   }
 
-  const direction = movement.clone().normalize();
-  playerAnimator?.setClip(`walk_${facing}`, player.material);
+  const isRunning = keys.has("ShiftLeft") || keys.has("ShiftRight");
+  const direction = isRunning ? getRunDirection(aimDirection, dt) : movement.clone().normalize();
+  const movementDotFacing = direction.dot(aimDirection);
+  const backpedalMultiplier = !isRunning && movementDotFacing < -0.35 ? 0.54 : 1;
+  const walkSpeed = 3.9;
+  const runSpeed = walkSpeed * 1.25;
+  const speed = (isRunning ? runSpeed : walkSpeed) * backpedalMultiplier;
+  const animationFacing = isRunning ? getDirectionName(direction) : facing;
+  playerFacingDirection = animationFacing;
+  playerAnimator?.setClip(`${isRunning ? "run" : "walk"}_${animationFacing}`, player.material);
   const before = player.position.clone();
-  moveWithSlide(player, direction.multiplyScalar(5.2 * dt), player.userData.radius);
+  moveWithSlide(player, direction.multiplyScalar(speed * dt), player.userData.radius);
   playerAnimator?.advanceByDistance(player.position.distanceTo(before));
+}
+
+function getRunDirection(targetDirection, dt) {
+  if (runMoveDirection.lengthSq() < 0.01) runMoveDirection.copy(targetDirection);
+  const turnBlend = 1 - Math.exp(-dt * 5.4);
+  runMoveDirection.lerp(targetDirection, turnBlend);
+  if (runMoveDirection.lengthSq() < 0.01) return targetDirection.clone();
+  return runMoveDirection.normalize().clone();
 }
 
 function moveWithSlide(entity, delta, radius) {
@@ -1356,14 +1985,18 @@ function moveWithSlide(entity, delta, radius) {
 }
 
 function getMouseFacingDirection() {
-  if (!floorPlane || !player) return lastAimDirection;
+  return getDirectionName(getMouseDirectionVector());
+}
+
+function getMouseDirectionVector() {
+  const fallback = getDirectionVectorFromName(lastAimDirection);
+  if (!floorPlane || !player) return fallback;
   raycaster.setFromCamera(pointer, camera);
   const hit = raycaster.intersectObject(floorPlane)[0];
-  if (!hit) return lastAimDirection;
+  if (!hit) return fallback;
   const direction = hit.point.sub(player.position).setY(0);
-  if (direction.lengthSq() < 0.04) return lastAimDirection;
-  lastAimDirection = getDirectionName(direction.normalize());
-  return lastAimDirection;
+  if (direction.lengthSq() < 0.04) return fallback;
+  return direction.normalize();
 }
 
 function getDirectionName(direction) {
@@ -1371,6 +2004,20 @@ function getDirectionName(direction) {
   const eastWest = direction.x < -0.35 ? "west" : direction.x > 0.35 ? "east" : "";
   if (northSouth && eastWest) return `${northSouth}_${eastWest}`;
   return northSouth || eastWest || "south";
+}
+
+function getDirectionVectorFromName(name) {
+  const vectors = {
+    north: new THREE.Vector3(0, 0, -1),
+    north_east: new THREE.Vector3(1, 0, -1),
+    east: new THREE.Vector3(1, 0, 0),
+    south_east: new THREE.Vector3(1, 0, 1),
+    south: new THREE.Vector3(0, 0, 1),
+    south_west: new THREE.Vector3(-1, 0, 1),
+    west: new THREE.Vector3(-1, 0, 0),
+    north_west: new THREE.Vector3(-1, 0, -1),
+  };
+  return (vectors[name] || vectors.south).clone().normalize();
 }
 
 function updateZombies(dt) {
@@ -1392,20 +2039,106 @@ function updateZombies(dt) {
 
 function updateCamera() {
   const target = player.position;
-  camera.position.lerp(new THREE.Vector3(target.x + 12, 16, target.z + 12), 0.08);
+  camera.position.lerp(target.clone().add(missionCameraOffset), 0.08);
   camera.lookAt(target.x, 0, target.z);
+}
+
+function updateFogOfWar() {
+  if (!player || state.mode !== "mission") return;
+  for (const room of missionRooms) {
+    const visible = isRoomVisible(room);
+    if (room.fogTile) room.fogTile.visible = !visible;
+  }
+
+  for (const node of [...lootNodes, ...zombies, ...exits]) {
+    node.visible = isPointVisibleFromPlayer(node.position);
+  }
+
+  for (const door of doorNodes) {
+    const doorPosition = getObjectWorldPosition(door);
+    door.visible = doorPosition.distanceTo(player.position) < 3.2 || isPointVisibleFromPlayer(doorPosition);
+  }
+}
+
+function isRoomVisible(room) {
+  const center = new THREE.Vector3(room.x, playerSpriteY, room.z);
+  if (isPointInRoom(player.position, room)) return true;
+  const points = [
+    center,
+    new THREE.Vector3(room.x - room.halfW * 0.55, playerSpriteY, room.z - room.halfH * 0.55),
+    new THREE.Vector3(room.x + room.halfW * 0.55, playerSpriteY, room.z - room.halfH * 0.55),
+    new THREE.Vector3(room.x - room.halfW * 0.55, playerSpriteY, room.z + room.halfH * 0.55),
+    new THREE.Vector3(room.x + room.halfW * 0.55, playerSpriteY, room.z + room.halfH * 0.55),
+  ];
+  return points.some(isPointVisibleFromPlayer);
+}
+
+function isPointVisibleFromPlayer(point) {
+  if (!player) return true;
+  const toPoint = point.clone().sub(player.position).setY(0);
+  const distance = toPoint.length();
+  const sameRoom = getRoomAtPosition(point) === getRoomAtPosition(player.position);
+  if (distance < 4.2) return sameRoom || hasLineOfSight(player.position, point);
+  if (distance > 22) return false;
+
+  const facing = getFacingVector();
+  const direction = toPoint.normalize();
+  const inSightCone = facing.dot(direction) > 0.36;
+  return inSightCone && hasLineOfSight(player.position, point);
+}
+
+function getRoomAtPosition(point) {
+  return missionRooms.find((room) => isPointInRoom(point, room)) || null;
+}
+
+function isPointInRoom(point, room) {
+  return (
+    point.x >= room.x - room.halfW &&
+    point.x <= room.x + room.halfW &&
+    point.z >= room.z - room.halfH &&
+    point.z <= room.z + room.halfH
+  );
+}
+
+function getFacingVector() {
+  return getDirectionVectorFromName(playerFacingDirection);
+}
+
+function hasLineOfSight(from, to) {
+  const origin = from.clone();
+  const target = to.clone();
+  origin.y = 1.05;
+  target.y = 1.05;
+  const direction = target.sub(origin);
+  const distance = direction.length();
+  if (distance <= 0.01) return true;
+
+  raycaster.set(origin, direction.normalize());
+  raycaster.far = distance - 0.12;
+  const hits = raycaster.intersectObjects(getSightBlockers(), false);
+  raycaster.far = Infinity;
+  return hits.length === 0;
+}
+
+function getSightBlockers() {
+  return colliders.filter((node) => node.userData.blocksSight);
+}
+
+function getObjectWorldPosition(object) {
+  object.updateWorldMatrix(true, false);
+  return object.getWorldPosition(new THREE.Vector3());
 }
 
 function findInteraction() {
   interactTarget = null;
-  const nearbyLoot = lootNodes.find((node) => node.position.distanceTo(player.position) < 1.4);
+  const nearbyLoot = lootNodes.find((node) => node.visible && node.position.distanceTo(player.position) < 1.4);
   if (nearbyLoot) {
     interactTarget = nearbyLoot;
     showPrompt(nearbyLoot.userData.item === "Key" ? "Press E to pick up a key" : `Press E to loot ${nearbyLoot.userData.item}`);
     return;
   }
 
-  const nearbyDoor = doorNodes.find((door) => door.position.distanceTo(player.position) < 1.8);
+  const nearbyDoor = doorNodes.find((door) => getObjectWorldPosition(door).distanceTo(player.position) < 1.8);
   if (nearbyDoor) {
     interactTarget = nearbyDoor;
     if (nearbyDoor.userData.locked) showPrompt(state.keys > 0 ? "Press E to unlock and open this door" : "Locked door. Find a key.");
@@ -1450,7 +2183,7 @@ function interact() {
 }
 
 function attack() {
-  if (state.mode !== "mission" || state.ammo <= 0) return;
+  if (state.mode !== "mission" || state.ammo <= 0 || !isAiming) return;
   state.ammo -= 1;
   raycaster.setFromCamera(pointer, camera);
   const hit = raycaster.intersectObject(floorPlane)[0];
@@ -1463,7 +2196,7 @@ function attack() {
     const toZombie = zombie.position.clone().sub(player.position).setY(0);
     const distance = toZombie.length();
     const dot = direction.dot(toZombie.normalize());
-    if (distance < 9 && dot > bestDot) {
+    if (distance < 9 && dot > bestDot && hasLineOfSight(player.position, zombie.position)) {
       best = zombie;
       bestDot = dot;
     }
@@ -1545,13 +2278,24 @@ function resize() {
   const width = window.innerWidth;
   const height = window.innerHeight;
   renderer.setSize(width, height);
+  cameraConfig.view = Math.min(cameraConfig.view, getDefaultCameraView());
+  applyCameraProjection();
+}
+
+function applyCameraProjection() {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
   const aspect = width / height;
-  const view = width < 720 ? 8 : 11;
+  const view = cameraConfig.view;
   camera.left = -view * aspect;
   camera.right = view * aspect;
   camera.top = view;
   camera.bottom = -view;
   camera.updateProjectionMatrix();
+}
+
+function getDefaultCameraView() {
+  return window.innerWidth < 720 ? cameraConfig.mobileDefaultView : cameraConfig.desktopDefaultView;
 }
 
 function randomInt(min, max) {

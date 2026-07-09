@@ -22,6 +22,14 @@ SOURCES = {
     "walk_south_west": "player_src_walk_south_west.gif",
     "walk_west": "player_src_walk_west.gif",
     "walk_north_west": "player_src_walk_north_west.gif",
+    "run_north": "player_src_run_north.gif",
+    "run_north_east": "player_src_run_north_east.gif",
+    "run_east": "player_src_run_east.gif",
+    "run_south_east": "player_src_run_south_east.gif",
+    "run_south": "player_src_run_south.gif",
+    "run_south_west": "player_src_run_south_west.gif",
+    "run_west": "player_src_run_west.gif",
+    "run_north_west": "player_src_run_north_west.gif",
 }
 
 
