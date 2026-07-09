@@ -1,4 +1,4 @@
-import * as THREE from "https://unpkg.com/three@0.161.0/build/three.module.js";
+import * as THREE from "./vendor/three.module.js";
 
 const canvas = document.querySelector("#game");
 const baseHud = document.querySelector("#baseHud");
@@ -12,6 +12,12 @@ const inventoryOverlay = document.querySelector("#inventoryOverlay");
 const closeInventoryButton = document.querySelector("#closeInventory");
 const runEnd = document.querySelector("#runEnd");
 const returnBaseButton = document.querySelector("#returnBase");
+const quantityPrompt = document.querySelector("#quantityPrompt");
+const quantityPromptForm = document.querySelector("#quantityPromptForm");
+const quantityPromptTitle = document.querySelector("#quantityPromptTitle");
+const quantityPromptText = document.querySelector("#quantityPromptText");
+const quantityPromptInput = document.querySelector("#quantityPromptInput");
+const quantityPromptCancel = document.querySelector("#quantityPromptCancel");
 
 const ui = {
   baseHealth: document.querySelector("#baseHealth"),
@@ -31,9 +37,31 @@ const ui = {
   slotSidearm: document.querySelector("#slotSidearm"),
   slotArmor: document.querySelector("#slotArmor"),
   slotBackpack: document.querySelector("#slotBackpack"),
+  quickbar: document.querySelector("#quickbar"),
   runEndTitle: document.querySelector("#runEndTitle"),
   runEndText: document.querySelector("#runEndText"),
 };
+
+const DIRECTIONS = Object.freeze([
+  "north",
+  "north_east",
+  "east",
+  "south_east",
+  "south",
+  "south_west",
+  "west",
+  "north_west",
+]);
+
+const EQUIPMENT_SLOTS = Object.freeze({
+  PRIMARY: "primary",
+  SIDEARM: "sidearm",
+  ARMOR: "armor",
+  BACKPACK: "backpack",
+});
+
+const MAX_FRAME_DT = 0.05;
+const COLLIDER_CELL_SIZE = 4;
 
 const locations = [
   {
@@ -131,40 +159,42 @@ const playerAnimations = {
   run_north_west: { src: "./assets/player_run_north_west_sheet.png", frames: 8, frameDuration: 0.11 },
 };
 
+validatePlayerAnimations(playerAnimations);
+
 const itemCatalog = {
   "Spare Parts": { label: "Spare Parts", texture: "spareParts" },
-  "Kitchen Knife": { slot: "primary", label: "Kitchen Knife", texture: "kitchenKnife" },
-  Bandages: { label: "Bandages", texture: "bandages" },
-  "Antibiotics Bottle": { label: "Antibiotics Bottle", texture: "antibioticsBottle" },
-  "Rubbing Alcohol Bottle": { label: "Rubbing Alcohol Bottle", texture: "rubbingAlcoholBottle" },
-  "Combat Knife": { slot: "primary", label: "Combat Knife", texture: "combatKnife" },
-  Handgun: { slot: "sidearm", label: "Handgun", texture: "handgun" },
-  Shotgun: { slot: "primary", label: "Shotgun", texture: "shotgun" },
-  "Body Armor Level 1": { slot: "armor", label: "Body Armor Lv.1", armorClass: 1, texture: "bodyArmorLevel1" },
-  "Body Armor Level 2": { slot: "armor", label: "Body Armor Lv.2", armorClass: 2, texture: "bodyArmorLevel2" },
-  "Body Armor Level 3": { slot: "armor", label: "Police Vest", armorClass: 3, texture: "bodyArmorLevel3" },
-  "Body Armor Level 4": { slot: "armor", label: "Military Vest", armorClass: 4, texture: "bodyArmorLevel4" },
-  "Water Bottle": { label: "Water Bottle", texture: "waterBottle" },
-  "Soda Can": { label: "Soda Can", texture: "sodaCan" },
-  "Juice Box": { label: "Juice Box", texture: "juiceBox" },
-  "Can of Tuna": { label: "Can of Tuna", texture: "canOfTuna" },
-  "Bag of Chips": { label: "Bag of Chips", texture: "bagOfChips" },
-  "Can of Beans": { label: "Can of Beans", texture: "canOfBeans" },
-  Apple: { label: "Apple", texture: "apple" },
-  Banana: { label: "Banana", texture: "banana" },
-  "Box of Mac'n'Cheese": { label: "Box of Mac'n'Cheese", texture: "macNCheeseBox" },
-  Hammer: { slot: "primary", label: "Hammer", texture: "hammer" },
-  Crowbar: { slot: "primary", label: "Crowbar", texture: "crowbar" },
-  Axe: { slot: "primary", label: "Axe", texture: "axe" },
-  "Baseball Bat": { slot: "primary", label: "Baseball Bat", texture: "baseballBat" },
-  "Simple Backpack": { slot: "backpack", label: "Simple Backpack", slots: 6, texture: "simpleBackpack" },
-  "Small Backpack": { slot: "backpack", label: "Small Backpack", slots: 6, texture: "simpleBackpack" },
-  "Large Backpack": { slot: "backpack", label: "Large Backpack", slots: 8, texture: "largeBackpack" },
-  Armor: { slot: "armor", label: "Body Armor", armorClass: 1, texture: "bodyArmorLevel1" },
-  Backpack: { slot: "backpack", label: "Large Backpack", slots: 8, texture: "largeBackpack" },
+  "Kitchen Knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Kitchen Knife", texture: "kitchenKnife" },
+  Bandages: { label: "Bandages", texture: "bandages", healHp: 25 },
+  "Antibiotics Bottle": { label: "Antibiotics Bottle", texture: "antibioticsBottle", healHp: 40, cureInfection: true },
+  "Rubbing Alcohol Bottle": { label: "Rubbing Alcohol Bottle", texture: "rubbingAlcoholBottle", healHp: 5, disinfect: true },
+  "Combat Knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Combat Knife", texture: "combatKnife" },
+  Handgun: { slot: EQUIPMENT_SLOTS.SIDEARM, label: "Handgun", texture: "handgun" },
+  Shotgun: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Shotgun", texture: "shotgun" },
+  "Body Armor Level 1": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Body Armor Lv.1", armorClass: 1, texture: "bodyArmorLevel1" },
+  "Body Armor Level 2": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Body Armor Lv.2", armorClass: 2, texture: "bodyArmorLevel2" },
+  "Body Armor Level 3": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Police Vest", armorClass: 3, texture: "bodyArmorLevel3" },
+  "Body Armor Level 4": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Military Vest", armorClass: 4, texture: "bodyArmorLevel4" },
+  "Water Bottle": { label: "Water Bottle", texture: "waterBottle", healHp: 10 },
+  "Soda Can": { label: "Soda Can", texture: "sodaCan", healHp: 5 },
+  "Juice Box": { label: "Juice Box", texture: "juiceBox", healHp: 8 },
+  "Can of Tuna": { label: "Can of Tuna", texture: "canOfTuna", healHp: 20 },
+  "Bag of Chips": { label: "Bag of Chips", texture: "bagOfChips", healHp: 6 },
+  "Can of Beans": { label: "Can of Beans", texture: "canOfBeans", healHp: 18 },
+  Apple: { label: "Apple", texture: "apple", healHp: 12 },
+  Banana: { label: "Banana", texture: "banana", healHp: 10 },
+  "Box of Mac'n'Cheese": { label: "Box of Mac'n'Cheese", texture: "macNCheeseBox", healHp: 22 },
+  Hammer: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Hammer", texture: "hammer" },
+  Crowbar: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Crowbar", texture: "crowbar" },
+  Axe: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Axe", texture: "axe" },
+  "Baseball Bat": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Baseball Bat", texture: "baseballBat" },
+  "Simple Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Simple Backpack", slots: 6, texture: "simpleBackpack" },
+  "Small Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Small Backpack", slots: 6, texture: "simpleBackpack" },
+  "Large Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Large Backpack", slots: 8, texture: "largeBackpack" },
+  Armor: { slot: EQUIPMENT_SLOTS.ARMOR, label: "Body Armor", armorClass: 1, texture: "bodyArmorLevel1" },
+  Backpack: { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Large Backpack", slots: 8, texture: "largeBackpack" },
   Food: { label: "Food", texture: "canOfBeans" },
-  Water: { label: "Water", texture: "waterBottle" },
-  Bandage: { label: "Bandage", texture: "bandages" },
+  Water: { label: "Water", texture: "waterBottle", healHp: 10 },
+  Bandage: { label: "Bandage", texture: "bandages", healHp: 25 },
   Parts: { label: "Parts", texture: "spareParts" },
   Ammo: { label: "Ammo" },
   Painkillers: { label: "Painkillers" },
@@ -174,6 +204,7 @@ const itemCatalog = {
   Battery: { label: "Battery" },
   "Duct Tape": { label: "Duct Tape" },
   "Radio Parts": { label: "Radio Parts" },
+  Key: { label: "Key", texture: "key" },
 };
 
 const state = {
@@ -181,7 +212,10 @@ const state = {
   health: 100,
   ammo: 12,
   keys: 0,
+  runSeed: Date.now() >>> 0,
   inventory: [],
+  quickbar: Array(9).fill(null),
+  activeQuickSlot: null,
   equipment: {
     primary: null,
     sidearm: "Handgun",
@@ -205,22 +239,22 @@ const state = {
 const upgradeData = {
   storage: {
     name: "Item Box",
-    costs: ["6 Parts", "10 Parts", "16 Parts"],
+    costs: [{ item: "Parts", qty: 6 }, { item: "Parts", qty: 10 }, { item: "Parts", qty: 16 }],
     bonuses: ["Storage capacity +8", "Storage capacity +12", "Rare item sorting"],
   },
   workbench: {
     name: "Workbench",
-    costs: ["8 Parts", "14 Parts", "1 Tool Kit"],
+    costs: [{ item: "Parts", qty: 8 }, { item: "Parts", qty: 14 }, { item: "Tool Kit", qty: 1 }],
     bonuses: ["Basic ammo crafting", "Weapon repair", "Improvised explosives"],
   },
   med: {
     name: "Medical Unit",
-    costs: ["4 Meds", "8 Meds", "12 Meds"],
+    costs: [{ item: "Meds", qty: 4 }, { item: "Meds", qty: 8 }, { item: "Meds", qty: 12 }],
     bonuses: ["Patch wounds", "Full heal before runs", "Trauma recovery"],
   },
   intel: {
     name: "Intel Center",
-    costs: ["5 Radio Parts", "9 Radio Parts", "1 Signal Scanner"],
+    costs: [{ item: "Radio Parts", qty: 5 }, { item: "Radio Parts", qty: 9 }, { item: "Signal Scanner", qty: 1 }],
     bonuses: ["Reveal 1 extra map location", "Preview threat level", "Reveal extraction hint"],
   },
 };
@@ -296,6 +330,26 @@ const itemTexturePaths = {
   key: "./assets/items/key.png",
 };
 
+const DIRECTION_VECTORS = Object.freeze({
+  north: new THREE.Vector3(0, 0, -1),
+  north_east: new THREE.Vector3(1, 0, -1),
+  east: new THREE.Vector3(1, 0, 0),
+  south_east: new THREE.Vector3(1, 0, 1),
+  south: new THREE.Vector3(0, 0, 1),
+  south_west: new THREE.Vector3(-1, 0, 1),
+  west: new THREE.Vector3(-1, 0, 0),
+  north_west: new THREE.Vector3(-1, 0, -1),
+});
+
+function validatePlayerAnimations(animations) {
+  for (const direction of DIRECTIONS) {
+    for (const prefix of ["idle", "walk", "run"]) {
+      const key = `${prefix}_${direction}`;
+      if (!animations[key]) throw new Error(`[Outbreak] Missing player animation: ${key}`);
+    }
+  }
+}
+
 let scene;
 let camera;
 let renderer;
@@ -307,6 +361,9 @@ let playerFacingDirection = "south";
 let runMoveDirection = new THREE.Vector3(0, 0, 1);
 let floorPlane;
 let colliders = [];
+let colliderGrid = new Map();
+let colliderBounds = new WeakMap();
+let colliderGridDirty = true;
 let lootNodes = [];
 let zombies = [];
 let exits = [];
@@ -321,6 +378,8 @@ let baseInteractables = [];
 let hoveredBaseObject = null;
 let interactTarget = null;
 let isAiming = false;
+let hoveredInventoryIndex = null;
+let rng = createSeededRng(state.runSeed);
 let baseRoutine = {
   targetIndex: 0,
   pauseTimer: 0,
@@ -330,6 +389,7 @@ let baseRoutine = {
 initThree();
 buildBaseScene();
 renderBaseHud();
+renderQuickbar();
 animate();
 
 window.addEventListener("resize", resize);
@@ -339,7 +399,17 @@ window.addEventListener("keydown", (event) => {
     toggleInventory();
     return;
   }
-  if (!inventoryOverlay.classList.contains("hidden")) return;
+  if (!inventoryOverlay.classList.contains("hidden")) {
+    if (/^Digit[3-9]$/.test(event.code)) {
+      bindHoveredInventoryItemToQuickbar(Number(event.code.slice(5)));
+      return;
+    }
+    return;
+  }
+  if (/^Digit[1-9]$/.test(event.code)) {
+    selectQuickSlot(Number(event.code.slice(5)));
+    return;
+  }
   keys.add(event.code);
   if (event.code === "KeyE") interact();
   if (event.code === "Space") attack();
@@ -417,7 +487,7 @@ function initThree() {
 }
 
 function createTextureMaterial(src, repeatX = 1, repeatY = 1, color = "#ffffff") {
-  const texture = textureLoader.load(src);
+  const texture = loadTextureWithFallback(src);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set(repeatX, repeatY);
@@ -430,10 +500,38 @@ function createTextureMaterial(src, repeatX = 1, repeatY = 1, color = "#ffffff")
   });
 }
 
+function loadTextureWithFallback(src) {
+  const texture = textureLoader.load(
+    src,
+    undefined,
+    undefined,
+    () => {
+      console.warn(`[Outbreak] Missing texture: ${src}`);
+      texture.image = createFallbackTextureCanvas();
+      texture.needsUpdate = true;
+    }
+  );
+  return texture;
+}
+
+function createFallbackTextureCanvas() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 16;
+  canvas.height = 16;
+  const context = canvas.getContext("2d");
+  context.fillStyle = "#ff00ff";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "#111111";
+  context.fillRect(0, 0, 8, 8);
+  context.fillRect(8, 8, 8, 8);
+  return canvas;
+}
+
 function renderBaseHud() {
   ui.baseHealth.textContent = state.health;
   ui.baseAmmo.textContent = state.ammo;
   ui.basePack.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
+  renderQuickbar();
 }
 
 function buildBaseScene() {
@@ -846,29 +944,225 @@ function closeBasePanel() {
 
 function renderItemBoxPanel() {
   basePanelTitle.textContent = "Item Box";
+  const stashCapacity = Math.max(36, 24 + state.upgrades.storage * 8, state.stash.length + 8);
+  const stashCells = Array.from({ length: stashCapacity }, (_, index) => renderStashCell(index)).join("");
+  const inventoryCells = Array.from({ length: getInventoryCapacity() }, (_, index) => renderTransferInventoryCell(index)).join("");
   basePanelContent.innerHTML = `
-    <div class="panel-grid">
-      <section class="panel-block">
-        <h3>Stored Items</h3>
-        <div class="item-list">
-          ${state.stash.map((item) => `<div class="item-row"><span>${item.name}</span><b>${item.qty}</b></div>`).join("")}
+    <div class="item-box-layout">
+      <section class="item-box-stash">
+        <div class="storage-header">
+          <h3>Stored Items</h3>
+          <span>${state.stash.reduce((total, item) => total + item.qty, 0)} items</span>
+        </div>
+        <div class="storage-grid storage-grid--stash" data-drop-target="stash">
+          ${stashCells}
         </div>
       </section>
-      <section class="panel-block">
-        <h3>Carried Gear</h3>
-        <div class="item-list">
-          <div class="item-row"><span>Handgun Ammo</span><b>${state.ammo}</b></div>
-          <div class="item-row"><span>Pack Space</span><b>${state.inventory.length}/${getInventoryCapacity()}</b></div>
-          <div class="item-row"><span>Status</span><b>${state.health >= 70 ? "Fine" : "Hurt"}</b></div>
+
+      <section class="item-box-inventory">
+        <div class="storage-header">
+          <h3>Inventory</h3>
+          <span>${state.inventory.length}/${getInventoryCapacity()}</span>
+        </div>
+        <div class="storage-equipment">
+          ${renderTransferEquipmentSlot(EQUIPMENT_SLOTS.PRIMARY, "Primary")}
+          ${renderTransferEquipmentSlot(EQUIPMENT_SLOTS.SIDEARM, "Sidearm")}
+          ${renderTransferEquipmentSlot(EQUIPMENT_SLOTS.ARMOR, "Armor")}
+          ${renderTransferEquipmentSlot(EQUIPMENT_SLOTS.BACKPACK, "Backpack")}
+        </div>
+        <div class="storage-grid storage-grid--pack" data-drop-target="inventory">
+          ${inventoryCells}
+        </div>
+        <div class="storage-quickbar">
+          ${Array.from({ length: 9 }, (_, index) => renderQuickbarCell(index + 1, true)).join("")}
         </div>
       </section>
-      <section class="panel-block">
-        <h3>Upgrade</h3>
+
+      <section class="item-box-upgrade">
         ${renderUpgradeButton("storage")}
       </section>
     </div>
   `;
+  wireItemBoxPanel();
   wireUpgradeButtons();
+}
+
+function renderStashCell(index) {
+  const stack = state.stash[index];
+  if (!stack) return `<div class="storage-cell storage-cell--empty" data-drop-target="stash"></div>`;
+  return `
+    <button class="storage-cell" draggable="true" data-source="stash" data-index="${index}" title="${getItemLabel(stack.name)} x${stack.qty}">
+      <img src="${getItemIconPath(stack.name)}" alt="" />
+      <span class="storage-cell__qty">${stack.qty}</span>
+    </button>
+  `;
+}
+
+function renderTransferInventoryCell(index) {
+  const itemName = state.inventory[index];
+  if (!itemName) {
+    return `<div class="storage-cell storage-cell--empty" data-drop-target="inventory" data-index="${index}"></div>`;
+  }
+  return `
+    <button class="storage-cell" draggable="true" data-source="inventory" data-index="${index}" title="${getItemLabel(itemName)}">
+      <img src="${getItemIconPath(itemName)}" alt="" />
+    </button>
+  `;
+}
+
+function renderTransferEquipmentSlot(slot, label) {
+  const itemName = state.equipment[slot];
+  const content = itemName
+    ? `<img src="${getItemIconPath(itemName)}" alt="" /><b>${getItemLabel(itemName)}</b>`
+    : `<b>Empty</b>`;
+  return `
+    <button class="storage-equip-slot" data-equipment-slot="${slot}" title="${itemName ? getItemLabel(itemName) : label}">
+      <span>${label}</span>
+      ${content}
+    </button>
+  `;
+}
+
+function wireItemBoxPanel() {
+  for (const cell of basePanelContent.querySelectorAll("[draggable='true']")) {
+    cell.addEventListener("dragstart", (event) => {
+      const itemName = cell.dataset.source === "stash"
+        ? state.stash[Number(cell.dataset.index)]?.name
+        : state.inventory[Number(cell.dataset.index)];
+      event.dataTransfer.setData("text/plain", JSON.stringify({
+        source: cell.dataset.source,
+        index: Number(cell.dataset.index),
+      }));
+      setItemDragImage(event, itemName);
+    });
+  }
+
+  for (const target of basePanelContent.querySelectorAll("[data-drop-target], [data-equipment-slot], [data-quick-slot]")) {
+    target.addEventListener("dragover", (event) => event.preventDefault());
+    target.addEventListener("drop", handleItemBoxDrop);
+  }
+}
+
+async function handleItemBoxDrop(event) {
+  event.preventDefault();
+  const raw = event.dataTransfer.getData("text/plain");
+  if (!raw) return;
+  const payload = JSON.parse(raw);
+  let changed = true;
+  if (event.currentTarget.dataset.dropTarget === "stash") moveInventoryItemToStash(payload);
+  else if (event.currentTarget.dataset.dropTarget === "inventory") changed = await moveStashItemToInventory(payload);
+  else if (event.currentTarget.dataset.equipmentSlot) moveItemToEquipment(payload, event.currentTarget.dataset.equipmentSlot);
+  else if (event.currentTarget.dataset.quickSlot) assignItemToQuickbar(payload, Number(event.currentTarget.dataset.quickSlot));
+  if (!changed) return;
+  renderItemBoxPanel();
+  renderInventoryIfOpen();
+  renderBaseHud();
+  updateHud();
+  renderQuickbar();
+}
+
+async function moveStashItemToInventory(payload) {
+  if (payload.source !== "stash") return false;
+  const stack = state.stash[payload.index];
+  if (!stack || state.inventory.length >= getInventoryCapacity()) {
+    showPrompt("No inventory space available.");
+    return false;
+  }
+  const openSlots = getInventoryCapacity() - state.inventory.length;
+  const qty = await promptForStashMoveQuantity(stack, openSlots);
+  if (qty <= 0) return false;
+  for (let count = 0; count < qty; count++) state.inventory.push(stack.name);
+  stack.qty -= qty;
+  if (stack.qty <= 0) state.stash.splice(payload.index, 1);
+  return true;
+}
+
+async function promptForStashMoveQuantity(stack, openSlots) {
+  const maxQty = Math.min(stack.qty, openSlots);
+  if (maxQty <= 1) return maxQty;
+  return requestQuantityPrompt({
+    title: "Move Items",
+    text: `${getItemLabel(stack.name)} x${stack.qty}. Choose how many to move into your pack.`,
+    max: maxQty,
+  });
+}
+
+function moveInventoryItemToStash(payload) {
+  if (payload.source !== "inventory") return;
+  const itemName = state.inventory[payload.index];
+  if (!itemName) return;
+  state.inventory.splice(payload.index, 1);
+  cleanQuickbarAssignments();
+  addToStash(itemName, 1);
+}
+
+function moveItemToEquipment(payload, slot) {
+  if (payload.source !== "inventory") return;
+  const itemName = state.inventory[payload.index];
+  const item = getItem(itemName);
+  if (!itemName || item.slot !== slot) {
+    showPrompt("That item does not fit there.");
+    return;
+  }
+  state.inventory.splice(payload.index, 1);
+  cleanQuickbarAssignments();
+  const previous = state.equipment[slot];
+  state.equipment[slot] = itemName;
+  if (previous) addItemToInventory(previous) || addToStash(previous, 1);
+  trimInventoryToCapacity();
+  normalizeQuickbarSelection();
+}
+
+function assignItemToQuickbar(payload, slot) {
+  if (slot <= 2 || payload.source !== "inventory") return;
+  const itemName = state.inventory[payload.index];
+  if (!itemName) return;
+  state.quickbar[slot - 1] = itemName;
+}
+
+function requestQuantityPrompt({ title, text, max }) {
+  return new Promise((resolve) => {
+    quantityPromptTitle.textContent = title;
+    quantityPromptText.textContent = text;
+    quantityPromptInput.max = String(max);
+    quantityPromptInput.value = String(max);
+    quantityPrompt.classList.remove("hidden");
+    quantityPromptInput.focus();
+    quantityPromptInput.select();
+
+    const cleanup = (value) => {
+      quantityPrompt.classList.add("hidden");
+      quantityPromptForm.removeEventListener("submit", handleSubmit);
+      quantityPromptCancel.removeEventListener("click", handleCancel);
+      quantityPrompt.removeEventListener("click", handleBackdrop);
+      resolve(value);
+    };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const requested = Number.parseInt(quantityPromptInput.value, 10);
+      cleanup(Number.isFinite(requested) ? THREE.MathUtils.clamp(requested, 0, max) : 0);
+    };
+
+    const handleCancel = () => cleanup(0);
+    const handleBackdrop = (event) => {
+      if (event.target === quantityPrompt) cleanup(0);
+    };
+
+    quantityPromptForm.addEventListener("submit", handleSubmit);
+    quantityPromptCancel.addEventListener("click", handleCancel);
+    quantityPrompt.addEventListener("click", handleBackdrop);
+  });
+}
+
+function setItemDragImage(event, itemName) {
+  if (!event.dataTransfer || !itemName) return;
+  const image = document.createElement("img");
+  image.src = getItemIconPath(itemName);
+  image.className = "drag-ghost";
+  document.body.append(image);
+  event.dataTransfer.setDragImage(image, 24, 24);
+  window.setTimeout(() => image.remove(), 0);
 }
 
 function renderWorkbenchPanel() {
@@ -1033,7 +1327,7 @@ function renderUpgradeButton(type) {
   const data = upgradeData[type];
   const level = state.upgrades[type];
   const maxed = level >= data.costs.length;
-  const cost = maxed ? "Max level" : data.costs[level];
+  const cost = maxed ? "Max level" : formatUpgradeCost(data.costs[level]);
   const bonus = data.bonuses[Math.min(level, data.bonuses.length - 1)];
   return `
     <button class="upgrade" data-upgrade="${type}" ${maxed ? "disabled" : ""}>
@@ -1069,23 +1363,23 @@ function isPaused() {
 
 function openInventory() {
   keys.clear();
-  renderInventory();
   inventoryOverlay.classList.remove("hidden");
   promptEl.classList.add("hidden");
+  renderInventory();
+  renderQuickbar();
 }
 
 function closeInventory() {
   inventoryOverlay.classList.add("hidden");
+  hoveredInventoryIndex = null;
+  renderQuickbar();
 }
 
 function renderInventory() {
   ui.inventoryHp.textContent = state.health;
   ui.inventoryArmor.textContent = getArmorClass();
   ui.inventoryCapacity.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
-  ui.slotPrimary.textContent = getItemLabel(state.equipment.primary);
-  ui.slotSidearm.textContent = getItemLabel(state.equipment.sidearm);
-  ui.slotArmor.textContent = getItemLabel(state.equipment.armor);
-  ui.slotBackpack.textContent = getItemLabel(state.equipment.backpack);
+  renderInventoryEquipmentSlots();
   ui.inventorySlots.classList.toggle("inventory-slots--six", getInventoryCapacity() === 6);
 
   for (const button of inventoryOverlay.querySelectorAll("[data-slot]")) {
@@ -1098,15 +1392,130 @@ function renderInventory() {
   const capacity = getInventoryCapacity();
   for (let index = 0; index < capacity; index++) {
     const itemName = state.inventory[index];
-    const button = document.createElement("button");
-    button.className = "inventory-slot";
-    button.disabled = !itemName;
-    button.innerHTML = itemName
-      ? `<span>${getItemTypeLabel(itemName)}</span><b>${getItemLabel(itemName)}</b>`
-      : `<span>Empty Slot</span><b>-</b>`;
-    if (itemName) button.addEventListener("click", () => equipInventoryItem(index));
-    ui.inventorySlots.append(button);
+    const slot = document.createElement("div");
+    slot.className = "inventory-slot";
+    slot.dataset.dropTarget = "inventory";
+    slot.dataset.index = index;
+    slot.addEventListener("mouseenter", () => {
+      hoveredInventoryIndex = itemName ? index : null;
+    });
+    slot.addEventListener("mouseleave", () => {
+      if (hoveredInventoryIndex === index) hoveredInventoryIndex = null;
+    });
+    if (!itemName) {
+      slot.classList.add("inventory-slot--empty");
+      slot.innerHTML = `<span>Empty Slot</span><b>-</b>`;
+      ui.inventorySlots.append(slot);
+      continue;
+    }
+
+    const item = getItem(itemName);
+    slot.draggable = true;
+    slot.dataset.source = "inventory";
+    slot.title = getItemLabel(itemName);
+    slot.innerHTML = `
+      <img class="inventory-slot__icon" src="${getItemIconPath(itemName)}" alt="" />
+      <span>${getItemTypeLabel(itemName)}</span>
+      <b>${getItemLabel(itemName)}</b>
+      <div class="inventory-slot__actions"></div>
+    `;
+    const actions = slot.querySelector(".inventory-slot__actions");
+    if (item.healHp) actions.append(makeInventoryActionButton("Use", () => useInventoryItem(index)));
+    if (item.slot) actions.append(makeInventoryActionButton("Equip", () => equipInventoryItem(index)));
+    actions.append(makeInventoryActionButton("Drop", () => dropInventoryItem(index)));
+    ui.inventorySlots.append(slot);
   }
+  wireInventoryDragAndDrop();
+  renderQuickbar();
+}
+
+function renderInventoryEquipmentSlots() {
+  for (const button of inventoryOverlay.querySelectorAll("[data-slot]")) {
+    const slot = button.dataset.slot;
+    const itemName = state.equipment[slot];
+    const label = getEquipmentSlotLabel(slot);
+    button.innerHTML = `
+      <span>${label}</span>
+      <div class="equipment-slot__item">
+        ${itemName ? `<img src="${getItemIconPath(itemName)}" alt="" />` : ""}
+        <b>${getItemLabel(itemName)}</b>
+      </div>
+    `;
+  }
+}
+
+function wireInventoryDragAndDrop() {
+  for (const item of ui.inventorySlots.querySelectorAll("[draggable='true']")) {
+    item.addEventListener("dragstart", (event) => {
+      const itemName = state.inventory[Number(item.dataset.index)];
+      event.dataTransfer.setData("text/plain", JSON.stringify({
+        source: "inventory",
+        index: Number(item.dataset.index),
+      }));
+      setItemDragImage(event, itemName);
+    });
+  }
+
+  for (const target of document.querySelectorAll("[data-quick-slot]")) {
+    target.addEventListener("dragover", (event) => event.preventDefault());
+    target.addEventListener("drop", (event) => {
+      event.preventDefault();
+      const raw = event.dataTransfer.getData("text/plain");
+      if (!raw) return;
+      assignItemToQuickbar(JSON.parse(raw), Number(target.dataset.quickSlot));
+      renderQuickbar();
+      renderInventory();
+    });
+  }
+}
+
+function renderInventoryIfOpen() {
+  if (isInventoryOpen()) renderInventory();
+}
+
+function formatUpgradeCost(cost) {
+  return `${cost.qty} ${cost.item}`;
+}
+
+function makeInventoryActionButton(label, onClick) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = label;
+  button.addEventListener("click", (event) => {
+    event.stopPropagation();
+    onClick();
+  });
+  return button;
+}
+
+function useInventoryItem(index) {
+  const itemName = state.inventory[index];
+  const item = getItem(itemName);
+  if (!item.healHp) return;
+  const previousHealth = state.health;
+  state.health = Math.min(100, state.health + item.healHp);
+  state.inventory.splice(index, 1);
+  cleanQuickbarAssignments();
+  showInventoryHint(
+    state.health > previousHealth
+      ? `Used ${getItemLabel(itemName)} (+${state.health - previousHealth} HP)`
+      : `${getItemLabel(itemName)} used. Health already full.`
+  );
+  renderInventory();
+  renderBaseHud();
+  updateHud();
+}
+
+function dropInventoryItem(index) {
+  const itemName = state.inventory[index];
+  if (!itemName) return;
+  state.inventory.splice(index, 1);
+  cleanQuickbarAssignments();
+  if (state.mode === "mission") dropItemNearPlayer(itemName);
+  else showInventoryHint(`${getItemLabel(itemName)} dropped.`);
+  renderInventory();
+  renderBaseHud();
+  updateHud();
 }
 
 function equipInventoryItem(index) {
@@ -1119,10 +1528,12 @@ function equipInventoryItem(index) {
   }
 
   state.inventory.splice(index, 1);
+  cleanQuickbarAssignments();
   const previous = state.equipment[slot];
   state.equipment[slot] = itemName;
   if (previous) addItemToInventory(previous) || dropItemNearPlayer(previous);
   trimInventoryToCapacity();
+  normalizeQuickbarSelection();
   renderInventory();
   renderBaseHud();
   updateHud();
@@ -1143,6 +1554,7 @@ function unequipItem(slot) {
     showInventoryHint(`${getItemLabel(itemName)} dropped. No inventory slot was available.`);
   }
   trimInventoryToCapacity();
+  normalizeQuickbarSelection();
   renderInventory();
   renderBaseHud();
   updateHud();
@@ -1195,17 +1607,143 @@ function getItemLabel(itemName) {
 function getItemTypeLabel(itemName) {
   const slot = getItem(itemName).slot;
   if (!slot) return "Item";
-  if (slot === "primary") return "Primary";
-  if (slot === "sidearm") return "Sidearm";
-  if (slot === "armor") return "Armor";
+  if (slot === EQUIPMENT_SLOTS.PRIMARY) return "Primary";
+  if (slot === EQUIPMENT_SLOTS.SIDEARM) return "Sidearm";
+  if (slot === EQUIPMENT_SLOTS.ARMOR) return "Armor";
   return "Backpack";
+}
+
+function getEquipmentSlotLabel(slot) {
+  if (slot === EQUIPMENT_SLOTS.PRIMARY) return "Primary Weapon";
+  if (slot === EQUIPMENT_SLOTS.SIDEARM) return "Sidearm";
+  if (slot === EQUIPMENT_SLOTS.ARMOR) return "Armor";
+  if (slot === EQUIPMENT_SLOTS.BACKPACK) return "Backpack";
+  return "Equipment";
+}
+
+function getItemIconPath(itemName) {
+  const textureKey = getItem(itemName).texture || "spareParts";
+  return itemTexturePaths[textureKey] || itemTexturePaths.spareParts;
+}
+
+function renderQuickbar() {
+  if (!ui.quickbar) return;
+  ui.quickbar.classList.toggle("quickbar--inventory", isInventoryOpen());
+  ui.quickbar.innerHTML = Array.from({ length: 9 }, (_, index) => renderQuickbarCell(index + 1)).join("");
+  for (const cell of ui.quickbar.querySelectorAll("[data-quick-slot]")) {
+    cell.addEventListener("dragover", (event) => {
+      if (Number(cell.dataset.quickSlot) > 2) event.preventDefault();
+    });
+    cell.addEventListener("drop", (event) => {
+      event.preventDefault();
+      const raw = event.dataTransfer.getData("text/plain");
+      if (!raw) return;
+      assignItemToQuickbar(JSON.parse(raw), Number(cell.dataset.quickSlot));
+      renderQuickbar();
+    });
+    cell.addEventListener("click", () => selectQuickSlot(Number(cell.dataset.quickSlot)));
+  }
+}
+
+function bindHoveredInventoryItemToQuickbar(slot) {
+  if (slot < 3 || slot > 9) return;
+  const itemName = state.inventory[hoveredInventoryIndex];
+  if (!itemName) {
+    showPrompt("Hover an inventory item first.");
+    return;
+  }
+  state.quickbar[slot - 1] = itemName;
+  showPrompt(`${getItemLabel(itemName)} bound to slot ${slot}.`);
+  renderQuickbar();
+}
+
+function renderQuickbarCell(slot, compact = false) {
+  const itemName = getQuickbarItem(slot);
+  const locked = slot <= 2;
+  const active = state.activeQuickSlot === slot ? " quickbar-cell--active" : "";
+  const empty = itemName ? "" : " quickbar-cell--empty";
+  const lockLabel = slot === 1 ? "Primary" : slot === 2 ? "Sidearm" : "Free";
+  return `
+    <button
+      class="quickbar-cell${active}${empty}${compact ? " quickbar-cell--compact" : ""}"
+      data-quick-slot="${slot}"
+      title="${itemName ? getItemLabel(itemName) : lockLabel}"
+      ${locked && compact ? "aria-label=\"" + lockLabel + "\"" : ""}
+    >
+      <span class="quickbar-cell__num">${slot}</span>
+      ${itemName ? `<img src="${getItemIconPath(itemName)}" alt="" />` : `<b>${locked ? lockLabel : ""}</b>`}
+    </button>
+  `;
+}
+
+function getQuickbarItem(slot = state.activeQuickSlot) {
+  if (slot === 1) return state.equipment.primary;
+  if (slot === 2) return state.equipment.sidearm;
+  if (!slot) return null;
+  const itemName = state.quickbar[slot - 1];
+  return state.inventory.includes(itemName) ? itemName : null;
+}
+
+function selectQuickSlot(slot) {
+  const itemName = getQuickbarItem(slot);
+  if (!itemName) {
+    showPrompt(`Slot ${slot} is empty.`);
+    return;
+  }
+  if (!isWeaponItem(itemName)) {
+    useQuickbarItem(itemName, slot);
+    return;
+  }
+  state.activeQuickSlot = slot;
+  showPrompt(`Holding ${getItemLabel(itemName)}`);
+  renderQuickbar();
+}
+
+function useQuickbarItem(itemName, slot) {
+  const index = state.inventory.indexOf(itemName);
+  const item = getItem(itemName);
+  if (index < 0) {
+    state.quickbar[slot - 1] = null;
+    renderQuickbar();
+    return;
+  }
+  if (item.healHp) {
+    useInventoryItem(index);
+    if (!state.inventory.includes(itemName)) state.quickbar[slot - 1] = null;
+    renderQuickbar();
+  } else {
+    showPrompt(`${getItemLabel(itemName)} is ready, but has no quick use yet.`);
+  }
+}
+
+function normalizeQuickbarSelection() {
+  cleanQuickbarAssignments();
+  if (state.activeQuickSlot && !getQuickbarItem(state.activeQuickSlot)) state.activeQuickSlot = null;
+}
+
+function cleanQuickbarAssignments() {
+  for (let index = 2; index < state.quickbar.length; index++) {
+    if (state.quickbar[index] && !state.inventory.includes(state.quickbar[index])) state.quickbar[index] = null;
+  }
+}
+
+function isWeaponItem(itemName) {
+  const item = getItem(itemName);
+  return item.slot === EQUIPMENT_SLOTS.PRIMARY || item.slot === EQUIPMENT_SLOTS.SIDEARM;
+}
+
+function isRangedWeapon(itemName) {
+  return itemName === "Handgun" || itemName === "Shotgun";
 }
 
 function startMission(location) {
   state.mode = "mission";
   state.activeLocation = location;
   state.keys = 0;
+  state.runSeed = createRunSeed(location);
+  rng = createSeededRng(state.runSeed);
   isAiming = false;
+  state.activeQuickSlot = null;
   playerFacingDirection = lastAimDirection;
   runMoveDirection.copy(getDirectionVectorFromName(playerFacingDirection));
   baseHud.classList.add("hidden");
@@ -1260,6 +1798,9 @@ function clearScene() {
     scene.remove(child);
   }
   colliders = [];
+  colliderGrid = new Map();
+  colliderBounds = new WeakMap();
+  colliderGridDirty = true;
   lootNodes = [];
   zombies = [];
   exits = [];
@@ -1272,6 +1813,11 @@ function clearScene() {
   pillarKeys = new Set();
   interactTarget = null;
   isAiming = false;
+}
+
+function createRunSeed(location) {
+  const locationHash = [...location.id].reduce((hash, char) => ((hash << 5) - hash + char.charCodeAt(0)) >>> 0, 0);
+  return (Date.now() ^ locationHash ^ ((state.upgrades.intel + 1) * 2654435761)) >>> 0;
 }
 
 function addGrid(size) {
@@ -1306,8 +1852,8 @@ function buildMissionLayoutAttempt(location) {
 
   let frontier = rooms[0];
   while (rooms.length < targetCount) {
-    const parent = Math.random() < 0.72 ? frontier : pick(rooms);
-    const shuffled = [...directions].sort(() => Math.random() - 0.5);
+    const parent = random() < 0.72 ? frontier : pick(rooms);
+    const shuffled = shuffle(directions);
     let placed = false;
 
     for (const direction of shuffled) {
@@ -1327,7 +1873,7 @@ function buildMissionLayoutAttempt(location) {
         depth: parent.depth + 1,
         doors: [],
       };
-      const locked = room.depth > 1 && Math.random() < Math.min(0.18 + location.stars * 0.08, 0.46);
+      const locked = room.depth > 1 && random() < Math.min(0.18 + location.stars * 0.08, 0.46);
       const accessibleRooms = rooms.filter((candidate) => candidate.depth < room.depth);
       const keyRoom = locked ? pick(accessibleRooms.length ? accessibleRooms : [parent]) : null;
       const edge = { from: parent, to: room, side: direction.name, opposite: direction.opposite, locked, keyRoom };
@@ -1545,6 +2091,7 @@ function toggleDoor(door) {
   door.userData.endRotationY = opening ? door.userData.openRotation : door.userData.closedRotationY;
   if (opening) colliders = colliders.filter((node) => node !== door);
   else if (!colliders.includes(door)) colliders.push(door);
+  markColliderGridDirty();
   door.userData.blocksSight = !opening;
   openingDoors.push(door);
 }
@@ -1554,6 +2101,7 @@ function updateOpeningDoors(dt) {
     door.userData.animTime = Math.min(1, door.userData.animTime + dt * 2.8);
     const t = easeOutCubic(door.userData.animTime);
     door.userData.hinge.rotation.y = THREE.MathUtils.lerp(door.userData.startRotationY, door.userData.endRotationY, t);
+    if (colliders.includes(door)) markColliderGridDirty();
     if (door.userData.animTime >= 1) {
       door.userData.opening = false;
       door.userData.isOpen = door.userData.openTarget === 1;
@@ -1588,6 +2136,7 @@ function addWall(x, z, width, depth, material) {
   wall.userData.blocksSight = true;
   scene.add(wall);
   colliders.push(wall);
+  markColliderGridDirty();
   return wall;
 }
 
@@ -1682,7 +2231,7 @@ function createSpriteSheetAnimator(clips) {
 }
 
 function createSpriteSheetClip(loader, clip) {
-  const texture = loader.load(clip.src);
+  const texture = loadTextureWithFallback(clip.src);
   texture.magFilter = THREE.NearestFilter;
   texture.minFilter = THREE.NearestFilter;
   texture.generateMipmaps = false;
@@ -1744,7 +2293,7 @@ function getItemTexture(item) {
   const textureKey = item.texture || "spareParts";
   const src = itemTexturePaths[textureKey] || itemTexturePaths.spareParts;
   if (!itemTextureCache.has(src)) {
-    const texture = textureLoader.load(src);
+    const texture = loadTextureWithFallback(src);
     texture.magFilter = THREE.NearestFilter;
     texture.minFilter = THREE.NearestFilter;
     texture.generateMipmaps = false;
@@ -1755,16 +2304,16 @@ function getItemTexture(item) {
 
 function getLootScale(itemName) {
   const item = getItem(itemName);
-  if (item.slot === "primary") return 0.95;
-  if (item.slot === "armor" || item.slot === "backpack") return 1.05;
+  if (item.slot === EQUIPMENT_SLOTS.PRIMARY) return 0.95;
+  if (item.slot === EQUIPMENT_SLOTS.ARMOR || item.slot === EQUIPMENT_SLOTS.BACKPACK) return 1.05;
   return 0.78;
 }
 
 function getLootColor(itemName) {
   const slot = getItem(itemName).slot;
-  if (slot === "primary" || slot === "sidearm") return "#b76f43";
-  if (slot === "armor") return "#9aa1a6";
-  if (slot === "backpack") return "#d0a63f";
+  if (slot === EQUIPMENT_SLOTS.PRIMARY || slot === EQUIPMENT_SLOTS.SIDEARM) return "#b76f43";
+  if (slot === EQUIPMENT_SLOTS.ARMOR) return "#9aa1a6";
+  if (slot === EQUIPMENT_SLOTS.BACKPACK) return "#d0a63f";
   return "#d9b15f";
 }
 
@@ -1785,6 +2334,8 @@ function addZombies(location) {
       health: 35 + location.stars * 10,
       speed: 1.1 + location.stars * 0.08,
       attackTimer: 0,
+      aiTickTimer: randomFloat(0, 0.25),
+      chaseDirection: new THREE.Vector3(),
       radius: 0.5,
     };
     scene.add(zombie);
@@ -1829,11 +2380,12 @@ function getSafeExitPosition(room, preferred) {
     new THREE.Vector3(room.x + insetX, 0.06, room.z),
     new THREE.Vector3(room.x, 0.06, room.z - insetZ),
     new THREE.Vector3(room.x, 0.06, room.z + insetZ),
-  ].filter((point) => isPointInRoom(point, room));
+  ].filter((point) => isPointInRoom(point, room) && !hitsCollider(point, 1.15));
 
-  return candidates
-    .map((point, index) => ({ point, score: getDoorClearanceScore(point) - index * 0.03 }))
+  const scoredCandidates = candidates
+    .map((point, index) => ({ point, doorClearance: getDoorClearance(point), score: getDoorClearanceScore(point) - index * 0.03 }))
     .sort((a, b) => b.score - a.score)[0]?.point || preferred;
+  return scoredCandidates;
 }
 
 function getExitPositionAwayFromNearestDoor(room) {
@@ -1856,13 +2408,18 @@ function clampPointToRoom(point, room, inset = 0.8) {
 }
 
 function getDoorClearanceScore(point) {
-  const doorClearance = doorNodes.length
-    ? Math.min(...doorNodes.map((door) => getObjectWorldPosition(door).distanceTo(point)))
-    : 10;
+  const doorClearance = getDoorClearance(point);
   const room = getRoomAtPosition(point);
   const centerDistance = room ? point.distanceTo(new THREE.Vector3(room.x, point.y, room.z)) : 0;
   const centerPenalty = Math.abs(centerDistance - 1.8) * 0.2;
-  return doorClearance - centerPenalty;
+  const doorwayPenalty = doorClearance < 2.4 ? 6 : 0;
+  return doorClearance - centerPenalty - doorwayPenalty;
+}
+
+function getDoorClearance(point) {
+  return doorNodes.length
+    ? Math.min(...doorNodes.map((door) => getObjectWorldPosition(door).distanceTo(point)))
+    : 10;
 }
 
 function createExtractionGrid() {
@@ -1913,23 +2470,27 @@ function createExtractionGrid() {
 
 function animate() {
   requestAnimationFrame(animate);
-  const dt = Math.min(clock.getDelta(), 0.05);
-  if (isPaused()) {
+  try {
+    const dt = Math.min(clock.getDelta(), MAX_FRAME_DT);
+    if (isPaused()) {
+      renderer.render(scene, camera);
+      return;
+    }
+    if (state.mode === "base") {
+      updateBase(dt);
+    } else if (state.mode === "mission") {
+      updatePlayer(dt);
+      updateOpeningDoors(dt);
+      updateZombies(dt);
+      updateCamera();
+      updateFogOfWar();
+      findInteraction();
+      updateHud();
+    }
     renderer.render(scene, camera);
-    return;
+  } catch (err) {
+    console.error("[Outbreak] Render error:", err);
   }
-  if (state.mode === "base") {
-    updateBase(dt);
-  } else if (state.mode === "mission") {
-    updatePlayer(dt);
-    updateOpeningDoors(dt);
-    updateZombies(dt);
-    updateCamera();
-    updateFogOfWar();
-    findInteraction();
-    updateHud();
-  }
-  renderer.render(scene, camera);
 }
 
 function updatePlayer(dt) {
@@ -2007,17 +2568,7 @@ function getDirectionName(direction) {
 }
 
 function getDirectionVectorFromName(name) {
-  const vectors = {
-    north: new THREE.Vector3(0, 0, -1),
-    north_east: new THREE.Vector3(1, 0, -1),
-    east: new THREE.Vector3(1, 0, 0),
-    south_east: new THREE.Vector3(1, 0, 1),
-    south: new THREE.Vector3(0, 0, 1),
-    south_west: new THREE.Vector3(-1, 0, 1),
-    west: new THREE.Vector3(-1, 0, 0),
-    north_west: new THREE.Vector3(-1, 0, -1),
-  };
-  return (vectors[name] || vectors.south).clone().normalize();
+  return (DIRECTION_VECTORS[name] || DIRECTION_VECTORS.south).clone().normalize();
 }
 
 function updateZombies(dt) {
@@ -2025,9 +2576,15 @@ function updateZombies(dt) {
     const toPlayer = player.position.clone().sub(zombie.position);
     const distance = toPlayer.length();
     zombie.userData.attackTimer -= dt;
+    zombie.userData.aiTickTimer -= dt;
     if (distance < 10) {
-      toPlayer.normalize();
-      moveWithSlide(zombie, toPlayer.multiplyScalar(zombie.userData.speed * dt), zombie.userData.radius);
+      if (zombie.userData.aiTickTimer <= 0) {
+        zombie.userData.aiTickTimer = randomFloat(0.2, 0.32);
+        zombie.userData.chaseDirection.copy(toPlayer.normalize());
+      }
+      if (zombie.userData.chaseDirection.lengthSq() > 0.01) {
+        moveWithSlide(zombie, zombie.userData.chaseDirection.clone().multiplyScalar(zombie.userData.speed * dt), zombie.userData.radius);
+      }
     }
     if (distance < 1.1 && zombie.userData.attackTimer <= 0) {
       zombie.userData.attackTimer = 1.1;
@@ -2183,27 +2740,40 @@ function interact() {
 }
 
 function attack() {
-  if (state.mode !== "mission" || state.ammo <= 0 || !isAiming) return;
-  state.ammo -= 1;
+  if (state.mode !== "mission" || !isAiming) return;
+  const heldItem = getQuickbarItem();
+  if (!heldItem || !isWeaponItem(heldItem)) {
+    showPrompt("Press 1 or 2 to ready a weapon.");
+    return;
+  }
+  const ranged = isRangedWeapon(heldItem);
+  if (ranged && state.ammo <= 0) {
+    showPrompt("No ammo.");
+    return;
+  }
+  if (ranged) state.ammo -= 1;
   raycaster.setFromCamera(pointer, camera);
   const hit = raycaster.intersectObject(floorPlane)[0];
   const target = hit ? hit.point : player.position.clone().add(new THREE.Vector3(1, 0, 0));
   const direction = target.sub(player.position).setY(0).normalize();
+  const attackRange = ranged ? 9 : 2.1;
+  const attackDot = ranged ? 0.86 : 0.66;
+  const damage = ranged ? (heldItem === "Shotgun" ? 65 : 45) : 35;
 
   let best = null;
-  let bestDot = 0.86;
+  let bestDot = attackDot;
   for (const zombie of zombies) {
     const toZombie = zombie.position.clone().sub(player.position).setY(0);
     const distance = toZombie.length();
     const dot = direction.dot(toZombie.normalize());
-    if (distance < 9 && dot > bestDot && hasLineOfSight(player.position, zombie.position)) {
+    if (distance < attackRange && dot > bestDot && hasLineOfSight(player.position, zombie.position)) {
       best = zombie;
       bestDot = dot;
     }
   }
 
   if (!best) return;
-  best.userData.health -= 45;
+  best.userData.health -= damage;
   best.material.color.set("#c94d46");
   window.setTimeout(() => best.material?.color.set("#8fb06e"), 90);
   if (best.userData.health <= 0) {
@@ -2243,8 +2813,8 @@ function returnToBase() {
 
 function addToStash(name, qty) {
   const existing = state.stash.find((item) => item.name === name);
-  if (existing) existing.qty += qty;
-  else state.stash.push({ name, qty });
+  if (existing) existing.qty = Math.min(999, existing.qty + qty);
+  else state.stash.push({ name, qty: Math.min(999, qty) });
 }
 
 function updateHud() {
@@ -2252,6 +2822,7 @@ function updateHud() {
   ui.hudAmmo.textContent = state.ammo;
   ui.hudPack.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
   ui.hudKeys.textContent = state.keys;
+  renderQuickbar();
 }
 
 function showPrompt(text) {
@@ -2260,18 +2831,70 @@ function showPrompt(text) {
 }
 
 function hitsCollider(position, radius) {
-  return colliders.some((wall) => {
-    const dx = Math.abs(position.x - wall.position.x);
-    const dz = Math.abs(position.z - wall.position.z);
-    const box = new THREE.Box3().setFromObject(wall);
-    return (
+  for (const wall of getNearbyColliders(position, radius)) {
+    const box = getColliderBounds(wall);
+    if (
       position.x + radius > box.min.x &&
       position.x - radius < box.max.x &&
       position.z + radius > box.min.z &&
-      position.z - radius < box.max.z &&
-      dx + dz < 24
-    );
-  });
+      position.z - radius < box.max.z
+    ) return true;
+  }
+  return false;
+}
+
+function markColliderGridDirty() {
+  colliderGridDirty = true;
+}
+
+function getNearbyColliders(position, radius) {
+  if (colliderGridDirty) rebuildColliderGrid();
+  const minCellX = worldToColliderCell(position.x - radius);
+  const maxCellX = worldToColliderCell(position.x + radius);
+  const minCellZ = worldToColliderCell(position.z - radius);
+  const maxCellZ = worldToColliderCell(position.z + radius);
+  const candidates = new Set();
+
+  for (let cellX = minCellX; cellX <= maxCellX; cellX++) {
+    for (let cellZ = minCellZ; cellZ <= maxCellZ; cellZ++) {
+      for (const collider of colliderGrid.get(getColliderCellKey(cellX, cellZ)) || []) candidates.add(collider);
+    }
+  }
+
+  return candidates;
+}
+
+function rebuildColliderGrid() {
+  colliderGrid = new Map();
+  colliderBounds = new WeakMap();
+  for (const collider of colliders) {
+    const box = getColliderBounds(collider);
+    const minCellX = worldToColliderCell(box.min.x);
+    const maxCellX = worldToColliderCell(box.max.x);
+    const minCellZ = worldToColliderCell(box.min.z);
+    const maxCellZ = worldToColliderCell(box.max.z);
+    for (let cellX = minCellX; cellX <= maxCellX; cellX++) {
+      for (let cellZ = minCellZ; cellZ <= maxCellZ; cellZ++) {
+        const key = getColliderCellKey(cellX, cellZ);
+        if (!colliderGrid.has(key)) colliderGrid.set(key, []);
+        colliderGrid.get(key).push(collider);
+      }
+    }
+  }
+  colliderGridDirty = false;
+}
+
+function getColliderBounds(collider) {
+  if (!colliderBounds.has(collider)) colliderBounds.set(collider, new THREE.Box3().setFromObject(collider));
+  return colliderBounds.get(collider);
+}
+
+function worldToColliderCell(value) {
+  return Math.floor(value / COLLIDER_CELL_SIZE);
+}
+
+function getColliderCellKey(cellX, cellZ) {
+  return `${cellX},${cellZ}`;
 }
 
 function resize() {
@@ -2299,13 +2922,37 @@ function getDefaultCameraView() {
 }
 
 function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(random() * (max - min + 1)) + min;
 }
 
 function randomFloat(min, max) {
-  return Math.random() * (max - min) + min;
+  return random() * (max - min) + min;
 }
 
 function pick(list) {
-  return list[Math.floor(Math.random() * list.length)];
+  return list[Math.floor(random() * list.length)];
+}
+
+function shuffle(list) {
+  const result = [...list];
+  for (let index = result.length - 1; index > 0; index--) {
+    const swapIndex = randomInt(0, index);
+    [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
+  }
+  return result;
+}
+
+function random() {
+  return rng();
+}
+
+function createSeededRng(seed) {
+  let value = seed >>> 0;
+  return () => {
+    value += 0x6d2b79f5;
+    let next = value;
+    next = Math.imul(next ^ (next >>> 15), next | 1);
+    next ^= next + Math.imul(next ^ (next >>> 7), next | 61);
+    return ((next ^ (next >>> 14)) >>> 0) / 4294967296;
+  };
 }

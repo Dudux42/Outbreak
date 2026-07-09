@@ -1,6 +1,11 @@
 from pathlib import Path
 from PIL import Image, ImageSequence
 
+try:
+    import numpy as np
+except ImportError:
+    np = None
+
 
 ASSET_DIR = Path(__file__).resolve().parents[1] / "assets"
 
@@ -35,6 +40,15 @@ SOURCES = {
 
 def chroma_key(frame):
     image = frame.convert("RGBA")
+    if np is not None:
+        pixels = np.array(image)
+        red = pixels[:, :, 0]
+        green = pixels[:, :, 1]
+        blue = pixels[:, :, 2]
+        mask = (green > 155) & (red < 90) & (blue < 90)
+        pixels[:, :, 3] = np.where(mask, 0, pixels[:, :, 3])
+        return Image.fromarray(pixels, "RGBA")
+
     pixels = image.load()
     for y in range(image.height):
         for x in range(image.width):

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Outbreak Run Prototype</title>
-    <link rel="stylesheet" href="./src/styles.css?v=inventory-compact" />
+    <link rel="stylesheet" href="./src/styles.css?v=inventory-prompt-2" />
   </head>
   <body>
     <main id="app">
@@ -49,6 +49,8 @@
       </section>
 
       <section id="prompt" class="prompt hidden"></section>
+
+      <section id="quickbar" class="quickbar" aria-label="Quick access bar"></section>
 
       <section id="inventoryOverlay" class="inventory-overlay hidden">
         <div class="inventory-window">
@@ -102,6 +104,21 @@
           <p id="runEndText"></p>
           <button id="returnBase">Return to Base</button>
         </div>
+      </section>
+
+      <section id="quantityPrompt" class="modal quantity-prompt hidden">
+        <form id="quantityPromptForm" class="modal__body quantity-prompt__body">
+          <h2 id="quantityPromptTitle">Move Items</h2>
+          <p id="quantityPromptText"></p>
+          <label class="quantity-prompt__field">
+            <span>Quantity</span>
+            <input id="quantityPromptInput" type="number" min="1" value="1" />
+          </label>
+          <div class="quantity-prompt__actions">
+            <button id="quantityPromptCancel" type="button">Cancel</button>
+            <button type="submit">Move</button>
+          </div>
+        </form>
       </section>
     </main>
 
