@@ -73,6 +73,10 @@ The repository includes source GIFs and generated sprite sheets for the player a
 
 Texture generation helpers live in `tools/generate_game_textures.py`. Generated textures and item icons are committed under `assets/`.
 
+## Godot Migration
+
+Godot migration prep lives in `godot_migration/`. It includes exported JSON data, an asset manifest, a suggested Godot scene layout, a migration plan, and a starter `OutbreakDataLoader.gd`. Regenerate the migration data with `node tools/export_godot_data.mjs` after changing item, location, upgrade, texture, or animation definitions.
+
 ## Current Issues and Future Plans
 
 This build is still in heavy prototype mode. The handgun aiming animation state is wired into the debug panel, but the current aim sheets are visually subtle and still need art polish before they read clearly in-game. The `Y` debug panel shows the active player animation state, selected sprite sheet, loaded texture, quickbar slot, and held weapon to help track animation problems during testing.

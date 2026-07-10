@@ -1,0 +1,1154 @@
+[
+  {
+    "path": "res://assets/female_8dir.gif",
+    "source_path": "assets/female_8dir.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 19881,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/female_walk_east.gif",
+    "source_path": "assets/female_walk_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 17908,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/female_walk_north.gif",
+    "source_path": "assets/female_walk_north.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 19101,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/female_walk_north_east.gif",
+    "source_path": "assets/female_walk_north_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 19025,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/female_walk_north_west.gif",
+    "source_path": "assets/female_walk_north_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 18762,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/female_walk_south.gif",
+    "source_path": "assets/female_walk_south.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 19322,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/female_walk_south_east.gif",
+    "source_path": "assets/female_walk_south_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 18863,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/female_walk_south_west.gif",
+    "source_path": "assets/female_walk_south_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 19850,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/female_walk_west.gif",
+    "source_path": "assets/female_walk_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 18549,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/antibiotics_bottle.png",
+    "source_path": "assets/items/antibiotics_bottle.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 598,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/apple.png",
+    "source_path": "assets/items/apple.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 612,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/axe.png",
+    "source_path": "assets/items/axe.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 562,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/bag_of_chips.png",
+    "source_path": "assets/items/bag_of_chips.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 526,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/banana.png",
+    "source_path": "assets/items/banana.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 398,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/bandages.png",
+    "source_path": "assets/items/bandages.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 430,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/baseball_bat.png",
+    "source_path": "assets/items/baseball_bat.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 573,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/body_armor_level_1.png",
+    "source_path": "assets/items/body_armor_level_1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 586,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/body_armor_level_2.png",
+    "source_path": "assets/items/body_armor_level_2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 595,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/body_armor_level_3.png",
+    "source_path": "assets/items/body_armor_level_3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 612,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/body_armor_level_4.png",
+    "source_path": "assets/items/body_armor_level_4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 609,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/can_of_beans.png",
+    "source_path": "assets/items/can_of_beans.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 462,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/can_of_tuna.png",
+    "source_path": "assets/items/can_of_tuna.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 477,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/combat_knife.png",
+    "source_path": "assets/items/combat_knife.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 559,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/crowbar.png",
+    "source_path": "assets/items/crowbar.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 537,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/hammer.png",
+    "source_path": "assets/items/hammer.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 482,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/handgun.png",
+    "source_path": "assets/items/handgun.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 4241,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/handgun_ammo.png",
+    "source_path": "assets/items/handgun_ammo.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20715,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/juice_box.png",
+    "source_path": "assets/items/juice_box.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 522,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/key.png",
+    "source_path": "assets/items/key.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 421,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/kitchen_knife.png",
+    "source_path": "assets/items/kitchen_knife.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 561,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/large_backpack.png",
+    "source_path": "assets/items/large_backpack.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 464,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/mac_n_cheese_box.png",
+    "source_path": "assets/items/mac_n_cheese_box.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 463,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/rubbing_alcohol_bottle.png",
+    "source_path": "assets/items/rubbing_alcohol_bottle.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 571,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/shotgun.png",
+    "source_path": "assets/items/shotgun.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 3115,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/shotgun_ammo.png",
+    "source_path": "assets/items/shotgun_ammo.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12979,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/simple_backpack.png",
+    "source_path": "assets/items/simple_backpack.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 434,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/soda_can.png",
+    "source_path": "assets/items/soda_can.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 531,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/spare_parts.png",
+    "source_path": "assets/items/spare_parts.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 687,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/water_bottle.png",
+    "source_path": "assets/items/water_bottle.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 575,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_breathing_east_sheet.png",
+    "source_path": "assets/player_breathing_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 9856,
+    "width": 480,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_breathing_north_east_sheet.png",
+    "source_path": "assets/player_breathing_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 9506,
+    "width": 480,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_breathing_north_sheet.png",
+    "source_path": "assets/player_breathing_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 11095,
+    "width": 480,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_breathing_north_west_sheet.png",
+    "source_path": "assets/player_breathing_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 10129,
+    "width": 480,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_breathing_south_east_sheet.png",
+    "source_path": "assets/player_breathing_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 10061,
+    "width": 480,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_breathing_south_sheet.png",
+    "source_path": "assets/player_breathing_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 12239,
+    "width": 480,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_breathing_south_west_sheet.png",
+    "source_path": "assets/player_breathing_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 11129,
+    "width": 480,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_breathing_west_sheet.png",
+    "source_path": "assets/player_breathing_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 9468,
+    "width": 480,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_east_sheet.png",
+    "source_path": "assets/player_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 25689,
+    "width": 1024,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_handgun_east_sheet.png",
+    "source_path": "assets/player_handgun_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 11064,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_north_east_sheet.png",
+    "source_path": "assets/player_handgun_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 10679,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_north_sheet.png",
+    "source_path": "assets/player_handgun_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 12024,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_north_west_sheet.png",
+    "source_path": "assets/player_handgun_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 11243,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_south_east_sheet.png",
+    "source_path": "assets/player_handgun_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 11274,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_south_sheet.png",
+    "source_path": "assets/player_handgun_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 13056,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_south_west_sheet.png",
+    "source_path": "assets/player_handgun_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 12154,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_walk_east_sheet.png",
+    "source_path": "assets/player_handgun_walk_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 17367,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_walk_north_east_sheet.png",
+    "source_path": "assets/player_handgun_walk_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 18609,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_walk_north_sheet.png",
+    "source_path": "assets/player_handgun_walk_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21588,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_walk_north_west_sheet.png",
+    "source_path": "assets/player_handgun_walk_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 20007,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_walk_south_east_sheet.png",
+    "source_path": "assets/player_handgun_walk_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 20360,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_walk_south_sheet.png",
+    "source_path": "assets/player_handgun_walk_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21887,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_walk_south_west_sheet.png",
+    "source_path": "assets/player_handgun_walk_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19502,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_walk_west_sheet.png",
+    "source_path": "assets/player_handgun_walk_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19755,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_handgun_west_sheet.png",
+    "source_path": "assets/player_handgun_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 10475,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_idle_sheet.png",
+    "source_path": "assets/player_idle_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 29111,
+    "width": 1024,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_idle_south_sheet.png",
+    "source_path": "assets/player_idle_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 20554,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_north_east_sheet.png",
+    "source_path": "assets/player_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 28079,
+    "width": 1024,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_north_sheet.png",
+    "source_path": "assets/player_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 26924,
+    "width": 1024,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_north_west_sheet.png",
+    "source_path": "assets/player_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 26884,
+    "width": 1024,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_run_east_sheet.png",
+    "source_path": "assets/player_run_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19226,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_run_north_east_sheet.png",
+    "source_path": "assets/player_run_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19239,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_run_north_sheet.png",
+    "source_path": "assets/player_run_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 20676,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_run_north_west_sheet.png",
+    "source_path": "assets/player_run_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21364,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_run_south_east_sheet.png",
+    "source_path": "assets/player_run_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21502,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_run_south_sheet.png",
+    "source_path": "assets/player_run_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21880,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_run_south_west_sheet.png",
+    "source_path": "assets/player_run_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19292,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_run_west_sheet.png",
+    "source_path": "assets/player_run_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 20882,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_south_east_sheet.png",
+    "source_path": "assets/player_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 28154,
+    "width": 1024,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_south_sheet.png",
+    "source_path": "assets/player_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 29267,
+    "width": 1024,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_south_west_sheet.png",
+    "source_path": "assets/player_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 31001,
+    "width": 1024,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_src_breathing_east.gif",
+    "source_path": "assets/player_src_breathing_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 7527,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_breathing_north.gif",
+    "source_path": "assets/player_src_breathing_north.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 8320,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_breathing_north_east.gif",
+    "source_path": "assets/player_src_breathing_north_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 7662,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_breathing_north_west.gif",
+    "source_path": "assets/player_src_breathing_north_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 7968,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_breathing_south.gif",
+    "source_path": "assets/player_src_breathing_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 8624,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_breathing_south_east.gif",
+    "source_path": "assets/player_src_breathing_south_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 7737,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_breathing_south_west.gif",
+    "source_path": "assets/player_src_breathing_south_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 8074,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_breathing_west.gif",
+    "source_path": "assets/player_src_breathing_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 7500,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_idle_south.gif",
+    "source_path": "assets/player_src_idle_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16395,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_run_east.gif",
+    "source_path": "assets/player_src_run_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 14765,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_run_north.gif",
+    "source_path": "assets/player_src_run_north.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15986,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_run_north_east.gif",
+    "source_path": "assets/player_src_run_north_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15026,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_run_north_west.gif",
+    "source_path": "assets/player_src_run_north_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15825,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_run_south.gif",
+    "source_path": "assets/player_src_run_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16060,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_run_south_east.gif",
+    "source_path": "assets/player_src_run_south_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15727,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_run_south_west.gif",
+    "source_path": "assets/player_src_run_south_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 14841,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_run_west.gif",
+    "source_path": "assets/player_src_run_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15447,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_walk_east.gif",
+    "source_path": "assets/player_src_walk_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 14167,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_walk_north.gif",
+    "source_path": "assets/player_src_walk_north.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16666,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_walk_north_east.gif",
+    "source_path": "assets/player_src_walk_north_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15130,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_walk_north_west.gif",
+    "source_path": "assets/player_src_walk_north_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15680,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_walk_south.gif",
+    "source_path": "assets/player_src_walk_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16684,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_walk_south_east.gif",
+    "source_path": "assets/player_src_walk_south_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15711,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_walk_south_west.gif",
+    "source_path": "assets/player_src_walk_south_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15220,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_walk_west.gif",
+    "source_path": "assets/player_src_walk_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15441,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_walk_east_sheet.png",
+    "source_path": "assets/player_walk_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 17486,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_walk_north_east_sheet.png",
+    "source_path": "assets/player_walk_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 18778,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_walk_north_sheet.png",
+    "source_path": "assets/player_walk_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22506,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_walk_north_west_sheet.png",
+    "source_path": "assets/player_walk_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 20325,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_walk_south_east_sheet.png",
+    "source_path": "assets/player_walk_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 20888,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_walk_south_sheet.png",
+    "source_path": "assets/player_walk_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23043,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_walk_south_west_sheet.png",
+    "source_path": "assets/player_walk_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 20182,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_walk_west_sheet.png",
+    "source_path": "assets/player_walk_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 20032,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_west_sheet.png",
+    "source_path": "assets/player_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 27238,
+    "width": 1024,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/base_floor_wood.png",
+    "source_path": "assets/textures/base_floor_wood.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 427950,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/base_intel_center.png",
+    "source_path": "assets/textures/base_intel_center.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 3084,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/base_item_box.png",
+    "source_path": "assets/textures/base_item_box.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 3188,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/base_map.png",
+    "source_path": "assets/textures/base_map.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 546745,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/base_med_unit.png",
+    "source_path": "assets/textures/base_med_unit.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 3620,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/base_texture_atlas_generated.png",
+    "source_path": "assets/textures/base_texture_atlas_generated.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 2999353,
+    "width": 1774,
+    "height": 887
+  },
+  {
+    "path": "res://assets/textures/base_wall_wallpaper.png",
+    "source_path": "assets/textures/base_wall_wallpaper.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 505280,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/base_window_boarded.png",
+    "source_path": "assets/textures/base_window_boarded.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 461530,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/base_workbench.png",
+    "source_path": "assets/textures/base_workbench.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 4154,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/door_worn.png",
+    "source_path": "assets/textures/door_worn.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 448398,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/floor_concrete.png",
+    "source_path": "assets/textures/floor_concrete.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 548708,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/pillar_concrete.png",
+    "source_path": "assets/textures/pillar_concrete.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 9266,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/texture_sheet_generated.png",
+    "source_path": "assets/textures/texture_sheet_generated.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 3249166,
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/textures/wall_stained.png",
+    "source_path": "assets/textures/wall_stained.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 570825,
+    "width": 512,
+    "height": 512
+  }
+]

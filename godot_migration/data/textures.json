@@ -1,0 +1,14 @@
+{
+  "floor": "res://assets/textures/floor_concrete.png",
+  "wall": "res://assets/textures/wall_stained.png",
+  "pillar": "res://assets/textures/pillar_concrete.png",
+  "door": "res://assets/textures/door_worn.png",
+  "baseFloor": "res://assets/textures/base_floor_wood.png",
+  "baseWall": "res://assets/textures/base_wall_wallpaper.png",
+  "boardedWindow": "res://assets/textures/base_window_boarded.png",
+  "workbench": "res://assets/textures/base_workbench.png",
+  "itemBox": "res://assets/textures/base_item_box.png",
+  "map": "res://assets/textures/base_map.png",
+  "intel": "res://assets/textures/base_intel_center.png",
+  "medical": "res://assets/textures/base_med_unit.png"
+}

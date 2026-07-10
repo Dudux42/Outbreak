@@ -1,0 +1,117 @@
+[
+  {
+    "id": "house",
+    "name": "Abandoned House",
+    "stars": 1,
+    "lootType": "Food, tools, basic medicine",
+    "loot": [
+      "Can of Beans",
+      "Apple",
+      "Bandages",
+      "Spare Parts",
+      "Kitchen Knife",
+      "Water Bottle",
+      "Handgun Ammo"
+    ],
+    "rooms": 7,
+    "mapX": 43,
+    "mapY": 32,
+    "intelRequired": 0
+  },
+  {
+    "id": "pharmacy",
+    "name": "Corner Pharmacy",
+    "stars": 2,
+    "lootType": "Medicine and recovery supplies",
+    "loot": [
+      "Bandages",
+      "Antibiotics Bottle",
+      "Rubbing Alcohol Bottle",
+      "Water Bottle",
+      "Juice Box"
+    ],
+    "rooms": 9,
+    "mapX": 58,
+    "mapY": 40,
+    "intelRequired": 0
+  },
+  {
+    "id": "supermarket",
+    "name": "Supermarket",
+    "stars": 3,
+    "lootType": "Food, water, bags, utility items",
+    "loot": [
+      "Water Bottle",
+      "Soda Can",
+      "Juice Box",
+      "Can of Tuna",
+      "Bag of Chips",
+      "Can of Beans",
+      "Apple",
+      "Banana",
+      "Box of Mac'n'Cheese"
+    ],
+    "rooms": 11,
+    "mapX": 35,
+    "mapY": 61,
+    "intelRequired": 1
+  },
+  {
+    "id": "police",
+    "name": "Police Station",
+    "stars": 4,
+    "lootType": "Weapons, ammo, armor, comms",
+    "loot": [
+      "Handgun",
+      "Shotgun",
+      "Handgun Ammo",
+      "Shotgun Ammo",
+      "Combat Knife",
+      "Body Armor Level 1",
+      "Body Armor Level 2",
+      "Body Armor Level 3"
+    ],
+    "rooms": 13,
+    "mapX": 70,
+    "mapY": 64,
+    "intelRequired": 2
+  },
+  {
+    "id": "warehouse",
+    "name": "Freight Warehouse",
+    "stars": 3,
+    "lootType": "Parts, batteries, storage gear",
+    "loot": [
+      "Spare Parts",
+      "Handgun Ammo",
+      "Shotgun Ammo",
+      "Hammer",
+      "Crowbar",
+      "Axe",
+      "Baseball Bat",
+      "Simple Backpack",
+      "Large Backpack"
+    ],
+    "rooms": 12,
+    "mapX": 24,
+    "mapY": 43,
+    "intelRequired": 1
+  },
+  {
+    "id": "clinic",
+    "name": "Riverside Clinic",
+    "stars": 5,
+    "lootType": "Rare medicine and trauma supplies",
+    "loot": [
+      "Antibiotics Bottle",
+      "Rubbing Alcohol Bottle",
+      "Med Kit",
+      "Body Armor Level 3",
+      "Body Armor Level 4"
+    ],
+    "rooms": 15,
+    "mapX": 78,
+    "mapY": 27,
+    "intelRequired": 3
+  }
+]

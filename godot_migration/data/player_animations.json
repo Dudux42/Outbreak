@@ -1,0 +1,282 @@
+{
+  "idle_south": {
+    "id": "idle_south",
+    "sheet": "res://assets/player_breathing_south_sheet.png",
+    "frames": 4,
+    "frame_duration_seconds": 0.24,
+    "fps": 4.167
+  },
+  "idle_north": {
+    "id": "idle_north",
+    "sheet": "res://assets/player_breathing_north_sheet.png",
+    "frames": 4,
+    "frame_duration_seconds": 0.24,
+    "fps": 4.167
+  },
+  "idle_north_east": {
+    "id": "idle_north_east",
+    "sheet": "res://assets/player_breathing_north_east_sheet.png",
+    "frames": 4,
+    "frame_duration_seconds": 0.24,
+    "fps": 4.167
+  },
+  "idle_east": {
+    "id": "idle_east",
+    "sheet": "res://assets/player_breathing_east_sheet.png",
+    "frames": 4,
+    "frame_duration_seconds": 0.24,
+    "fps": 4.167
+  },
+  "idle_south_east": {
+    "id": "idle_south_east",
+    "sheet": "res://assets/player_breathing_south_east_sheet.png",
+    "frames": 4,
+    "frame_duration_seconds": 0.24,
+    "fps": 4.167
+  },
+  "idle_south_west": {
+    "id": "idle_south_west",
+    "sheet": "res://assets/player_breathing_south_west_sheet.png",
+    "frames": 4,
+    "frame_duration_seconds": 0.24,
+    "fps": 4.167
+  },
+  "idle_west": {
+    "id": "idle_west",
+    "sheet": "res://assets/player_breathing_west_sheet.png",
+    "frames": 4,
+    "frame_duration_seconds": 0.24,
+    "fps": 4.167
+  },
+  "idle_north_west": {
+    "id": "idle_north_west",
+    "sheet": "res://assets/player_breathing_north_west_sheet.png",
+    "frames": 4,
+    "frame_duration_seconds": 0.24,
+    "fps": 4.167
+  },
+  "walk_north": {
+    "id": "walk_north",
+    "sheet": "res://assets/player_walk_north_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "walk_north_east": {
+    "id": "walk_north_east",
+    "sheet": "res://assets/player_walk_north_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "walk_east": {
+    "id": "walk_east",
+    "sheet": "res://assets/player_walk_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "walk_south_east": {
+    "id": "walk_south_east",
+    "sheet": "res://assets/player_walk_south_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "walk_south": {
+    "id": "walk_south",
+    "sheet": "res://assets/player_walk_south_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "walk_south_west": {
+    "id": "walk_south_west",
+    "sheet": "res://assets/player_walk_south_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "walk_west": {
+    "id": "walk_west",
+    "sheet": "res://assets/player_walk_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "walk_north_west": {
+    "id": "walk_north_west",
+    "sheet": "res://assets/player_walk_north_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "run_north": {
+    "id": "run_north",
+    "sheet": "res://assets/player_run_north_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.11,
+    "fps": 9.091
+  },
+  "run_north_east": {
+    "id": "run_north_east",
+    "sheet": "res://assets/player_run_north_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.11,
+    "fps": 9.091
+  },
+  "run_east": {
+    "id": "run_east",
+    "sheet": "res://assets/player_run_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.11,
+    "fps": 9.091
+  },
+  "run_south_east": {
+    "id": "run_south_east",
+    "sheet": "res://assets/player_run_south_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.11,
+    "fps": 9.091
+  },
+  "run_south": {
+    "id": "run_south",
+    "sheet": "res://assets/player_run_south_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.11,
+    "fps": 9.091
+  },
+  "run_south_west": {
+    "id": "run_south_west",
+    "sheet": "res://assets/player_run_south_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.11,
+    "fps": 9.091
+  },
+  "run_west": {
+    "id": "run_west",
+    "sheet": "res://assets/player_run_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.11,
+    "fps": 9.091
+  },
+  "run_north_west": {
+    "id": "run_north_west",
+    "sheet": "res://assets/player_run_north_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.11,
+    "fps": 9.091
+  },
+  "aim_idle_north": {
+    "id": "aim_idle_north",
+    "sheet": "res://assets/player_handgun_north_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.12,
+    "fps": 8.333
+  },
+  "aim_walk_north": {
+    "id": "aim_walk_north",
+    "sheet": "res://assets/player_handgun_walk_north_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "aim_idle_north_east": {
+    "id": "aim_idle_north_east",
+    "sheet": "res://assets/player_handgun_north_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.12,
+    "fps": 8.333
+  },
+  "aim_walk_north_east": {
+    "id": "aim_walk_north_east",
+    "sheet": "res://assets/player_handgun_walk_north_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "aim_idle_east": {
+    "id": "aim_idle_east",
+    "sheet": "res://assets/player_handgun_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.12,
+    "fps": 8.333
+  },
+  "aim_walk_east": {
+    "id": "aim_walk_east",
+    "sheet": "res://assets/player_handgun_walk_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "aim_idle_south_east": {
+    "id": "aim_idle_south_east",
+    "sheet": "res://assets/player_handgun_south_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.12,
+    "fps": 8.333
+  },
+  "aim_walk_south_east": {
+    "id": "aim_walk_south_east",
+    "sheet": "res://assets/player_handgun_walk_south_east_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "aim_idle_south": {
+    "id": "aim_idle_south",
+    "sheet": "res://assets/player_handgun_south_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.12,
+    "fps": 8.333
+  },
+  "aim_walk_south": {
+    "id": "aim_walk_south",
+    "sheet": "res://assets/player_handgun_walk_south_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "aim_idle_south_west": {
+    "id": "aim_idle_south_west",
+    "sheet": "res://assets/player_handgun_south_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.12,
+    "fps": 8.333
+  },
+  "aim_walk_south_west": {
+    "id": "aim_walk_south_west",
+    "sheet": "res://assets/player_handgun_walk_south_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "aim_idle_west": {
+    "id": "aim_idle_west",
+    "sheet": "res://assets/player_handgun_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.12,
+    "fps": 8.333
+  },
+  "aim_walk_west": {
+    "id": "aim_walk_west",
+    "sheet": "res://assets/player_handgun_walk_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  },
+  "aim_idle_north_west": {
+    "id": "aim_idle_north_west",
+    "sheet": "res://assets/player_handgun_north_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.12,
+    "fps": 8.333
+  },
+  "aim_walk_north_west": {
+    "id": "aim_walk_north_west",
+    "sheet": "res://assets/player_handgun_walk_north_west_sheet.png",
+    "frames": 8,
+    "frame_duration_seconds": 0.2,
+    "fps": 5
+  }
+}

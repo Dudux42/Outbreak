@@ -1,0 +1,34 @@
+{
+  "directions": [
+    "north",
+    "north_east",
+    "east",
+    "south_east",
+    "south",
+    "south_west",
+    "west",
+    "north_west"
+  ],
+  "equipment_slots": {
+    "PRIMARY": "primary",
+    "SIDEARM": "sidearm",
+    "ARMOR": "armor",
+    "BACKPACK": "backpack"
+  },
+  "player_animation_states": {
+    "IDLE_BREATHING": "idle_breathing",
+    "WALK": "walk",
+    "RUN": "run",
+    "IDLE_AIMING_HANDGUN": "idle_aiming_handgun",
+    "WALK_AIMING_HANDGUN": "walk_aiming_handgun",
+    "IDLE_AIMING_MELEE": "idle_aiming_melee",
+    "WALK_AIMING_MELEE": "walk_aiming_melee",
+    "IDLE_AIMING_SHOTGUN": "idle_aiming_shotgun",
+    "WALK_AIMING_SHOTGUN": "walk_aiming_shotgun",
+    "TAKING_DAMAGE": "taking_damage",
+    "INTERACTING": "interacting",
+    "PICK_UP_ITEM": "pick_up_item",
+    "DEATH": "death"
+  },
+  "ammo_stack_limit": 60
+}

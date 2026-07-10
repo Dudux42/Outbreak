@@ -1,0 +1,90 @@
+{
+  "storage": {
+    "name": "Item Box",
+    "costs": [
+      {
+        "item": "Parts",
+        "qty": 6
+      },
+      {
+        "item": "Parts",
+        "qty": 10
+      },
+      {
+        "item": "Parts",
+        "qty": 16
+      }
+    ],
+    "bonuses": [
+      "Storage capacity +8",
+      "Storage capacity +12",
+      "Rare item sorting"
+    ]
+  },
+  "workbench": {
+    "name": "Workbench",
+    "costs": [
+      {
+        "item": "Parts",
+        "qty": 8
+      },
+      {
+        "item": "Parts",
+        "qty": 14
+      },
+      {
+        "item": "Tool Kit",
+        "qty": 1
+      }
+    ],
+    "bonuses": [
+      "Basic ammo crafting",
+      "Weapon repair",
+      "Improvised explosives"
+    ]
+  },
+  "med": {
+    "name": "Medical Unit",
+    "costs": [
+      {
+        "item": "Meds",
+        "qty": 4
+      },
+      {
+        "item": "Meds",
+        "qty": 8
+      },
+      {
+        "item": "Meds",
+        "qty": 12
+      }
+    ],
+    "bonuses": [
+      "Patch wounds",
+      "Full heal before runs",
+      "Trauma recovery"
+    ]
+  },
+  "intel": {
+    "name": "Intel Center",
+    "costs": [
+      {
+        "item": "Radio Parts",
+        "qty": 5
+      },
+      {
+        "item": "Radio Parts",
+        "qty": 9
+      },
+      {
+        "item": "Signal Scanner",
+        "qty": 1
+      }
+    ],
+    "bonuses": [
+      "Reveal 1 extra map location",
+      "Preview threat level",
+      "Reveal extraction hint"
+    ]
+  }
+}
