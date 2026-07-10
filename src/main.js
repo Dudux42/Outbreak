@@ -43,6 +43,8 @@ const ui = {
   slotSidearm: document.querySelector("#slotSidearm"),
   slotArmor: document.querySelector("#slotArmor"),
   slotBackpack: document.querySelector("#slotBackpack"),
+  inventoryCharacterName: document.querySelector("#inventoryCharacterName"),
+  inventorySprite: document.querySelector(".inventory-sprite"),
   quickbar: document.querySelector("#quickbar"),
   runEndTitle: document.querySelector("#runEndTitle"),
   runEndText: document.querySelector("#runEndText"),
@@ -69,21 +71,39 @@ const EQUIPMENT_SLOTS = Object.freeze({
 const MAX_FRAME_DT = 0.05;
 const COLLIDER_CELL_SIZE = 12;
 const AMMO_STACK_LIMIT = 60;
-const HANDGUN_AIM_ASSET_VERSION = "handgun-aim-4";
-const PLAYER_ANIMATION_STATES = Object.freeze({
-  IDLE_BREATHING: "idle_breathing",
+const AIM_ASSET_VERSION = "firearm-aim-1";
+const SAVE_STORAGE_KEY = "outbreak.save.v1";
+const SAVE_VERSION = 1;
+const PLAYER_ACTION_STATES = Object.freeze({
+  IDLE: "Idle",
   WALK: "walk",
   RUN: "run",
-  IDLE_AIMING_HANDGUN: "idle_aiming_handgun",
-  WALK_AIMING_HANDGUN: "walk_aiming_handgun",
-  IDLE_AIMING_MELEE: "idle_aiming_melee",
-  WALK_AIMING_MELEE: "walk_aiming_melee",
-  IDLE_AIMING_SHOTGUN: "idle_aiming_shotgun",
-  WALK_AIMING_SHOTGUN: "walk_aiming_shotgun",
-  TAKING_DAMAGE: "taking_damage",
-  INTERACTING: "interacting",
-  PICK_UP_ITEM: "pick_up_item",
+  AIM: "aim",
+  PICKUP: "pickup",
+  INTERACT: "interact",
   DEATH: "death",
+  ATTACK: "attack",
+  TWO_H_ATTACK: "2hAttack",
+  SHOOT: "shoot",
+  TWO_H_SHOOT: "2hShoot",
+  WORK: "work",
+  VICTORY: "victory",
+});
+
+const PLAYER_ACTION_CONFIG = Object.freeze({
+  [PLAYER_ACTION_STATES.IDLE]: { loop: true, priority: 0, lockMovement: false },
+  [PLAYER_ACTION_STATES.WALK]: { loop: true, priority: 1, lockMovement: false },
+  [PLAYER_ACTION_STATES.RUN]: { loop: true, priority: 2, lockMovement: false },
+  [PLAYER_ACTION_STATES.AIM]: { loop: true, priority: 3, lockMovement: false },
+  [PLAYER_ACTION_STATES.PICKUP]: { loop: false, priority: 7, duration: 0.42, lockMovement: true },
+  [PLAYER_ACTION_STATES.INTERACT]: { loop: false, priority: 7, duration: 0.38, lockMovement: true },
+  [PLAYER_ACTION_STATES.ATTACK]: { loop: false, priority: 8, duration: 0.34, lockMovement: true },
+  [PLAYER_ACTION_STATES.TWO_H_ATTACK]: { loop: false, priority: 8, duration: 0.52, lockMovement: true },
+  [PLAYER_ACTION_STATES.SHOOT]: { loop: false, priority: 8, duration: 0.2, lockMovement: true },
+  [PLAYER_ACTION_STATES.TWO_H_SHOOT]: { loop: false, priority: 8, duration: 0.36, lockMovement: true },
+  [PLAYER_ACTION_STATES.WORK]: { loop: false, priority: 9, duration: 1.15, lockMovement: true },
+  [PLAYER_ACTION_STATES.VICTORY]: { loop: false, priority: 10, duration: 1.0, lockMovement: true, terminal: true },
+  [PLAYER_ACTION_STATES.DEATH]: { loop: false, priority: 11, duration: 1.1, lockMovement: true, terminal: true },
 });
 
 const locations = [
@@ -92,7 +112,7 @@ const locations = [
     name: "Abandoned House",
     stars: 1,
     lootType: "Food, tools, basic medicine",
-    loot: ["Can of Beans", "Apple", "Bandages", "Spare Parts", "Kitchen Knife", "Water Bottle", "Handgun Ammo"],
+    loot: ["can of beans", "Apple", "bandage", "Gears", "kitchen knife", "water bottle", "handgun ammo"],
     rooms: 7,
     mapX: 43,
     mapY: 32,
@@ -103,7 +123,7 @@ const locations = [
     name: "Corner Pharmacy",
     stars: 2,
     lootType: "Medicine and recovery supplies",
-    loot: ["Bandages", "Antibiotics Bottle", "Rubbing Alcohol Bottle", "Water Bottle", "Juice Box"],
+    loot: ["bandage", "antibiotics", "rubbing alcohol", "first aid kit", "painkillers", "water bottle", "Juice Box"],
     rooms: 9,
     mapX: 58,
     mapY: 40,
@@ -114,7 +134,7 @@ const locations = [
     name: "Supermarket",
     stars: 3,
     lootType: "Food, water, bags, utility items",
-    loot: ["Water Bottle", "Soda Can", "Juice Box", "Can of Tuna", "Bag of Chips", "Can of Beans", "Apple", "Banana", "Box of Mac'n'Cheese"],
+    loot: ["water bottle", "soda", "Juice Box", "can of tuna", "can of spam", "can of beans", "Apple", "Banana", "Orange"],
     rooms: 11,
     mapX: 35,
     mapY: 61,
@@ -125,7 +145,7 @@ const locations = [
     name: "Police Station",
     stars: 4,
     lootType: "Weapons, ammo, armor, comms",
-    loot: ["Handgun", "Shotgun", "Handgun Ammo", "Shotgun Ammo", "Combat Knife", "Body Armor Level 1", "Body Armor Level 2", "Body Armor Level 3"],
+    loot: ["Handgun", "shotgun", "submachine-gun", "assault rifle", "handgun ammo", "shotgun shells", "submachine-gun ammo", "assault rifle ammo", "combat knife", "level 1 body armor", "level 2 body armor", "level 3 body armor"],
     rooms: 13,
     mapX: 70,
     mapY: 64,
@@ -135,8 +155,8 @@ const locations = [
     id: "warehouse",
     name: "Freight Warehouse",
     stars: 3,
-    lootType: "Parts, batteries, storage gear",
-    loot: ["Spare Parts", "Handgun Ammo", "Shotgun Ammo", "Hammer", "Crowbar", "Axe", "Baseball Bat", "Simple Backpack", "Large Backpack"],
+    lootType: "Tools, batteries, storage gear",
+    loot: ["Gears", "nails", "bolts", "battery", "wire", "hammer", "crowbar", "axe", "baseball bat", "small backpack", "medium backpack", "large backpack"],
     rooms: 12,
     mapX: 24,
     mapY: 43,
@@ -147,7 +167,7 @@ const locations = [
     name: "Riverside Clinic",
     stars: 5,
     lootType: "Rare medicine and trauma supplies",
-    loot: ["Antibiotics Bottle", "Rubbing Alcohol Bottle", "Med Kit", "Body Armor Level 3", "Body Armor Level 4"],
+    loot: ["antibiotics", "rubbing alcohol", "first aid kit", "Syringe", "blood kit", "suture needles", "Cotton balls", "level 3 body armor"],
     rooms: 15,
     mapX: 78,
     mapY: 27,
@@ -155,7 +175,7 @@ const locations = [
   },
 ];
 
-const playerAnimations = {
+const femalePlayerAnimationClips = {
   idle_south: { src: "./assets/player_breathing_south_sheet.png", frames: 4, frameDuration: 0.24 },
   idle_north: { src: "./assets/player_breathing_north_sheet.png", frames: 4, frameDuration: 0.24 },
   idle_north_east: { src: "./assets/player_breathing_north_east_sheet.png", frames: 4, frameDuration: 0.24 },
@@ -183,61 +203,245 @@ const playerAnimations = {
 };
 
 for (const direction of DIRECTIONS) {
-  playerAnimations[`aim_idle_${direction}`] = {
-    src: `./assets/player_handgun_${direction}_sheet.png?v=${HANDGUN_AIM_ASSET_VERSION}`,
+  femalePlayerAnimationClips[`firearm_aim_${direction}`] = {
+    src: `./assets/player_firearm_aim_${direction}_sheet.png?v=${AIM_ASSET_VERSION}`,
     frames: 8,
     frameDuration: 0.12,
   };
-  playerAnimations[`aim_walk_${direction}`] = {
-    src: `./assets/player_handgun_walk_${direction}_sheet.png?v=${HANDGUN_AIM_ASSET_VERSION}`,
-    frames: 8,
-    frameDuration: 0.2,
-  };
 }
 
+const malePlayerAnimationClips = {};
+for (const direction of DIRECTIONS) {
+  malePlayerAnimationClips[`idle_${direction}`] = { src: `./assets/player_male_idle_${direction}_sheet.png`, frames: 9, frameDuration: 0.16 };
+  malePlayerAnimationClips[`walk_${direction}`] = { src: `./assets/player_male_walk_${direction}_sheet.png`, frames: 8, frameDuration: 0.2 };
+  malePlayerAnimationClips[`run_${direction}`] = { src: `./assets/player_male_run_${direction}_sheet.png`, frames: 8, frameDuration: 0.11 };
+  malePlayerAnimationClips[`firearm_aim_${direction}`] = { src: `./assets/player_male_idle_${direction}_sheet.png`, frames: 9, frameDuration: 0.12 };
+  malePlayerAnimationClips[`pickup_${direction}`] = { src: `./assets/player_male_pickup_${direction}_sheet.png`, frames: 9, frameDuration: 0.08 };
+}
+
+const characterProfiles = {
+  female: {
+    id: "female",
+    name: "Ava Belmont",
+    description: "Female survivor",
+    animations: femalePlayerAnimationClips,
+    inventorySprite: {
+      src: "./assets/player_breathing_south_sheet.png",
+      size: "496px 124px",
+      steps: 4,
+      duration: "0.96s",
+      distance: "-496px",
+    },
+  },
+  male: {
+    id: "male",
+    name: "Peter Ashfield",
+    description: "Male survivor",
+    animations: malePlayerAnimationClips,
+    inventorySprite: {
+      src: "./assets/player_male_idle_south_sheet.png",
+      size: "1116px 124px",
+      steps: 9,
+      duration: "1.44s",
+      distance: "-1116px",
+    },
+  },
+};
+
+const characterDatabase = [
+  {
+    id: "ava_belmont",
+    name: "Ava Belmont",
+    status: "active",
+    playable: true,
+    runtimeProfileId: "female",
+    portrait: "./assets/portraits/ava_belmont.png",
+  },
+  {
+    id: "peter_ashfield",
+    name: "Peter Ashfield",
+    status: "active",
+    playable: true,
+    runtimeProfileId: "male",
+    portrait: "./assets/portraits/peter_ashfield.png",
+  },
+  {
+    id: "alynne",
+    name: "Alynne",
+    status: "future",
+    playable: false,
+    runtimeProfileId: null,
+    portrait: "./assets/portraits/alynne.png",
+  },
+  {
+    id: "future_survivor_02",
+    name: "Future Survivor 02",
+    status: "future",
+    playable: false,
+    runtimeProfileId: null,
+    portrait: "./assets/portraits/future_survivor_02.png",
+  },
+  {
+    id: "future_survivor_03",
+    name: "Future Survivor 03",
+    status: "future",
+    playable: false,
+    runtimeProfileId: null,
+    portrait: "./assets/portraits/future_survivor_03.png",
+  },
+  {
+    id: "future_survivor_04",
+    name: "Future Survivor 04",
+    status: "future",
+    playable: false,
+    runtimeProfileId: null,
+    portrait: "./assets/portraits/future_survivor_04.png",
+  },
+  {
+    id: "future_survivor_05",
+    name: "Future Survivor 05",
+    status: "future",
+    playable: false,
+    runtimeProfileId: null,
+    portrait: "./assets/portraits/future_survivor_05.png",
+  },
+  {
+    id: "future_survivor_06",
+    name: "Future Survivor 06",
+    status: "future",
+    playable: false,
+    runtimeProfileId: null,
+    portrait: "./assets/portraits/future_survivor_06.png",
+  },
+  {
+    id: "future_survivor_07",
+    name: "Future Survivor 07",
+    status: "future",
+    playable: false,
+    runtimeProfileId: null,
+    portrait: "./assets/portraits/future_survivor_07.png",
+  },
+  {
+    id: "future_survivor_08",
+    name: "Future Survivor 08",
+    status: "future",
+    playable: false,
+    runtimeProfileId: null,
+    portrait: "./assets/portraits/future_survivor_08.png",
+  },
+  {
+    id: "future_survivor_09",
+    name: "Future Survivor 09",
+    status: "future",
+    playable: false,
+    runtimeProfileId: null,
+    portrait: "./assets/portraits/future_survivor_09.png",
+  },
+  {
+    id: "future_survivor_10",
+    name: "Future Survivor 10",
+    status: "future",
+    playable: false,
+    runtimeProfileId: null,
+    portrait: "./assets/portraits/future_survivor_10.png",
+  },
+];
+
+const ACTION_STATE_CLIP_GROUPS = Object.freeze({
+  [PLAYER_ACTION_STATES.IDLE]: "idle",
+  [PLAYER_ACTION_STATES.WALK]: "walk",
+  [PLAYER_ACTION_STATES.RUN]: "run",
+  [PLAYER_ACTION_STATES.AIM]: "firearm_aim",
+  [PLAYER_ACTION_STATES.PICKUP]: "pickup",
+});
+
+function createZombieAnimationClips(prefix, frameCounts) {
+  const clips = {};
+  for (const direction of DIRECTIONS) {
+    clips[`idle_${direction}`] = { src: `./assets/${prefix}_idle_${direction}_sheet.png`, frames: frameCounts.idle, frameDuration: 0.32 };
+    clips[`walk_${direction}`] = { src: `./assets/${prefix}_walk_${direction}_sheet.png`, frames: frameCounts.walk, frameDuration: 0.16 };
+    clips[`death_${direction}`] = { src: `./assets/${prefix}_death_${direction}_sheet.png`, frames: frameCounts.death, frameDuration: 0.08 };
+  }
+  return clips;
+}
+
+const enemyTypes = [
+  {
+    id: "civilian_zombie",
+    name: "Civilian Zombie",
+    animations: createZombieAnimationClips("zombie", { idle: 1, walk: 9, death: 13 }),
+  },
+  {
+    id: "dark_civilian_zombie",
+    name: "Dark Civilian Zombie",
+    animations: createZombieAnimationClips("zombie_dark", { idle: 1, walk: 1, death: 1 }),
+  },
+];
+
 const itemCatalog = {
-  "Spare Parts": { label: "Spare Parts", texture: "spareParts" },
-  "Kitchen Knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Kitchen Knife", texture: "kitchenKnife", damage: 18, reach: 1.45, attackSpeed: 0.45, staminaCost: 8, knockback: 0.35 },
-  Bandages: { label: "Bandages", texture: "bandages", healHp: 25 },
-  "Antibiotics Bottle": { label: "Antibiotics Bottle", texture: "antibioticsBottle", healHp: 40, cureInfection: true },
-  "Rubbing Alcohol Bottle": { label: "Rubbing Alcohol Bottle", texture: "rubbingAlcoholBottle", healHp: 5, disinfect: true },
-  "Combat Knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Combat Knife", texture: "combatKnife", damage: 24, reach: 1.55, attackSpeed: 0.4, staminaCost: 9, knockback: 0.4 },
-  Handgun: { slot: EQUIPMENT_SLOTS.SIDEARM, label: "Handgun", texture: "handgun", ammoType: "Handgun Ammo", magazineSize: 15, reserveAmmo: 30, damage: 45, range: 9, fireRate: 0.35 },
-  Shotgun: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Shotgun", texture: "shotgun", ammoType: "Shotgun Ammo", magazineSize: 6, reserveAmmo: 18, damage: 65, range: 7, spread: 8, pellets: 6, fireRate: 0.9 },
-  "Body Armor Level 1": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Body Armor Lv.1", armorClass: 1, texture: "bodyArmorLevel1" },
-  "Body Armor Level 2": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Body Armor Lv.2", armorClass: 2, texture: "bodyArmorLevel2" },
-  "Body Armor Level 3": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Police Vest", armorClass: 3, texture: "bodyArmorLevel3" },
-  "Body Armor Level 4": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Military Vest", armorClass: 4, texture: "bodyArmorLevel4" },
-  "Water Bottle": { label: "Water Bottle", texture: "waterBottle", healHp: 10 },
-  "Soda Can": { label: "Soda Can", texture: "sodaCan", healHp: 5 },
-  "Juice Box": { label: "Juice Box", texture: "juiceBox", healHp: 8 },
-  "Can of Tuna": { label: "Can of Tuna", texture: "canOfTuna", healHp: 20 },
-  "Bag of Chips": { label: "Bag of Chips", texture: "bagOfChips", healHp: 6 },
-  "Can of Beans": { label: "Can of Beans", texture: "canOfBeans", healHp: 18 },
-  Apple: { label: "Apple", texture: "apple", healHp: 12 },
-  Banana: { label: "Banana", texture: "banana", healHp: 10 },
-  "Box of Mac'n'Cheese": { label: "Box of Mac'n'Cheese", texture: "macNCheeseBox", healHp: 22 },
-  Hammer: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Hammer", texture: "hammer", damage: 32, reach: 1.75, attackSpeed: 0.75, staminaCost: 15, knockback: 0.75 },
-  Crowbar: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Crowbar", texture: "crowbar", damage: 38, reach: 1.85, attackSpeed: 0.85, staminaCost: 17, knockback: 0.85 },
-  Axe: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Axe", texture: "axe", damage: 52, reach: 1.95, attackSpeed: 1.0, staminaCost: 22, knockback: 1.0 },
-  "Baseball Bat": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Baseball Bat", texture: "baseballBat", damage: 30, reach: 2.05, attackSpeed: 0.7, staminaCost: 14, knockback: 1.05 },
-  "Simple Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Simple Backpack", slots: 6, texture: "simpleBackpack" },
-  "Small Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Small Backpack", slots: 6, texture: "simpleBackpack" },
-  "Large Backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Large Backpack", slots: 8, texture: "largeBackpack" },
-  Food: { label: "Food", texture: "canOfBeans" },
-  Parts: { label: "Parts", texture: "spareParts" },
-  "Handgun Ammo": { label: "Handgun Ammo", texture: "handgunAmmo", ammoType: "Handgun Ammo", ammoQty: 15, stackLimit: AMMO_STACK_LIMIT },
-  "Shotgun Ammo": { label: "Shotgun Ammo", texture: "shotgunAmmo", ammoType: "Shotgun Ammo", ammoQty: 6, stackLimit: AMMO_STACK_LIMIT },
-  Painkillers: { label: "Painkillers" },
-  "Med Kit": { label: "Med Kit" },
-  Battery: { label: "Battery" },
-  "Duct Tape": { label: "Duct Tape" },
-  "Radio Parts": { label: "Radio Parts" },
-  Key: { label: "Key", texture: "key" },
+  Apple: { label: "Apple", texture: "apple", tags: ["Food"], healHp: 12 },
+  Banana: { label: "Banana", texture: "banana", tags: ["Food"], healHp: 10 },
+  Orange: { label: "Orange", texture: "orange", tags: ["Food"], healHp: 10 },
+  "Juice Box": { label: "Juice Box", texture: "juiceBox", tags: ["Drink"], healHp: 8 },
+  soda: { label: "Soda", texture: "sodaCan", tags: ["Drink"], healHp: 5 },
+  "water bottle": { label: "Water Bottle", texture: "waterBottle", tags: ["Drink"], healHp: 10 },
+  bandage: { label: "Bandage", texture: "bandages", tags: ["Aid"], healHp: 25 },
+  "rubbing alcohol": { label: "Rubbing Alcohol", texture: "rubbingAlcoholBottle", tags: ["Aid"], healHp: 5, disinfect: true },
+  "first aid kit": { label: "First Aid Kit", texture: "medKit", tags: ["Aid"], healHp: 55 },
+  painkillers: { label: "Painkillers", texture: "painkillers", tags: ["Aid"], healHp: 15 },
+  antibiotics: { label: "Antibiotics", texture: "antibioticsBottle", tags: ["Aid"], healHp: 35, cureInfection: true },
+  "can of beans": { label: "Can of Beans", texture: "canOfBeans", tags: ["Food"], healHp: 18 },
+  "can of tuna": { label: "Can of Tuna", texture: "canOfTuna", tags: ["Food"], healHp: 20 },
+  "can of spam": { label: "Can of Spam", texture: "canOfSpam", tags: ["Food"], healHp: 20 },
+  Gears: { label: "Gears", texture: "spareParts", tags: ["Base Resource"] },
+  nails: { label: "Nails", texture: "spareParts", tags: ["Base Resource"] },
+  bolts: { label: "Bolts", texture: "spareParts", tags: ["Base Resource"] },
+  "wooden stick": { label: "Wooden Stick", texture: "spareParts", tags: ["Base Resource"] },
+  "metal bar": { label: "Metal Bar", texture: "spareParts", tags: ["Base Resource"] },
+  "metal sheet": { label: "Metal Sheet", texture: "spareParts", tags: ["Base Resource"] },
+  battery: { label: "Battery", texture: "spareParts", tags: ["Base Resource"] },
+  wire: { label: "Wire", texture: "spareParts", tags: ["Base Resource"] },
+  hammer: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Hammer", texture: "hammer", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Melee" }, weaponKind: "melee", hands: 1, damage: 32, reach: 1.75, attackSpeed: 0.75, staminaCost: 15, knockback: 0.75 },
+  crowbar: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Crowbar", texture: "crowbar", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 38, reach: 1.85, attackSpeed: 0.85, staminaCost: 17, knockback: 0.85 },
+  axe: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Axe", texture: "axe", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 52, reach: 1.95, attackSpeed: 1.0, staminaCost: 22, knockback: 1.0 },
+  screwdriver: { label: "Screwdriver", texture: "spareParts", tags: ["Base Resource"] },
+  RAM: { label: "RAM", texture: "spareParts", tags: ["Base Resource"] },
+  GPU: { label: "GPU", texture: "spareParts", tags: ["Base Resource"] },
+  processor: { label: "Processor", texture: "spareParts", tags: ["Base Resource"] },
+  motherboard: { label: "Motherboard", texture: "spareParts", tags: ["Base Resource"] },
+  PSU: { label: "PSU", texture: "spareParts", tags: ["Base Resource"] },
+  Handgun: { slot: EQUIPMENT_SLOTS.SIDEARM, label: "Handgun", texture: "handgun", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Firearm" }, weaponKind: "firearm", hands: 1, ammoType: "handgun ammo", magazineSize: 15, reserveAmmo: 30, damage: 45, range: 9, fireRate: 0.35 },
+  shotgun: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Shotgun", texture: "shotgun", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Firearm" }, weaponKind: "firearm", hands: 2, ammoType: "shotgun shells", magazineSize: 6, reserveAmmo: 18, damage: 65, range: 7, spread: 8, pellets: 6, fireRate: 0.9 },
+  "submachine-gun": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Submachine Gun", texture: "handgun", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Firearm" }, weaponKind: "firearm", hands: 2, ammoType: "submachine-gun ammo", magazineSize: 30, reserveAmmo: 60, damage: 32, range: 8, fireRate: 0.12 },
+  "assault rifle": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Assault Rifle", texture: "shotgun", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Firearm" }, weaponKind: "firearm", hands: 2, ammoType: "assault rifle ammo", magazineSize: 30, reserveAmmo: 60, damage: 42, range: 11, fireRate: 0.16 },
+  "handgun ammo": { label: "Handgun Ammo", texture: "handgunAmmo", tags: ["Ammunition"], ammoType: "handgun ammo", ammoQty: 15, stackLimit: AMMO_STACK_LIMIT },
+  "shotgun shells": { label: "Shotgun Shells", texture: "shotgunAmmo", tags: ["Ammunition"], ammoType: "shotgun shells", ammoQty: 6, stackLimit: AMMO_STACK_LIMIT },
+  "submachine-gun ammo": { label: "Submachine Gun Ammo", texture: "handgunAmmo", tags: ["Ammunition"], ammoType: "submachine-gun ammo", ammoQty: 30, stackLimit: AMMO_STACK_LIMIT },
+  "assault rifle ammo": { label: "Assault Rifle Ammo", texture: "handgunAmmo", tags: ["Ammunition"], ammoType: "assault rifle ammo", ammoQty: 30, stackLimit: AMMO_STACK_LIMIT },
+  "baseball bat": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Baseball Bat", texture: "baseballBat", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 30, reach: 2.05, attackSpeed: 0.7, staminaCost: 14, knockback: 1.05 },
+  hatchet: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Hatchet", texture: "axe", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Melee" }, weaponKind: "melee", hands: 1, damage: 34, reach: 1.65, attackSpeed: 0.7, staminaCost: 15, knockback: 0.65 },
+  sledgehammer: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Sledgehammer", texture: "hammer", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 62, reach: 1.9, attackSpeed: 1.1, staminaCost: 25, knockback: 1.25 },
+  Katana: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Katana", texture: "combatKnife", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 58, reach: 2.05, attackSpeed: 0.68, staminaCost: 18, knockback: 0.72 },
+  "combat knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Combat Knife", texture: "combatKnife", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Melee" }, weaponKind: "melee", hands: 1, damage: 24, reach: 1.55, attackSpeed: 0.4, staminaCost: 9, knockback: 0.4 },
+  "kitchen knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Kitchen Knife", texture: "kitchenKnife", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Melee" }, weaponKind: "melee", hands: 1, damage: 18, reach: 1.45, attackSpeed: 0.45, staminaCost: 8, knockback: 0.35 },
+  "Nail gun": { label: "Nail Gun", texture: "spareParts", tags: ["Base Resource"] },
+  Drill: { label: "Drill", texture: "spareParts", tags: ["Base Resource"] },
+  "small backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Small Backpack", texture: "simpleBackpack", tags: ["Equipment"], slots: 6 },
+  "medium backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Medium Backpack", texture: "largeBackpack", tags: ["Equipment"], slots: 8 },
+  "large backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Large Backpack", texture: "largeBackpack", tags: ["Equipment"], slots: 10 },
+  "level 1 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 1 Body Armor", armorClass: 1, texture: "bodyArmorLevel1", tags: ["Armor"] },
+  "level 2 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 2 Body Armor", armorClass: 2, texture: "bodyArmorLevel2", tags: ["Armor"] },
+  "level 3 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 3 Body Armor", armorClass: 3, texture: "bodyArmorLevel3", tags: ["Armor"] },
+  Syringe: { label: "Syringe", texture: "spareParts", tags: ["Base Resource"] },
+  "blood kit": { label: "Blood Kit", texture: "spareParts", tags: ["Base Resource"] },
+  "suture needles": { label: "Suture Needles", texture: "spareParts", tags: ["Base Resource"] },
+  "Cotton balls": { label: "Cotton Balls", texture: "spareParts", tags: ["Base Resource"] },
+  Key: { label: "Key", texture: "key", tags: ["Key"] },
 };
 
 const state = {
   mode: "base",
+  character: "female",
   health: 100,
   keys: 0,
   runSeed: Date.now() >>> 0,
@@ -246,21 +450,23 @@ const state = {
   activeQuickSlot: null,
   magazines: {
     Handgun: 15,
-    Shotgun: 0,
+    shotgun: 0,
+    "submachine-gun": 0,
+    "assault rifle": 0,
   },
   equipment: {
     primary: null,
     sidearm: "Handgun",
     armor: null,
-    backpack: "Small Backpack",
+    backpack: "small backpack",
   },
   stash: [
-    { name: "Bandages", qty: 2 },
-    { name: "Handgun Ammo", qty: 30 },
-    { name: "Shotgun Ammo", qty: 6 },
-    { name: "Shotgun", qty: 1 },
-    { name: "Axe", qty: 1 },
-    { name: "Parts", qty: 3 },
+    { name: "bandage", qty: 2 },
+    { name: "handgun ammo", qty: 30 },
+    { name: "shotgun shells", qty: 6 },
+    { name: "shotgun", qty: 1 },
+    { name: "axe", qty: 1 },
+    { name: "Gears", qty: 3 },
   ],
   upgrades: {
     storage: 0,
@@ -271,25 +477,27 @@ const state = {
   activeLocation: null,
 };
 
+let playerAnimationClips = getCharacterProfile(state.character).animations;
+
 const upgradeData = {
   storage: {
     name: "Item Box",
-    costs: [{ item: "Parts", qty: 6 }, { item: "Parts", qty: 10 }, { item: "Parts", qty: 16 }],
+    costs: [{ item: "Gears", qty: 6 }, { item: "metal sheet", qty: 4 }, { item: "bolts", qty: 16 }],
     bonuses: ["Storage capacity +8", "Storage capacity +12", "Rare item sorting"],
   },
   workbench: {
     name: "Workbench",
-    costs: [{ item: "Parts", qty: 8 }, { item: "Parts", qty: 14 }, { item: "Tool Kit", qty: 1 }],
+    costs: [{ item: "Gears", qty: 8 }, { item: "metal bar", qty: 6 }, { item: "Drill", qty: 1 }],
     bonuses: ["Basic ammo crafting", "Weapon repair", "Improvised explosives"],
   },
   med: {
     name: "Medical Unit",
-    costs: [{ item: "Meds", qty: 4 }, { item: "Meds", qty: 8 }, { item: "Meds", qty: 12 }],
+    costs: [{ item: "Syringe", qty: 4 }, { item: "blood kit", qty: 2 }, { item: "suture needles", qty: 12 }],
     bonuses: ["Patch wounds", "Full heal before runs", "Trauma recovery"],
   },
   intel: {
     name: "Intel Center",
-    costs: [{ item: "Radio Parts", qty: 5 }, { item: "Radio Parts", qty: 9 }, { item: "Signal Scanner", qty: 1 }],
+    costs: [{ item: "wire", qty: 5 }, { item: "RAM", qty: 2 }, { item: "processor", qty: 1 }],
     bonuses: ["Reveal 1 extra map location", "Preview threat level", "Reveal extraction hint"],
   },
 };
@@ -317,6 +525,7 @@ const baseStationPoints = [
   { id: "medical", label: "Medical Unit", x: 3.9, z: -1.45, facing: "south_east" },
   { id: "intel", label: "Intel Center", x: -4.35, z: 1.25, facing: "north_west" },
   { id: "map", label: "Map Table", x: 3.35, z: 1.15, facing: "north_east" },
+  { id: "restStation", label: "Rest Station", x: 0.2, z: 3.05, facing: "north" },
 ];
 
 const texturePaths = {
@@ -332,6 +541,9 @@ const texturePaths = {
   map: "./assets/textures/base_map.png",
   intel: "./assets/textures/base_intel_center.png",
   medical: "./assets/textures/base_med_unit.png",
+  restBed: "./assets/textures/base_rest_bed.png",
+  restTable: "./assets/textures/base_rest_table.png",
+  activeCharacterStar: "./assets/active_character_star.png",
 };
 
 const itemTexturePaths = {
@@ -357,7 +569,11 @@ const itemTexturePaths = {
   canOfBeans: "./assets/items/can_of_beans.png",
   apple: "./assets/items/apple.png",
   banana: "./assets/items/banana.png",
+  orange: "./assets/items/apple.png",
   macNCheeseBox: "./assets/items/mac_n_cheese_box.png",
+  canOfSpam: "./assets/items/can_of_beans.png",
+  medKit: "./assets/items/bandages.png",
+  painkillers: "./assets/items/antibiotics_bottle.png",
   hammer: "./assets/items/hammer.png",
   crowbar: "./assets/items/crowbar.png",
   axe: "./assets/items/axe.png",
@@ -380,14 +596,22 @@ const DIRECTION_VECTORS = Object.freeze({
 
 function validatePlayerAnimations(animations) {
   for (const direction of DIRECTIONS) {
-    for (const prefix of ["idle", "walk", "run", "aim_idle", "aim_walk"]) {
+    for (const prefix of ["idle", "walk", "run", "firearm_aim"]) {
       const key = `${prefix}_${direction}`;
       if (!animations[key]) throw new Error(`[Outbreak] Missing player animation: ${key}`);
     }
   }
 }
 
-validatePlayerAnimations(playerAnimations);
+for (const profile of Object.values(characterProfiles)) validatePlayerAnimations(profile.animations);
+for (const enemyType of enemyTypes) {
+  for (const direction of DIRECTIONS) {
+    for (const prefix of ["idle", "walk", "death"]) {
+      const key = `${prefix}_${direction}`;
+      if (!enemyType.animations[key]) throw new Error(`[Outbreak] Missing ${enemyType.id} animation: ${key}`);
+    }
+  }
+}
 
 let scene;
 let camera;
@@ -397,6 +621,8 @@ let playerAnimator;
 let lastAimDirection = "south";
 let playerFacingDirection = "south";
 let runMoveDirection = new THREE.Vector3(0, 0, 1);
+let playerAction = createDefaultPlayerActionState();
+let attackCooldownTimer = 0;
 let floorPlane;
 let colliders = [];
 let colliderGrid = new Map();
@@ -404,6 +630,7 @@ let colliderBounds = new WeakMap();
 let colliderGridDirty = true;
 let lootNodes = [];
 let zombies = [];
+let deadZombies = [];
 let exits = [];
 let doorNodes = [];
 let lockedDoors = [];
@@ -412,6 +639,7 @@ let missionRooms = [];
 let missionBounds = null;
 let roomFogTiles = [];
 let pillarKeys = new Set();
+let baseSurvivors = [];
 let baseInteractables = [];
 let hoveredBaseObject = null;
 let interactTarget = null;
@@ -426,6 +654,7 @@ let baseRoutine = {
   facing: "south",
 };
 
+loadSavedGame();
 initThree();
 buildBaseScene();
 renderBaseHud();
@@ -458,7 +687,6 @@ window.addEventListener("keydown", (event) => {
   keys.add(event.code);
   if (event.code === "KeyE") interact();
   if (event.code === "KeyR") reloadHeldWeapon();
-  if (event.code === "Space") attack();
 });
 window.addEventListener("keyup", (event) => keys.delete(event.code));
 window.addEventListener("pointermove", setPointerFromEvent);
@@ -474,6 +702,114 @@ function suppressCanvasContextMenu(event) {
 function resetAimingInput() {
   isAiming = false;
 }
+
+function getCharacterProfile(characterId = state.character) {
+  return characterProfiles[characterId] || characterProfiles.female;
+}
+
+function setActiveCharacter(characterId) {
+  const profile = getCharacterProfile(characterId);
+  state.character = profile.id;
+  playerAnimationClips = profile.animations;
+  updateCharacterUi();
+  updateBaseSurvivorSelection();
+  if (!player || state.mode === "base") return;
+  playerAnimator = createSpriteSheetAnimator(playerAnimationClips);
+  player.material.map = playerAnimator.texture;
+  player.material.needsUpdate = true;
+  setPlayerActionState(PLAYER_ACTION_STATES.IDLE, { facing: lastAimDirection, immediate: true });
+  playerAnimator.holdFrame(getClipForPlayerAction(PLAYER_ACTION_STATES.IDLE, lastAimDirection) || "idle_south", player.material, 0);
+}
+
+function updateCharacterUi() {
+  const profile = getCharacterProfile();
+  if (ui.inventoryCharacterName) ui.inventoryCharacterName.textContent = profile.name;
+  if (ui.inventorySprite) {
+    ui.inventorySprite.style.setProperty("--survivor-sprite", `url("${profile.inventorySprite.src}")`);
+    ui.inventorySprite.style.setProperty("--survivor-sprite-size", profile.inventorySprite.size);
+    ui.inventorySprite.style.setProperty("--survivor-animation-steps", profile.inventorySprite.steps);
+    ui.inventorySprite.style.setProperty("--survivor-animation-duration", profile.inventorySprite.duration);
+    ui.inventorySprite.style.setProperty("--survivor-animation-distance", profile.inventorySprite.distance);
+  }
+}
+
+function createSavePayload() {
+  return {
+    version: SAVE_VERSION,
+    savedAt: new Date().toISOString(),
+    state: {
+      character: state.character,
+      health: state.health,
+      keys: state.keys,
+      runSeed: state.runSeed,
+      inventory: state.inventory,
+      quickbar: state.quickbar,
+      activeQuickSlot: state.activeQuickSlot,
+      magazines: state.magazines,
+      equipment: state.equipment,
+      stash: state.stash,
+      upgrades: state.upgrades,
+    },
+  };
+}
+
+function saveGame() {
+  try {
+    localStorage.setItem(SAVE_STORAGE_KEY, JSON.stringify(createSavePayload()));
+    showPrompt("Game saved at the Intel Center.");
+    renderIntelPanel();
+    return true;
+  } catch (error) {
+    console.warn("[Outbreak] Save failed:", error);
+    showPrompt("Save failed. Browser storage is unavailable.");
+    return false;
+  }
+}
+
+function getSavedAtLabel() {
+  try {
+    const raw = localStorage.getItem(SAVE_STORAGE_KEY);
+    if (!raw) return "No save yet";
+    const payload = JSON.parse(raw);
+    if (!payload?.savedAt) return "No save yet";
+    return new Date(payload.savedAt).toLocaleString();
+  } catch {
+    return "Unavailable";
+  }
+}
+
+function loadSavedGame() {
+  let payload = null;
+  try {
+    const raw = localStorage.getItem(SAVE_STORAGE_KEY);
+    if (!raw) return false;
+    payload = JSON.parse(raw);
+  } catch (error) {
+    console.warn("[Outbreak] Save load failed:", error);
+    return false;
+  }
+  if (!payload || payload.version !== SAVE_VERSION || !payload.state) return false;
+
+  const saved = payload.state;
+  state.mode = "base";
+  state.character = getCharacterProfile(saved.character).id;
+  state.health = Number.isFinite(saved.health) ? THREE.MathUtils.clamp(saved.health, 1, 100) : state.health;
+  state.keys = Number.isFinite(saved.keys) ? Math.max(0, saved.keys) : 0;
+  state.runSeed = Number.isFinite(saved.runSeed) ? saved.runSeed >>> 0 : state.runSeed;
+  state.inventory = Array.isArray(saved.inventory) ? saved.inventory : [];
+  state.quickbar = Array.isArray(saved.quickbar) ? saved.quickbar.slice(0, 9) : Array(9).fill(null);
+  while (state.quickbar.length < 9) state.quickbar.push(null);
+  state.activeQuickSlot = saved.activeQuickSlot || null;
+  state.magazines = { ...state.magazines, ...(saved.magazines || {}) };
+  state.equipment = { ...state.equipment, ...(saved.equipment || {}) };
+  state.stash = Array.isArray(saved.stash) ? saved.stash : state.stash;
+  state.upgrades = { ...state.upgrades, ...(saved.upgrades || {}) };
+  state.activeLocation = null;
+  playerAnimationClips = getCharacterProfile(state.character).animations;
+  rng = createSeededRng(state.runSeed);
+  return true;
+}
+
 function setPointerFromEvent(event) {
   pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -585,6 +921,7 @@ function createFallbackTextureCanvas() {
 }
 
 function renderBaseHud() {
+  updateCharacterUi();
   ui.baseHealth.textContent = state.health;
   ui.basePack.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
   renderQuickbar();
@@ -627,19 +964,78 @@ function buildBaseScene() {
   addBaseStation("medical", "Medical Unit", 3.9, -2.65, "#d6d7cf", () => makeMedUnit());
   addBaseStation("intel", "Intel Center", -4.65, 2.25, "#334a5b", () => makeIntelDesk());
   addBaseStation("map", "Map Table", 3.45, 2.05, "#7b5d38", () => makeMapTable());
+  addBaseStation("restStation", "Rest Station", 0.2, 3.05, "#d9b15f", () => makeRestStation());
 
   addBaseProps();
-  addPlayer(0);
-  player.position.set(-1.6, playerSpriteY, 0.7);
-  player.scale.set(playerSpriteScale, playerSpriteScale, 1);
-  playerAnimator?.setClip("idle_south", player.material);
-  baseRoutine = {
-    targetIndex: randomInt(0, baseStationPoints.length - 1),
-    pauseTimer: 0.8,
-    facing: "south",
-  };
+  addBaseSurvivors();
   updateBaseCamera();
   showPrompt("Click a station in the safehouse");
+}
+
+function addBaseSurvivors() {
+  baseSurvivors = [
+    createBaseSurvivor("female", new THREE.Vector3(-1.9, playerSpriteY, 0.7), 0),
+    createBaseSurvivor("male", new THREE.Vector3(1.3, playerSpriteY, 0.25), 2),
+  ];
+  updateBaseSurvivorSelection();
+}
+
+function createBaseSurvivor(characterId, position, targetOffset = 0) {
+  const profile = getCharacterProfile(characterId);
+  const animator = createSpriteSheetAnimator(profile.animations);
+  const material = new THREE.SpriteMaterial({
+    map: animator.texture,
+    transparent: true,
+    alphaTest: 0.45,
+    depthWrite: true,
+    depthTest: true,
+  });
+  const sprite = new THREE.Sprite(material);
+  sprite.position.copy(position);
+  sprite.scale.set(playerSpriteScale, playerSpriteScale, 1);
+  sprite.userData.characterId = characterId;
+  sprite.userData.radius = 0.45;
+  scene.add(sprite);
+  animator.holdFrame("idle_south", material, 0);
+
+  const highlight = new THREE.Sprite(
+    new THREE.SpriteMaterial({
+      map: loadTextureWithFallback(texturePaths.activeCharacterStar),
+      transparent: true,
+      alphaTest: 0.08,
+      depthWrite: false,
+      depthTest: true,
+    })
+  );
+  highlight.scale.set(0.58, 0.58, 1);
+  highlight.position.set(position.x, playerSpriteY + 1.55, position.z);
+  highlight.visible = characterId === state.character;
+  scene.add(highlight);
+
+  return {
+    characterId,
+    sprite,
+    animator,
+    highlight,
+    routine: {
+      targetIndex: (randomInt(0, baseStationPoints.length - 1) + targetOffset) % baseStationPoints.length,
+      pauseTimer: randomFloat(0.5, 1.4),
+      facing: "south",
+    },
+  };
+}
+
+function updateBaseSurvivorSelection() {
+  for (const survivor of baseSurvivors) {
+    const selected = survivor.characterId === state.character;
+    survivor.highlight.visible = selected;
+    if (!selected) continue;
+    player = survivor.sprite;
+    playerAnimator = survivor.animator;
+    playerAnimationClips = getCharacterProfile(state.character).animations;
+    playerAction = createDefaultPlayerActionState();
+    setPlayerActionState(PLAYER_ACTION_STATES.IDLE, { facing: survivor.routine.facing, immediate: true });
+  }
 }
 
 function addBaseWall(x, z, width, depth, material) {
@@ -866,6 +1262,31 @@ function makeMapTable() {
   return group;
 }
 
+function makeRestStation() {
+  const group = new THREE.Group();
+  const bedMaterial = createTextureMaterial(texturePaths.restBed, 1, 1, "#5f5147");
+  const blanketMaterial = new THREE.MeshStandardMaterial({ color: "#536358", roughness: 0.86 });
+  const pillowMaterial = new THREE.MeshStandardMaterial({ color: "#c2bbac", roughness: 0.78 });
+  const tableMaterial = createTextureMaterial(texturePaths.restTable, 1, 1, "#755238");
+  const legMaterial = new THREE.MeshStandardMaterial({ color: "#2d1d14", roughness: 0.82 });
+
+  addBox(group, 2.55, 0.26, 1.18, 0, 0.32, 0, bedMaterial);
+  addBox(group, 2.34, 0.16, 0.86, 0.12, 0.56, 0.05, blanketMaterial);
+  addBox(group, 0.72, 0.16, 0.78, -0.78, 0.72, 0.05, pillowMaterial);
+  addBox(group, 0.16, 0.62, 1.3, -1.36, 0.52, 0, bedMaterial);
+
+  for (const x of [-1.0, 1.0]) {
+    for (const z of [-0.44, 0.44]) addBox(group, 0.12, 0.42, 0.12, x, 0.1, z, legMaterial);
+  }
+
+  addBox(group, 0.82, 0.18, 0.72, 1.88, 0.62, -0.1, tableMaterial);
+  addBox(group, 0.62, 0.42, 0.54, 1.88, 0.32, -0.1, tableMaterial);
+  addBox(group, 0.42, 0.05, 0.06, 1.88, 0.56, -0.48, new THREE.MeshStandardMaterial({ color: "#c6a05a", roughness: 0.48 }));
+  addTableLamp(group, 1.98, 0.72, 0.14);
+  group.rotation.y = Math.PI / 2;
+  return group;
+}
+
 function addBox(group, width, height, depth, x, y, z, material) {
   const mesh = new THREE.Mesh(new THREE.BoxGeometry(width, height, depth), material);
   mesh.position.set(x, y, z);
@@ -933,36 +1354,49 @@ function updateBase(dt) {
 }
 
 function updateBaseSurvivorRoutine(dt) {
-  if (!player) return;
-  const target = baseStationPoints[baseRoutine.targetIndex];
-  const targetPosition = new THREE.Vector3(target.x, playerSpriteY, target.z);
-  const toTarget = targetPosition.clone().sub(player.position).setY(0);
+  for (const survivor of baseSurvivors) updateOneBaseSurvivor(survivor, dt);
+}
 
-  if (baseRoutine.pauseTimer > 0) {
-    baseRoutine.pauseTimer -= dt;
-    const idleFacing = target.facing || baseRoutine.facing;
-    baseRoutine.facing = idleFacing;
-    playerAnimator?.setClip(`idle_${idleFacing}`, player.material);
-    playerAnimator?.update(dt);
+function updateOneBaseSurvivor(survivor, dt) {
+  const sprite = survivor.sprite;
+  const routine = survivor.routine;
+  const target = baseStationPoints[routine.targetIndex];
+  const targetPosition = new THREE.Vector3(target.x, playerSpriteY, target.z);
+  const toTarget = targetPosition.clone().sub(sprite.position).setY(0);
+
+  if (routine.pauseTimer > 0) {
+    routine.pauseTimer -= dt;
+    routine.facing = target.facing || routine.facing;
+    updateBaseSurvivorAnimation(survivor, PLAYER_ACTION_STATES.IDLE, routine.facing, dt, 0);
     return;
   }
 
   if (toTarget.lengthSq() < 0.08) {
-    baseRoutine.pauseTimer = randomFloat(1.4, 3.2);
-    baseRoutine.targetIndex = pickNextBaseStationIndex(baseRoutine.targetIndex);
-    playerAnimator?.setClip(`idle_${target.facing || baseRoutine.facing}`, player.material);
-    playerAnimator?.update(dt);
+    routine.pauseTimer = randomFloat(1.4, 3.2);
+    routine.targetIndex = pickNextBaseStationIndex(routine.targetIndex);
+    routine.facing = target.facing || routine.facing;
+    updateBaseSurvivorAnimation(survivor, PLAYER_ACTION_STATES.IDLE, routine.facing, dt, 0);
     return;
   }
 
   const direction = toTarget.normalize();
   const facing = getDirectionName(direction);
-  baseRoutine.facing = facing;
-  playerAnimator?.setClip(`walk_${facing}`, player.material);
-  const before = player.position.clone();
-  player.position.add(direction.multiplyScalar(2.2 * dt));
-  player.position.y = playerSpriteY;
-  playerAnimator?.advanceByDistance(player.position.distanceTo(before));
+  routine.facing = facing;
+  const before = sprite.position.clone();
+  sprite.position.add(direction.multiplyScalar(2.2 * dt));
+  sprite.position.y = playerSpriteY;
+  survivor.highlight.position.set(sprite.position.x, playerSpriteY + 1.55, sprite.position.z);
+  updateBaseSurvivorAnimation(survivor, PLAYER_ACTION_STATES.WALK, facing, dt, sprite.position.distanceTo(before));
+}
+
+function updateBaseSurvivorAnimation(survivor, stateName, facing, dt, distance) {
+  const clipGroup = ACTION_STATE_CLIP_GROUPS[stateName] || "idle";
+  const clipName = `${clipGroup}_${DIRECTIONS.includes(facing) ? facing : "south"}`;
+  survivor.animator.setClip(clipName, survivor.sprite.material);
+  if (distance > 0 && shouldAdvanceActionByDistance(stateName)) survivor.animator.advanceByDistance(distance);
+  else survivor.animator.update(dt);
+  survivor.sprite.userData.animationState = stateName;
+  survivor.sprite.userData.animationFacing = facing;
 }
 
 function pickNextBaseStationIndex(currentIndex) {
@@ -987,6 +1421,7 @@ function openBasePanel(action) {
     medical: renderMedicalPanel,
     intel: renderIntelPanel,
     map: renderMapPanel,
+    restStation: renderRestStationPanel,
   };
   const render = panelMap[action];
   if (!render) return;
@@ -1239,9 +1674,9 @@ function renderWorkbenchPanel() {
       <section class="panel-block">
         <h3>Available Crafts</h3>
         <div class="craft-list">
-          <div class="craft-row"><b>Handgun Ammo x6</b><span>2 Parts + 1 Powder</span></div>
-          <div class="craft-row"><b>Pipe Bomb</b><span>4 Parts + 1 Rubbing Alcohol Bottle</span></div>
-          <div class="craft-row"><b>Weapon Repair</b><span>3 Parts</span></div>
+          <div class="craft-row"><b>Handgun Ammo x6</b><span>2 Gears + 1 metal bar</span></div>
+          <div class="craft-row"><b>Shotgun Shells x4</b><span>2 metal sheet + 1 bolts</span></div>
+          <div class="craft-row"><b>Weapon Repair</b><span>3 Gears</span></div>
         </div>
       </section>
       <section class="panel-block">
@@ -1260,8 +1695,8 @@ function renderMedicalPanel() {
       <section class="panel-block">
         <h3>Available Actions</h3>
         <div class="action-list">
-          <button class="action-row" data-action="heal"><b>Patch Wounds</b><span>1 Bandages</span></button>
-          <button class="action-row" data-action="stabilize"><b>Stabilize Trauma</b><span>2 Meds</span></button>
+          <button class="action-row" data-action="heal"><b>Patch Wounds</b><span>1 bandage</span></button>
+          <button class="action-row" data-action="stabilize"><b>Stabilize Trauma</b><span>1 first aid kit</span></button>
           <div class="action-row"><b>Current Health</b><span>${state.health}/100</span></div>
         </div>
       </section>
@@ -1283,6 +1718,7 @@ function renderIntelPanel() {
   basePanelTitle.textContent = "Intel Center";
   const level = state.upgrades.intel;
   const knownLocations = getAvailableLocations().length;
+  const savedAt = getSavedAtLabel();
   basePanelContent.innerHTML = `
     <div class="panel-grid">
       <section class="panel-block">
@@ -1297,9 +1733,44 @@ function renderIntelPanel() {
         <h3>Upgrade</h3>
         ${renderUpgradeButton("intel")}
       </section>
+      <section class="panel-block">
+        <h3>Save</h3>
+        <div class="action-list">
+          <button class="action-row" data-action="save"><b>Save Game</b><span>No cost</span></button>
+          <div class="bonus-row"><b>Last Save</b><span>${savedAt}</span></div>
+        </div>
+      </section>
     </div>
   `;
+  basePanelContent.querySelector('[data-action="save"]')?.addEventListener("click", saveGame);
   wireUpgradeButtons();
+}
+
+function renderRestStationPanel() {
+  basePanelTitle.textContent = "Rest Station";
+  basePanelContent.innerHTML = `
+    <div class="character-switch-grid">
+      ${Object.values(characterProfiles).map((profile) => {
+        const active = profile.id === state.character;
+        return `
+          <button class="character-switch-card ${active ? "character-switch-card--active" : ""}" data-character="${profile.id}" ${active ? "disabled" : ""}>
+            <span class="character-switch-card__portrait" style="--portrait-image: url('${profile.inventorySprite.src}'); --portrait-size: ${profile.inventorySprite.size}; --portrait-steps: ${profile.inventorySprite.steps}; --portrait-distance: ${profile.inventorySprite.distance}; --portrait-duration: ${profile.inventorySprite.duration};"></span>
+            <strong>${profile.name}</strong>
+          </button>
+        `;
+      }).join("")}
+    </div>
+  `;
+
+  for (const button of basePanelContent.querySelectorAll("[data-character]")) {
+    button.addEventListener("click", () => {
+      if (button.dataset.character === state.character) return;
+      setActiveCharacter(button.dataset.character);
+      closeBasePanel();
+      renderBaseHud();
+      showPrompt(`Selected ${getCharacterProfile().name}.`);
+    });
+  }
 }
 
 function renderMapPanel() {
@@ -1443,6 +1914,7 @@ function closeInventory() {
 }
 
 function renderInventory() {
+  updateCharacterUi();
   ui.inventoryHp.textContent = state.health;
   ui.inventoryArmor.textContent = getArmorClass();
   ui.inventoryCapacity.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
@@ -1892,16 +2364,30 @@ function isWeaponItem(itemName) {
 }
 
 function isRangedWeapon(itemName) {
-  return itemName === "Handgun" || itemName === "Shotgun";
+  return getItem(itemName).weaponKind === "firearm";
+}
+
+function isTwoHandedWeapon(itemName) {
+  return (getItem(itemName).hands || 1) >= 2;
+}
+
+function getAttackActionState(itemName) {
+  if (isRangedWeapon(itemName)) {
+    return isTwoHandedWeapon(itemName) ? PLAYER_ACTION_STATES.TWO_H_SHOOT : PLAYER_ACTION_STATES.SHOOT;
+  }
+  return isTwoHandedWeapon(itemName) ? PLAYER_ACTION_STATES.TWO_H_ATTACK : PLAYER_ACTION_STATES.ATTACK;
 }
 
 function startMission(location) {
   state.mode = "mission";
   state.activeLocation = location;
   state.keys = 0;
+  keys.clear();
   state.runSeed = createRunSeed(location);
   rng = createSeededRng(state.runSeed);
   isAiming = false;
+  attackCooldownTimer = 0;
+  playerAction = createDefaultPlayerActionState();
   state.activeQuickSlot = null;
   resetEquippedWeaponMagazines();
   playerFacingDirection = lastAimDirection;
@@ -1974,6 +2460,7 @@ function clearScene() {
   colliderGridDirty = true;
   lootNodes = [];
   zombies = [];
+  deadZombies = [];
   exits = [];
   doorNodes = [];
   lockedDoors = [];
@@ -1982,6 +2469,7 @@ function clearScene() {
   missionBounds = null;
   roomFogTiles = [];
   pillarKeys = new Set();
+  baseSurvivors = [];
   interactTarget = null;
   isAiming = false;
 }
@@ -2333,7 +2821,7 @@ function addRoomFog(rooms) {
 }
 
 function addPlayer(size, spawnPosition = null) {
-  playerAnimator = createSpriteSheetAnimator(playerAnimations);
+  playerAnimator = createSpriteSheetAnimator(playerAnimationClips);
   const material = new THREE.SpriteMaterial({
     map: playerAnimator.texture,
     transparent: true,
@@ -2341,7 +2829,8 @@ function addPlayer(size, spawnPosition = null) {
     depthWrite: true,
     depthTest: true,
   });
-  playerAnimator.holdFrame(`idle_${lastAimDirection}`, material, 0);
+  playerAction = createDefaultPlayerActionState();
+  playerAnimator.holdFrame(getClipForPlayerAction(PLAYER_ACTION_STATES.IDLE, lastAimDirection), material, 0);
   player = new THREE.Sprite(material);
   if (spawnPosition) player.position.copy(spawnPosition);
   else player.position.set(0, playerSpriteY, size - 1.2);
@@ -2349,6 +2838,7 @@ function addPlayer(size, spawnPosition = null) {
   player.scale.set(playerSpriteScale, playerSpriteScale, 1);
   player.userData.radius = 0.45;
   scene.add(player);
+  setPlayerActionState(PLAYER_ACTION_STATES.IDLE, { facing: lastAimDirection, immediate: true });
 }
 
 function createSpriteSheetAnimator(clips) {
@@ -2383,8 +2873,10 @@ function createSpriteSheetAnimator(clips) {
       elapsed = 0;
       distanceAccumulator = 0;
       setSheetFrame(preparedClips[activeName], frame);
-      material.map = preparedClips[activeName].texture;
-      material.needsUpdate = true;
+      if (material) {
+        material.map = preparedClips[activeName].texture;
+        material.needsUpdate = true;
+      }
       if (player && material === player.material) {
         player.userData.animationClip = activeName;
       }
@@ -2410,6 +2902,10 @@ function createSpriteSheetAnimator(clips) {
       distanceAccumulator = (distanceAccumulator + distance) % cycleDistance;
       frame = Math.floor((distanceAccumulator / cycleDistance) * activeClip.frames);
       setSheetFrame(activeClip, frame);
+    },
+    holdCurrentFrame() {
+      elapsed = 0;
+      setSheetFrame(preparedClips[activeName], frame);
     },
     getActiveName() {
       return activeName;
@@ -2546,22 +3042,31 @@ function addZombies(location) {
   for (let i = 0; i < count; i++) {
     const spawnRooms = missionRooms.filter((room) => room.id !== 0);
     const room = pick(spawnRooms.length ? spawnRooms : missionRooms);
-    const zombie = new THREE.Sprite(
-      new THREE.SpriteMaterial({
-        color: i % 3 === 0 ? "#8fb06e" : "#6f8f61",
-        transparent: true,
-      })
-    );
+    const enemyType = pick(enemyTypes);
+    const animator = createSpriteSheetAnimator(enemyType.animations);
+    const material = new THREE.SpriteMaterial({
+      map: animator.texture,
+      transparent: true,
+      alphaTest: 0.45,
+      depthWrite: true,
+      depthTest: true,
+    });
+    const zombie = new THREE.Sprite(material);
     zombie.position.copy(getRandomPointInRoom(room, 1.0, 1.05));
-    zombie.scale.set(1.3, 1.9, 1);
+    zombie.scale.set(2.5, 2.5, 1);
     zombie.userData = {
       health: 35 + location.stars * 10,
       speed: 1.1 + location.stars * 0.08,
       attackTimer: 0,
       aiTickTimer: randomFloat(0, 0.25),
       chaseDirection: new THREE.Vector3(),
+      enemyTypeId: enemyType.id,
+      enemyTypeName: enemyType.name,
+      animator,
+      facing: "south",
       radius: 0.5,
     };
+    animator.holdFrame("idle_south", material, 0);
     scene.add(zombie);
     zombies.push(zombie);
   }
@@ -2700,15 +3205,19 @@ function animate() {
       renderer.render(scene, camera);
       return;
     }
+    updatePlayerActionTimers(dt);
     if (state.mode === "base") {
       updateBase(dt);
     } else if (state.mode === "mission") {
       updatePlayer(dt);
       updateOpeningDoors(dt);
-      updateZombies(dt);
+      if (!isPlayerInTerminalAction()) {
+        updateZombies(dt);
+        updateDeadZombies(dt);
+        findInteraction();
+      }
       updateCamera();
       updateFogOfWar();
-      findInteraction();
       updateHud();
     }
     updateDebugPanel();
@@ -2728,33 +3237,46 @@ function updatePlayer(dt) {
   const facing = getDirectionName(aimDirection);
   lastAimDirection = facing;
   const heldItem = getQuickbarItem();
+  const isMoving = movement.lengthSq() > 0;
+  const isRunning = isMoving && (keys.has("ShiftLeft") || keys.has("ShiftRight"));
 
-  if (movement.lengthSq() === 0) {
-    applyPlayerAnimationState({
-      stateName: getPlayerAnimationState({ isMoving: false, isRunning: false, heldItem }),
+  if (isPlayerActionMovementLocked()) {
+    playerFacingDirection = playerAction.facing || facing;
+    applyPlayerActionAnimation({
+      stateName: playerAction.name,
+      facing: playerAction.facing || facing,
+      dt,
+      distance: 0,
+    });
+    return;
+  }
+
+  if (!isMoving) {
+    const stateName = getLocomotionActionState({ isMoving, isRunning, isAiming, heldItem });
+    playerFacingDirection = facing;
+    runMoveDirection.lerp(aimDirection, 1 - Math.exp(-dt * 8));
+    if (runMoveDirection.lengthSq() > 0.01) runMoveDirection.normalize();
+    applyPlayerActionAnimation({
+      stateName,
       facing,
       dt,
       distance: 0,
     });
-    playerFacingDirection = facing;
-    runMoveDirection.lerp(aimDirection, 1 - Math.exp(-dt * 8));
-    if (runMoveDirection.lengthSq() > 0.01) runMoveDirection.normalize();
     return;
   }
 
-  const isRunning = keys.has("ShiftLeft") || keys.has("ShiftRight");
   const direction = isRunning ? getRunDirection(aimDirection, dt) : movement.clone().normalize();
   const movementDotFacing = direction.dot(aimDirection);
   const backpedalMultiplier = !isRunning && movementDotFacing < -0.35 ? 0.54 : 1;
   const walkSpeed = 3.9;
   const runSpeed = walkSpeed * 1.25;
   const speed = (isRunning ? runSpeed : walkSpeed) * backpedalMultiplier;
-  const animationFacing = isRunning ? getDirectionName(direction) : facing;
-  const stateName = getPlayerAnimationState({ isMoving: true, isRunning, heldItem });
+  const animationFacing = isAiming ? facing : isRunning ? getDirectionName(direction) : facing;
+  const stateName = getLocomotionActionState({ isMoving, isRunning, isAiming, heldItem });
   playerFacingDirection = animationFacing;
   const before = player.position.clone();
   moveWithSlide(player, direction.multiplyScalar(speed * dt), player.userData.radius);
-  applyPlayerAnimationState({
+  applyPlayerActionAnimation({
     stateName,
     facing: animationFacing,
     dt,
@@ -2762,57 +3284,127 @@ function updatePlayer(dt) {
   });
 }
 
-function getPlayerAnimationState({ isMoving, isRunning, heldItem }) {
-  if (isRunning) return PLAYER_ANIMATION_STATES.RUN;
-  if (!isAiming || !heldItem) return isMoving ? PLAYER_ANIMATION_STATES.WALK : PLAYER_ANIMATION_STATES.IDLE_BREATHING;
-  if (heldItem === "Handgun") {
-    return isMoving ? PLAYER_ANIMATION_STATES.WALK_AIMING_HANDGUN : PLAYER_ANIMATION_STATES.IDLE_AIMING_HANDGUN;
-  }
-  if (heldItem === "Shotgun") {
-    return isMoving ? PLAYER_ANIMATION_STATES.WALK_AIMING_SHOTGUN : PLAYER_ANIMATION_STATES.IDLE_AIMING_SHOTGUN;
-  }
-  if (isWeaponItem(heldItem)) {
-    return isMoving ? PLAYER_ANIMATION_STATES.WALK_AIMING_MELEE : PLAYER_ANIMATION_STATES.IDLE_AIMING_MELEE;
-  }
-  return isMoving ? PLAYER_ANIMATION_STATES.WALK : PLAYER_ANIMATION_STATES.IDLE_BREATHING;
+function createDefaultPlayerActionState() {
+  return {
+    name: PLAYER_ACTION_STATES.IDLE,
+    facing: "south",
+    locked: false,
+    lockTimer: 0,
+    elapsed: 0,
+    onComplete: null,
+  };
 }
 
-function applyPlayerAnimationState({ stateName, facing, dt, distance }) {
-  const clipName = getPlayerClipForState(stateName, facing);
+function setPlayerActionState(stateName, options = {}) {
+  const config = getPlayerActionConfig(stateName);
+  if (playerAction.locked && stateName === playerAction.name && options.locked === undefined && !options.immediate) {
+    playerAction.facing = options.facing || playerAction.facing || lastAimDirection;
+    if (player) player.userData.animationFacing = playerAction.facing;
+    return true;
+  }
+  if (playerAction.locked && !options.immediate) {
+    const activeConfig = getPlayerActionConfig(playerAction.name);
+    if ((activeConfig.priority || 0) > (config.priority || 0)) return false;
+  }
+  playerAction.name = stateName;
+  playerAction.facing = options.facing || playerAction.facing || lastAimDirection;
+  playerAction.locked = Boolean(options.locked);
+  playerAction.lockTimer = options.duration ?? (playerAction.locked ? config.duration || 0 : 0);
+  playerAction.elapsed = 0;
+  playerAction.onComplete = options.onComplete || null;
+  if (player) {
+    player.userData.animationState = playerAction.name;
+    player.userData.animationFacing = playerAction.facing;
+  }
+  return true;
+}
+
+function requestPlayerActionState(stateName, options = {}) {
+  const config = getPlayerActionConfig(stateName);
+  return setPlayerActionState(stateName, {
+    facing: options.facing || playerFacingDirection || lastAimDirection,
+    locked: options.locked ?? !config.loop,
+    duration: options.duration ?? config.duration,
+    onComplete: options.onComplete,
+    immediate: options.immediate,
+  });
+}
+
+function updatePlayerActionTimers(dt) {
+  attackCooldownTimer = Math.max(0, attackCooldownTimer - dt);
+  if (!playerAction.locked) return;
+  playerAction.elapsed += dt;
+  playerAction.lockTimer = Math.max(0, playerAction.lockTimer - dt);
+  if (playerAction.lockTimer > 0) return;
+  const onComplete = playerAction.onComplete;
+  playerAction.locked = false;
+  playerAction.onComplete = null;
+  if (onComplete) onComplete();
+}
+
+function getPlayerActionConfig(stateName) {
+  return PLAYER_ACTION_CONFIG[stateName] || PLAYER_ACTION_CONFIG[PLAYER_ACTION_STATES.IDLE];
+}
+
+function isPlayerActionMovementLocked() {
+  return Boolean(playerAction.locked && getPlayerActionConfig(playerAction.name).lockMovement);
+}
+
+function isPlayerInTerminalAction() {
+  return Boolean(playerAction.locked && getPlayerActionConfig(playerAction.name).terminal);
+}
+
+function getClipForPlayerAction(stateName, facing, options = {}) {
+  const direction = DIRECTIONS.includes(facing) ? facing : "south";
+  const clipGroup = ACTION_STATE_CLIP_GROUPS[stateName];
+  if (!clipGroup) return null;
+  const clipName = `${clipGroup}_${direction}`;
+  return playerAnimator?.hasClip(clipName) ? clipName : null;
+}
+
+function getActionAnimationDuration(stateName, facing, fallbackDuration) {
+  const direction = DIRECTIONS.includes(facing) ? facing : "south";
+  const clipGroup = ACTION_STATE_CLIP_GROUPS[stateName];
+  const clip = clipGroup ? playerAnimationClips[`${clipGroup}_${direction}`] : null;
+  if (!clip) return fallbackDuration;
+  return clip.frames * clip.frameDuration;
+}
+
+function getLocomotionActionState({ isMoving, isRunning, isAiming: aiming }) {
+  if (aiming) return PLAYER_ACTION_STATES.AIM;
+  if (isRunning) return PLAYER_ACTION_STATES.RUN;
+  if (isMoving) return PLAYER_ACTION_STATES.WALK;
+  return PLAYER_ACTION_STATES.IDLE;
+}
+
+function applyPlayerActionAnimation({ stateName, facing, dt, distance }) {
+  setPlayerActionState(stateName, { facing });
+  const clipName = getClipForPlayerAction(stateName, facing, { isMoving: distance > 0 });
+  if (!clipName) {
+    playerAnimator?.holdCurrentFrame();
+    player.userData.animationState = playerAction.name;
+    player.userData.animationClip = playerAnimator?.getActiveName() || null;
+    player.userData.activeWeapon = getQuickbarItem();
+    updateDebugAimMarker();
+    return;
+  }
   playerAnimator?.setClip(clipName, player.material);
   playerAnimator?.forceClipTexture(clipName, player.material);
-  player.userData.animationState = stateName;
+  player.userData.animationState = playerAction.name;
   player.userData.animationClip = playerAnimator?.getActiveName() || clipName;
   player.userData.activeWeapon = getQuickbarItem();
-  if (distance > 0) playerAnimator?.advanceByDistance(distance);
+  const config = getPlayerActionConfig(stateName);
+  const clipInfo = playerAnimator?.getClipInfo(clipName);
+  if (config.loop === false && clipInfo?.exists) {
+    const frame = Math.min(clipInfo.frames - 1, Math.floor((playerAction.elapsed || 0) / clipInfo.frameDuration));
+    playerAnimator?.holdFrame(clipName, player.material, frame);
+  } else if (distance > 0 && shouldAdvanceActionByDistance(stateName)) playerAnimator?.advanceByDistance(distance);
   else playerAnimator?.update(dt);
   updateDebugAimMarker();
 }
 
-function getPlayerClipForState(stateName, facing) {
-  const fallbackIdle = `idle_${facing}`;
-  const fallbackWalk = `walk_${facing}`;
-  const fallbackRun = `run_${facing}`;
-  const clipByState = {
-    [PLAYER_ANIMATION_STATES.IDLE_BREATHING]: fallbackIdle,
-    [PLAYER_ANIMATION_STATES.WALK]: fallbackWalk,
-    [PLAYER_ANIMATION_STATES.RUN]: fallbackRun,
-    [PLAYER_ANIMATION_STATES.IDLE_AIMING_HANDGUN]: getAimClipKey(false, facing),
-    [PLAYER_ANIMATION_STATES.WALK_AIMING_HANDGUN]: getAimClipKey(true, facing),
-    [PLAYER_ANIMATION_STATES.IDLE_AIMING_MELEE]: fallbackIdle,
-    [PLAYER_ANIMATION_STATES.WALK_AIMING_MELEE]: fallbackWalk,
-    [PLAYER_ANIMATION_STATES.IDLE_AIMING_SHOTGUN]: fallbackIdle,
-    [PLAYER_ANIMATION_STATES.WALK_AIMING_SHOTGUN]: fallbackWalk,
-    [PLAYER_ANIMATION_STATES.TAKING_DAMAGE]: fallbackIdle,
-    [PLAYER_ANIMATION_STATES.INTERACTING]: fallbackIdle,
-    [PLAYER_ANIMATION_STATES.PICK_UP_ITEM]: fallbackIdle,
-    [PLAYER_ANIMATION_STATES.DEATH]: fallbackIdle,
-  };
-  return clipByState[stateName] || fallbackIdle;
-}
-
-function getAimClipKey(isMoving, facingDirection) {
-  return `${isMoving ? "aim_walk" : "aim_idle"}_${facingDirection}`;
+function shouldAdvanceActionByDistance(stateName) {
+  return stateName === PLAYER_ACTION_STATES.WALK || stateName === PLAYER_ACTION_STATES.RUN || stateName === PLAYER_ACTION_STATES.AIM;
 }
 
 window.outbreakDebug = function outbreakDebug() {
@@ -2840,10 +3432,12 @@ function getDebugSnapshot() {
   const isMoving = movementKeys.some((code) => keys.has(code));
   const isRunning = keys.has("ShiftLeft") || keys.has("ShiftRight");
   const facing = getDirectionName(getMouseDirectionVector());
-  const expectedState = getPlayerAnimationState({ isMoving, isRunning, heldItem });
-  const expectedClip = getPlayerClipForState(expectedState, isRunning ? playerFacingDirection : facing);
+  const expectedState = playerAction.locked
+    ? playerAction.name
+    : getLocomotionActionState({ isMoving, isRunning, isAiming, heldItem });
+  const expectedClip = getClipForPlayerAction(expectedState, playerAction.locked ? playerAction.facing : isRunning ? playerFacingDirection : facing, { isMoving });
   const activeClipInfo = playerAnimator?.getActiveClipInfo() || null;
-  const expectedClipInfo = playerAnimator?.getClipInfo(expectedClip) || null;
+  const expectedClipInfo = expectedClip ? playerAnimator?.getClipInfo(expectedClip) || null : null;
   const mapSource = map?.source?.data?.currentSrc || map?.image?.currentSrc || map?.image?.src || map?.userData?.sourcePath || null;
   return {
     mode: state.mode,
@@ -2855,9 +3449,10 @@ function getDebugSnapshot() {
     facing,
     isMoving,
     isRunning,
+    playerAction: { ...playerAction, onComplete: Boolean(playerAction.onComplete) },
     expectedState,
     expectedClip,
-    aimDiagnosis: getAimDebugDiagnosis({ heldItem, expectedState, expectedClip, activeClipInfo, expectedClipInfo }),
+    animationDiagnosis: getAnimationDebugDiagnosis({ expectedState, expectedClip, activeClipInfo, expectedClipInfo }),
     animationState: player?.userData.animationState,
     animationClip: player?.userData.animationClip,
     activeClipInfo,
@@ -2870,12 +3465,9 @@ function getDebugSnapshot() {
   };
 }
 
-function getAimDebugDiagnosis({ heldItem, expectedState, expectedClip, activeClipInfo, expectedClipInfo }) {
-  if (state.mode !== "mission") return "Aim animations only update during missions.";
-  if (!isAiming) return "Right mouse is not held, so the player stays in normal idle/walk/run animation.";
-  if (!heldItem) return "No active held item. Press 1 or 2 before aiming.";
-  if (heldItem !== "Handgun") return `Active held item is ${heldItem}; handgun aim sheets are not expected.`;
-  if (!expectedClipInfo?.exists) return `Expected handgun aim clip ${expectedClip} is not registered.`;
+function getAnimationDebugDiagnosis({ expectedState, expectedClip, activeClipInfo, expectedClipInfo }) {
+  if (!expectedClip) return `${expectedState} currently has no sprite sheet assigned.`;
+  if (!expectedClipInfo?.exists) return `Expected clip ${expectedClip} is not registered for ${expectedState}.`;
   if (!expectedClipInfo.loaded) return `Expected clip ${expectedClip} exists, but its image has not loaded yet.`;
   if (player?.userData.animationState !== expectedState) {
     return `Expected state ${expectedState}, but player reports ${player?.userData.animationState || "none"}.`;
@@ -2924,7 +3516,7 @@ function updateDebugAimMarker() {
     scene.add(debugAimMarker);
   }
   const activeClip = playerAnimator?.getActiveName() || "";
-  debugAimMarker.visible = activeClip.startsWith("aim_");
+  debugAimMarker.visible = playerAction.name === PLAYER_ACTION_STATES.AIM || activeClip.startsWith("firearm_aim_");
   debugAimMarker.position.copy(player.position);
   debugAimMarker.position.y += 1.55;
 }
@@ -2977,6 +3569,7 @@ function updateZombies(dt) {
   for (const zombie of zombies) {
     const toPlayer = player.position.clone().sub(zombie.position);
     const distance = toPlayer.length();
+    let movedDistance = 0;
     zombie.userData.attackTimer -= dt;
     zombie.userData.aiTickTimer -= dt;
     if (distance < 10) {
@@ -2985,14 +3578,68 @@ function updateZombies(dt) {
         zombie.userData.chaseDirection.copy(toPlayer.normalize());
       }
       if (zombie.userData.chaseDirection.lengthSq() > 0.01) {
+        const before = zombie.position.clone();
         moveWithSlide(zombie, zombie.userData.chaseDirection.clone().multiplyScalar(zombie.userData.speed * dt), zombie.userData.radius);
+        movedDistance = zombie.position.distanceTo(before);
+        zombie.userData.facing = getDirectionName(zombie.userData.chaseDirection);
       }
     }
+    updateZombieAnimation(zombie, dt, movedDistance);
     if (distance < 1.1 && zombie.userData.attackTimer <= 0) {
       zombie.userData.attackTimer = 1.1;
       state.health = Math.max(0, state.health - 8);
-      if (state.health <= 0) endRun(false);
+      if (state.health <= 0) {
+        endRun(false);
+        break;
+      }
     }
+  }
+}
+
+function updateZombieAnimation(zombie, dt, distance) {
+  const animator = zombie.userData.animator;
+  if (!animator) return;
+  if (zombie.userData.dead) return;
+  const stateName = distance > 0.002 ? "walk" : "idle";
+  const facing = zombie.userData.facing || "south";
+  const clipName = `${stateName}_${DIRECTIONS.includes(facing) ? facing : "south"}`;
+  animator.setClip(clipName, zombie.material);
+  if (distance > 0.002) animator.advanceByDistance(distance * 0.72);
+  else animator.update(dt);
+  zombie.userData.animationClip = animator.getActiveName();
+}
+
+function killZombie(zombie) {
+  if (!zombie || zombie.userData.dead) return;
+  zombies = zombies.filter((item) => item !== zombie);
+  zombie.userData.dead = true;
+  zombie.userData.radius = 0;
+  zombie.userData.chaseDirection.set(0, 0, 0);
+  zombie.userData.deathTimer = 0;
+  zombie.userData.deathFrame = 0;
+  zombie.userData.facing = zombie.userData.facing || getDirectionName(zombie.position.clone().sub(player.position).setY(0));
+  zombie.userData.deathClipName = `death_${DIRECTIONS.includes(zombie.userData.facing) ? zombie.userData.facing : "south"}`;
+  zombie.material.color.set("#ffffff");
+  zombie.userData.animator?.holdFrame(zombie.userData.deathClipName, zombie.material, 0);
+  zombie.userData.animationClip = zombie.userData.deathClipName;
+  if (!deadZombies.includes(zombie)) deadZombies.push(zombie);
+}
+
+function updateDeadZombies(dt) {
+  for (const zombie of deadZombies) {
+    const animator = zombie.userData.animator;
+    const clipName = zombie.userData.deathClipName || "death_south";
+    const clipInfo = animator?.getClipInfo(clipName);
+    if (!animator || !clipInfo?.exists) continue;
+    if (zombie.userData.deathComplete) {
+      animator.holdFrame(clipName, zombie.material, Math.max(0, clipInfo.frames - 1));
+      continue;
+    }
+    zombie.userData.deathTimer += dt;
+    const frame = Math.min(clipInfo.frames - 1, Math.floor(zombie.userData.deathTimer / clipInfo.frameDuration));
+    zombie.userData.deathFrame = frame;
+    animator.holdFrame(clipName, zombie.material, frame);
+    if (frame >= clipInfo.frames - 1) zombie.userData.deathComplete = true;
   }
 }
 
@@ -3009,7 +3656,7 @@ function updateFogOfWar() {
     if (room.fogTile) room.fogTile.visible = !visible;
   }
 
-  for (const node of [...lootNodes, ...zombies, ...exits]) {
+  for (const node of [...lootNodes, ...zombies, ...deadZombies, ...exits]) {
     node.visible = isPointVisibleFromPlayer(node.position);
   }
 
@@ -3117,33 +3764,62 @@ function findInteraction() {
 
 function interact() {
   if (!interactTarget || state.mode !== "mission") return;
+  if (isPlayerActionMovementLocked()) return;
   if (lootNodes.includes(interactTarget)) {
-    if (interactTarget.userData.item === "Key") {
-      state.keys += 1;
-    } else if (addItemToInventory(interactTarget.userData.item, getItem(interactTarget.userData.item).ammoQty || 1)) {
-      const qty = getItem(interactTarget.userData.item).ammoQty || 1;
-      showPrompt(`Picked up ${qty > 1 ? `${qty}x ` : ""}${getItemLabel(interactTarget.userData.item)}`);
-    } else {
-      showPrompt("Inventory full. Item left on the floor.");
-      return;
-    }
-    scene.remove(interactTarget);
-    lootNodes = lootNodes.filter((node) => node !== interactTarget);
+    const lootTarget = interactTarget;
+    const facing = getMouseFacingDirection();
+    requestPlayerActionState(PLAYER_ACTION_STATES.PICKUP, {
+      facing,
+      duration: getActionAnimationDuration(PLAYER_ACTION_STATES.PICKUP, facing, getPlayerActionConfig(PLAYER_ACTION_STATES.PICKUP).duration),
+      onComplete: () => completePickupInteraction(lootTarget),
+    });
   } else if (doorNodes.includes(interactTarget)) {
-    if (interactTarget.userData.locked) {
-      if (state.keys <= 0) return;
-      state.keys -= 1;
-      interactTarget.userData.locked = false;
-      lockedDoors = lockedDoors.filter((node) => node !== interactTarget);
-    }
-    toggleDoor(interactTarget);
+    const doorTarget = interactTarget;
+    const requiresWork = doorTarget.userData.locked;
+    requestPlayerActionState(requiresWork ? PLAYER_ACTION_STATES.WORK : PLAYER_ACTION_STATES.INTERACT, {
+      facing: getMouseFacingDirection(),
+      duration: requiresWork ? 1.15 : 0.38,
+      onComplete: () => completeDoorInteraction(doorTarget),
+    });
   } else if (exits.includes(interactTarget)) {
     endRun(true);
   }
 }
 
+function completePickupInteraction(target) {
+  if (!lootNodes.includes(target)) return;
+  if (target.userData.item === "Key") {
+    state.keys += 1;
+  } else if (addItemToInventory(target.userData.item, getItem(target.userData.item).ammoQty || 1)) {
+    const qty = getItem(target.userData.item).ammoQty || 1;
+    showPrompt(`Picked up ${qty > 1 ? `${qty}x ` : ""}${getItemLabel(target.userData.item)}`);
+  } else {
+    showPrompt("Inventory full. Item left on the floor.");
+    return;
+  }
+  scene.remove(target);
+  lootNodes = lootNodes.filter((node) => node !== target);
+  updateHud();
+}
+
+function completeDoorInteraction(target) {
+  if (!doorNodes.includes(target)) return;
+  if (target.userData.locked) {
+    if (state.keys <= 0) {
+      showPrompt("Locked door. Find a key.");
+      return;
+    }
+    state.keys -= 1;
+    target.userData.locked = false;
+    lockedDoors = lockedDoors.filter((node) => node !== target);
+  }
+  toggleDoor(target);
+  updateHud();
+}
+
 function attack() {
   if (state.mode !== "mission" || !isAiming) return;
+  if (isPlayerActionMovementLocked() || attackCooldownTimer > 0) return;
   const heldItem = getQuickbarItem();
   if (!heldItem || !isWeaponItem(heldItem)) {
     showPrompt("Press 1 or 2 to ready a weapon.");
@@ -3155,6 +3831,13 @@ function attack() {
     showPrompt(`Magazine empty. Press R to reload ${getItemLabel(heldItem)}.`);
     return;
   }
+  const actionState = getAttackActionState(heldItem);
+  const actionDuration = ranged ? heldData.fireRate || 0.35 : heldData.attackSpeed || 0.45;
+  attackCooldownTimer = actionDuration;
+  requestPlayerActionState(actionState, {
+    facing: getMouseFacingDirection(),
+    duration: Math.min(0.9, Math.max(0.18, actionDuration * 0.82)),
+  });
   if (ranged) state.magazines[heldItem] = getMagazineAmmo(heldItem) - 1;
   raycaster.setFromCamera(pointer, camera);
   const hit = raycaster.intersectObject(floorPlane)[0];
@@ -3179,10 +3862,11 @@ function attack() {
   if (!best) return;
   best.userData.health -= damage;
   best.material.color.set("#c94d46");
-  window.setTimeout(() => best.material?.color.set("#8fb06e"), 90);
+  window.setTimeout(() => {
+    if (!best.userData.dead) best.material?.color.set("#ffffff");
+  }, 90);
   if (best.userData.health <= 0) {
-    scene.remove(best);
-    zombies = zombies.filter((zombie) => zombie !== best);
+    killZombie(best);
   }
   updateHud();
 }
@@ -3219,6 +3903,14 @@ function reloadHeldWeapon() {
 }
 
 function endRun(extracted) {
+  if (state.mode !== "mission") return;
+  requestPlayerActionState(extracted ? PLAYER_ACTION_STATES.VICTORY : PLAYER_ACTION_STATES.DEATH, {
+    facing: playerFacingDirection || lastAimDirection,
+    onComplete: () => finishRun(extracted),
+  });
+}
+
+function finishRun(extracted) {
   state.mode = "ended";
   if (extracted) {
     const recovered = state.inventory.map((entry) => `${getInventoryEntryQty(entry) > 1 ? `${getInventoryEntryQty(entry)}x ` : ""}${getInventoryEntryName(entry)}`);
@@ -3228,7 +3920,12 @@ function endRun(extracted) {
     state.inventory = [];
   } else {
     state.inventory = [];
-    state.magazines = { Handgun: 15, Shotgun: 0 };
+    state.magazines = {
+      Handgun: 15,
+      shotgun: 0,
+      "submachine-gun": 0,
+      "assault rifle": 0,
+    };
     state.health = 100;
     ui.runEndTitle.textContent = "You Died";
     ui.runEndText.textContent = "You woke up back at base. Carried gear and loot were lost.";
@@ -3239,6 +3936,9 @@ function endRun(extracted) {
 function returnToBase() {
   state.mode = "base";
   state.health = Math.max(state.health, 45);
+  attackCooldownTimer = 0;
+  playerAction = createDefaultPlayerActionState();
+  isAiming = false;
   promptEl.classList.add("hidden");
   missionHud.classList.add("hidden");
   weaponHud.classList.add("hidden");

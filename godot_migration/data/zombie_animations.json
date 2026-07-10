@@ -1,0 +1,338 @@
+{
+  "civilian_zombie_idle_north": {
+    "id": "civilian_zombie_idle_north",
+    "sheet": "res://assets/zombie_idle_north_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "civilian_zombie_walk_north": {
+    "id": "civilian_zombie_walk_north",
+    "sheet": "res://assets/zombie_walk_north_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "civilian_zombie_death_north": {
+    "id": "civilian_zombie_death_north",
+    "sheet": "res://assets/zombie_death_north_sheet.png",
+    "frames": 13,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "dark_civilian_zombie_idle_north": {
+    "id": "dark_civilian_zombie_idle_north",
+    "sheet": "res://assets/zombie_dark_idle_north_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "dark_civilian_zombie_walk_north": {
+    "id": "dark_civilian_zombie_walk_north",
+    "sheet": "res://assets/zombie_dark_walk_north_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "dark_civilian_zombie_death_north": {
+    "id": "dark_civilian_zombie_death_north",
+    "sheet": "res://assets/zombie_dark_death_north_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "civilian_zombie_idle_north_east": {
+    "id": "civilian_zombie_idle_north_east",
+    "sheet": "res://assets/zombie_idle_north_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "civilian_zombie_walk_north_east": {
+    "id": "civilian_zombie_walk_north_east",
+    "sheet": "res://assets/zombie_walk_north_east_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "civilian_zombie_death_north_east": {
+    "id": "civilian_zombie_death_north_east",
+    "sheet": "res://assets/zombie_death_north_east_sheet.png",
+    "frames": 13,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "dark_civilian_zombie_idle_north_east": {
+    "id": "dark_civilian_zombie_idle_north_east",
+    "sheet": "res://assets/zombie_dark_idle_north_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "dark_civilian_zombie_walk_north_east": {
+    "id": "dark_civilian_zombie_walk_north_east",
+    "sheet": "res://assets/zombie_dark_walk_north_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "dark_civilian_zombie_death_north_east": {
+    "id": "dark_civilian_zombie_death_north_east",
+    "sheet": "res://assets/zombie_dark_death_north_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "civilian_zombie_idle_east": {
+    "id": "civilian_zombie_idle_east",
+    "sheet": "res://assets/zombie_idle_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "civilian_zombie_walk_east": {
+    "id": "civilian_zombie_walk_east",
+    "sheet": "res://assets/zombie_walk_east_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "civilian_zombie_death_east": {
+    "id": "civilian_zombie_death_east",
+    "sheet": "res://assets/zombie_death_east_sheet.png",
+    "frames": 13,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "dark_civilian_zombie_idle_east": {
+    "id": "dark_civilian_zombie_idle_east",
+    "sheet": "res://assets/zombie_dark_idle_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "dark_civilian_zombie_walk_east": {
+    "id": "dark_civilian_zombie_walk_east",
+    "sheet": "res://assets/zombie_dark_walk_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "dark_civilian_zombie_death_east": {
+    "id": "dark_civilian_zombie_death_east",
+    "sheet": "res://assets/zombie_dark_death_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "civilian_zombie_idle_south_east": {
+    "id": "civilian_zombie_idle_south_east",
+    "sheet": "res://assets/zombie_idle_south_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "civilian_zombie_walk_south_east": {
+    "id": "civilian_zombie_walk_south_east",
+    "sheet": "res://assets/zombie_walk_south_east_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "civilian_zombie_death_south_east": {
+    "id": "civilian_zombie_death_south_east",
+    "sheet": "res://assets/zombie_death_south_east_sheet.png",
+    "frames": 13,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "dark_civilian_zombie_idle_south_east": {
+    "id": "dark_civilian_zombie_idle_south_east",
+    "sheet": "res://assets/zombie_dark_idle_south_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "dark_civilian_zombie_walk_south_east": {
+    "id": "dark_civilian_zombie_walk_south_east",
+    "sheet": "res://assets/zombie_dark_walk_south_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "dark_civilian_zombie_death_south_east": {
+    "id": "dark_civilian_zombie_death_south_east",
+    "sheet": "res://assets/zombie_dark_death_south_east_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "civilian_zombie_idle_south": {
+    "id": "civilian_zombie_idle_south",
+    "sheet": "res://assets/zombie_idle_south_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "civilian_zombie_walk_south": {
+    "id": "civilian_zombie_walk_south",
+    "sheet": "res://assets/zombie_walk_south_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "civilian_zombie_death_south": {
+    "id": "civilian_zombie_death_south",
+    "sheet": "res://assets/zombie_death_south_sheet.png",
+    "frames": 13,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "dark_civilian_zombie_idle_south": {
+    "id": "dark_civilian_zombie_idle_south",
+    "sheet": "res://assets/zombie_dark_idle_south_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "dark_civilian_zombie_walk_south": {
+    "id": "dark_civilian_zombie_walk_south",
+    "sheet": "res://assets/zombie_dark_walk_south_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "dark_civilian_zombie_death_south": {
+    "id": "dark_civilian_zombie_death_south",
+    "sheet": "res://assets/zombie_dark_death_south_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "civilian_zombie_idle_south_west": {
+    "id": "civilian_zombie_idle_south_west",
+    "sheet": "res://assets/zombie_idle_south_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "civilian_zombie_walk_south_west": {
+    "id": "civilian_zombie_walk_south_west",
+    "sheet": "res://assets/zombie_walk_south_west_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "civilian_zombie_death_south_west": {
+    "id": "civilian_zombie_death_south_west",
+    "sheet": "res://assets/zombie_death_south_west_sheet.png",
+    "frames": 13,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "dark_civilian_zombie_idle_south_west": {
+    "id": "dark_civilian_zombie_idle_south_west",
+    "sheet": "res://assets/zombie_dark_idle_south_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "dark_civilian_zombie_walk_south_west": {
+    "id": "dark_civilian_zombie_walk_south_west",
+    "sheet": "res://assets/zombie_dark_walk_south_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "dark_civilian_zombie_death_south_west": {
+    "id": "dark_civilian_zombie_death_south_west",
+    "sheet": "res://assets/zombie_dark_death_south_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "civilian_zombie_idle_west": {
+    "id": "civilian_zombie_idle_west",
+    "sheet": "res://assets/zombie_idle_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "civilian_zombie_walk_west": {
+    "id": "civilian_zombie_walk_west",
+    "sheet": "res://assets/zombie_walk_west_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "civilian_zombie_death_west": {
+    "id": "civilian_zombie_death_west",
+    "sheet": "res://assets/zombie_death_west_sheet.png",
+    "frames": 13,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "dark_civilian_zombie_idle_west": {
+    "id": "dark_civilian_zombie_idle_west",
+    "sheet": "res://assets/zombie_dark_idle_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "dark_civilian_zombie_walk_west": {
+    "id": "dark_civilian_zombie_walk_west",
+    "sheet": "res://assets/zombie_dark_walk_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "dark_civilian_zombie_death_west": {
+    "id": "dark_civilian_zombie_death_west",
+    "sheet": "res://assets/zombie_dark_death_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "civilian_zombie_idle_north_west": {
+    "id": "civilian_zombie_idle_north_west",
+    "sheet": "res://assets/zombie_idle_north_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "civilian_zombie_walk_north_west": {
+    "id": "civilian_zombie_walk_north_west",
+    "sheet": "res://assets/zombie_walk_north_west_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "civilian_zombie_death_north_west": {
+    "id": "civilian_zombie_death_north_west",
+    "sheet": "res://assets/zombie_death_north_west_sheet.png",
+    "frames": 13,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "dark_civilian_zombie_idle_north_west": {
+    "id": "dark_civilian_zombie_idle_north_west",
+    "sheet": "res://assets/zombie_dark_idle_north_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.32,
+    "fps": 3.125
+  },
+  "dark_civilian_zombie_walk_north_west": {
+    "id": "dark_civilian_zombie_walk_north_west",
+    "sheet": "res://assets/zombie_dark_walk_north_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.16,
+    "fps": 6.25
+  },
+  "dark_civilian_zombie_death_north_west": {
+    "id": "dark_civilian_zombie_death_north_west",
+    "sheet": "res://assets/zombie_dark_death_north_west_sheet.png",
+    "frames": 1,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  }
+}

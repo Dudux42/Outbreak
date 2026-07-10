@@ -167,116 +167,60 @@
     "frame_duration_seconds": 0.11,
     "fps": 9.091
   },
-  "aim_idle_north": {
-    "id": "aim_idle_north",
-    "sheet": "res://assets/player_handgun_north_sheet.png",
+  "firearm_aim_north": {
+    "id": "firearm_aim_north",
+    "sheet": "res://assets/player_firearm_aim_north_sheet.png",
     "frames": 8,
     "frame_duration_seconds": 0.12,
     "fps": 8.333
   },
-  "aim_walk_north": {
-    "id": "aim_walk_north",
-    "sheet": "res://assets/player_handgun_walk_north_sheet.png",
-    "frames": 8,
-    "frame_duration_seconds": 0.2,
-    "fps": 5
-  },
-  "aim_idle_north_east": {
-    "id": "aim_idle_north_east",
-    "sheet": "res://assets/player_handgun_north_east_sheet.png",
+  "firearm_aim_north_east": {
+    "id": "firearm_aim_north_east",
+    "sheet": "res://assets/player_firearm_aim_north_east_sheet.png",
     "frames": 8,
     "frame_duration_seconds": 0.12,
     "fps": 8.333
   },
-  "aim_walk_north_east": {
-    "id": "aim_walk_north_east",
-    "sheet": "res://assets/player_handgun_walk_north_east_sheet.png",
-    "frames": 8,
-    "frame_duration_seconds": 0.2,
-    "fps": 5
-  },
-  "aim_idle_east": {
-    "id": "aim_idle_east",
-    "sheet": "res://assets/player_handgun_east_sheet.png",
+  "firearm_aim_east": {
+    "id": "firearm_aim_east",
+    "sheet": "res://assets/player_firearm_aim_east_sheet.png",
     "frames": 8,
     "frame_duration_seconds": 0.12,
     "fps": 8.333
   },
-  "aim_walk_east": {
-    "id": "aim_walk_east",
-    "sheet": "res://assets/player_handgun_walk_east_sheet.png",
-    "frames": 8,
-    "frame_duration_seconds": 0.2,
-    "fps": 5
-  },
-  "aim_idle_south_east": {
-    "id": "aim_idle_south_east",
-    "sheet": "res://assets/player_handgun_south_east_sheet.png",
+  "firearm_aim_south_east": {
+    "id": "firearm_aim_south_east",
+    "sheet": "res://assets/player_firearm_aim_south_east_sheet.png",
     "frames": 8,
     "frame_duration_seconds": 0.12,
     "fps": 8.333
   },
-  "aim_walk_south_east": {
-    "id": "aim_walk_south_east",
-    "sheet": "res://assets/player_handgun_walk_south_east_sheet.png",
-    "frames": 8,
-    "frame_duration_seconds": 0.2,
-    "fps": 5
-  },
-  "aim_idle_south": {
-    "id": "aim_idle_south",
-    "sheet": "res://assets/player_handgun_south_sheet.png",
+  "firearm_aim_south": {
+    "id": "firearm_aim_south",
+    "sheet": "res://assets/player_firearm_aim_south_sheet.png",
     "frames": 8,
     "frame_duration_seconds": 0.12,
     "fps": 8.333
   },
-  "aim_walk_south": {
-    "id": "aim_walk_south",
-    "sheet": "res://assets/player_handgun_walk_south_sheet.png",
-    "frames": 8,
-    "frame_duration_seconds": 0.2,
-    "fps": 5
-  },
-  "aim_idle_south_west": {
-    "id": "aim_idle_south_west",
-    "sheet": "res://assets/player_handgun_south_west_sheet.png",
+  "firearm_aim_south_west": {
+    "id": "firearm_aim_south_west",
+    "sheet": "res://assets/player_firearm_aim_south_west_sheet.png",
     "frames": 8,
     "frame_duration_seconds": 0.12,
     "fps": 8.333
   },
-  "aim_walk_south_west": {
-    "id": "aim_walk_south_west",
-    "sheet": "res://assets/player_handgun_walk_south_west_sheet.png",
-    "frames": 8,
-    "frame_duration_seconds": 0.2,
-    "fps": 5
-  },
-  "aim_idle_west": {
-    "id": "aim_idle_west",
-    "sheet": "res://assets/player_handgun_west_sheet.png",
+  "firearm_aim_west": {
+    "id": "firearm_aim_west",
+    "sheet": "res://assets/player_firearm_aim_west_sheet.png",
     "frames": 8,
     "frame_duration_seconds": 0.12,
     "fps": 8.333
   },
-  "aim_walk_west": {
-    "id": "aim_walk_west",
-    "sheet": "res://assets/player_handgun_walk_west_sheet.png",
-    "frames": 8,
-    "frame_duration_seconds": 0.2,
-    "fps": 5
-  },
-  "aim_idle_north_west": {
-    "id": "aim_idle_north_west",
-    "sheet": "res://assets/player_handgun_north_west_sheet.png",
+  "firearm_aim_north_west": {
+    "id": "firearm_aim_north_west",
+    "sheet": "res://assets/player_firearm_aim_north_west_sheet.png",
     "frames": 8,
     "frame_duration_seconds": 0.12,
     "fps": 8.333
-  },
-  "aim_walk_north_west": {
-    "id": "aim_walk_north_west",
-    "sheet": "res://assets/player_handgun_walk_north_west_sheet.png",
-    "frames": 8,
-    "frame_duration_seconds": 0.2,
-    "fps": 5
   }
 }

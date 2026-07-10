@@ -1,63 +1,350 @@
 {
-  "Spare Parts": {
-    "id": "Spare Parts",
-    "label": "Spare Parts",
-    "texture": "spareParts",
-    "icon": "res://assets/items/spare_parts.png"
+  "Apple": {
+    "id": "Apple",
+    "label": "Apple",
+    "texture": "apple",
+    "tags": [
+      "Food"
+    ],
+    "healHp": 12,
+    "icon": "res://assets/items/apple.png"
   },
-  "Kitchen Knife": {
-    "id": "Kitchen Knife",
-    "slot": "primary",
-    "label": "Kitchen Knife",
-    "texture": "kitchenKnife",
-    "damage": 18,
-    "reach": 1.45,
-    "attackSpeed": 0.45,
-    "staminaCost": 8,
-    "knockback": 0.35,
-    "icon": "res://assets/items/kitchen_knife.png"
+  "Banana": {
+    "id": "Banana",
+    "label": "Banana",
+    "texture": "banana",
+    "tags": [
+      "Food"
+    ],
+    "healHp": 10,
+    "icon": "res://assets/items/banana.png"
   },
-  "Bandages": {
-    "id": "Bandages",
-    "label": "Bandages",
+  "Orange": {
+    "id": "Orange",
+    "label": "Orange",
+    "texture": "orange",
+    "tags": [
+      "Food"
+    ],
+    "healHp": 10,
+    "icon": "res://assets/items/apple.png"
+  },
+  "Juice Box": {
+    "id": "Juice Box",
+    "label": "Juice Box",
+    "texture": "juiceBox",
+    "tags": [
+      "Drink"
+    ],
+    "healHp": 8,
+    "icon": "res://assets/items/juice_box.png"
+  },
+  "soda": {
+    "id": "soda",
+    "label": "Soda",
+    "texture": "sodaCan",
+    "tags": [
+      "Drink"
+    ],
+    "healHp": 5,
+    "icon": "res://assets/items/soda_can.png"
+  },
+  "water bottle": {
+    "id": "water bottle",
+    "label": "Water Bottle",
+    "texture": "waterBottle",
+    "tags": [
+      "Drink"
+    ],
+    "healHp": 10,
+    "icon": "res://assets/items/water_bottle.png"
+  },
+  "bandage": {
+    "id": "bandage",
+    "label": "Bandage",
     "texture": "bandages",
+    "tags": [
+      "Aid"
+    ],
     "healHp": 25,
     "icon": "res://assets/items/bandages.png"
   },
-  "Antibiotics Bottle": {
-    "id": "Antibiotics Bottle",
-    "label": "Antibiotics Bottle",
-    "texture": "antibioticsBottle",
-    "healHp": 40,
-    "cureInfection": true,
-    "icon": "res://assets/items/antibiotics_bottle.png"
-  },
-  "Rubbing Alcohol Bottle": {
-    "id": "Rubbing Alcohol Bottle",
-    "label": "Rubbing Alcohol Bottle",
+  "rubbing alcohol": {
+    "id": "rubbing alcohol",
+    "label": "Rubbing Alcohol",
     "texture": "rubbingAlcoholBottle",
+    "tags": [
+      "Aid"
+    ],
     "healHp": 5,
     "disinfect": true,
     "icon": "res://assets/items/rubbing_alcohol_bottle.png"
   },
-  "Combat Knife": {
-    "id": "Combat Knife",
+  "first aid kit": {
+    "id": "first aid kit",
+    "label": "First Aid Kit",
+    "texture": "medKit",
+    "tags": [
+      "Aid"
+    ],
+    "healHp": 55,
+    "icon": "res://assets/items/bandages.png"
+  },
+  "painkillers": {
+    "id": "painkillers",
+    "label": "Painkillers",
+    "texture": "painkillers",
+    "tags": [
+      "Aid"
+    ],
+    "healHp": 15,
+    "icon": "res://assets/items/antibiotics_bottle.png"
+  },
+  "antibiotics": {
+    "id": "antibiotics",
+    "label": "Antibiotics",
+    "texture": "antibioticsBottle",
+    "tags": [
+      "Aid"
+    ],
+    "healHp": 35,
+    "cureInfection": true,
+    "icon": "res://assets/items/antibiotics_bottle.png"
+  },
+  "can of beans": {
+    "id": "can of beans",
+    "label": "Can of Beans",
+    "texture": "canOfBeans",
+    "tags": [
+      "Food"
+    ],
+    "healHp": 18,
+    "icon": "res://assets/items/can_of_beans.png"
+  },
+  "can of tuna": {
+    "id": "can of tuna",
+    "label": "Can of Tuna",
+    "texture": "canOfTuna",
+    "tags": [
+      "Food"
+    ],
+    "healHp": 20,
+    "icon": "res://assets/items/can_of_tuna.png"
+  },
+  "can of spam": {
+    "id": "can of spam",
+    "label": "Can of Spam",
+    "texture": "canOfSpam",
+    "tags": [
+      "Food"
+    ],
+    "healHp": 20,
+    "icon": "res://assets/items/can_of_beans.png"
+  },
+  "Gears": {
+    "id": "Gears",
+    "label": "Gears",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "nails": {
+    "id": "nails",
+    "label": "Nails",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "bolts": {
+    "id": "bolts",
+    "label": "Bolts",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "wooden stick": {
+    "id": "wooden stick",
+    "label": "Wooden Stick",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "metal bar": {
+    "id": "metal bar",
+    "label": "Metal Bar",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "metal sheet": {
+    "id": "metal sheet",
+    "label": "Metal Sheet",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "battery": {
+    "id": "battery",
+    "label": "Battery",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "wire": {
+    "id": "wire",
+    "label": "Wire",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "hammer": {
+    "id": "hammer",
     "slot": "primary",
-    "label": "Combat Knife",
-    "texture": "combatKnife",
-    "damage": 24,
-    "reach": 1.55,
-    "attackSpeed": 0.4,
-    "staminaCost": 9,
-    "knockback": 0.4,
-    "icon": "res://assets/items/combat_knife.png"
+    "label": "Hammer",
+    "texture": "hammer",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "1 handed",
+      "combat": "Melee"
+    },
+    "weaponKind": "melee",
+    "hands": 1,
+    "damage": 32,
+    "reach": 1.75,
+    "attackSpeed": 0.75,
+    "staminaCost": 15,
+    "knockback": 0.75,
+    "icon": "res://assets/items/hammer.png"
+  },
+  "crowbar": {
+    "id": "crowbar",
+    "slot": "primary",
+    "label": "Crowbar",
+    "texture": "crowbar",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "2 handed",
+      "combat": "Melee"
+    },
+    "weaponKind": "melee",
+    "hands": 2,
+    "damage": 38,
+    "reach": 1.85,
+    "attackSpeed": 0.85,
+    "staminaCost": 17,
+    "knockback": 0.85,
+    "icon": "res://assets/items/crowbar.png"
+  },
+  "axe": {
+    "id": "axe",
+    "slot": "primary",
+    "label": "Axe",
+    "texture": "axe",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "2 handed",
+      "combat": "Melee"
+    },
+    "weaponKind": "melee",
+    "hands": 2,
+    "damage": 52,
+    "reach": 1.95,
+    "attackSpeed": 1,
+    "staminaCost": 22,
+    "knockback": 1,
+    "icon": "res://assets/items/axe.png"
+  },
+  "screwdriver": {
+    "id": "screwdriver",
+    "label": "Screwdriver",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "RAM": {
+    "id": "RAM",
+    "label": "RAM",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "GPU": {
+    "id": "GPU",
+    "label": "GPU",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "processor": {
+    "id": "processor",
+    "label": "Processor",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "motherboard": {
+    "id": "motherboard",
+    "label": "Motherboard",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "PSU": {
+    "id": "PSU",
+    "label": "PSU",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
   },
   "Handgun": {
     "id": "Handgun",
     "slot": "sidearm",
     "label": "Handgun",
     "texture": "handgun",
-    "ammoType": "Handgun Ammo",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "1 handed",
+      "combat": "Firearm"
+    },
+    "weaponKind": "firearm",
+    "hands": 1,
+    "ammoType": "handgun ammo",
     "magazineSize": 15,
     "reserveAmmo": 30,
     "damage": 45,
@@ -65,12 +352,21 @@
     "fireRate": 0.35,
     "icon": "res://assets/items/handgun.png"
   },
-  "Shotgun": {
-    "id": "Shotgun",
+  "shotgun": {
+    "id": "shotgun",
     "slot": "primary",
     "label": "Shotgun",
     "texture": "shotgun",
-    "ammoType": "Shotgun Ammo",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "2 handed",
+      "combat": "Firearm"
+    },
+    "weaponKind": "firearm",
+    "hands": 2,
+    "ammoType": "shotgun shells",
     "magazineSize": 6,
     "reserveAmmo": 18,
     "damage": 65,
@@ -80,142 +376,112 @@
     "fireRate": 0.9,
     "icon": "res://assets/items/shotgun.png"
   },
-  "Body Armor Level 1": {
-    "id": "Body Armor Level 1",
-    "slot": "armor",
-    "label": "Body Armor Lv.1",
-    "armorClass": 1,
-    "texture": "bodyArmorLevel1",
-    "icon": "res://assets/items/body_armor_level_1.png"
-  },
-  "Body Armor Level 2": {
-    "id": "Body Armor Level 2",
-    "slot": "armor",
-    "label": "Body Armor Lv.2",
-    "armorClass": 2,
-    "texture": "bodyArmorLevel2",
-    "icon": "res://assets/items/body_armor_level_2.png"
-  },
-  "Body Armor Level 3": {
-    "id": "Body Armor Level 3",
-    "slot": "armor",
-    "label": "Police Vest",
-    "armorClass": 3,
-    "texture": "bodyArmorLevel3",
-    "icon": "res://assets/items/body_armor_level_3.png"
-  },
-  "Body Armor Level 4": {
-    "id": "Body Armor Level 4",
-    "slot": "armor",
-    "label": "Military Vest",
-    "armorClass": 4,
-    "texture": "bodyArmorLevel4",
-    "icon": "res://assets/items/body_armor_level_4.png"
-  },
-  "Water Bottle": {
-    "id": "Water Bottle",
-    "label": "Water Bottle",
-    "texture": "waterBottle",
-    "healHp": 10,
-    "icon": "res://assets/items/water_bottle.png"
-  },
-  "Soda Can": {
-    "id": "Soda Can",
-    "label": "Soda Can",
-    "texture": "sodaCan",
-    "healHp": 5,
-    "icon": "res://assets/items/soda_can.png"
-  },
-  "Juice Box": {
-    "id": "Juice Box",
-    "label": "Juice Box",
-    "texture": "juiceBox",
-    "healHp": 8,
-    "icon": "res://assets/items/juice_box.png"
-  },
-  "Can of Tuna": {
-    "id": "Can of Tuna",
-    "label": "Can of Tuna",
-    "texture": "canOfTuna",
-    "healHp": 20,
-    "icon": "res://assets/items/can_of_tuna.png"
-  },
-  "Bag of Chips": {
-    "id": "Bag of Chips",
-    "label": "Bag of Chips",
-    "texture": "bagOfChips",
-    "healHp": 6,
-    "icon": "res://assets/items/bag_of_chips.png"
-  },
-  "Can of Beans": {
-    "id": "Can of Beans",
-    "label": "Can of Beans",
-    "texture": "canOfBeans",
-    "healHp": 18,
-    "icon": "res://assets/items/can_of_beans.png"
-  },
-  "Apple": {
-    "id": "Apple",
-    "label": "Apple",
-    "texture": "apple",
-    "healHp": 12,
-    "icon": "res://assets/items/apple.png"
-  },
-  "Banana": {
-    "id": "Banana",
-    "label": "Banana",
-    "texture": "banana",
-    "healHp": 10,
-    "icon": "res://assets/items/banana.png"
-  },
-  "Box of Mac'n'Cheese": {
-    "id": "Box of Mac'n'Cheese",
-    "label": "Box of Mac'n'Cheese",
-    "texture": "macNCheeseBox",
-    "healHp": 22,
-    "icon": "res://assets/items/mac_n_cheese_box.png"
-  },
-  "Hammer": {
-    "id": "Hammer",
+  "submachine-gun": {
+    "id": "submachine-gun",
     "slot": "primary",
-    "label": "Hammer",
-    "texture": "hammer",
+    "label": "Submachine Gun",
+    "texture": "handgun",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "2 handed",
+      "combat": "Firearm"
+    },
+    "weaponKind": "firearm",
+    "hands": 2,
+    "ammoType": "submachine-gun ammo",
+    "magazineSize": 30,
+    "reserveAmmo": 60,
     "damage": 32,
-    "reach": 1.75,
-    "attackSpeed": 0.75,
-    "staminaCost": 15,
-    "knockback": 0.75,
-    "icon": "res://assets/items/hammer.png"
+    "range": 8,
+    "fireRate": 0.12,
+    "icon": "res://assets/items/handgun.png"
   },
-  "Crowbar": {
-    "id": "Crowbar",
+  "assault rifle": {
+    "id": "assault rifle",
     "slot": "primary",
-    "label": "Crowbar",
-    "texture": "crowbar",
-    "damage": 38,
-    "reach": 1.85,
-    "attackSpeed": 0.85,
-    "staminaCost": 17,
-    "knockback": 0.85,
-    "icon": "res://assets/items/crowbar.png"
+    "label": "Assault Rifle",
+    "texture": "shotgun",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "2 handed",
+      "combat": "Firearm"
+    },
+    "weaponKind": "firearm",
+    "hands": 2,
+    "ammoType": "assault rifle ammo",
+    "magazineSize": 30,
+    "reserveAmmo": 60,
+    "damage": 42,
+    "range": 11,
+    "fireRate": 0.16,
+    "icon": "res://assets/items/shotgun.png"
   },
-  "Axe": {
-    "id": "Axe",
-    "slot": "primary",
-    "label": "Axe",
-    "texture": "axe",
-    "damage": 52,
-    "reach": 1.95,
-    "attackSpeed": 1,
-    "staminaCost": 22,
-    "knockback": 1,
-    "icon": "res://assets/items/axe.png"
+  "handgun ammo": {
+    "id": "handgun ammo",
+    "label": "Handgun Ammo",
+    "texture": "handgunAmmo",
+    "tags": [
+      "Ammunition"
+    ],
+    "ammoType": "handgun ammo",
+    "ammoQty": 15,
+    "stackLimit": 60,
+    "icon": "res://assets/items/handgun_ammo.png"
   },
-  "Baseball Bat": {
-    "id": "Baseball Bat",
+  "shotgun shells": {
+    "id": "shotgun shells",
+    "label": "Shotgun Shells",
+    "texture": "shotgunAmmo",
+    "tags": [
+      "Ammunition"
+    ],
+    "ammoType": "shotgun shells",
+    "ammoQty": 6,
+    "stackLimit": 60,
+    "icon": "res://assets/items/shotgun_ammo.png"
+  },
+  "submachine-gun ammo": {
+    "id": "submachine-gun ammo",
+    "label": "Submachine Gun Ammo",
+    "texture": "handgunAmmo",
+    "tags": [
+      "Ammunition"
+    ],
+    "ammoType": "submachine-gun ammo",
+    "ammoQty": 30,
+    "stackLimit": 60,
+    "icon": "res://assets/items/handgun_ammo.png"
+  },
+  "assault rifle ammo": {
+    "id": "assault rifle ammo",
+    "label": "Assault Rifle Ammo",
+    "texture": "handgunAmmo",
+    "tags": [
+      "Ammunition"
+    ],
+    "ammoType": "assault rifle ammo",
+    "ammoQty": 30,
+    "stackLimit": 60,
+    "icon": "res://assets/items/handgun_ammo.png"
+  },
+  "baseball bat": {
+    "id": "baseball bat",
     "slot": "primary",
     "label": "Baseball Bat",
     "texture": "baseballBat",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "2 handed",
+      "combat": "Melee"
+    },
+    "weaponKind": "melee",
+    "hands": 2,
     "damage": 30,
     "reach": 2.05,
     "attackSpeed": 0.7,
@@ -223,89 +489,238 @@
     "knockback": 1.05,
     "icon": "res://assets/items/baseball_bat.png"
   },
-  "Simple Backpack": {
-    "id": "Simple Backpack",
-    "slot": "backpack",
-    "label": "Simple Backpack",
-    "slots": 6,
-    "texture": "simpleBackpack",
-    "icon": "res://assets/items/simple_backpack.png"
+  "hatchet": {
+    "id": "hatchet",
+    "slot": "primary",
+    "label": "Hatchet",
+    "texture": "axe",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "1 handed",
+      "combat": "Melee"
+    },
+    "weaponKind": "melee",
+    "hands": 1,
+    "damage": 34,
+    "reach": 1.65,
+    "attackSpeed": 0.7,
+    "staminaCost": 15,
+    "knockback": 0.65,
+    "icon": "res://assets/items/axe.png"
   },
-  "Small Backpack": {
-    "id": "Small Backpack",
-    "slot": "backpack",
-    "label": "Small Backpack",
-    "slots": 6,
-    "texture": "simpleBackpack",
-    "icon": "res://assets/items/simple_backpack.png"
+  "sledgehammer": {
+    "id": "sledgehammer",
+    "slot": "primary",
+    "label": "Sledgehammer",
+    "texture": "hammer",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "2 handed",
+      "combat": "Melee"
+    },
+    "weaponKind": "melee",
+    "hands": 2,
+    "damage": 62,
+    "reach": 1.9,
+    "attackSpeed": 1.1,
+    "staminaCost": 25,
+    "knockback": 1.25,
+    "icon": "res://assets/items/hammer.png"
   },
-  "Large Backpack": {
-    "id": "Large Backpack",
-    "slot": "backpack",
-    "label": "Large Backpack",
-    "slots": 8,
-    "texture": "largeBackpack",
-    "icon": "res://assets/items/large_backpack.png"
+  "Katana": {
+    "id": "Katana",
+    "slot": "primary",
+    "label": "Katana",
+    "texture": "combatKnife",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "2 handed",
+      "combat": "Melee"
+    },
+    "weaponKind": "melee",
+    "hands": 2,
+    "damage": 58,
+    "reach": 2.05,
+    "attackSpeed": 0.68,
+    "staminaCost": 18,
+    "knockback": 0.72,
+    "icon": "res://assets/items/combat_knife.png"
   },
-  "Food": {
-    "id": "Food",
-    "label": "Food",
-    "texture": "canOfBeans",
-    "icon": "res://assets/items/can_of_beans.png"
+  "combat knife": {
+    "id": "combat knife",
+    "slot": "primary",
+    "label": "Combat Knife",
+    "texture": "combatKnife",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "1 handed",
+      "combat": "Melee"
+    },
+    "weaponKind": "melee",
+    "hands": 1,
+    "damage": 24,
+    "reach": 1.55,
+    "attackSpeed": 0.4,
+    "staminaCost": 9,
+    "knockback": 0.4,
+    "icon": "res://assets/items/combat_knife.png"
   },
-  "Parts": {
-    "id": "Parts",
-    "label": "Parts",
+  "kitchen knife": {
+    "id": "kitchen knife",
+    "slot": "primary",
+    "label": "Kitchen Knife",
+    "texture": "kitchenKnife",
+    "tags": [
+      "Weapon"
+    ],
+    "subTags": {
+      "hands": "1 handed",
+      "combat": "Melee"
+    },
+    "weaponKind": "melee",
+    "hands": 1,
+    "damage": 18,
+    "reach": 1.45,
+    "attackSpeed": 0.45,
+    "staminaCost": 8,
+    "knockback": 0.35,
+    "icon": "res://assets/items/kitchen_knife.png"
+  },
+  "Nail gun": {
+    "id": "Nail gun",
+    "label": "Nail Gun",
     "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
     "icon": "res://assets/items/spare_parts.png"
   },
-  "Handgun Ammo": {
-    "id": "Handgun Ammo",
-    "label": "Handgun Ammo",
-    "texture": "handgunAmmo",
-    "ammoType": "Handgun Ammo",
-    "ammoQty": 15,
-    "stackLimit": 60,
-    "icon": "res://assets/items/handgun_ammo.png"
+  "Drill": {
+    "id": "Drill",
+    "label": "Drill",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
   },
-  "Shotgun Ammo": {
-    "id": "Shotgun Ammo",
-    "label": "Shotgun Ammo",
-    "texture": "shotgunAmmo",
-    "ammoType": "Shotgun Ammo",
-    "ammoQty": 6,
-    "stackLimit": 60,
-    "icon": "res://assets/items/shotgun_ammo.png"
+  "small backpack": {
+    "id": "small backpack",
+    "slot": "backpack",
+    "label": "Small Backpack",
+    "texture": "simpleBackpack",
+    "tags": [
+      "Equipment"
+    ],
+    "slots": 6,
+    "icon": "res://assets/items/simple_backpack.png"
   },
-  "Painkillers": {
-    "id": "Painkillers",
-    "label": "Painkillers",
-    "icon": null
+  "medium backpack": {
+    "id": "medium backpack",
+    "slot": "backpack",
+    "label": "Medium Backpack",
+    "texture": "largeBackpack",
+    "tags": [
+      "Equipment"
+    ],
+    "slots": 8,
+    "icon": "res://assets/items/large_backpack.png"
   },
-  "Med Kit": {
-    "id": "Med Kit",
-    "label": "Med Kit",
-    "icon": null
+  "large backpack": {
+    "id": "large backpack",
+    "slot": "backpack",
+    "label": "Large Backpack",
+    "texture": "largeBackpack",
+    "tags": [
+      "Equipment"
+    ],
+    "slots": 10,
+    "icon": "res://assets/items/large_backpack.png"
   },
-  "Battery": {
-    "id": "Battery",
-    "label": "Battery",
-    "icon": null
+  "level 1 body armor": {
+    "id": "level 1 body armor",
+    "slot": "armor",
+    "label": "Level 1 Body Armor",
+    "armorClass": 1,
+    "texture": "bodyArmorLevel1",
+    "tags": [
+      "Armor"
+    ],
+    "icon": "res://assets/items/body_armor_level_1.png"
   },
-  "Duct Tape": {
-    "id": "Duct Tape",
-    "label": "Duct Tape",
-    "icon": null
+  "level 2 body armor": {
+    "id": "level 2 body armor",
+    "slot": "armor",
+    "label": "Level 2 Body Armor",
+    "armorClass": 2,
+    "texture": "bodyArmorLevel2",
+    "tags": [
+      "Armor"
+    ],
+    "icon": "res://assets/items/body_armor_level_2.png"
   },
-  "Radio Parts": {
-    "id": "Radio Parts",
-    "label": "Radio Parts",
-    "icon": null
+  "level 3 body armor": {
+    "id": "level 3 body armor",
+    "slot": "armor",
+    "label": "Level 3 Body Armor",
+    "armorClass": 3,
+    "texture": "bodyArmorLevel3",
+    "tags": [
+      "Armor"
+    ],
+    "icon": "res://assets/items/body_armor_level_3.png"
+  },
+  "Syringe": {
+    "id": "Syringe",
+    "label": "Syringe",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "blood kit": {
+    "id": "blood kit",
+    "label": "Blood Kit",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "suture needles": {
+    "id": "suture needles",
+    "label": "Suture Needles",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "Cotton balls": {
+    "id": "Cotton balls",
+    "label": "Cotton Balls",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
   },
   "Key": {
     "id": "Key",
     "label": "Key",
     "texture": "key",
+    "tags": [
+      "Key"
+    ],
     "icon": "res://assets/items/key.png"
   }
 }

@@ -3,15 +3,15 @@
     "name": "Item Box",
     "costs": [
       {
-        "item": "Parts",
+        "item": "Gears",
         "qty": 6
       },
       {
-        "item": "Parts",
-        "qty": 10
+        "item": "metal sheet",
+        "qty": 4
       },
       {
-        "item": "Parts",
+        "item": "bolts",
         "qty": 16
       }
     ],
@@ -25,15 +25,15 @@
     "name": "Workbench",
     "costs": [
       {
-        "item": "Parts",
+        "item": "Gears",
         "qty": 8
       },
       {
-        "item": "Parts",
-        "qty": 14
+        "item": "metal bar",
+        "qty": 6
       },
       {
-        "item": "Tool Kit",
+        "item": "Drill",
         "qty": 1
       }
     ],
@@ -47,15 +47,15 @@
     "name": "Medical Unit",
     "costs": [
       {
-        "item": "Meds",
+        "item": "Syringe",
         "qty": 4
       },
       {
-        "item": "Meds",
-        "qty": 8
+        "item": "blood kit",
+        "qty": 2
       },
       {
-        "item": "Meds",
+        "item": "suture needles",
         "qty": 12
       }
     ],
@@ -69,15 +69,15 @@
     "name": "Intel Center",
     "costs": [
       {
-        "item": "Radio Parts",
+        "item": "wire",
         "qty": 5
       },
       {
-        "item": "Radio Parts",
-        "qty": 9
+        "item": "RAM",
+        "qty": 2
       },
       {
-        "item": "Signal Scanner",
+        "item": "processor",
         "qty": 1
       }
     ],

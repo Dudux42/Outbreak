@@ -107,6 +107,15 @@ p {
   color: var(--text);
 }
 
+.hud-button {
+  min-width: 144px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(42, 48, 43, 0.92);
+  color: var(--text);
+  font-weight: 800;
+}
+
 .base-hud {
   position: fixed;
   top: 16px;
@@ -118,6 +127,10 @@ p {
   justify-content: space-between;
   gap: 16px;
   pointer-events: none;
+}
+
+.base-hud button {
+  pointer-events: auto;
 }
 
 .base-hud > div,
@@ -197,6 +210,68 @@ p {
 .panel-block h3 {
   margin: 0 0 10px;
   font-size: 0.95rem;
+}
+
+.character-switch-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.character-switch-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 82px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    rgba(28, 31, 28, 0.92);
+  background-size: 22px 22px, 22px 22px, auto;
+  text-align: left;
+}
+
+.character-switch-card:not(:disabled):hover {
+  border-color: rgba(217, 177, 95, 0.84);
+  background-color: rgba(42, 49, 43, 0.96);
+}
+
+.character-switch-card:disabled {
+  cursor: default;
+}
+
+.character-switch-card--active {
+  border-color: rgba(240, 200, 79, 0.88);
+  box-shadow: inset 0 0 0 1px rgba(240, 200, 79, 0.32);
+}
+
+.character-switch-card strong {
+  font-size: 1.05rem;
+}
+
+.character-switch-card__portrait {
+  width: 124px;
+  height: 124px;
+  flex: 0 0 74px;
+  margin: -25px -25px -25px -18px;
+  background-image: var(--portrait-image);
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: var(--portrait-size);
+  image-rendering: pixelated;
+  transform: scale(0.58);
+  animation: character-switch-breathe var(--portrait-duration) steps(var(--portrait-steps)) infinite;
+}
+
+@keyframes character-switch-breathe {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: var(--portrait-distance);
+  }
 }
 
 .item-list,
@@ -1006,17 +1081,17 @@ p {
 }
 
 .inventory-sprite {
-  width: 120px;
-  height: 120px;
+  width: 124px;
+  height: 124px;
   align-self: center;
   margin-top: 44px;
-  background-image: url("../assets/player_breathing_south_sheet.png");
+  background-image: var(--survivor-sprite, url("../assets/player_breathing_south_sheet.png"));
   background-position: 0 0;
   background-repeat: no-repeat;
-  background-size: 480px 120px;
+  background-size: var(--survivor-sprite-size, 480px 120px);
   image-rendering: pixelated;
   transform: scale(2.75);
-  animation: inventory-breathe 0.96s steps(4) infinite;
+  animation: inventory-breathe var(--survivor-animation-duration, 0.96s) steps(var(--survivor-animation-steps, 4)) infinite;
 }
 
 .survivor-stats {
@@ -1045,7 +1120,7 @@ p {
     background-position-x: 0;
   }
   to {
-    background-position-x: -480px;
+    background-position-x: var(--survivor-animation-distance, -496px);
   }
 }
 

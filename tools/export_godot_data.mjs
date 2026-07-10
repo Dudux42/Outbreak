@@ -27,7 +27,8 @@ const EQUIPMENT_SLOTS = {
 };
 
 const AMMO_STACK_LIMIT = 60;
-const HANDGUN_AIM_ASSET_VERSION = "handgun-aim-4";
+const AIM_ASSET_VERSION = "firearm-aim-1";
+let playerActionStatesForEval = {};
 
 function extractConst(name) {
   const marker = `const ${name} =`;
@@ -50,9 +51,10 @@ function evaluateExpression(expression) {
   return Function(
     "EQUIPMENT_SLOTS",
     "AMMO_STACK_LIMIT",
-    "HANDGUN_AIM_ASSET_VERSION",
+    "AIM_ASSET_VERSION",
+    "PLAYER_ACTION_STATES",
     `"use strict"; return (${expression});`
-  )(EQUIPMENT_SLOTS, AMMO_STACK_LIMIT, HANDGUN_AIM_ASSET_VERSION);
+  )(EQUIPMENT_SLOTS, AMMO_STACK_LIMIT, AIM_ASSET_VERSION, playerActionStatesForEval);
 }
 
 function stripQuery(assetPath) {
@@ -99,19 +101,40 @@ const itemCatalog = evaluateExpression(extractConst("itemCatalog"));
 const upgradeData = evaluateExpression(extractConst("upgradeData"));
 const texturePaths = evaluateExpression(extractConst("texturePaths"));
 const itemTexturePaths = evaluateExpression(extractConst("itemTexturePaths"));
-const playerAnimations = evaluateExpression(extractConst("playerAnimations"));
+const characterDatabase = evaluateExpression(extractConst("characterDatabase"));
+const playerAnimationClips = evaluateExpression(extractConst("femalePlayerAnimationClips"));
+const zombieAnimationClips = {};
+const enemyTypes = [
+  { id: "civilian_zombie", name: "Civilian Zombie", prefix: "zombie", frames: { idle: 1, walk: 9, death: 13 } },
+  { id: "dark_civilian_zombie", name: "Dark Civilian Zombie", prefix: "zombie_dark", frames: { idle: 1, walk: 1, death: 1 } },
+];
+const playerActionStates = evaluateExpression(extractConst("PLAYER_ACTION_STATES"));
+playerActionStatesForEval = playerActionStates;
+const playerActionConfig = evaluateExpression(extractConst("PLAYER_ACTION_CONFIG"));
 
 for (const direction of DIRECTIONS) {
-  playerAnimations[`aim_idle_${direction}`] = {
-    src: `./assets/player_handgun_${direction}_sheet.png?v=${HANDGUN_AIM_ASSET_VERSION}`,
+  playerAnimationClips[`firearm_aim_${direction}`] = {
+    src: `./assets/player_firearm_aim_${direction}_sheet.png?v=${AIM_ASSET_VERSION}`,
     frames: 8,
     frameDuration: 0.12,
   };
-  playerAnimations[`aim_walk_${direction}`] = {
-    src: `./assets/player_handgun_walk_${direction}_sheet.png?v=${HANDGUN_AIM_ASSET_VERSION}`,
-    frames: 8,
-    frameDuration: 0.2,
-  };
+  for (const enemyType of enemyTypes) {
+    zombieAnimationClips[`${enemyType.id}_idle_${direction}`] = {
+      src: `./assets/${enemyType.prefix}_idle_${direction}_sheet.png`,
+      frames: enemyType.frames.idle,
+      frameDuration: 0.32,
+    };
+    zombieAnimationClips[`${enemyType.id}_walk_${direction}`] = {
+      src: `./assets/${enemyType.prefix}_walk_${direction}_sheet.png`,
+      frames: enemyType.frames.walk,
+      frameDuration: 0.16,
+    };
+    zombieAnimationClips[`${enemyType.id}_death_${direction}`] = {
+      src: `./assets/${enemyType.prefix}_death_${direction}_sheet.png`,
+      frames: enemyType.frames.death,
+      frameDuration: 0.08,
+    };
+  }
 }
 
 const godotItems = Object.fromEntries(
@@ -126,7 +149,7 @@ const godotItems = Object.fromEntries(
 );
 
 const godotAnimations = Object.fromEntries(
-  Object.entries(playerAnimations).map(([id, clip]) => [
+  Object.entries(playerAnimationClips).map(([id, clip]) => [
     id,
     {
       id,
@@ -147,8 +170,10 @@ const assetManifest = listFiles(path.join(root, "assets")).map((filePath) => {
     ? "item_icon"
     : relative.includes("/textures/")
       ? "texture"
-      : relative.includes("player_")
+    : relative.includes("player_")
         ? "player_animation"
+        : relative.includes("zombie")
+          ? "enemy_animation"
         : "source_or_reference";
   return {
     path: `res://${relative}`,
@@ -164,14 +189,37 @@ const assetManifest = listFiles(path.join(root, "assets")).map((filePath) => {
 writeJson("items.json", godotItems);
 writeJson("locations.json", locations);
 writeJson("upgrades.json", upgradeData);
+writeJson("characters.json", characterDatabase.map((character) => ({
+  ...character,
+  portrait: character.portrait ? normalizeAssetPath(character.portrait) : null,
+})));
 writeJson("player_animations.json", godotAnimations);
+writeJson("zombie_animations.json", Object.fromEntries(
+  Object.entries(zombieAnimationClips).map(([id, clip]) => [
+    id,
+    {
+      id,
+      sheet: normalizeAssetPath(clip.src),
+      frames: clip.frames,
+      frame_duration_seconds: clip.frameDuration,
+      fps: Number((1 / clip.frameDuration).toFixed(3)),
+    },
+  ])
+));
+writeJson("enemy_types.json", enemyTypes.map((enemyType) => ({
+  id: enemyType.id,
+  name: enemyType.name,
+  animation_prefix: enemyType.prefix,
+  stats_profile: "standard_zombie",
+})));
 writeJson("textures.json", Object.fromEntries(Object.entries(texturePaths).map(([key, value]) => [key, normalizeAssetPath(value)])));
 writeJson("item_textures.json", Object.fromEntries(Object.entries(itemTexturePaths).map(([key, value]) => [key, normalizeAssetPath(value)])));
 writeJson("asset_manifest.json", assetManifest);
 writeJson("migration_constants.json", {
   directions: DIRECTIONS,
   equipment_slots: EQUIPMENT_SLOTS,
-  player_animation_states: evaluateExpression(extractConst("PLAYER_ANIMATION_STATES")),
+  player_action_states: playerActionStates,
+  player_action_config: playerActionConfig,
   ammo_stack_limit: AMMO_STACK_LIMIT,
 });
 

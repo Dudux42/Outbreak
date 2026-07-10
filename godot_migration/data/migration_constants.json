@@ -15,20 +15,98 @@
     "ARMOR": "armor",
     "BACKPACK": "backpack"
   },
-  "player_animation_states": {
-    "IDLE_BREATHING": "idle_breathing",
+  "player_action_states": {
+    "IDLE": "Idle",
     "WALK": "walk",
     "RUN": "run",
-    "IDLE_AIMING_HANDGUN": "idle_aiming_handgun",
-    "WALK_AIMING_HANDGUN": "walk_aiming_handgun",
-    "IDLE_AIMING_MELEE": "idle_aiming_melee",
-    "WALK_AIMING_MELEE": "walk_aiming_melee",
-    "IDLE_AIMING_SHOTGUN": "idle_aiming_shotgun",
-    "WALK_AIMING_SHOTGUN": "walk_aiming_shotgun",
-    "TAKING_DAMAGE": "taking_damage",
-    "INTERACTING": "interacting",
-    "PICK_UP_ITEM": "pick_up_item",
-    "DEATH": "death"
+    "AIM": "aim",
+    "PICKUP": "pickup",
+    "INTERACT": "interact",
+    "DEATH": "death",
+    "ATTACK": "attack",
+    "TWO_H_ATTACK": "2hAttack",
+    "SHOOT": "shoot",
+    "TWO_H_SHOOT": "2hShoot",
+    "WORK": "work",
+    "VICTORY": "victory"
+  },
+  "player_action_config": {
+    "Idle": {
+      "loop": true,
+      "priority": 0,
+      "lockMovement": false
+    },
+    "walk": {
+      "loop": true,
+      "priority": 1,
+      "lockMovement": false
+    },
+    "run": {
+      "loop": true,
+      "priority": 2,
+      "lockMovement": false
+    },
+    "aim": {
+      "loop": true,
+      "priority": 3,
+      "lockMovement": false
+    },
+    "pickup": {
+      "loop": false,
+      "priority": 7,
+      "duration": 0.42,
+      "lockMovement": true
+    },
+    "interact": {
+      "loop": false,
+      "priority": 7,
+      "duration": 0.38,
+      "lockMovement": true
+    },
+    "attack": {
+      "loop": false,
+      "priority": 8,
+      "duration": 0.34,
+      "lockMovement": true
+    },
+    "2hAttack": {
+      "loop": false,
+      "priority": 8,
+      "duration": 0.52,
+      "lockMovement": true
+    },
+    "shoot": {
+      "loop": false,
+      "priority": 8,
+      "duration": 0.2,
+      "lockMovement": true
+    },
+    "2hShoot": {
+      "loop": false,
+      "priority": 8,
+      "duration": 0.36,
+      "lockMovement": true
+    },
+    "work": {
+      "loop": false,
+      "priority": 9,
+      "duration": 1.15,
+      "lockMovement": true
+    },
+    "victory": {
+      "loop": false,
+      "priority": 10,
+      "duration": 1,
+      "lockMovement": true,
+      "terminal": true
+    },
+    "death": {
+      "loop": false,
+      "priority": 11,
+      "duration": 1.1,
+      "lockMovement": true,
+      "terminal": true
+    }
   },
   "ammo_stack_limit": 60
 }

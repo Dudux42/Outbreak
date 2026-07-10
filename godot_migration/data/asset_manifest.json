@@ -1,5 +1,14 @@
 [
   {
+    "path": "res://assets/active_character_star.png",
+    "source_path": "assets/active_character_star.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 974,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/female_8dir.gif",
     "source_path": "assets/female_8dir.gif",
     "category": "source_or_reference",
@@ -432,6 +441,78 @@
     "height": 128
   },
   {
+    "path": "res://assets/player_firearm_aim_east_sheet.png",
+    "source_path": "assets/player_firearm_aim_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 11064,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_firearm_aim_north_east_sheet.png",
+    "source_path": "assets/player_firearm_aim_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 10679,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_firearm_aim_north_sheet.png",
+    "source_path": "assets/player_firearm_aim_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 12024,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_firearm_aim_north_west_sheet.png",
+    "source_path": "assets/player_firearm_aim_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 11243,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_firearm_aim_south_east_sheet.png",
+    "source_path": "assets/player_firearm_aim_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 11274,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_firearm_aim_south_sheet.png",
+    "source_path": "assets/player_firearm_aim_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 13056,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_firearm_aim_south_west_sheet.png",
+    "source_path": "assets/player_firearm_aim_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 12154,
+    "width": 960,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_firearm_aim_west_sheet.png",
+    "source_path": "assets/player_firearm_aim_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 10475,
+    "width": 960,
+    "height": 120
+  },
+  {
     "path": "res://assets/player_handgun_east_sheet.png",
     "source_path": "assets/player_handgun_east_sheet.png",
     "category": "player_animation",
@@ -592,6 +673,294 @@
     "bytes": 20554,
     "width": 960,
     "height": 120
+  },
+  {
+    "path": "res://assets/player_male_idle_east_sheet.png",
+    "source_path": "assets/player_male_idle_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22118,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_idle_north_east_sheet.png",
+    "source_path": "assets/player_male_idle_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 24182,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_idle_north_sheet.png",
+    "source_path": "assets/player_male_idle_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22907,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_idle_north_west_sheet.png",
+    "source_path": "assets/player_male_idle_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23661,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_idle_south_east_sheet.png",
+    "source_path": "assets/player_male_idle_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 29897,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_idle_south_sheet.png",
+    "source_path": "assets/player_male_idle_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 31573,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_idle_south_west_sheet.png",
+    "source_path": "assets/player_male_idle_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 29932,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_idle_west_sheet.png",
+    "source_path": "assets/player_male_idle_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22179,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_pickup_east_sheet.png",
+    "source_path": "assets/player_male_pickup_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22771,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_pickup_north_east_sheet.png",
+    "source_path": "assets/player_male_pickup_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 26382,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_pickup_north_sheet.png",
+    "source_path": "assets/player_male_pickup_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 26976,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_pickup_north_west_sheet.png",
+    "source_path": "assets/player_male_pickup_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 26050,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_pickup_south_east_sheet.png",
+    "source_path": "assets/player_male_pickup_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 29799,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_pickup_south_sheet.png",
+    "source_path": "assets/player_male_pickup_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 31389,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_pickup_south_west_sheet.png",
+    "source_path": "assets/player_male_pickup_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 29816,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_pickup_west_sheet.png",
+    "source_path": "assets/player_male_pickup_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22622,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_run_east_sheet.png",
+    "source_path": "assets/player_male_run_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23686,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_run_north_east_sheet.png",
+    "source_path": "assets/player_male_run_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 24200,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_run_north_sheet.png",
+    "source_path": "assets/player_male_run_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23614,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_run_north_west_sheet.png",
+    "source_path": "assets/player_male_run_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 24094,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_run_south_east_sheet.png",
+    "source_path": "assets/player_male_run_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 25619,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_run_south_sheet.png",
+    "source_path": "assets/player_male_run_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 26567,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_run_south_west_sheet.png",
+    "source_path": "assets/player_male_run_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 25502,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_run_west_sheet.png",
+    "source_path": "assets/player_male_run_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23556,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_walk_east_sheet.png",
+    "source_path": "assets/player_male_walk_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21104,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_walk_north_east_sheet.png",
+    "source_path": "assets/player_male_walk_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 24708,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_walk_north_sheet.png",
+    "source_path": "assets/player_male_walk_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23533,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_walk_north_west_sheet.png",
+    "source_path": "assets/player_male_walk_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 24582,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_walk_south_east_sheet.png",
+    "source_path": "assets/player_male_walk_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 25977,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_walk_south_sheet.png",
+    "source_path": "assets/player_male_walk_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 26698,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_walk_south_west_sheet.png",
+    "source_path": "assets/player_male_walk_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 25855,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_male_walk_west_sheet.png",
+    "source_path": "assets/player_male_walk_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21024,
+    "width": 992,
+    "height": 124
   },
   {
     "path": "res://assets/player_north_east_sheet.png",
@@ -799,6 +1168,303 @@
     "bytes": 16395,
     "width": 120,
     "height": 120
+  },
+  {
+    "path": "res://assets/player_src_male_idle_east.gif",
+    "source_path": "assets/player_src_male_idle_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17367,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_idle_north.gif",
+    "source_path": "assets/player_src_male_idle_north.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 19228,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_idle_north_east.gif",
+    "source_path": "assets/player_src_male_idle_north_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18866,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_idle_north_west.gif",
+    "source_path": "assets/player_src_male_idle_north_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18871,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_idle_south.gif",
+    "source_path": "assets/player_src_male_idle_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 22156,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_idle_south_east.gif",
+    "source_path": "assets/player_src_male_idle_south_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 20969,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_idle_south_west.gif",
+    "source_path": "assets/player_src_male_idle_south_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 20939,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_idle_west.gif",
+    "source_path": "assets/player_src_male_idle_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17357,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_pickup_east.gif",
+    "source_path": "assets/player_src_male_pickup_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17082,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_pickup_north.gif",
+    "source_path": "assets/player_src_male_pickup_north.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 19596,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_pickup_north_east.gif",
+    "source_path": "assets/player_src_male_pickup_north_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 19010,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_pickup_north_west.gif",
+    "source_path": "assets/player_src_male_pickup_north_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 19002,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_pickup_south.gif",
+    "source_path": "assets/player_src_male_pickup_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 20925,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_pickup_south_east.gif",
+    "source_path": "assets/player_src_male_pickup_south_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 20196,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_pickup_south_west.gif",
+    "source_path": "assets/player_src_male_pickup_south_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 20222,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_pickup_west.gif",
+    "source_path": "assets/player_src_male_pickup_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17116,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_rotations_8dir.gif",
+    "source_path": "assets/player_src_male_rotations_8dir.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17304,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_run_east.gif",
+    "source_path": "assets/player_src_male_run_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16350,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_run_north.gif",
+    "source_path": "assets/player_src_male_run_north.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17174,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_run_north_east.gif",
+    "source_path": "assets/player_src_male_run_north_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16890,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_run_north_west.gif",
+    "source_path": "assets/player_src_male_run_north_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16886,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_run_south.gif",
+    "source_path": "assets/player_src_male_run_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17705,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_run_south_east.gif",
+    "source_path": "assets/player_src_male_run_south_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17238,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_run_south_west.gif",
+    "source_path": "assets/player_src_male_run_south_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17230,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_run_west.gif",
+    "source_path": "assets/player_src_male_run_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16339,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_walk_east.gif",
+    "source_path": "assets/player_src_male_walk_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15672,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_walk_north.gif",
+    "source_path": "assets/player_src_male_walk_north.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17504,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_walk_north_east.gif",
+    "source_path": "assets/player_src_male_walk_north_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17202,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_walk_north_west.gif",
+    "source_path": "assets/player_src_male_walk_north_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17184,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_walk_south.gif",
+    "source_path": "assets/player_src_male_walk_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18249,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_walk_south_east.gif",
+    "source_path": "assets/player_src_male_walk_south_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17700,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_walk_south_west.gif",
+    "source_path": "assets/player_src_male_walk_south_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17711,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_male_walk_west.gif",
+    "source_path": "assets/player_src_male_walk_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15681,
+    "width": 124,
+    "height": 124
   },
   {
     "path": "res://assets/player_src_run_east.gif",
@@ -1026,6 +1692,114 @@
     "height": 128
   },
   {
+    "path": "res://assets/portraits/alynne.png",
+    "source_path": "assets/portraits/alynne.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1313513,
+    "width": 768,
+    "height": 1366
+  },
+  {
+    "path": "res://assets/portraits/ava_belmont.png",
+    "source_path": "assets/portraits/ava_belmont.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 879166,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/portraits/future_survivor_02.png",
+    "source_path": "assets/portraits/future_survivor_02.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1764647,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/portraits/future_survivor_03.png",
+    "source_path": "assets/portraits/future_survivor_03.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 843459,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/portraits/future_survivor_04.png",
+    "source_path": "assets/portraits/future_survivor_04.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1218310,
+    "width": 1408,
+    "height": 768
+  },
+  {
+    "path": "res://assets/portraits/future_survivor_05.png",
+    "source_path": "assets/portraits/future_survivor_05.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1347758,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/portraits/future_survivor_06.png",
+    "source_path": "assets/portraits/future_survivor_06.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1263388,
+    "width": 1408,
+    "height": 768
+  },
+  {
+    "path": "res://assets/portraits/future_survivor_07.png",
+    "source_path": "assets/portraits/future_survivor_07.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1087520,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/portraits/future_survivor_08.png",
+    "source_path": "assets/portraits/future_survivor_08.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 980126,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/portraits/future_survivor_09.png",
+    "source_path": "assets/portraits/future_survivor_09.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1108155,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/portraits/future_survivor_10.png",
+    "source_path": "assets/portraits/future_survivor_10.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1036467,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/portraits/peter_ashfield.png",
+    "source_path": "assets/portraits/peter_ashfield.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1120124,
+    "width": 1024,
+    "height": 1024
+  },
+  {
     "path": "res://assets/textures/base_floor_wood.png",
     "source_path": "assets/textures/base_floor_wood.png",
     "category": "texture",
@@ -1067,6 +1841,24 @@
     "category": "texture",
     "type": "png",
     "bytes": 3620,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/base_rest_bed.png",
+    "source_path": "assets/textures/base_rest_bed.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 1135,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/base_rest_table.png",
+    "source_path": "assets/textures/base_rest_table.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 932,
     "width": 128,
     "height": 128
   },
@@ -1150,5 +1942,599 @@
     "bytes": 570825,
     "width": 512,
     "height": 512
+  },
+  {
+    "path": "res://assets/zombie_dark_death_east_sheet.png",
+    "source_path": "assets/zombie_dark_death_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2173,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_death_north_east_sheet.png",
+    "source_path": "assets/zombie_dark_death_north_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2686,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_death_north_sheet.png",
+    "source_path": "assets/zombie_dark_death_north_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2615,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_death_north_west_sheet.png",
+    "source_path": "assets/zombie_dark_death_north_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2696,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_death_south_east_sheet.png",
+    "source_path": "assets/zombie_dark_death_south_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2978,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_death_south_sheet.png",
+    "source_path": "assets/zombie_dark_death_south_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2846,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_death_south_west_sheet.png",
+    "source_path": "assets/zombie_dark_death_south_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2976,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_death_west_sheet.png",
+    "source_path": "assets/zombie_dark_death_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2109,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_idle_east_sheet.png",
+    "source_path": "assets/zombie_dark_idle_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2173,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_idle_north_east_sheet.png",
+    "source_path": "assets/zombie_dark_idle_north_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2686,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_idle_north_sheet.png",
+    "source_path": "assets/zombie_dark_idle_north_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2615,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_idle_north_west_sheet.png",
+    "source_path": "assets/zombie_dark_idle_north_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2696,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_idle_south_east_sheet.png",
+    "source_path": "assets/zombie_dark_idle_south_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2978,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_idle_south_sheet.png",
+    "source_path": "assets/zombie_dark_idle_south_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2846,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_idle_south_west_sheet.png",
+    "source_path": "assets/zombie_dark_idle_south_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2976,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_idle_west_sheet.png",
+    "source_path": "assets/zombie_dark_idle_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2109,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_src_idle_rotations_8dir.gif",
+    "source_path": "assets/zombie_dark_src_idle_rotations_8dir.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 11145,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_walk_east_sheet.png",
+    "source_path": "assets/zombie_dark_walk_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2173,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_walk_north_east_sheet.png",
+    "source_path": "assets/zombie_dark_walk_north_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2686,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_walk_north_sheet.png",
+    "source_path": "assets/zombie_dark_walk_north_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2615,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_walk_north_west_sheet.png",
+    "source_path": "assets/zombie_dark_walk_north_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2696,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_walk_south_east_sheet.png",
+    "source_path": "assets/zombie_dark_walk_south_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2978,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_walk_south_sheet.png",
+    "source_path": "assets/zombie_dark_walk_south_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2846,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_walk_south_west_sheet.png",
+    "source_path": "assets/zombie_dark_walk_south_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2976,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_dark_walk_west_sheet.png",
+    "source_path": "assets/zombie_dark_walk_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2109,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_death_east_sheet.png",
+    "source_path": "assets/zombie_death_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 47815,
+    "width": 1612,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_death_north_east_sheet.png",
+    "source_path": "assets/zombie_death_north_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 48533,
+    "width": 1612,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_death_north_sheet.png",
+    "source_path": "assets/zombie_death_north_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 49488,
+    "width": 1612,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_death_north_west_sheet.png",
+    "source_path": "assets/zombie_death_north_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 48561,
+    "width": 1612,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_death_south_east_sheet.png",
+    "source_path": "assets/zombie_death_south_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 53670,
+    "width": 1612,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_death_south_sheet.png",
+    "source_path": "assets/zombie_death_south_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 57401,
+    "width": 1612,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_death_south_west_sheet.png",
+    "source_path": "assets/zombie_death_south_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 53802,
+    "width": 1612,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_death_west_sheet.png",
+    "source_path": "assets/zombie_death_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 48189,
+    "width": 1612,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_idle_east_sheet.png",
+    "source_path": "assets/zombie_idle_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 2971,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_idle_north_east_sheet.png",
+    "source_path": "assets/zombie_idle_north_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 3956,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_idle_north_sheet.png",
+    "source_path": "assets/zombie_idle_north_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 4115,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_idle_north_west_sheet.png",
+    "source_path": "assets/zombie_idle_north_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 3957,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_idle_south_east_sheet.png",
+    "source_path": "assets/zombie_idle_south_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 4304,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_idle_south_sheet.png",
+    "source_path": "assets/zombie_idle_south_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 4934,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_idle_south_west_sheet.png",
+    "source_path": "assets/zombie_idle_south_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 4365,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_idle_west_sheet.png",
+    "source_path": "assets/zombie_idle_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 3040,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_death_east.gif",
+    "source_path": "assets/zombie_src_death_east.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 30759,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_death_north.gif",
+    "source_path": "assets/zombie_src_death_north.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 32009,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_death_north_east.gif",
+    "source_path": "assets/zombie_src_death_north_east.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 31138,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_death_north_west.gif",
+    "source_path": "assets/zombie_src_death_north_west.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 31148,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_death_south.gif",
+    "source_path": "assets/zombie_src_death_south.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 34486,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_death_south_east.gif",
+    "source_path": "assets/zombie_src_death_south_east.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 33193,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_death_south_west.gif",
+    "source_path": "assets/zombie_src_death_south_west.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 33214,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_death_west.gif",
+    "source_path": "assets/zombie_src_death_west.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 30797,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_idle_rotations_8dir.gif",
+    "source_path": "assets/zombie_src_idle_rotations_8dir.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 20077,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_walk_east.gif",
+    "source_path": "assets/zombie_src_walk_east.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 20467,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_walk_north.gif",
+    "source_path": "assets/zombie_src_walk_north.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 23158,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_walk_north_east.gif",
+    "source_path": "assets/zombie_src_walk_north_east.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 23019,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_walk_north_west.gif",
+    "source_path": "assets/zombie_src_walk_north_west.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 23012,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_walk_south.gif",
+    "source_path": "assets/zombie_src_walk_south.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 25725,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_walk_south_east.gif",
+    "source_path": "assets/zombie_src_walk_south_east.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 23872,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_walk_south_west.gif",
+    "source_path": "assets/zombie_src_walk_south_west.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 23900,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_src_walk_west.gif",
+    "source_path": "assets/zombie_src_walk_west.gif",
+    "category": "enemy_animation",
+    "type": "gif",
+    "bytes": 20463,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_walk_east_sheet.png",
+    "source_path": "assets/zombie_walk_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 31102,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_walk_north_east_sheet.png",
+    "source_path": "assets/zombie_walk_north_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 36878,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_walk_north_sheet.png",
+    "source_path": "assets/zombie_walk_north_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 35569,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_walk_north_west_sheet.png",
+    "source_path": "assets/zombie_walk_north_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 36646,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_walk_south_east_sheet.png",
+    "source_path": "assets/zombie_walk_south_east_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 39434,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_walk_south_sheet.png",
+    "source_path": "assets/zombie_walk_south_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 44896,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_walk_south_west_sheet.png",
+    "source_path": "assets/zombie_walk_south_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 39570,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/zombie_walk_west_sheet.png",
+    "source_path": "assets/zombie_walk_west_sheet.png",
+    "category": "enemy_animation",
+    "type": "png",
+    "bytes": 30990,
+    "width": 1116,
+    "height": 124
   }
 ]

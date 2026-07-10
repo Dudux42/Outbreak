@@ -10,5 +10,8 @@
   "itemBox": "res://assets/textures/base_item_box.png",
   "map": "res://assets/textures/base_map.png",
   "intel": "res://assets/textures/base_intel_center.png",
-  "medical": "res://assets/textures/base_med_unit.png"
+  "medical": "res://assets/textures/base_med_unit.png",
+  "restBed": "res://assets/textures/base_rest_bed.png",
+  "restTable": "res://assets/textures/base_rest_table.png",
+  "activeCharacterStar": "res://assets/active_character_star.png"
 }

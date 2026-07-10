@@ -7,7 +7,7 @@ Outbreak is a browser-based top-down zombie survival prototype built with Three.
 - Top-down 3D scene rendered with Three.js.
 - Safehouse hub with item box, workbench, medical station, intel center, and map table.
 - Procedural mission layouts with rooms, doors, pillars, loot, zombies, extraction zones, and line-of-sight fog.
-- Eight-direction player sprites with idle, walk, and run animations.
+- Eight-direction player sprites with idle, walk, run, aim, combat, interaction, pickup, victory, and death action states.
 - Inventory, equipment, stash, item icons, quickbar, and drag-and-drop item movement.
 - Keyboard quickbar binding for inventory items.
 - Ranged and melee weapon handling through selected quickbar slots.
@@ -19,7 +19,7 @@ Outbreak is a browser-based top-down zombie survival prototype built with Three.
 - `Shift`: Run
 - Mouse move: Aim/facing direction
 - Right mouse button: Aim
-- Left mouse button or `Space`: Attack while aiming and holding a weapon
+- Left mouse button: Attack or shoot while aiming and holding a weapon
 - `E`: Interact with loot, doors, and extraction zones
 - `Tab`: Open inventory
 - `1`: Hold equipped primary weapon
@@ -79,7 +79,7 @@ Godot migration prep lives in `godot_migration/`. It includes exported JSON data
 
 ## Current Issues and Future Plans
 
-This build is still in heavy prototype mode. The handgun aiming animation state is wired into the debug panel, but the current aim sheets are visually subtle and still need art polish before they read clearly in-game. The `Y` debug panel shows the active player animation state, selected sprite sheet, loaded texture, quickbar slot, and held weapon to help track animation problems during testing.
+This build is still in heavy prototype mode. The player now uses a single action-state controller for idle, walk, run, aim, pickup, interact, death, attack, 2hAttack, shoot, 2hShoot, work, and victory. Several action states intentionally use fallback idle or aim clips until final sprite sheets exist. The `Y` debug panel shows the active player action state, selected sprite sheet, loaded texture, quickbar slot, and held weapon to help track animation problems during testing.
 
 Short-term work:
 

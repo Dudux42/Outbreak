@@ -1,0 +1,14 @@
+[
+  {
+    "id": "civilian_zombie",
+    "name": "Civilian Zombie",
+    "animation_prefix": "zombie",
+    "stats_profile": "standard_zombie"
+  },
+  {
+    "id": "dark_civilian_zombie",
+    "name": "Dark Civilian Zombie",
+    "animation_prefix": "zombie_dark",
+    "stats_profile": "standard_zombie"
+  }
+]
