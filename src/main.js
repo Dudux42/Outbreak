@@ -1026,8 +1026,13 @@ const texturePaths = {
   pillar: "./assets/textures/pillar_concrete.png",
   door: "./assets/textures/door_worn.png",
   baseFloor: "./assets/textures/base_floor_wood.png",
+  baseOuterGrass: "./assets/textures/base_outer_grass.png",
+  baseSandPath: "./assets/textures/base_sand_path.png",
   baseWall: "./assets/textures/base_wall_wallpaper.png",
   boardedWindow: "./assets/textures/base_window_boarded.png",
+  baseWindowFrame: "./assets/textures/base_window_frame_wood.png",
+  baseWindowGlass: "./assets/textures/base_window_dirty_glass.png",
+  baseWindowBoards: "./assets/textures/base_window_barricade_wood.png",
   baseCarpet: "./assets/textures/base_green_carpet.png",
   workbench: "./assets/textures/base_workbench.png",
   workbenchScrewdriverGrip: "./assets/textures/workbench_screwdriver_grip.png",
@@ -1517,11 +1522,15 @@ function buildBaseScene() {
   scene.fog = new THREE.Fog("#070908", 24, 58);
 
   const floorMaterial = createTextureMaterial(texturePaths.baseFloor, 3, 2, "#9a7a55");
+  const garageFloorMaterial = createTextureMaterial(texturePaths.floor, 2.5, 1.5, "#8a8982");
   const wallMaterial = createTextureMaterial(texturePaths.baseWall, 2, 1, "#8a897b");
   const pillarMaterial = createTextureMaterial(texturePaths.pillar, 1, 1, "#7d7d70");
-  const boardedWindowMaterial = createTextureMaterial(texturePaths.boardedWindow, 1, 1, "#8b6846");
+  const baseWindowMaterials = createBaseWindowMaterials();
   const baseDoorMaterial = createTextureMaterial(texturePaths.door, 1, 1, "#9b7a59");
   baseDoorMaterial.emissive = new THREE.Color("#2a1a0d");
+
+  addBaseOuterGround();
+  addBaseExteriorApproach();
 
   const rooms = [
     {
@@ -1547,10 +1556,26 @@ function buildBaseScene() {
       sharedSides: ["east"],
     },
     {
+      id: "northWestRoom",
+      x: -11.5,
+      z: -7,
+      width: 7,
+      depth: 7,
+      sharedSides: ["south", "east"],
+    },
+    {
+      id: "southWestRoom",
+      x: -11.5,
+      z: 7,
+      width: 7,
+      depth: 7,
+      sharedSides: ["north", "east"],
+    },
+    {
       id: "workshop",
-      x: -5,
+      x: -3,
       z: 9,
-      width: 6,
+      width: 10,
       depth: 6,
       openings: { north: [{ offset: 0, width: 2.4 }] },
       sharedSides: ["north"],
@@ -1562,7 +1587,7 @@ function buildBaseScene() {
       width: 6,
       depth: 6,
       openings: { north: [{ offset: 0, width: 2.4 }] },
-      sharedSides: ["north"],
+      sharedSides: ["north", "west"],
     },
     {
       id: "bathroom",
@@ -1571,28 +1596,45 @@ function buildBaseScene() {
       width: 6,
       depth: 6,
       openings: { south: [{ offset: 0, width: 2.4 }] },
-      sharedSides: ["south"],
+      sharedSides: ["south", "east"],
     },
     {
       id: "kitchen",
-      x: 5,
+      x: 3,
       z: -9,
-      width: 6,
+      width: 10,
       depth: 6,
       openings: { south: [{ offset: 0, width: 2.4 }] },
+      sharedSides: ["south"],
+    },
+    {
+      id: "garage",
+      x: 5,
+      z: -16,
+      width: 14,
+      depth: 8,
+      floorMaterial: garageFloorMaterial,
+      openings: { east: [{ offset: 0, width: 4.8 }] },
       sharedSides: ["south"],
     },
   ];
 
   for (const room of rooms) {
-    addBaseRoomFloor(room, floorMaterial);
+    addBaseRoomFloor(room, room.floorMaterial || floorMaterial);
     addBaseRoomWalls(room, wallMaterial, pillarMaterial);
   }
+  addBaseArchitecturalJoinWalls(wallMaterial, pillarMaterial);
 
-  addBarricadedWindow(-11.5, -3.22, boardedWindowMaterial, "north");
-  addBarricadedWindow(-5, 11.72, boardedWindowMaterial, "south");
-  addBarricadedWindow(5, 11.72, boardedWindowMaterial, "south");
-  addBarricadedWindow(5, -11.72, boardedWindowMaterial, "north");
+  addBarricadedWindow(-11.5, -3.22, baseWindowMaterials, "north");
+  addBarricadedWindow(-11.5, -10.22, baseWindowMaterials, "north");
+  addBarricadedWindow(-14.72, -7, baseWindowMaterials, "west");
+  addBarricadedWindow(-14.72, 7, baseWindowMaterials, "west");
+  addBarricadedWindow(-11.5, 10.22, baseWindowMaterials, "south");
+  addBarricadedWindow(-5, 11.72, baseWindowMaterials, "south");
+  addBarricadedWindow(5, 11.72, baseWindowMaterials, "south");
+  addBarricadedWindow(7.72, -3.5, baseWindowMaterials, "east");
+  addBarricadedWindow(7.72, 3.5, baseWindowMaterials, "east");
+  addBarricadedWindow(7.72, -9, baseWindowMaterials, "east");
   addBaseDoubleDoor(8, 0, baseDoorMaterial);
 
   addBaseStation("itemBox", "Item Box", -5.2, -2.75, "#57636c", () => makeCrate(1.75, 1.0, 1.1));
@@ -1701,6 +1743,128 @@ function addBaseRoomFloor(room, material) {
   scene.add(floor);
 }
 
+function addBaseOuterGround() {
+  const yardWidth = 48;
+  const yardDepth = 44;
+  const yardCenterX = -3.5;
+  const yardCenterZ = 0;
+  const soilMaterial = new THREE.MeshStandardMaterial({
+    color: "#242018",
+    roughness: 1,
+  });
+  const soilBed = new THREE.Mesh(new THREE.BoxGeometry(yardWidth, 0.18, yardDepth), soilMaterial);
+  soilBed.position.set(yardCenterX, -0.27, yardCenterZ);
+  soilBed.receiveShadow = true;
+  scene.add(soilBed);
+
+  const grassTexture = loadTextureWithFallback(texturePaths.baseOuterGrass);
+  grassTexture.colorSpace = THREE.SRGBColorSpace;
+  grassTexture.wrapS = THREE.RepeatWrapping;
+  grassTexture.wrapT = THREE.RepeatWrapping;
+  grassTexture.repeat.set(8, 7);
+  grassTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  const grassMaterial = new THREE.MeshStandardMaterial({
+    map: grassTexture,
+    color: "#9aa58c",
+    roughness: 1,
+    metalness: 0,
+  });
+  const grass = new THREE.Mesh(new THREE.PlaneGeometry(yardWidth, yardDepth), grassMaterial);
+  grass.rotation.x = -Math.PI / 2;
+  grass.position.set(yardCenterX, -0.175, yardCenterZ);
+  grass.receiveShadow = true;
+  scene.add(grass);
+}
+
+function addBaseExteriorApproach() {
+  const sandTexture = loadTextureWithFallback(texturePaths.baseSandPath);
+  sandTexture.colorSpace = THREE.SRGBColorSpace;
+  sandTexture.wrapS = THREE.RepeatWrapping;
+  sandTexture.wrapT = THREE.RepeatWrapping;
+  sandTexture.repeat.set(4.5, 1.15);
+  sandTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  const sandMaterial = new THREE.MeshStandardMaterial({
+    map: sandTexture,
+    color: "#a99572",
+    roughness: 1,
+  });
+  const path = new THREE.Mesh(new THREE.PlaneGeometry(11.8, 2.5), sandMaterial);
+  path.rotation.x = -Math.PI / 2;
+  path.position.set(13.9, -0.16, 0);
+  path.receiveShadow = true;
+  scene.add(path);
+
+  const drivewayTexture = loadTextureWithFallback(texturePaths.floor);
+  drivewayTexture.colorSpace = THREE.SRGBColorSpace;
+  drivewayTexture.wrapS = THREE.RepeatWrapping;
+  drivewayTexture.wrapT = THREE.RepeatWrapping;
+  drivewayTexture.repeat.set(3.2, 1.6);
+  drivewayTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  const drivewayMaterial = new THREE.MeshStandardMaterial({
+    map: drivewayTexture,
+    color: "#8d8a82",
+    roughness: 0.96,
+  });
+  const driveway = new THREE.Mesh(new THREE.PlaneGeometry(8.5, 4.8), drivewayMaterial);
+  driveway.rotation.x = -Math.PI / 2;
+  driveway.position.set(16.25, -0.158, -16);
+  driveway.receiveShadow = true;
+  scene.add(driveway);
+
+  const gate = new THREE.Group();
+  gate.position.set(19.85, 0, 0);
+  scene.add(gate);
+
+  const gateWood = createTextureMaterial(texturePaths.restFrameWood, 1.6, 1, "#725235");
+  gateWood.roughness = 0.88;
+  const gateMetal = new THREE.MeshStandardMaterial({ color: "#4d5350", metalness: 0.75, roughness: 0.35 });
+
+  for (const z of [-1.55, 1.55]) {
+    addBox(gate, 0.38, 2.25, 0.38, 0, 1.12, z, gateWood);
+    addBox(gate, 0.46, 0.16, 0.46, 0, 2.29, z, gateWood);
+  }
+
+  for (const panelCenter of [-0.72, 0.72]) {
+    const panel = new THREE.Group();
+    panel.position.set(-0.03, 0, panelCenter);
+    gate.add(panel);
+
+    for (const slatOffset of [-0.48, -0.24, 0, 0.24, 0.48]) {
+      addBox(panel, 0.15, 1.42, 0.2, 0, 1.15, slatOffset, gateWood);
+    }
+    addBox(panel, 0.17, 0.14, 1.24, -0.01, 0.62, 0, gateWood);
+    addBox(panel, 0.17, 0.14, 1.24, -0.01, 1.66, 0, gateWood);
+    const brace = addBox(panel, 0.18, 0.14, 1.35, -0.015, 1.14, 0, gateWood);
+    brace.rotation.x = panelCenter < 0 ? 0.68 : -0.68;
+  }
+
+  for (const z of [-1.3, 1.3]) {
+    for (const y of [0.76, 1.52]) {
+      const hinge = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.2, 12), gateMetal);
+      hinge.position.set(-0.13, y, z);
+      hinge.castShadow = true;
+      gate.add(hinge);
+    }
+  }
+
+  const latch = addBox(gate, 0.22, 0.12, 0.54, -0.13, 1.2, 0, gateMetal);
+  latch.castShadow = true;
+}
+
+function addBaseArchitecturalJoinWalls(wallMaterial, pillarMaterial) {
+  const doorwayPosts = [
+    [-8, -6],
+    [-8, -3.5],
+    [-8, 3.5],
+    [-8, 6],
+  ];
+  for (const [x, z] of doorwayPosts) addBaseWallPost(x, z, pillarMaterial);
+
+  addBaseWall(10, -12, 2, 0.125, wallMaterial);
+  addBaseWallPost(8, -12, pillarMaterial);
+  addBaseWallPost(12, -12, pillarMaterial);
+}
+
 function addBaseRoomWalls(room, wallMaterial, pillarMaterial) {
   for (const side of ["north", "south", "west", "east"]) {
     if (room.sharedSides?.includes(side)) continue;
@@ -1781,26 +1945,119 @@ function addBaseWallPosts(material) {
   }
 }
 
-function addBarricadedWindow(x, z, material, side = "south") {
-  const onVerticalWall = side === "east" || side === "west";
-  const xOffset = side === "east" ? -0.05 : side === "west" ? 0.05 : 0;
-  const zOffset = side === "south" ? -0.05 : side === "north" ? 0.05 : 0;
-  const darkGlass = new THREE.Mesh(
-    new THREE.BoxGeometry(onVerticalWall ? 0.08 : 1.55, 1.05, onVerticalWall ? 1.55 : 0.08),
-    new THREE.MeshStandardMaterial({ color: "#101817", emissive: "#080b0a", roughness: 0.6 })
-  );
-  darkGlass.position.set(x + xOffset, 1.35, z + zOffset);
-  scene.add(darkGlass);
+function createBaseWindowMaterials() {
+  const frameTexture = loadTextureWithFallback(texturePaths.baseWindowFrame);
+  const glassTexture = loadTextureWithFallback(texturePaths.baseWindowGlass);
+  const boardTexture = loadTextureWithFallback(texturePaths.baseWindowBoards);
 
-  for (let i = 0; i < 3; i++) {
-    const board = new THREE.Mesh(
-      new THREE.BoxGeometry(onVerticalWall ? 0.12 : 1.85, 0.16, onVerticalWall ? 1.85 : 0.12),
-      material
-    );
-    board.position.set(x + xOffset * 2, 1.0 + i * 0.32, z + zOffset * 2);
-    board.rotation.z = i % 2 === 0 ? 0.18 : -0.12;
+  for (const texture of [frameTexture, glassTexture, boardTexture]) {
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  }
+
+  return {
+    frame: new THREE.MeshStandardMaterial({ map: frameTexture, color: "#a58b70", roughness: 0.78 }),
+    glass: new THREE.MeshBasicMaterial({
+      map: glassTexture,
+      color: "#bcc9c9",
+      transparent: true,
+      opacity: 0.64,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+      toneMapped: false,
+    }),
+    boards: new THREE.MeshStandardMaterial({ map: boardTexture, color: "#9b7857", roughness: 0.92 }),
+    recess: new THREE.MeshStandardMaterial({ color: "#0b1111", emissive: "#050807", roughness: 0.78 }),
+    metal: new THREE.MeshStandardMaterial({ color: "#727875", metalness: 0.72, roughness: 0.34 }),
+  };
+}
+
+function createBaseWindowBoardGeometry(width, height, depth) {
+  const corner = 0.035;
+  const shape = new THREE.Shape();
+  shape.moveTo(-width / 2 + corner, -height / 2);
+  shape.lineTo(width / 2 - corner * 2, -height / 2 + corner * 0.2);
+  shape.lineTo(width / 2, -height / 2 + corner);
+  shape.lineTo(width / 2 - corner * 0.4, height / 2 - corner);
+  shape.lineTo(width / 2 - corner, height / 2);
+  shape.lineTo(-width / 2 + corner * 0.4, height / 2 - corner * 0.15);
+  shape.lineTo(-width / 2, height / 2 - corner);
+  shape.lineTo(-width / 2 + corner * 0.2, -height / 2 + corner);
+  shape.closePath();
+
+  const geometry = new THREE.ExtrudeGeometry(shape, {
+    depth,
+    bevelEnabled: true,
+    bevelSegments: 2,
+    bevelSize: 0.012,
+    bevelThickness: 0.012,
+  });
+  geometry.center();
+  return geometry;
+}
+
+function addBarricadedWindow(x, z, materials, side = "south") {
+  const orientation = {
+    north: { x: 0, z: 0.08, rotationY: 0 },
+    south: { x: 0, z: -0.08, rotationY: Math.PI },
+    east: { x: -0.08, z: 0, rotationY: -Math.PI / 2 },
+    west: { x: 0.08, z: 0, rotationY: Math.PI / 2 },
+  }[side];
+  const group = new THREE.Group();
+  group.position.set(x + orientation.x, 0.69, z + orientation.z);
+  group.rotation.y = orientation.rotationY;
+  group.scale.setScalar(0.5);
+  scene.add(group);
+
+  addBox(group, 1.72, 1.12, 0.05, 0, 1.38, -0.04, materials.recess);
+
+  for (const paneX of [-0.39, 0.39]) {
+    for (const paneY of [1.12, 1.64]) {
+      const pane = addBox(group, 0.68, 0.42, 0.025, paneX, paneY, 0.005, materials.glass);
+      pane.castShadow = false;
+    }
+  }
+
+  addBox(group, 2.0, 0.16, 0.16, 0, 2.05, 0.07, materials.frame);
+  addBox(group, 2.0, 0.16, 0.16, 0, 0.71, 0.07, materials.frame);
+  addBox(group, 0.16, 1.34, 0.16, -0.92, 1.38, 0.07, materials.frame);
+  addBox(group, 0.16, 1.34, 0.16, 0.92, 1.38, 0.07, materials.frame);
+  addBox(group, 0.1, 1.12, 0.13, 0, 1.38, 0.09, materials.frame);
+  addBox(group, 1.68, 0.1, 0.13, 0, 1.38, 0.09, materials.frame);
+  addBox(group, 2.12, 0.16, 0.34, 0, 0.64, 0.18, materials.frame);
+
+  for (const fastenerX of [-0.82, 0.82]) {
+    for (const fastenerY of [0.77, 1.99]) {
+      const fastener = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.025, 12), materials.metal);
+      fastener.position.set(fastenerX, fastenerY, 0.165);
+      fastener.rotation.x = Math.PI / 2;
+      fastener.castShadow = true;
+      group.add(fastener);
+    }
+  }
+
+  const boardAngles = [0.12, -0.1, 0.075];
+  const boardHeights = [1.04, 1.4, 1.76];
+  for (let index = 0; index < boardAngles.length; index += 1) {
+    const boardGroup = new THREE.Group();
+    boardGroup.position.set(0, boardHeights[index], 0.25 + index * 0.008);
+    boardGroup.rotation.z = boardAngles[index];
+    group.add(boardGroup);
+
+    const board = new THREE.Mesh(createBaseWindowBoardGeometry(2.18, 0.2, 0.11), materials.boards);
     board.castShadow = true;
-    scene.add(board);
+    board.receiveShadow = true;
+    boardGroup.add(board);
+
+    for (const nailX of [-0.72, 0.72]) {
+      const nail = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.026, 12), materials.metal);
+      nail.position.set(nailX, 0, 0.07);
+      nail.rotation.x = Math.PI / 2;
+      nail.castShadow = true;
+      boardGroup.add(nail);
+    }
   }
 }
 
