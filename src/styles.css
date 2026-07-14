@@ -1745,15 +1745,59 @@ p {
   gap: 8px;
 }
 
-.settings-panel {
-  margin-top: 14px;
-  padding: 12px;
-  border: 1px solid rgba(198, 202, 190, 0.18);
-  border-radius: 6px;
-  background: rgba(0, 0, 0, 0.22);
+.settings-menu {
+  z-index: 9;
 }
 
-.settings-panel label {
+.settings-menu__body {
+  width: min(480px, calc(100% - 32px));
+  max-height: min(620px, calc(100vh - 32px));
+  padding: 0 20px 20px;
+  overflow-y: auto;
+}
+
+.settings-menu__header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 -20px 20px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(198, 202, 190, 0.16);
+  background: rgba(18, 22, 20, 0.98);
+}
+
+.settings-menu__header p,
+.settings-menu__header h2 {
+  margin: 0;
+}
+
+.settings-menu__header p {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.settings-menu__header h2 {
+  margin-top: 2px;
+  font-size: 1.25rem;
+}
+
+.modal .settings-menu__close {
+  width: 36px;
+  margin: 0;
+}
+
+.settings-menu__controls {
+  display: grid;
+  gap: 18px;
+}
+
+.settings-control {
   display: grid;
   gap: 8px;
   color: var(--muted);
@@ -1762,7 +1806,19 @@ p {
   text-transform: uppercase;
 }
 
-.settings-panel select {
+.settings-control > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.settings-control output {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.settings-control select {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid rgba(198, 202, 190, 0.26);
@@ -1770,6 +1826,20 @@ p {
   background: rgba(0, 0, 0, 0.34);
   color: var(--text);
   font: inherit;
+}
+
+.settings-control input[type="range"] {
+  width: 100%;
+  accent-color: #758f79;
+  cursor: pointer;
+}
+
+.settings-menu__message {
+  min-height: 1.2em;
+  margin: 18px 0 0;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.84rem;
 }
 
 .pause-menu__message {

@@ -77,28 +77,38 @@ function syncBaseMusic() {
   }
 }
 
+function applyAudioSettings() {
+  const musicVolume = THREE.MathUtils.clamp(state.settings.musicVolume / 100, 0, 1);
+  baseMusic.volume = musicVolume;
+  abandonedHouseMusic.volume = musicVolume;
+}
+
+function getSoundEffectsVolume(scale = 1) {
+  return THREE.MathUtils.clamp((state.settings.soundEffectsVolume / 100) * scale, 0, 1);
+}
+
 function playDoorOpenSound() {
   const source = doorOpenSounds[Math.floor(Math.random() * doorOpenSounds.length)];
   const sound = source.cloneNode();
-  sound.volume = 0.7;
+  sound.volume = getSoundEffectsVolume();
   sound.play().catch(() => {});
 }
 
 function playDoorCloseSound() {
   const sound = doorCloseSound.cloneNode();
-  sound.volume = 0.7;
+  sound.volume = getSoundEffectsVolume();
   sound.play().catch(() => {});
 }
 
 function playDoorLockedSound() {
   const sound = doorLockedSound.cloneNode();
-  sound.volume = 0.7;
+  sound.volume = getSoundEffectsVolume();
   sound.play().catch(() => {});
 }
 
 function playDoorUnlockSound() {
   const sound = doorUnlockSound.cloneNode();
-  sound.volume = 0.7;
+  sound.volume = getSoundEffectsVolume();
   sound.play().catch(() => {});
 }
 
@@ -106,7 +116,7 @@ function playZombieSound(zombie) {
   zombie.userData.vocalAudio?.pause();
   const source = zombieSounds[Math.floor(Math.random() * zombieSounds.length)];
   const sound = source.cloneNode();
-  sound.volume = 0.55;
+  sound.volume = getSoundEffectsVolume(0.8);
   zombie.userData.vocalAudio = sound;
   sound.addEventListener("ended", () => {
     if (zombie.userData.vocalAudio === sound) zombie.userData.vocalAudio = null;
@@ -116,7 +126,7 @@ function playZombieSound(zombie) {
 
 function playZombieDamageSound(lethal) {
   const sound = (lethal ? zombieDeathSound : zombieHitSound).cloneNode();
-  sound.volume = 0.7;
+  sound.volume = getSoundEffectsVolume();
   sound.play().catch(() => {});
 }
 
@@ -124,7 +134,7 @@ function playRandomPickupSound(isAmmo) {
   const pool = isAmmo ? ammoPickupSounds : itemPickupSounds;
   const source = pool[Math.floor(Math.random() * pool.length)];
   const sound = source.cloneNode();
-  sound.volume = 0.7;
+  sound.volume = getSoundEffectsVolume();
   sound.play().catch(() => {});
 }
 
@@ -150,8 +160,14 @@ const pauseLoadGameButton = document.querySelector("#pauseLoadGame");
 const pauseSettingsButton = document.querySelector("#pauseSettings");
 const pauseQuitGameButton = document.querySelector("#pauseQuitGame");
 const pauseMenuMessage = document.querySelector("#pauseMenuMessage");
-const settingsPanel = document.querySelector("#settingsPanel");
+const settingsMenu = document.querySelector("#settingsMenu");
+const closeSettingsButton = document.querySelector("#closeSettings");
 const resolutionSelect = document.querySelector("#resolutionSelect");
+const musicVolumeInput = document.querySelector("#musicVolume");
+const musicVolumeValue = document.querySelector("#musicVolumeValue");
+const soundEffectsVolumeInput = document.querySelector("#soundEffectsVolume");
+const soundEffectsVolumeValue = document.querySelector("#soundEffectsVolumeValue");
+const settingsMessage = document.querySelector("#settingsMessage");
 const weaponHud = document.querySelector("#weaponHud");
 const debugPanel = document.querySelector("#debugPanel");
 const debugPanelContent = document.querySelector("#debugPanelContent");
@@ -749,14 +765,37 @@ function loadSettings() {
     const saved = raw ? JSON.parse(raw) : null;
     return {
       resolution: RESOLUTION_PRESETS[saved?.resolution] !== undefined ? saved.resolution : "auto",
+      musicVolume: normalizeVolumeSetting(saved?.musicVolume, 35),
+      soundEffectsVolume: normalizeVolumeSetting(saved?.soundEffectsVolume, 70),
     };
   } catch {
-    return { resolution: "auto" };
+    return { resolution: "auto", musicVolume: 35, soundEffectsVolume: 70 };
   }
+}
+
+function normalizeVolumeSetting(value, fallback) {
+  const numericValue = Number(value);
+  return Number.isFinite(numericValue) ? THREE.MathUtils.clamp(Math.round(numericValue), 0, 100) : fallback;
 }
 
 function saveSettings() {
   localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(state.settings));
+}
+
+function syncSettingsControls() {
+  resolutionSelect.value = state.settings.resolution;
+  musicVolumeInput.value = String(state.settings.musicVolume);
+  musicVolumeValue.textContent = `${state.settings.musicVolume}%`;
+  soundEffectsVolumeInput.value = String(state.settings.soundEffectsVolume);
+  soundEffectsVolumeValue.textContent = `${state.settings.soundEffectsVolume}%`;
+}
+
+function updateVolumeSetting(settingKey, input, output) {
+  const value = normalizeVolumeSetting(input.value, state.settings[settingKey]);
+  state.settings[settingKey] = value;
+  output.textContent = `${value}%`;
+  applyAudioSettings();
+  saveSettings();
 }
 
 const state = {
@@ -800,6 +839,7 @@ const state = {
 };
 
 syncActiveCharacterLoadout();
+applyAudioSettings();
 
 let playerAnimationClips = getCharacterProfile(state.character).animations;
 let restStationSelectedCharacter = state.character;
@@ -1370,14 +1410,19 @@ closeBasePanelButton.addEventListener("click", closeBasePanel);
 closeInventoryButton.addEventListener("click", closeInventory);
 returnBaseButton.addEventListener("click", returnToBase);
 pauseLoadGameButton.addEventListener("click", loadGameFromPauseMenu);
-pauseSettingsButton.addEventListener("click", toggleSettingsPanel);
+pauseSettingsButton.addEventListener("click", openSettingsMenu);
 pauseQuitGameButton.addEventListener("click", quitGameImmediately);
+closeSettingsButton.addEventListener("click", closeSettingsMenu);
 resolutionSelect.addEventListener("change", () => {
   state.settings.resolution = resolutionSelect.value;
   saveSettings();
   applyResolution();
-  pauseMenuMessage.textContent = `Resolution set to ${getResolutionLabel(state.settings.resolution)}.`;
+  settingsMessage.textContent = `Resolution set to ${getResolutionLabel(state.settings.resolution)}.`;
 });
+musicVolumeInput.addEventListener("input", () => updateVolumeSetting("musicVolume", musicVolumeInput, musicVolumeValue));
+soundEffectsVolumeInput.addEventListener("input", () => (
+  updateVolumeSetting("soundEffectsVolume", soundEffectsVolumeInput, soundEffectsVolumeValue)
+));
 
 function initThree() {
   scene = new THREE.Scene();
@@ -1404,7 +1449,7 @@ function initThree() {
   lamp.shadow.mapSize.set(1024, 1024);
   scene.add(lamp);
 
-  resolutionSelect.value = state.settings.resolution;
+  syncSettingsControls();
   resize();
 }
 
@@ -6085,6 +6130,10 @@ function handleEscapeKey() {
     quantityPromptCancel.click();
     return;
   }
+  if (isSettingsMenuOpen()) {
+    closeSettingsMenu();
+    return;
+  }
   if (isPauseMenuOpen()) {
     closePauseMenu();
     return;
@@ -6116,6 +6165,7 @@ function isPaused() {
   return (
     isInventoryOpen() ||
     isPauseMenuOpen() ||
+    isSettingsMenuOpen() ||
     !basePanel.classList.contains("hidden") ||
     !runEnd.classList.contains("hidden") ||
     !quantityPrompt.classList.contains("hidden")
@@ -6126,16 +6176,23 @@ function isPauseMenuOpen() {
   return !pauseMenu.classList.contains("hidden");
 }
 
+function isSettingsMenuOpen() {
+  return !settingsMenu.classList.contains("hidden");
+}
+
 function openPauseMenu() {
   keys.clear();
   hideMissionInteractionUi();
   pauseMenuMessage.textContent = "";
+  settingsMenu.classList.add("hidden");
   pauseMenu.classList.remove("hidden");
 }
 
 function closePauseMenu() {
   pauseMenu.classList.add("hidden");
+  settingsMenu.classList.add("hidden");
   pauseMenuMessage.textContent = "";
+  settingsMessage.textContent = "";
 }
 
 function loadGameFromPauseMenu() {
@@ -6167,9 +6224,18 @@ function restoreLoadedGameToBase() {
   renderQuickbar();
 }
 
-function toggleSettingsPanel() {
-  settingsPanel.classList.toggle("hidden");
+function openSettingsMenu() {
+  syncSettingsControls();
   pauseMenuMessage.textContent = "";
+  settingsMessage.textContent = "";
+  pauseMenu.classList.add("hidden");
+  settingsMenu.classList.remove("hidden");
+}
+
+function closeSettingsMenu() {
+  settingsMenu.classList.add("hidden");
+  settingsMessage.textContent = "";
+  pauseMenu.classList.remove("hidden");
 }
 
 function quitGameImmediately() {
@@ -8356,10 +8422,8 @@ function finishRun(extracted) {
   syncBaseMusic();
   if (extracted) {
     const recovered = state.inventory.map((entry) => `${getInventoryEntryQty(entry) > 1 ? `${getInventoryEntryQty(entry)}x ` : ""}${getInventoryEntryName(entry)}`);
-    for (const entry of state.inventory) addToStash(getInventoryEntryName(entry), getInventoryEntryQty(entry));
     ui.runEndTitle.textContent = "Extraction Successful";
-    ui.runEndText.textContent = `Recovered ${state.inventory.length} item stack(s): ${recovered.join(", ") || "nothing"}.`;
-    state.inventory.length = 0;
+    ui.runEndText.textContent = `Recovered ${state.inventory.length} item stack(s): ${recovered.join(", ") || "nothing"}. Items remain in ${getCharacterProfile(state.character).name}'s inventory until moved manually at the Item Box.`;
   } else {
     state.inventory.length = 0;
     Object.assign(state.magazines, makeDefaultMagazines());

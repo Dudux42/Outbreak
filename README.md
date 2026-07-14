@@ -95,6 +95,22 @@ Long-term work:
 - Improve performance with broader spatial partitioning and AI update budgets.
 - Add automated checks for sprite-sheet assets, item definitions, and animation state coverage.
 
+## Major Systems Roadmap
+
+The following systems define the intended long-term progression model. Details and balance values remain subject to iteration.
+
+1. **Base construction:** The safehouse begins as a simple main hall. Blocked rooms must first be cleared through the Command Center, then assigned and constructed as full-room stations using resources.
+2. **Exterior construction:** Outdoor plots will support structures such as gardens, exterior dormitories, watchtowers, and other future facilities.
+3. **Fence upgrades:** The Command Center will manage perimeter improvements that increase security against zombie attacks.
+4. **Base attacks:** Zombie assaults may become playable defense missions or simulated outcomes. Rooms, barricades, defenses, and stored resources will affect damage and success.
+5. **Character statistics:** Survivors will improve attributes including health, stamina, fighting, shooting, and looting.
+6. **Backgrounds, traits, and abilities:** Every survivor will have individual bonuses and unlocks. For example, Ava's Survivalist trait may improve health and stamina while unlocking kitchen recipes.
+7. **Injury, infection, and permadeath:** Injuries apply specific penalties, infection can eventually kill and turn a survivor, and mission deaths are permanent. Medical treatment can temporarily halt infection, while a rare craftable cure becomes a late-game objective.
+8. **Automated missions:** Survivors can be sent on lower-yield scavenging runs with simulated injury and infection risk.
+9. **Location-based injuries:** Zombie attacks can cause injuries such as damaged legs or arms, reducing movement, attack power, accuracy, or other related abilities until treated.
+
+These systems should be implemented incrementally, with save-data migration and UI support considered before each feature becomes persistent.
+
 ## Prototype Status
 
 This is an active prototype. The current codebase still keeps most gameplay systems in `src/main.js`; modularization, deeper station upgrades, loot balancing, crafting, save data, and full combat polish are planned future passes.

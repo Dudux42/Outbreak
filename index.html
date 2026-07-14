@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Outbreak Run Prototype</title>
-    <link rel="stylesheet" href="./src/styles.css?v=rest-carried-icons" />
+    <link rel="stylesheet" href="./src/styles.css?v=settings-audio" />
   </head>
   <body>
     <main id="app">
@@ -133,8 +133,21 @@
             <button id="pauseSettings" type="button">Settings</button>
             <button id="pauseQuitGame" type="button">Quit Game</button>
           </div>
-          <section id="settingsPanel" class="settings-panel hidden" aria-label="Settings">
-            <label>
+          <p id="pauseMenuMessage" class="pause-menu__message"></p>
+        </div>
+      </section>
+
+      <section id="settingsMenu" class="modal settings-menu hidden">
+        <div class="modal__body settings-menu__body">
+          <header class="settings-menu__header">
+            <div>
+              <p>Options</p>
+              <h2>Settings</h2>
+            </div>
+            <button id="closeSettings" class="icon-button settings-menu__close" type="button" aria-label="Close settings">X</button>
+          </header>
+          <div class="settings-menu__controls">
+            <label class="settings-control">
               <span>Resolution</span>
               <select id="resolutionSelect">
                 <option value="auto">Auto</option>
@@ -146,8 +159,16 @@
                 <option value="3840x2160">3840 x 2160</option>
               </select>
             </label>
-          </section>
-          <p id="pauseMenuMessage" class="pause-menu__message"></p>
+            <label class="settings-control">
+              <span>Music Volume <output id="musicVolumeValue">35%</output></span>
+              <input id="musicVolume" type="range" min="0" max="100" step="1" value="35" />
+            </label>
+            <label class="settings-control">
+              <span>Sound Effects Volume <output id="soundEffectsVolumeValue">70%</output></span>
+              <input id="soundEffectsVolume" type="range" min="0" max="100" step="1" value="70" />
+            </label>
+          </div>
+          <p id="settingsMessage" class="settings-menu__message"></p>
         </div>
       </section>
 
