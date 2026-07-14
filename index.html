@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Outbreak Run Prototype</title>
-    <link rel="stylesheet" href="./src/styles.css?v=ammo-reload" />
+    <link rel="stylesheet" href="./src/styles.css?v=rest-carried-icons" />
   </head>
   <body>
     <main id="app">
@@ -53,6 +53,11 @@
 
       <section id="prompt" class="prompt hidden"></section>
 
+      <section id="interactionHint" class="interaction-hint hidden" aria-hidden="true">
+        <kbd>E</kbd>
+      </section>
+      <section id="playerNotice" class="player-notice hidden" aria-live="polite"></section>
+
       <section id="quickbar" class="quickbar" aria-label="Quick access bar"></section>
 
       <section id="weaponHud" class="weapon-hud hidden" aria-label="Held weapon">
@@ -72,17 +77,12 @@
       </section>
 
       <section id="inventoryOverlay" class="inventory-overlay hidden">
-        <div class="inventory-window">
-          <header class="inventory-header">
-            <div>
-              <p class="eyebrow">Survivor Inventory</p>
-              <h2 id="inventoryCharacterName">Ava Belmont</h2>
-            </div>
-            <button id="closeInventory" class="icon-button" aria-label="Close inventory">X</button>
-          </header>
+        <div class="inventory-window inventory-window--reference">
+          <button id="closeInventory" class="icon-button inventory-close" aria-label="Close inventory">X</button>
           <div class="inventory-layout">
             <section class="survivor-preview">
-              <div class="inventory-sprite" aria-label="Survivor idle sprite"></div>
+              <h2 id="inventoryCharacterName">Ava Belmont</h2>
+              <img id="inventoryPortrait" class="inventory-portrait" src="" alt="Survivor portrait" />
               <div class="survivor-stats">
                 <span>HP <b id="inventoryHp">100</b></span>
                 <span>Armor Class <b id="inventoryArmor">0</b></span>
@@ -122,6 +122,32 @@
           <h2 id="runEndTitle">Run Complete</h2>
           <p id="runEndText"></p>
           <button id="returnBase">Return to Base</button>
+        </div>
+      </section>
+
+      <section id="pauseMenu" class="modal pause-menu hidden">
+        <div class="modal__body pause-menu__body">
+          <h2>Paused</h2>
+          <div class="pause-menu__actions">
+            <button id="pauseLoadGame" type="button">Load Game</button>
+            <button id="pauseSettings" type="button">Settings</button>
+            <button id="pauseQuitGame" type="button">Quit Game</button>
+          </div>
+          <section id="settingsPanel" class="settings-panel hidden" aria-label="Settings">
+            <label>
+              <span>Resolution</span>
+              <select id="resolutionSelect">
+                <option value="auto">Auto</option>
+                <option value="1280x720">1280 x 720</option>
+                <option value="1366x768">1366 x 768</option>
+                <option value="1600x900">1600 x 900</option>
+                <option value="1920x1080">1920 x 1080</option>
+                <option value="2560x1440">2560 x 1440</option>
+                <option value="3840x2160">3840 x 2160</option>
+              </select>
+            </label>
+          </section>
+          <p id="pauseMenuMessage" class="pause-menu__message"></p>
         </div>
       </section>
 
