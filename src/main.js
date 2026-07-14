@@ -1020,6 +1020,17 @@ const BASE_NAV_EDGES = Object.freeze([
   ["northEastDoorRoom", "futureNorthEast"],
 ]);
 
+const BASE_FENCE_TIERS = Object.freeze({
+  simple: Object.freeze({
+    height: 1.42,
+    postHeight: 1.72,
+    boardWidth: 0.3,
+    boardSpacing: 0.34,
+    postSpacing: 2.5,
+    tint: "#d1a066",
+  }),
+});
+
 const texturePaths = {
   floor: "./assets/textures/floor_concrete.png",
   wall: "./assets/textures/wall_stained.png",
@@ -1033,6 +1044,12 @@ const texturePaths = {
   baseWindowFrame: "./assets/textures/base_window_frame_wood.png",
   baseWindowGlass: "./assets/textures/base_window_dirty_glass.png",
   baseWindowBoards: "./assets/textures/base_window_barricade_wood.png",
+  baseDoubleDoorAlbedo: "./assets/textures/base_double_door_albedo.png",
+  baseDoubleDoorBump: "./assets/textures/base_double_door_bump.png",
+  baseDoubleDoorRoughness: "./assets/textures/base_double_door_roughness.png",
+  baseFenceSimpleAlbedo: "./assets/textures/base_fence_simple_albedo.png",
+  baseFenceSimpleBump: "./assets/textures/base_fence_simple_bump.png",
+  baseFenceSimpleRoughness: "./assets/textures/base_fence_simple_roughness.png",
   baseCarpet: "./assets/textures/base_green_carpet.png",
   workbench: "./assets/textures/base_workbench.png",
   workbenchScrewdriverGrip: "./assets/textures/workbench_screwdriver_grip.png",
@@ -1526,10 +1543,8 @@ function buildBaseScene() {
   const wallMaterial = createTextureMaterial(texturePaths.baseWall, 2, 1, "#8a897b");
   const pillarMaterial = createTextureMaterial(texturePaths.pillar, 1, 1, "#7d7d70");
   const baseWindowMaterials = createBaseWindowMaterials();
-  const baseDoorMaterial = createTextureMaterial(texturePaths.door, 1, 1, "#9b7a59");
-  baseDoorMaterial.emissive = new THREE.Color("#2a1a0d");
-
   addBaseOuterGround();
+  addBasePerimeterFence("simple");
   addBaseExteriorApproach();
 
   const rooms = [
@@ -1542,7 +1557,7 @@ function buildBaseScene() {
       openings: {
         north: [{ offset: -5, width: 2.4 }, { offset: 5, width: 2.4 }],
         south: [{ offset: -5, width: 2.4 }, { offset: 5, width: 2.4 }],
-        west: [{ offset: 0, width: 2.4 }],
+        west: [{ offset: -5, width: 2.4 }, { offset: 0, width: 2.4 }, { offset: 5, width: 2.4 }],
         east: [{ offset: 0, width: 2.4 }],
       },
     },
@@ -1625,7 +1640,6 @@ function buildBaseScene() {
   }
   addBaseArchitecturalJoinWalls(wallMaterial, pillarMaterial);
 
-  addBarricadedWindow(-11.5, -3.22, baseWindowMaterials, "north");
   addBarricadedWindow(-11.5, -10.22, baseWindowMaterials, "north");
   addBarricadedWindow(-14.72, -7, baseWindowMaterials, "west");
   addBarricadedWindow(-14.72, 7, baseWindowMaterials, "west");
@@ -1635,7 +1649,7 @@ function buildBaseScene() {
   addBarricadedWindow(7.72, -3.5, baseWindowMaterials, "east");
   addBarricadedWindow(7.72, 3.5, baseWindowMaterials, "east");
   addBarricadedWindow(7.72, -9, baseWindowMaterials, "east");
-  addBaseDoubleDoor(8, 0, baseDoorMaterial);
+  addBaseDoubleDoor(8, 0);
 
   addBaseStation("itemBox", "Item Box", -5.2, -2.75, "#57636c", () => makeCrate(1.75, 1.0, 1.1));
   addBaseStation("intel", "Intel Center", -5.2, 2.75, "#334a5b", () => makeIntelDesk());
@@ -1776,6 +1790,199 @@ function addBaseOuterGround() {
   scene.add(grass);
 }
 
+function createBaseFenceMaterial(albedoPath, bumpPath, roughnessPath, tint, rotation = 0) {
+  const configureTexture = (path, colorTexture = false) => {
+    const texture = loadTextureWithFallback(path);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(0.1, 0.28);
+    texture.center.set(0.5, 0.5);
+    texture.rotation = rotation;
+    texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    texture.magFilter = THREE.LinearFilter;
+    texture.minFilter = THREE.LinearMipmapLinearFilter;
+    if (colorTexture) texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+  };
+
+  return new THREE.MeshStandardMaterial({
+    map: configureTexture(albedoPath, true),
+    bumpMap: configureTexture(bumpPath),
+    bumpScale: 0.026,
+    roughnessMap: configureTexture(roughnessPath),
+    color: tint,
+    roughness: 0.94,
+    metalness: 0,
+  });
+}
+
+function createSimpleFenceBoardGeometry(width, height) {
+  const halfWidth = width / 2;
+  const shape = new THREE.Shape();
+  shape.moveTo(-halfWidth, 0);
+  shape.lineTo(-halfWidth, height - 0.11);
+  shape.lineTo(-halfWidth * 0.48, height - 0.025);
+  shape.lineTo(halfWidth * 0.34, height);
+  shape.lineTo(halfWidth, height - 0.08);
+  shape.lineTo(halfWidth, 0);
+  shape.closePath();
+
+  const geometry = new THREE.ExtrudeGeometry(shape, {
+    depth: 0.105,
+    bevelEnabled: true,
+    bevelSegments: 1,
+    bevelSize: 0.012,
+    bevelThickness: 0.012,
+  });
+  geometry.translate(0, 0, -0.0525);
+  return geometry;
+}
+
+function addFenceInstancedMesh(geometry, material, transforms) {
+  if (!transforms.length) return;
+  const mesh = new THREE.InstancedMesh(geometry, material, transforms.length);
+  const dummy = new THREE.Object3D();
+  transforms.forEach((transform, index) => {
+    dummy.position.copy(transform.position);
+    dummy.rotation.set(0, transform.rotationY || 0, 0);
+    dummy.scale.copy(transform.scale || new THREE.Vector3(1, 1, 1));
+    dummy.updateMatrix();
+    mesh.setMatrixAt(index, dummy.matrix);
+  });
+  mesh.instanceMatrix.needsUpdate = true;
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  scene.add(mesh);
+}
+
+function addBasePerimeterFence(tierId = "simple") {
+  const tier = BASE_FENCE_TIERS[tierId] || BASE_FENCE_TIERS.simple;
+  const boardMaterial = createBaseFenceMaterial(
+    texturePaths.baseFenceSimpleAlbedo,
+    texturePaths.baseFenceSimpleBump,
+    texturePaths.baseFenceSimpleRoughness,
+    tier.tint
+  );
+  const railMaterial = createBaseFenceMaterial(
+    texturePaths.baseFenceSimpleAlbedo,
+    texturePaths.baseFenceSimpleBump,
+    texturePaths.baseFenceSimpleRoughness,
+    "#bd8b54",
+    Math.PI / 2
+  );
+  const postMaterial = createBaseFenceMaterial(
+    texturePaths.baseFenceSimpleAlbedo,
+    texturePaths.baseFenceSimpleBump,
+    texturePaths.baseFenceSimpleRoughness,
+    "#b7804b"
+  );
+  const nailMaterial = new THREE.MeshStandardMaterial({
+    color: "#4b4d48",
+    metalness: 0.72,
+    roughness: 0.48,
+  });
+
+  const parts = {
+    boards: [],
+    posts: [],
+    rails: [],
+    caps: [],
+    nails: [],
+    postKeys: new Set(),
+  };
+  let boardSequence = 0;
+
+  const addRun = (axis, start, end, fixed) => {
+    const length = end - start;
+    if (length <= 0.2) return;
+    const boardCount = Math.max(1, Math.floor(length / tier.boardSpacing));
+    const boardStep = length / boardCount;
+    const runRotation = axis === "z" ? Math.PI / 2 : 0;
+    const normalOffset = 0.078;
+
+    for (let index = 0; index < boardCount; index += 1) {
+      const along = start + boardStep * (index + 0.5);
+      const variation = Math.sin((boardSequence + 1) * 12.9898) * 0.5 + 0.5;
+      const heightScale = 0.95 + variation * 0.08;
+      const position = axis === "x"
+        ? new THREE.Vector3(along, 0.035, fixed)
+        : new THREE.Vector3(fixed, 0.035, along);
+      parts.boards.push({
+        position,
+        rotationY: runRotation + (variation - 0.5) * 0.018,
+        scale: new THREE.Vector3(1, heightScale, 1),
+      });
+
+      for (const nailY of [0.5, 1.08]) {
+        for (const side of [-1, 1]) {
+          const nailPosition = position.clone();
+          nailPosition.y = nailY;
+          if (axis === "x") nailPosition.z += normalOffset * side;
+          else nailPosition.x += normalOffset * side;
+          parts.nails.push({
+            position: nailPosition,
+            scale: axis === "x"
+              ? new THREE.Vector3(0.027, 0.027, 0.015)
+              : new THREE.Vector3(0.015, 0.027, 0.027),
+          });
+        }
+      }
+      boardSequence += 1;
+    }
+
+    const sectionCount = Math.max(1, Math.ceil(length / tier.postSpacing));
+    const sectionLength = length / sectionCount;
+    for (let section = 0; section <= sectionCount; section += 1) {
+      const along = start + sectionLength * section;
+      const postPosition = axis === "x"
+        ? new THREE.Vector3(along, tier.postHeight / 2, fixed)
+        : new THREE.Vector3(fixed, tier.postHeight / 2, along);
+      const postKey = `${postPosition.x.toFixed(2)}:${postPosition.z.toFixed(2)}`;
+      if (!parts.postKeys.has(postKey)) {
+        parts.postKeys.add(postKey);
+        parts.posts.push({
+          position: postPosition,
+          scale: new THREE.Vector3(0.27, tier.postHeight, 0.27),
+        });
+        parts.caps.push({
+          position: new THREE.Vector3(postPosition.x, tier.postHeight + 0.1, postPosition.z),
+          rotationY: Math.PI / 4,
+        });
+      }
+
+      if (section === sectionCount) continue;
+      const railAlong = along + sectionLength / 2;
+      for (const railY of [0.48, 1.08]) {
+        parts.rails.push({
+          position: axis === "x"
+            ? new THREE.Vector3(railAlong, railY, fixed)
+            : new THREE.Vector3(fixed, railY, railAlong),
+          scale: axis === "x"
+            ? new THREE.Vector3(sectionLength + 0.05, 0.11, 0.12)
+            : new THREE.Vector3(0.12, 0.11, sectionLength + 0.05),
+        });
+      }
+    }
+  };
+
+  const minX = -27.1;
+  const maxX = 20;
+  const minZ = -21.6;
+  const maxZ = 21.6;
+  addRun("x", minX, maxX, minZ);
+  addRun("x", minX, maxX, maxZ);
+  addRun("z", minZ, maxZ, minX);
+  addRun("z", minZ, -18.85, maxX);
+  addRun("z", -13.15, -2.15, maxX);
+  addRun("z", 2.15, maxZ, maxX);
+
+  addFenceInstancedMesh(createSimpleFenceBoardGeometry(tier.boardWidth, tier.height), boardMaterial, parts.boards);
+  addFenceInstancedMesh(new THREE.BoxGeometry(1, 1, 1), postMaterial, parts.posts);
+  addFenceInstancedMesh(new THREE.BoxGeometry(1, 1, 1), railMaterial, parts.rails);
+  addFenceInstancedMesh(new THREE.ConeGeometry(0.23, 0.2, 4), postMaterial, parts.caps);
+  addFenceInstancedMesh(new THREE.SphereGeometry(1, 8, 6), nailMaterial, parts.nails);
+}
+
 function addBaseExteriorApproach() {
   const sandTexture = loadTextureWithFallback(texturePaths.baseSandPath);
   sandTexture.colorSpace = THREE.SRGBColorSpace;
@@ -1815,40 +2022,81 @@ function addBaseExteriorApproach() {
   gate.position.set(19.85, 0, 0);
   scene.add(gate);
 
-  const gateWood = createTextureMaterial(texturePaths.restFrameWood, 1.6, 1, "#725235");
-  gateWood.roughness = 0.88;
-  const gateMetal = new THREE.MeshStandardMaterial({ color: "#4d5350", metalness: 0.75, roughness: 0.35 });
+  const postWood = createTextureMaterial(texturePaths.restFrameWood, 1.3, 2.2, "#775638");
+  postWood.roughness = 0.9;
+  const plankWood = createTextureMaterial(texturePaths.baseWindowBoards, 1.25, 1.8, "#806044");
+  plankWood.roughness = 0.94;
+  const braceWood = createTextureMaterial(texturePaths.restTableWood, 1.4, 1.1, "#68472f");
+  braceWood.roughness = 0.9;
+  const gateMetal = new THREE.MeshStandardMaterial({ color: "#343936", metalness: 0.78, roughness: 0.4 });
+  const gateRust = new THREE.MeshStandardMaterial({ color: "#70422f", metalness: 0.58, roughness: 0.68 });
 
-  for (const z of [-1.55, 1.55]) {
-    addBox(gate, 0.38, 2.25, 0.38, 0, 1.12, z, gateWood);
-    addBox(gate, 0.46, 0.16, 0.46, 0, 2.29, z, gateWood);
+  for (const z of [-1.9, 1.9]) {
+    addBox(gate, 0.52, 2.72, 0.52, 0, 1.36, z, postWood);
+    addBox(gate, 0.62, 0.17, 0.62, 0, 2.78, z, braceWood);
+    addBox(gate, 0.66, 0.12, 0.66, 0, 0.06, z, gateMetal);
+
+    for (const y of [0.82, 1.78]) {
+      const hingePin = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.28, 16), gateMetal);
+      hingePin.position.set(-0.31, y, z > 0 ? z - 0.22 : z + 0.22);
+      hingePin.rotation.x = Math.PI / 2;
+      hingePin.castShadow = true;
+      gate.add(hingePin);
+    }
   }
 
-  for (const panelCenter of [-0.72, 0.72]) {
+  for (const panelCenter of [-0.9, 0.9]) {
     const panel = new THREE.Group();
-    panel.position.set(-0.03, 0, panelCenter);
+    panel.position.set(-0.08, 0, panelCenter);
     gate.add(panel);
 
-    for (const slatOffset of [-0.48, -0.24, 0, 0.24, 0.48]) {
-      addBox(panel, 0.15, 1.42, 0.2, 0, 1.15, slatOffset, gateWood);
+    for (let index = 0; index < 6; index += 1) {
+      const slatOffset = -0.69 + index * 0.276;
+      const slat = addBox(panel, 0.2, 1.86, 0.245, 0, 1.32 + (index % 2) * 0.018, slatOffset, plankWood);
+      slat.rotation.x = (index - 2.5) * 0.006;
+      slat.castShadow = true;
+      slat.receiveShadow = true;
+
+      for (const y of [0.58, 2.04]) {
+        const nail = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.045, 12), gateRust);
+        nail.position.set(-0.125, y, slatOffset);
+        nail.rotation.z = Math.PI / 2;
+        nail.castShadow = true;
+        panel.add(nail);
+      }
     }
-    addBox(panel, 0.17, 0.14, 1.24, -0.01, 0.62, 0, gateWood);
-    addBox(panel, 0.17, 0.14, 1.24, -0.01, 1.66, 0, gateWood);
-    const brace = addBox(panel, 0.18, 0.14, 1.35, -0.015, 1.14, 0, gateWood);
-    brace.rotation.x = panelCenter < 0 ? 0.68 : -0.68;
+
+    for (const y of [0.54, 2.08]) {
+      const rail = addBox(panel, 0.25, 0.19, 1.58, -0.035, y, 0, braceWood);
+      rail.castShadow = true;
+    }
+
+    const brace = addBox(panel, 0.27, 0.18, 1.72, -0.05, 1.32, 0, braceWood);
+    brace.rotation.x = panelCenter < 0 ? 0.76 : -0.76;
+    brace.castShadow = true;
+
+    const hingeSide = panelCenter < 0 ? -0.72 : 0.72;
+    for (const y of [0.82, 1.78]) {
+      const hingeBand = addBox(panel, 0.08, 0.13, 0.68, -0.17, y, hingeSide, gateMetal);
+      hingeBand.castShadow = true;
+      for (const localZ of [hingeSide - Math.sign(hingeSide) * 0.12, hingeSide - Math.sign(hingeSide) * 0.5]) {
+        const bolt = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 8), gateRust);
+        bolt.position.set(-0.225, y, localZ);
+        bolt.castShadow = true;
+        panel.add(bolt);
+      }
+    }
   }
 
-  for (const z of [-1.3, 1.3]) {
-    for (const y of [0.76, 1.52]) {
-      const hinge = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.2, 12), gateMetal);
-      hinge.position.set(-0.13, y, z);
-      hinge.castShadow = true;
-      gate.add(hinge);
-    }
-  }
-
-  const latch = addBox(gate, 0.22, 0.12, 0.54, -0.13, 1.2, 0, gateMetal);
-  latch.castShadow = true;
+  const latchPlate = addBox(gate, 0.12, 0.42, 0.46, -0.22, 1.3, 0, gateMetal);
+  latchPlate.castShadow = true;
+  const latchBar = addBox(gate, 0.14, 0.12, 0.94, -0.29, 1.3, 0, gateRust);
+  latchBar.castShadow = true;
+  const latchRing = new THREE.Mesh(new THREE.TorusGeometry(0.12, 0.025, 10, 20), gateMetal);
+  latchRing.position.set(-0.38, 1.12, 0);
+  latchRing.rotation.y = Math.PI / 2;
+  latchRing.castShadow = true;
+  gate.add(latchRing);
 }
 
 function addBaseArchitecturalJoinWalls(wallMaterial, pillarMaterial) {
@@ -2061,43 +2309,76 @@ function addBarricadedWindow(x, z, materials, side = "south") {
   }
 }
 
-function addBaseDoubleDoor(x, z, material) {
+function createBaseDoorLeafMaterial(offsetX) {
+  const configureTexture = (path, colorTexture = false) => {
+    const texture = loadTextureWithFallback(path);
+    texture.wrapS = THREE.ClampToEdgeWrapping;
+    texture.wrapT = THREE.ClampToEdgeWrapping;
+    texture.repeat.set(0.5, 1);
+    texture.offset.set(offsetX, 0);
+    texture.magFilter = THREE.LinearFilter;
+    texture.minFilter = THREE.LinearMipmapLinearFilter;
+    texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    if (colorTexture) texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+  };
+
+  return new THREE.MeshStandardMaterial({
+    map: configureTexture(texturePaths.baseDoubleDoorAlbedo, true),
+    bumpMap: configureTexture(texturePaths.baseDoubleDoorBump),
+    bumpScale: 0.045,
+    roughnessMap: configureTexture(texturePaths.baseDoubleDoorRoughness),
+    roughness: 0.92,
+    metalness: 0.06,
+  });
+}
+
+function addBaseDoubleDoor(x, z) {
   const group = new THREE.Group();
   group.position.set(x, 0, z);
   scene.add(group);
 
-  const trimMaterial = new THREE.MeshStandardMaterial({ color: "#3c2819", emissive: "#120905", roughness: 0.78 });
-  const frame = new THREE.Mesh(
-    new THREE.BoxGeometry(0.16, 2.35, 2.05),
-    new THREE.MeshStandardMaterial({ color: "#1b1d19", roughness: 0.82 })
-  );
-  frame.position.set(-0.04, 1.18, 0);
-  group.add(frame);
+  const frameWood = createTextureMaterial(texturePaths.restFrameWood, 1.3, 1.8, "#4d3323");
+  frameWood.roughness = 0.9;
+  const edgeMaterial = new THREE.MeshStandardMaterial({ color: "#251a13", roughness: 0.88 });
+  const ironMaterial = new THREE.MeshStandardMaterial({ color: "#242725", metalness: 0.78, roughness: 0.42 });
+  const brassMaterial = new THREE.MeshStandardMaterial({ color: "#9d7440", metalness: 0.72, roughness: 0.35 });
 
-  for (const zOffset of [-0.52, 0.52]) {
-    const panel = new THREE.Mesh(new THREE.BoxGeometry(0.18, 2.05, 0.95), material);
-    panel.position.set(-0.12, 1.05, zOffset);
+  addBox(group, 0.34, 2.62, 0.22, -0.02, 1.31, -1.17, frameWood);
+  addBox(group, 0.34, 2.62, 0.22, -0.02, 1.31, 1.17, frameWood);
+  addBox(group, 0.34, 0.24, 2.56, -0.02, 2.5, 0, frameWood);
+  addBox(group, 0.28, 0.12, 2.34, -0.07, 0.06, 0, edgeMaterial);
+
+  for (const [index, zOffset] of [-0.55, 0.55].entries()) {
+    const leafMaterial = createBaseDoorLeafMaterial(index * 0.5);
+    const panelMaterials = [leafMaterial, leafMaterial, edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial];
+    const panel = new THREE.Mesh(new THREE.BoxGeometry(0.2, 2.28, 1.08), panelMaterials);
+    panel.position.set(-0.12, 1.18, zOffset);
     panel.castShadow = true;
     panel.receiveShadow = true;
     group.add(panel);
 
-    const rail = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.08, 0.76), trimMaterial);
-    rail.position.set(-0.24, 1.08, zOffset);
-    rail.castShadow = true;
-    group.add(rail);
-
-    const stile = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.72, 0.05), trimMaterial);
-    stile.position.set(-0.25, 1.05, zOffset > 0 ? zOffset - 0.43 : zOffset + 0.43);
-    stile.castShadow = true;
-    group.add(stile);
-
-    const handle = new THREE.Mesh(
-      new THREE.BoxGeometry(0.08, 0.12, 0.08),
-      new THREE.MeshStandardMaterial({ color: "#d4b16a", emissive: "#221600", roughness: 0.35 })
-    );
-    handle.position.set(-0.24, 1.08, zOffset > 0 ? zOffset - 0.24 : zOffset + 0.24);
+    const handleZ = zOffset > 0 ? 0.16 : -0.16;
+    const handlePlate = addBox(group, 0.055, 0.38, 0.12, 0.015, 1.2, handleZ, brassMaterial);
+    handlePlate.castShadow = true;
+    const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.28, 14), brassMaterial);
+    handle.position.set(0.085, 1.2, handleZ);
+    handle.castShadow = true;
     group.add(handle);
+
+    const outerZ = zOffset > 0 ? 1.02 : -1.02;
+    for (const hingeY of [0.58, 1.78]) {
+      const hingePlate = addBox(group, 0.055, 0.18, 0.32, 0.01, hingeY, outerZ, ironMaterial);
+      hingePlate.castShadow = true;
+      const hingePin = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.22, 12), ironMaterial);
+      hingePin.position.set(0.06, hingeY, outerZ + (zOffset > 0 ? 0.17 : -0.17));
+      hingePin.castShadow = true;
+      group.add(hingePin);
+    }
   }
+
+  const centerStrip = addBox(group, 0.045, 2.2, 0.055, 0, 1.18, 0, ironMaterial);
+  centerStrip.castShadow = true;
 }
 
 function addBaseStation(id, label, x, z, color, factory) {
@@ -5738,13 +6019,16 @@ function openBasePanel(action) {
   };
   const render = panelMap[action];
   if (!render) return;
-  basePanel.querySelector(".base-panel__body")?.classList.toggle("base-panel__body--rest", action === "restStation");
+  const panelBody = basePanel.querySelector(".base-panel__body");
+  panelBody?.classList.toggle("base-panel__body--rest", action === "restStation");
+  if (panelBody) panelBody.dataset.station = action;
   render();
   basePanel.classList.remove("hidden");
 }
 
 function closeBasePanel() {
   basePanel.classList.add("hidden");
+  basePanel.querySelector(".base-panel__body")?.removeAttribute("data-station");
 }
 
 function renderItemBoxPanel() {
@@ -6198,15 +6482,17 @@ function renderRestProfileEquipment(loadout) {
 
 function renderRestProfileInventory(loadout) {
   const capacity = getLoadoutInventoryCapacity(loadout);
-  return Array.from({ length: capacity }, (_, index) => {
+  return Array.from({ length: 10 }, (_, index) => {
     const entry = loadout.inventory[index];
-    if (!entry) return `<div class="rest-profile__inventory-cell rest-profile__inventory-cell--empty"></div>`;
+    if (!entry) {
+      const unavailable = index >= capacity;
+      return `<div class="rest-profile__inventory-cell rest-profile__inventory-cell--empty${unavailable ? " rest-profile__inventory-cell--unavailable" : ""}"${unavailable ? ' title="Requires a larger backpack"' : ""}></div>`;
+    }
     const itemName = getInventoryEntryName(entry);
     const qty = getInventoryEntryQty(entry);
     return `
       <div class="rest-profile__inventory-cell" title="${getItemLabel(itemName)}">
         <div class="rest-profile__inventory-icon"><img src="${getItemIconPath(itemName)}" alt="" /></div>
-        <b>${getItemLabel(itemName)}</b>
         ${qty > 1 ? `<span class="item-quantity">${qty}</span>` : ""}
       </div>
     `;

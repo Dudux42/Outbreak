@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Outbreak Run Prototype</title>
-    <link rel="stylesheet" href="./src/styles.css?v=settings-audio" />
+    <link rel="stylesheet" href="./src/styles.css?v=station-pause-ui-v4" />
   </head>
   <body>
     <main id="app">
@@ -80,39 +80,39 @@
         <div class="inventory-window inventory-window--reference">
           <button id="closeInventory" class="icon-button inventory-close" aria-label="Close inventory">X</button>
           <div class="inventory-layout">
-            <section class="survivor-preview">
-              <h2 id="inventoryCharacterName">Ava Belmont</h2>
-              <img id="inventoryPortrait" class="inventory-portrait" src="" alt="Survivor portrait" />
-              <div class="survivor-stats">
-                <span>HP <b id="inventoryHp">100</b></span>
-                <span>Armor Class <b id="inventoryArmor">0</b></span>
-              </div>
-            </section>
-            <section class="equipment-grid">
-              <button class="equipment-slot equipment-slot--wide" data-slot="primary">
-                <span>Primary Weapon</span>
-                <b id="slotPrimary">Empty</b>
-              </button>
-              <button class="equipment-slot" data-slot="sidearm">
-                <span>Sidearm</span>
-                <b id="slotSidearm">Empty</b>
-              </button>
-              <button class="equipment-slot" data-slot="armor">
-                <span>Armor</span>
-                <b id="slotArmor">Empty</b>
-              </button>
-              <button class="equipment-slot equipment-slot--backpack" data-slot="backpack">
-                <span>Backpack</span>
-                <b id="slotBackpack">Small Pack</b>
-              </button>
-            </section>
-            <section class="inventory-pack">
-              <div class="inventory-pack__header">
-                <strong>Inventory</strong>
-                <span id="inventoryCapacity">0/6</span>
-              </div>
-              <div id="inventorySlots" class="inventory-slots"></div>
-            </section>
+              <section class="survivor-preview">
+                <h2 id="inventoryCharacterName">Ava Belmont</h2>
+                <img id="inventoryPortrait" class="inventory-portrait" src="" alt="Survivor portrait" />
+                <div class="survivor-stats">
+                  <span>HP <b id="inventoryHp">100</b></span>
+                  <span>Armor Class <b id="inventoryArmor">0</b></span>
+                </div>
+              </section>
+              <section class="equipment-grid">
+                <button class="equipment-slot equipment-slot--wide" data-slot="primary">
+                  <span>Primary Weapon</span>
+                  <b id="slotPrimary">Empty</b>
+                </button>
+                <button class="equipment-slot" data-slot="sidearm">
+                  <span>Sidearm</span>
+                  <b id="slotSidearm">Empty</b>
+                </button>
+                <button class="equipment-slot" data-slot="armor">
+                  <span>Armor</span>
+                  <b id="slotArmor">Empty</b>
+                </button>
+                <button class="equipment-slot equipment-slot--backpack" data-slot="backpack">
+                  <span>Backpack</span>
+                  <b id="slotBackpack">Small Pack</b>
+                </button>
+              </section>
+              <section class="inventory-pack">
+                <div class="inventory-pack__header">
+                  <strong>Inventory</strong>
+                  <span id="inventoryCapacity">0/6</span>
+                </div>
+                <div id="inventorySlots" class="inventory-slots"></div>
+              </section>
           </div>
         </div>
       </section>
