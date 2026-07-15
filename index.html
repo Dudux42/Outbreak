@@ -4,11 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Outbreak Run Prototype</title>
-    <link rel="stylesheet" href="./src/styles.css?v=station-pause-ui-v4" />
+    <link rel="stylesheet" href="./src/styles.css?v=inventory-drag-v2" />
   </head>
   <body>
     <main id="app">
       <canvas id="game"></canvas>
+
+      <section id="mainMenu" class="main-menu" aria-label="Main menu">
+        <div class="main-menu__artwork">
+          <button id="mainMenuNewGame" class="main-menu__action main-menu__action--new" type="button" aria-label="Start New Game">
+            Start New Game
+          </button>
+          <button id="mainMenuLoadGame" class="main-menu__action main-menu__action--load" type="button" aria-label="Load Game">
+            Load Game
+          </button>
+          <button id="mainMenuQuitGame" class="main-menu__action main-menu__action--quit" type="button" aria-label="Quit Game">
+            Quit Game
+          </button>
+          <p id="mainMenuMessage" class="main-menu__message" aria-live="polite"></p>
+        </div>
+      </section>
 
       <section id="baseHud" class="base-hud">
         <div>
@@ -24,9 +39,9 @@
       <section id="basePanel" class="base-panel hidden">
         <div class="base-panel__body">
           <header class="base-panel__header">
-            <div>
-              <p class="eyebrow">Base Station</p>
+            <div class="base-panel__title-row">
               <h2 id="basePanelTitle">Station</h2>
+              <span id="basePanelLevel" class="base-panel__level hidden"></span>
             </div>
             <button id="closeBasePanel" class="icon-button" aria-label="Close panel">X</button>
           </header>
@@ -113,6 +128,35 @@
                 </div>
                 <div id="inventorySlots" class="inventory-slots"></div>
               </section>
+          </div>
+        </div>
+      </section>
+
+      <section id="lootContainerOverlay" class="loot-container-overlay hidden" aria-label="Loot container">
+        <div class="loot-container-window">
+          <header class="loot-container-header">
+            <div>
+              <p>Searching</p>
+              <h2 id="lootContainerTitle">Supply Crate</h2>
+            </div>
+            <button id="closeLootContainer" class="icon-button" type="button" aria-label="Close container">X</button>
+          </header>
+          <div class="loot-container-layout">
+            <section class="loot-container-storage">
+              <div class="storage-header">
+                <h3>Container</h3>
+                <span id="lootContainerStatus">Unsearched</span>
+              </div>
+              <div id="lootContainerGrid" class="loot-container-grid"></div>
+            </section>
+            <section class="loot-container-inventory">
+              <div class="storage-header">
+                <h3>Player Inventory</h3>
+                <span id="lootContainerCapacity">0/6</span>
+              </div>
+              <div id="lootContainerEquipment" class="storage-equipment"></div>
+              <div id="lootContainerInventory" class="storage-grid storage-grid--pack"></div>
+            </section>
           </div>
         </div>
       </section>

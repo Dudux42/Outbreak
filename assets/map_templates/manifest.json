@@ -1,0 +1,104 @@
+{
+  "templates": [
+    {
+      "id": "house_3_room_01",
+      "locationType": "house",
+      "tags": ["3-room house"],
+      "roomCount": 3,
+      "status": "playable",
+      "runtimeDefinition": "../../../src/data/houseMissionTemplates.js",
+      "referenceImage": "./house/house_3_room_01_reference.png",
+      "spaces": [
+        "living and dining area",
+        "kitchen",
+        "laundry and utility room",
+        "master bedroom",
+        "bathroom",
+        "second bedroom",
+        "office",
+        "garage",
+        "entrance"
+      ],
+      "containerSockets": [],
+      "looseLootSockets": [],
+      "enemySockets": [],
+      "extractionSockets": []
+    },
+    {
+      "id": "house_3_room_02",
+      "locationType": "house",
+      "tags": ["3-room house"],
+      "roomCount": 3,
+      "status": "playable",
+      "runtimeDefinition": "../../../src/data/houseMissionTemplates.js",
+      "referenceImage": "./house/house_3_room_02_reference.png",
+      "spaces": [
+        "living and dining area",
+        "kitchen",
+        "laundry area",
+        "bedroom 1",
+        "bedroom 2",
+        "walk-in closet",
+        "bathroom 1",
+        "bathroom 2",
+        "office",
+        "entryway",
+        "front porch",
+        "two-car garage"
+      ],
+      "containerSockets": [],
+      "looseLootSockets": [],
+      "enemySockets": [],
+      "extractionSockets": []
+    },
+    {
+      "id": "house_3_room_03",
+      "locationType": "house",
+      "tags": ["3-room house"],
+      "roomCount": 3,
+      "status": "playable",
+      "runtimeDefinition": "../../../src/data/houseMissionTemplates.js",
+      "referenceImage": "./house/house_3_room_03_reference.png",
+      "spaces": [
+        "television room",
+        "living room",
+        "kitchen and dining area",
+        "bathroom",
+        "bedroom 1",
+        "bedroom 2",
+        "office",
+        "hallway",
+        "exterior laundry alcove"
+      ],
+      "containerSockets": [],
+      "looseLootSockets": [],
+      "enemySockets": [],
+      "extractionSockets": []
+    },
+    {
+      "id": "house_3_room_04",
+      "locationType": "house",
+      "tags": ["3-room house"],
+      "roomCount": 3,
+      "status": "playable",
+      "runtimeDefinition": "../../../src/data/houseMissionTemplates.js",
+      "referenceImage": "./house/house_3_room_04_reference.png",
+      "spaces": [
+        "living room",
+        "television room",
+        "kitchen and laundry",
+        "bedroom 1",
+        "bedroom 2",
+        "bathroom",
+        "office",
+        "hallway",
+        "patio",
+        "front porch"
+      ],
+      "containerSockets": [],
+      "looseLootSockets": [],
+      "enemySockets": [],
+      "extractionSockets": []
+    }
+  ]
+}

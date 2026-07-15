@@ -21,6 +21,8 @@ import pickupSoundThreeUrl from "../assets/audio/pickup_3.mp3";
 import ammoPickupSoundOneUrl from "../assets/audio/ammo_pickup_1.mp3";
 import ammoPickupSoundTwoUrl from "../assets/audio/ammo_pickup_2.mp3";
 import abandonedHouseMusicUrl from "../assets/audio/abandoned_house.mp3";
+import { ITEM_ALIASES, ITEM_DATABASE } from "./data/itemDatabase.js";
+import { HOUSE_MISSION_TEMPLATES } from "./data/houseMissionTemplates.js";
 
 const baseMusic = new Audio(baseThemeUrl);
 baseMusic.loop = true;
@@ -142,9 +144,15 @@ const canvas = document.querySelector("#game");
 canvas.addEventListener("contextmenu", (event) => event.preventDefault());
 window.addEventListener("pointerdown", syncBaseMusic, { passive: true });
 window.addEventListener("keydown", syncBaseMusic);
+const mainMenu = document.querySelector("#mainMenu");
+const mainMenuNewGameButton = document.querySelector("#mainMenuNewGame");
+const mainMenuLoadGameButton = document.querySelector("#mainMenuLoadGame");
+const mainMenuQuitGameButton = document.querySelector("#mainMenuQuitGame");
+const mainMenuMessage = document.querySelector("#mainMenuMessage");
 const baseHud = document.querySelector("#baseHud");
 const basePanel = document.querySelector("#basePanel");
 const basePanelTitle = document.querySelector("#basePanelTitle");
+const basePanelLevel = document.querySelector("#basePanelLevel");
 const basePanelContent = document.querySelector("#basePanelContent");
 const closeBasePanelButton = document.querySelector("#closeBasePanel");
 const missionHud = document.querySelector("#missionHud");
@@ -153,6 +161,14 @@ const interactionHint = document.querySelector("#interactionHint");
 const playerNotice = document.querySelector("#playerNotice");
 const inventoryOverlay = document.querySelector("#inventoryOverlay");
 const closeInventoryButton = document.querySelector("#closeInventory");
+const lootContainerOverlay = document.querySelector("#lootContainerOverlay");
+const closeLootContainerButton = document.querySelector("#closeLootContainer");
+const lootContainerTitle = document.querySelector("#lootContainerTitle");
+const lootContainerStatus = document.querySelector("#lootContainerStatus");
+const lootContainerGrid = document.querySelector("#lootContainerGrid");
+const lootContainerEquipment = document.querySelector("#lootContainerEquipment");
+const lootContainerInventory = document.querySelector("#lootContainerInventory");
+const lootContainerCapacity = document.querySelector("#lootContainerCapacity");
 const runEnd = document.querySelector("#runEnd");
 const returnBaseButton = document.querySelector("#returnBase");
 const pauseMenu = document.querySelector("#pauseMenu");
@@ -226,6 +242,10 @@ const EQUIPMENT_SLOTS = Object.freeze({
 const MAX_FRAME_DT = 0.05;
 const COLLIDER_CELL_SIZE = 12;
 const AMMO_STACK_LIMIT = 60;
+const CONTAINER_INITIAL_SEARCH_MS = 4000;
+const CONTAINER_ITEM_SEARCH_MS = 1500;
+const TEST_CONTAINER_MAX_ITEMS = 6;
+const ITEM_BOX_BASE_CAPACITY = 240;
 const SAVE_STORAGE_KEY = "outbreak.save.v1";
 const SAVE_VERSION = 1;
 const SETTINGS_STORAGE_KEY = "outbreak.settings.v1";
@@ -274,6 +294,8 @@ const locations = [
   {
     id: "house",
     name: "Abandoned House",
+    category: "house",
+    mapShape: "house",
     stars: 1,
     lootType: "Food, tools, basic medicine",
     loot: ["can of beans", "Apple", "bandage", "Gears", "kitchen knife", "water bottle", "handgun ammo"],
@@ -285,6 +307,8 @@ const locations = [
   {
     id: "pharmacy",
     name: "Corner Pharmacy",
+    category: "medical",
+    mapShape: "wide",
     stars: 2,
     lootType: "Medicine and recovery supplies",
     loot: ["bandage", "antibiotics", "rubbing alcohol", "first aid kit", "painkillers", "water bottle", "Juice Box"],
@@ -296,6 +320,8 @@ const locations = [
   {
     id: "supermarket",
     name: "Supermarket",
+    category: "market",
+    mapShape: "wide",
     stars: 3,
     lootType: "Food, water, bags, utility items",
     loot: ["water bottle", "soda", "Juice Box", "can of tuna", "can of spam", "can of beans", "Apple", "Banana", "Orange"],
@@ -307,6 +333,8 @@ const locations = [
   {
     id: "police",
     name: "Police Station",
+    category: "police",
+    mapShape: "compound",
     stars: 4,
     lootType: "Weapons, ammo, armor, comms",
     loot: ["Handgun", "shotgun", "submachine-gun", "assault rifle", "handgun ammo", "shotgun shells", "submachine-gun ammo", "assault rifle ammo", "combat knife", "level 1 body armor", "level 2 body armor", "level 3 body armor"],
@@ -318,6 +346,8 @@ const locations = [
   {
     id: "warehouse",
     name: "Freight Warehouse",
+    category: "hardware",
+    mapShape: "warehouse",
     stars: 3,
     lootType: "Tools, batteries, storage gear",
     loot: ["Gears", "nails", "bolts", "battery", "wire", "hammer", "crowbar", "axe", "baseball bat", "small backpack", "medium backpack", "large backpack"],
@@ -329,6 +359,8 @@ const locations = [
   {
     id: "clinic",
     name: "Riverside Clinic",
+    category: "medical",
+    mapShape: "tall",
     stars: 5,
     lootType: "Rare medicine and trauma supplies",
     loot: ["antibiotics", "rubbing alcohol", "first aid kit", "Syringe", "blood kit", "suture needles", "Cotton balls", "level 3 body armor"],
@@ -338,6 +370,35 @@ const locations = [
     intelRequired: 3,
   },
 ];
+
+const MAP_CATEGORY_LABELS = Object.freeze({
+  house: "House",
+  medical: "Medical",
+  police: "Police",
+  hardware: "Hardware",
+  market: "Market",
+  military: "Military",
+  technical: "Technical",
+  garage: "Garage",
+});
+
+const mapSurveySites = Object.freeze([
+  { name: "Cedar Row Homes", category: "house", lootType: "Food, drinks, household supplies", mapX: 13, mapY: 19, shape: "house" },
+  { name: "Hillview Apartments", category: "house", lootType: "Household supplies and personal items", mapX: 28, mapY: 18, shape: "tall" },
+  { name: "St. Mercy Hospital", category: "medical", lootType: "Medical supplies and treatment resources", mapX: 46, mapY: 15, shape: "compound" },
+  { name: "Precinct Annex", category: "police", lootType: "Security gear, ammunition, and equipment", mapX: 65, mapY: 17, shape: "square" },
+  { name: "National Guard Depot", category: "military", lootType: "Military equipment and rare supplies", mapX: 88, mapY: 21, shape: "compound" },
+  { name: "Carter Hardware", category: "hardware", lootType: "Tools, parts, and construction resources", mapX: 14, mapY: 45, shape: "wide" },
+  { name: "Ash Street Market", category: "market", lootType: "Food, drinks, and general supplies", mapX: 30, mapY: 44, shape: "wide" },
+  { name: "Municipal Data Center", category: "technical", lootType: "Electronics, components, and technical parts", mapX: 64, mapY: 31, shape: "square" },
+  { name: "Bell Auto Garage", category: "garage", lootType: "Vehicle parts, tools, and fuel supplies", mapX: 83, mapY: 44, shape: "garage" },
+  { name: "Field Aid Post", category: "medical", lootType: "Basic medical and emergency supplies", mapX: 12, mapY: 70, shape: "square" },
+  { name: "Western Tool Depot", category: "hardware", lootType: "Heavy tools and base resources", mapX: 22, mapY: 82, shape: "warehouse" },
+  { name: "Civic Supermarket", category: "market", lootType: "Food, water, bags, and utility items", mapX: 46, mapY: 78, shape: "wide" },
+  { name: "Riverside Repair Yard", category: "garage", lootType: "Vehicle parts and mechanical supplies", mapX: 67, mapY: 78, shape: "garage" },
+  { name: "Power Relay Station", category: "technical", lootType: "Electrical parts, batteries, and wiring", mapX: 81, mapY: 68, shape: "diamond" },
+  { name: "Outer Barracks", category: "military", lootType: "Weapons, armor, and military resources", mapX: 90, mapY: 84, shape: "compound" },
+]);
 
 const femalePlayerAnimationClips = {
   idle_south: { src: "./assets/player_breathing_south_sheet.png", frames: 4, frameDuration: 0.24 },
@@ -649,12 +710,28 @@ const itemCatalog = {
   "level 1 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 1 Body Armor", armorClass: 1, texture: "bodyArmorLevel1", tags: ["Armor"] },
   "level 2 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 2 Body Armor", armorClass: 2, texture: "bodyArmorLevel2", tags: ["Armor"] },
   "level 3 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 3 Body Armor", armorClass: 3, texture: "bodyArmorLevel3", tags: ["Armor"] },
+  "level 4 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 4 Body Armor", armorClass: 4, texture: "bodyArmorLevel4", tags: ["Armor"] },
   Syringe: { label: "Syringe", texture: "spareParts", tags: ["Base Resource"] },
   "blood kit": { label: "Blood Kit", texture: "spareParts", tags: ["Base Resource"] },
   "suture needles": { label: "Suture Needles", texture: "spareParts", tags: ["Base Resource"] },
   "Cotton balls": { label: "Cotton Balls", texture: "spareParts", tags: ["Base Resource"] },
   Key: { label: "Key", texture: "key", tags: ["Key"] },
 };
+
+const itemIdsByLabel = Object.freeze(Object.fromEntries(
+  Object.values(ITEM_DATABASE).map((item) => [item.label, item.id])
+));
+
+for (const [itemId, databaseItem] of Object.entries(ITEM_DATABASE)) {
+  const gameplayItem = itemCatalog[itemId] || {};
+  itemCatalog[itemId] = {
+    texture: "spareParts",
+    tags: [],
+    ...gameplayItem,
+    ...databaseItem,
+    tags: gameplayItem.tags || [],
+  };
+}
 
 function makeDefaultMagazines(overrides = {}) {
   return {
@@ -798,6 +875,17 @@ function updateVolumeSetting(settingKey, input, output) {
   saveSettings();
 }
 
+function makeInitialStash() {
+  return [
+    { name: "bandage", qty: 2 },
+    { name: "handgun ammo", qty: 30 },
+    { name: "shotgun shells", qty: 6 },
+    { name: "shotgun", qty: 1 },
+    { name: "axe", qty: 1 },
+    { name: "Gears", qty: 3 },
+  ];
+}
+
 const state = {
   mode: "base",
   character: "female",
@@ -820,14 +908,7 @@ const state = {
     armor: null,
     backpack: "small backpack",
   },
-  stash: [
-    { name: "bandage", qty: 2 },
-    { name: "handgun ammo", qty: 30 },
-    { name: "shotgun shells", qty: 6 },
-    { name: "shotgun", qty: 1 },
-    { name: "axe", qty: 1 },
-    { name: "Gears", qty: 3 },
-  ],
+  stash: makeInitialStash(),
   upgrades: {
     storage: 0,
     med: 0,
@@ -1156,6 +1237,9 @@ for (const enemyType of enemyTypes) {
 let scene;
 let camera;
 let renderer;
+let mainMenuScene;
+let mainMenuCamera;
+let mainMenuBackdrop;
 let player;
 let playerAnimator;
 let lastAimDirection = "south";
@@ -1170,6 +1254,9 @@ let colliderGrid = new Map();
 let colliderBounds = new WeakMap();
 let colliderGridDirty = true;
 let lootNodes = [];
+let lootContainers = [];
+let activeLootContainer = null;
+let containerSearchTimers = [];
 let zombies = [];
 let deadZombies = [];
 let exits = [];
@@ -1190,6 +1277,7 @@ let isAiming = false;
 let isDebugPanelOpen = false;
 let debugAimMarker = null;
 let hoveredInventoryIndex = null;
+let activeInventoryDrag = null;
 let rng = createSeededRng(state.runSeed);
 let baseRoutine = {
   targetIndex: 0,
@@ -1197,15 +1285,16 @@ let baseRoutine = {
   facing: "south",
 };
 
-loadSavedGame();
 initThree();
-buildBaseScene();
-renderBaseHud();
-renderQuickbar();
+showMainMenu();
 animate();
 
 window.addEventListener("resize", resize);
 window.addEventListener("keydown", (event) => {
+  if (isMainMenuOpen()) {
+    if (event.code === "Escape" || event.code === "Tab" || event.code.startsWith("Key")) event.preventDefault();
+    return;
+  }
   if (event.code === "Escape") {
     event.preventDefault();
     handleEscapeKey();
@@ -1213,7 +1302,7 @@ window.addEventListener("keydown", (event) => {
   }
   if (event.code === "Tab") {
     event.preventDefault();
-    if (!basePanel.classList.contains("hidden")) return;
+    if (!basePanel.classList.contains("hidden") || isLootContainerOpen()) return;
     toggleInventory();
     return;
   }
@@ -1239,6 +1328,7 @@ window.addEventListener("keydown", (event) => {
 });
 window.addEventListener("keyup", (event) => keys.delete(event.code));
 window.addEventListener("pointermove", (event) => {
+  updateMainMenuCursor(event);
   setPointerFromEvent(event);
   updateBaseCameraDrag(event);
 });
@@ -1381,6 +1471,10 @@ function handleMouseWheelZoom(event) {
 }
 window.addEventListener("click", (event) => {
   if (event.target !== canvas) return;
+  if (state.mode === "menu") {
+    handleMainMenuClick(event);
+    return;
+  }
   if (isInventoryOpen()) return;
   if (state.mode === "base" && suppressNextBaseClick) {
     suppressNextBaseClick = false;
@@ -1430,7 +1524,11 @@ function updateBaseCameraDrag(event) {
 }
 closeBasePanelButton.addEventListener("click", closeBasePanel);
 closeInventoryButton.addEventListener("click", closeInventory);
+closeLootContainerButton.addEventListener("click", closeLootContainerWindow);
 returnBaseButton.addEventListener("click", returnToBase);
+mainMenuNewGameButton.addEventListener("click", startNewGameFromMainMenu);
+mainMenuLoadGameButton.addEventListener("click", loadGameFromMainMenu);
+mainMenuQuitGameButton.addEventListener("click", quitGameImmediately);
 pauseLoadGameButton.addEventListener("click", loadGameFromPauseMenu);
 pauseSettingsButton.addEventListener("click", openSettingsMenu);
 pauseQuitGameButton.addEventListener("click", quitGameImmediately);
@@ -1460,6 +1558,8 @@ function initThree() {
   camera.position.set(12, 16, 12);
   camera.lookAt(0, 0, 0);
 
+  buildMainMenuScene();
+
   const hemi = new THREE.HemisphereLight("#d7e7d3", "#141713", 1.2);
   hemi.userData.permanent = true;
   scene.add(hemi);
@@ -1473,6 +1573,53 @@ function initThree() {
 
   syncSettingsControls();
   resize();
+}
+
+function buildMainMenuScene() {
+  if (mainMenuScene) return;
+
+  mainMenuScene = new THREE.Scene();
+  mainMenuScene.background = new THREE.Color("#020405");
+  mainMenuCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+  mainMenuCamera.position.z = 1;
+
+  const texture = textureLoader.load(
+    "./assets/ui/main_menu.png",
+    () => resizeMainMenuScene(),
+    undefined,
+    () => {
+      mainMenuMessage.textContent = "Main menu artwork could not be loaded.";
+    }
+  );
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.minFilter = THREE.LinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+
+  mainMenuBackdrop = new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2),
+    new THREE.MeshBasicMaterial({ map: texture })
+  );
+  mainMenuScene.add(mainMenuBackdrop);
+  resizeMainMenuScene();
+}
+
+function resizeMainMenuScene() {
+  if (!mainMenuCamera || !mainMenuBackdrop) return;
+
+  const { width, height } = getActiveResolutionMetrics();
+  const viewportAspect = width / height;
+  const artworkAspect = 11 / 6;
+  mainMenuCamera.left = -viewportAspect;
+  mainMenuCamera.right = viewportAspect;
+  mainMenuCamera.top = 1;
+  mainMenuCamera.bottom = -1;
+  mainMenuCamera.updateProjectionMatrix();
+
+  if (viewportAspect >= artworkAspect) {
+    mainMenuBackdrop.scale.set(artworkAspect, 1, 1);
+  } else {
+    mainMenuBackdrop.scale.set(viewportAspect, viewportAspect / artworkAspect, 1);
+  }
 }
 
 function createTextureMaterial(src, repeatX = 1, repeatY = 1, color = "#ffffff") {
@@ -6022,6 +6169,10 @@ function openBasePanel(action) {
   const panelBody = basePanel.querySelector(".base-panel__body");
   panelBody?.classList.toggle("base-panel__body--rest", action === "restStation");
   if (panelBody) panelBody.dataset.station = action;
+  const upgradeKey = { itemBox: "storage", workbench: "workbench", medical: "med", intel: "intel" }[action];
+  basePanelLevel?.classList.toggle("hidden", !upgradeKey);
+  if (basePanelLevel && upgradeKey) basePanelLevel.textContent = `Level ${state.upgrades[upgradeKey] + 1}`;
+  if (action !== "itemBox") basePanelContent.onwheel = null;
   render();
   basePanel.classList.remove("hidden");
 }
@@ -6033,17 +6184,19 @@ function closeBasePanel() {
 
 function renderItemBoxPanel() {
   basePanelTitle.textContent = "Item Box";
-  const stashCapacity = Math.max(36, 24 + state.upgrades.storage * 8, state.stash.length + 8);
-  const stashCells = Array.from({ length: stashCapacity }, (_, index) => renderStashCell(index)).join("");
+  const stashCapacity = Math.max(ITEM_BOX_BASE_CAPACITY + state.upgrades.storage * 8, state.stash.length);
+  const occupiedStashSlots = state.stash.length;
+  const renderedStashSlots = Math.max(36, Math.ceil((occupiedStashSlots + 6) / 6) * 6);
+  const stashCells = Array.from({ length: renderedStashSlots }, (_, index) => renderStashCell(index)).join("");
   const inventoryCells = Array.from({ length: getInventoryCapacity() }, (_, index) => renderTransferInventoryCell(index)).join("");
   basePanelContent.innerHTML = `
     <div class="item-box-layout">
       <section class="item-box-stash">
         <div class="storage-header">
           <h3>Stored Items</h3>
-          <span>${state.stash.reduce((total, item) => total + item.qty, 0)} items</span>
+          <span>${occupiedStashSlots}/${stashCapacity}</span>
         </div>
-        <div class="storage-grid storage-grid--stash" data-drop-target="stash">
+        <div class="storage-grid storage-grid--stash" data-drop-target="stash" style="grid-template-columns: repeat(6, minmax(0, 1fr));">
           ${stashCells}
         </div>
       </section>
@@ -6062,13 +6215,10 @@ function renderItemBoxPanel() {
         <div class="storage-grid storage-grid--pack" data-drop-target="inventory">
           ${inventoryCells}
         </div>
-        <div class="storage-quickbar">
-          ${Array.from({ length: 7 }, (_, index) => renderQuickbarCell(index + 3, true)).join("")}
-        </div>
       </section>
 
       <section class="item-box-upgrade">
-        ${renderUpgradeButton("storage")}
+        ${renderUpgradeButton("storage", { costOnly: true })}
       </section>
     </div>
   `;
@@ -6116,6 +6266,16 @@ function renderTransferEquipmentSlot(slot, label) {
 }
 
 function wireItemBoxPanel() {
+  const stashGrid = basePanelContent.querySelector(".storage-grid--stash");
+  basePanelContent.scrollTop = 0;
+  const scrollStash = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (stashGrid) stashGrid.scrollTop += event.deltaY;
+  };
+  basePanelContent.onwheel = scrollStash;
+  if (stashGrid) stashGrid.onwheel = scrollStash;
+
   for (const cell of basePanelContent.querySelectorAll("[draggable='true']")) {
     cell.addEventListener("dragstart", (event) => {
       const itemName = cell.dataset.source === "stash"
@@ -6257,11 +6417,17 @@ function requestQuantityPrompt({ title, text, max }) {
 
 function setItemDragImage(event, itemName) {
   if (!event.dataTransfer || !itemName) return;
-  const image = document.createElement("img");
-  image.src = getItemIconPath(itemName);
+  const sourceImage = event.currentTarget?.querySelector?.("img");
+  const image = sourceImage?.cloneNode() || document.createElement("img");
+  if (!sourceImage) image.src = getItemIconPath(itemName);
+  const width = Math.max(1, Math.round(sourceImage?.offsetWidth || 48));
+  const height = Math.max(1, Math.round(sourceImage?.offsetHeight || 48));
   image.className = "drag-ghost";
+  image.style.width = `${width}px`;
+  image.style.height = `${height}px`;
   document.body.append(image);
-  event.dataTransfer.setDragImage(image, 24, 24);
+  event.dataTransfer.effectAllowed = "move";
+  event.dataTransfer.setDragImage(image, width / 2, height / 2);
   window.setTimeout(() => image.remove(), 0);
 }
 
@@ -6507,40 +6673,27 @@ function renderMapPanel() {
   basePanelTitle.textContent = "Map";
   basePanelContent.innerHTML = `
     <div class="world-map" aria-label="Outbreak area map">
-      <div class="map-sector map-sector--docks">Docks</div>
-      <div class="map-sector map-sector--old-town">Old Town</div>
-      <div class="map-sector map-sector--industrial">Industrial</div>
-      ${renderMapBuildings()}
-      <div class="map-road map-road--main-x"></div>
-      <div class="map-road map-road--main-y"></div>
-      <div class="map-road map-road--north"></div>
-      <div class="map-road map-road--east"></div>
-      <div class="map-road map-road--south"></div>
-      <div class="map-road map-road--west"></div>
-      <div class="map-river"></div>
-      <div class="map-district map-district--north"></div>
-      <div class="map-district map-district--south"></div>
-      <div class="map-district map-district--east"></div>
-      <span class="map-threat map-threat--west">!</span>
-      <span class="map-threat map-threat--north">!</span>
-      <span class="map-threat map-threat--east">!</span>
+      <div class="map-vignette"></div>
+      ${mapSurveySites.map(renderSurveySite).join("")}
       <div class="map-base" style="left: 50%; top: 50%;">
-        <span>Base</span>
+        <span class="map-base__mark"></span>
+        <span>Safehouse</span>
       </div>
       ${locations.map((location) => `
         <button
-          class="map-location ${isLocationAvailable(location) ? "" : "map-location--locked"}"
+          class="map-location map-site map-site--${location.mapShape} map-site--${location.category}${getMapSiteEdgeClass(location.mapX)} ${isLocationAvailable(location) ? "map-location--available" : "map-location--locked"}"
           data-location="${location.id}"
           style="left: ${location.mapX}%; top: ${location.mapY}%;"
           aria-disabled="${isLocationAvailable(location) ? "false" : "true"}"
           aria-label="${location.name}"
         >
-          <span class="map-location__dot"></span>
+          <span class="map-location__dot" aria-hidden="true"></span>
           <span class="map-location__label">${location.name}</span>
           <span class="map-tooltip">
             <strong>${location.name}</strong>
-            <span>${renderStars(location.stars)}</span>
-            <span>${location.lootType}</span>
+            <span class="map-tooltip__category">${MAP_CATEGORY_LABELS[location.category]}</span>
+            <span class="map-tooltip__stars">${renderStars(location.stars)}</span>
+            <span><b>Possible loot</b>${location.lootType}</span>
             ${isLocationAvailable(location) ? "<em>Click to scout</em>" : `<em>Requires Intel Lv.${location.intelRequired}</em>`}
           </span>
         </button>
@@ -6556,27 +6709,37 @@ function renderMapPanel() {
   }
 }
 
-function renderMapBuildings() {
-  const buildings = [];
-  const columns = 18;
-  const rows = 10;
-  for (let row = 0; row < rows; row++) {
-    for (let column = 0; column < columns; column++) {
-      const seed = (row + 3) * 37 + (column + 5) * 17;
-      if (seed % 7 === 0 || (column > 13 && row > 5)) continue;
-      const left = 5 + column * 5.05 + (seed % 5) * 0.3;
-      const top = 7 + row * 8.6 + (seed % 4) * 0.45;
-      if (Math.abs(left - 50) < 9 && Math.abs(top - 50) < 9) continue;
-      const width = 2.1 + (seed % 4) * 0.55;
-      const height = 3.2 + (seed % 5) * 0.62;
-      const tone = seed % 3;
-      const variant = seed % 11 === 0 ? " map-building--ruined" : tone === 0 ? " map-building--light" : "";
-      buildings.push(
-        `<span class="map-building${variant}" style="left:${left.toFixed(1)}%; top:${top.toFixed(1)}%; width:${width.toFixed(1)}%; height:${height.toFixed(1)}%;"></span>`
-      );
-    }
-  }
-  return buildings.join("");
+function renderSurveySite(site) {
+  const stars = getMapSiteStars(site.mapX, site.mapY);
+  return `
+    <div
+      class="map-site map-site--survey map-site--${site.shape} map-site--${site.category}${getMapSiteEdgeClass(site.mapX)}"
+      style="left: ${site.mapX}%; top: ${site.mapY}%;"
+      tabindex="0"
+      role="img"
+      aria-label="${site.name}, ${stars} star ${MAP_CATEGORY_LABELS[site.category]} location"
+    >
+      <span class="map-site__footprint" aria-hidden="true"></span>
+      <span class="map-tooltip">
+        <strong>${site.name}</strong>
+        <span class="map-tooltip__category">${MAP_CATEGORY_LABELS[site.category]}</span>
+        <span class="map-tooltip__stars">${renderStars(stars)}</span>
+        <span><b>Possible loot</b>${site.lootType}</span>
+        <em>Unscouted location</em>
+      </span>
+    </div>
+  `;
+}
+
+function getMapSiteStars(mapX, mapY) {
+  const distanceFromBase = Math.hypot(mapX - 50, mapY - 50);
+  return Math.max(1, Math.min(5, Math.ceil(distanceFromBase / 10)));
+}
+
+function getMapSiteEdgeClass(mapX) {
+  if (mapX < 22) return " map-site--edge-left";
+  if (mapX > 78) return " map-site--edge-right";
+  return "";
 }
 
 function isLocationAvailable(location) {
@@ -6591,7 +6754,7 @@ function renderStars(count) {
   return `${"*".repeat(count)}${"-".repeat(5 - count)}`;
 }
 
-function renderUpgradeButton(type) {
+function renderUpgradeButton(type, options = {}) {
   const data = upgradeData[type];
   const level = state.upgrades[type];
   const maxed = level >= data.costs.length;
@@ -6599,9 +6762,10 @@ function renderUpgradeButton(type) {
   const affordable = requirement ? hasStashItems(requirement) : false;
   const cost = maxed ? "Max level" : formatUpgradeCost(requirement);
   const bonus = data.bonuses[Math.min(level, data.bonuses.length - 1)];
+  const buttonLabel = options.costOnly ? "Cost to Upgrade" : `${data.name} Lv.${level + 1}`;
   return `
     <button class="upgrade" data-upgrade="${type}" ${maxed ? "disabled" : ""}>
-      ${data.name} Lv.${level + 1}
+      ${buttonLabel}
       <span class="upgrade__cost ${affordable ? "upgrade__cost--available" : ""}">${cost}</span>
     </button>
     <p class="upgrade-feedback" aria-live="polite"></p>
@@ -6667,10 +6831,131 @@ function toggleInventory() {
   else openInventory();
 }
 
+function showMainMenu() {
+  keys.clear();
+  state.mode = "menu";
+  canvas.style.cursor = "default";
+  mainMenuMessage.textContent = "";
+  mainMenu.classList.remove("hidden");
+  canvas.removeAttribute("aria-hidden");
+  baseHud.classList.add("hidden");
+  missionHud.classList.add("hidden");
+  weaponHud.classList.add("hidden");
+  ui.quickbar?.classList.add("hidden");
+  promptEl.classList.add("hidden");
+  interactionHint.classList.add("hidden");
+  inventoryOverlay.classList.add("hidden");
+  basePanel.classList.add("hidden");
+  pauseMenu.classList.add("hidden");
+  settingsMenu.classList.add("hidden");
+  runEnd.classList.add("hidden");
+  syncBaseMusic();
+}
+
+function isMainMenuOpen() {
+  return !mainMenu.classList.contains("hidden");
+}
+
+function resetGameStateForNewGame() {
+  state.mode = "base";
+  state.character = "female";
+  state.health = 100;
+  state.keys = 0;
+  state.runSeed = Date.now() >>> 0;
+  state.characterLoadouts = makeDefaultCharacterLoadouts();
+  syncActiveCharacterLoadout();
+  state.stash = makeInitialStash();
+  state.upgrades = { storage: 0, med: 0, workbench: 0, intel: 0 };
+  state.activeLocation = null;
+  playerAnimationClips = getCharacterProfile(state.character).animations;
+  restStationSelectedCharacter = state.character;
+  rng = createSeededRng(state.runSeed);
+  baseCameraPan.set(0, 0, 0);
+}
+
+function enterBaseFromMainMenu() {
+  mainMenuMessage.textContent = "";
+  try {
+    restoreLoadedGameToBase();
+    mainMenu.classList.add("hidden");
+    canvas.style.cursor = "default";
+  } catch (error) {
+    console.error("[Outbreak] Base load failed:", error);
+    state.mode = "menu";
+    mainMenu.classList.remove("hidden");
+    mainMenuMessage.textContent = "The base could not be loaded. Please try again.";
+  }
+}
+
+const MAIN_MENU_ACTION_BOUNDS = Object.freeze([
+  { id: "new", left: 0.168, right: 0.372, top: 0.895, bottom: 0.99 },
+  { id: "load", left: 0.434, right: 0.606, top: 0.895, bottom: 0.99 },
+  { id: "quit", left: 0.761, right: 0.849, top: 0.895, bottom: 0.99 },
+]);
+
+function getMainMenuActionAt(clientX, clientY) {
+  const rect = canvas.getBoundingClientRect();
+  if (!rect.width || !rect.height) return null;
+
+  const artworkAspect = 11 / 6;
+  const viewportAspect = rect.width / rect.height;
+  let artworkWidth = rect.width;
+  let artworkHeight = rect.height;
+  let artworkLeft = rect.left;
+  let artworkTop = rect.top;
+
+  if (viewportAspect >= artworkAspect) {
+    artworkWidth = rect.height * artworkAspect;
+    artworkLeft += (rect.width - artworkWidth) / 2;
+  } else {
+    artworkHeight = rect.width / artworkAspect;
+    artworkTop += (rect.height - artworkHeight) / 2;
+  }
+
+  const x = (clientX - artworkLeft) / artworkWidth;
+  const y = (clientY - artworkTop) / artworkHeight;
+  return MAIN_MENU_ACTION_BOUNDS.find((bounds) => (
+    x >= bounds.left && x <= bounds.right && y >= bounds.top && y <= bounds.bottom
+  ))?.id || null;
+}
+
+function updateMainMenuCursor(event) {
+  if (state.mode !== "menu" || event.target !== canvas) {
+    if (state.mode !== "menu") canvas.style.cursor = "default";
+    return;
+  }
+  canvas.style.cursor = getMainMenuActionAt(event.clientX, event.clientY) ? "pointer" : "default";
+}
+
+function handleMainMenuClick(event) {
+  const action = getMainMenuActionAt(event.clientX, event.clientY);
+  if (action === "new") startNewGameFromMainMenu();
+  else if (action === "load") loadGameFromMainMenu();
+  else if (action === "quit") quitGameImmediately();
+}
+
+function startNewGameFromMainMenu() {
+  resetGameStateForNewGame();
+  enterBaseFromMainMenu();
+}
+
+function loadGameFromMainMenu() {
+  if (!loadSavedGame()) {
+    mainMenuMessage.textContent = "No Intel Center save found.";
+    return;
+  }
+  enterBaseFromMainMenu();
+}
+
 function handleEscapeKey() {
   keys.clear();
+  if (isMainMenuOpen()) return;
   if (!quantityPrompt.classList.contains("hidden")) {
     quantityPromptCancel.click();
+    return;
+  }
+  if (isLootContainerOpen()) {
+    closeLootContainerWindow();
     return;
   }
   if (isSettingsMenuOpen()) {
@@ -6706,7 +6991,9 @@ function isInventoryOpen() {
 
 function isPaused() {
   return (
+    isMainMenuOpen() ||
     isInventoryOpen() ||
+    isLootContainerOpen() ||
     isPauseMenuOpen() ||
     isSettingsMenuOpen() ||
     !basePanel.classList.contains("hidden") ||
@@ -6721,6 +7008,260 @@ function isPauseMenuOpen() {
 
 function isSettingsMenuOpen() {
   return !settingsMenu.classList.contains("hidden");
+}
+
+function isLootContainerOpen() {
+  return !lootContainerOverlay.classList.contains("hidden");
+}
+
+function openLootContainerWindow(container) {
+  if (!lootContainers.includes(container)) return;
+  clearContainerSearchTimers();
+  keys.clear();
+  isAiming = false;
+  activeLootContainer = container;
+  lootContainerTitle.textContent = container.userData.containerName || "Loot Container";
+  lootContainerOverlay.classList.remove("hidden");
+  promptEl.classList.add("hidden");
+  hideMissionInteractionUi();
+  renderQuickbar();
+
+  if (container.userData.gridRevealed) {
+    renderLootContainerWindow();
+    scheduleContainerItemIdentification(container);
+    return;
+  }
+
+  lootContainerStatus.textContent = "Searching...";
+  lootContainerCapacity.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
+  renderLootContainerEquipment();
+  lootContainerInventory.innerHTML = Array.from(
+    { length: getInventoryCapacity() },
+    (_, index) => renderTransferInventoryCell(index)
+  ).join("");
+  lootContainerGrid.innerHTML = `
+    <div class="loot-container-search-cover" aria-live="polite">
+      <span class="loot-container-search-spinner"></span>
+      <strong>Searching container</strong>
+      <small>Checking for supplies...</small>
+    </div>
+  `;
+  wireLootContainerWindow();
+
+  addContainerSearchTimer(() => {
+    if (activeLootContainer !== container || !isLootContainerOpen()) return;
+    container.userData.gridRevealed = true;
+    renderLootContainerWindow();
+    scheduleContainerItemIdentification(container);
+  }, CONTAINER_INITIAL_SEARCH_MS);
+}
+
+function closeLootContainerWindow() {
+  clearContainerSearchTimers();
+  lootContainerOverlay.classList.add("hidden");
+  activeLootContainer = null;
+  renderQuickbar();
+}
+
+function clearContainerSearchTimers() {
+  for (const timer of containerSearchTimers) window.clearTimeout(timer);
+  containerSearchTimers = [];
+}
+
+function addContainerSearchTimer(callback, delay) {
+  const timer = window.setTimeout(callback, delay);
+  containerSearchTimers.push(timer);
+  return timer;
+}
+
+function scheduleContainerItemIdentification(container) {
+  const unidentified = container.userData.contents.filter((entry) => !entry.identified);
+  unidentified.forEach((entry, index) => {
+    addContainerSearchTimer(() => {
+      if (activeLootContainer !== container || !isLootContainerOpen()) return;
+      entry.identified = true;
+      renderLootContainerWindow();
+    }, (index + 1) * CONTAINER_ITEM_SEARCH_MS);
+  });
+}
+
+function renderLootContainerWindow() {
+  const container = activeLootContainer;
+  if (!container) return;
+  const contents = container.userData.contents;
+  const identifiedCount = contents.filter((entry) => entry.identified).length;
+  if (!contents.length) lootContainerStatus.textContent = "Empty";
+  else if (identifiedCount < contents.length) lootContainerStatus.textContent = `Identifying ${identifiedCount}/${contents.length}`;
+  else lootContainerStatus.textContent = "Search complete";
+
+  lootContainerGrid.innerHTML = Array.from({ length: 10 }, (_, index) => {
+    const entry = contents[index];
+    if (!entry) return `<div class="storage-cell storage-cell--empty loot-container-cell"></div>`;
+    if (!entry.identified) {
+      return `
+        <div class="storage-cell loot-container-cell loot-container-cell--unknown" aria-label="Unidentified item">
+          <span>?</span>
+          <i class="loot-container-cell__scan" aria-hidden="true"></i>
+        </div>
+      `;
+    }
+    return `
+      <button class="storage-cell loot-container-cell" draggable="true" data-source="container" data-index="${index}" title="${getItemLabel(entry.name)} x${entry.qty}">
+        <div class="storage-cell__icon-frame"><img src="${getItemIconPath(entry.name)}" alt="" /></div>
+        <b class="storage-cell__name">${getItemLabel(entry.name)}</b>
+        ${entry.qty > 1 ? `<span class="storage-cell__qty">${entry.qty}</span>` : ""}
+      </button>
+    `;
+  }).join("");
+
+  lootContainerCapacity.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
+  renderLootContainerEquipment();
+  lootContainerInventory.innerHTML = Array.from(
+    { length: getInventoryCapacity() },
+    (_, index) => renderTransferInventoryCell(index)
+  ).join("");
+  wireLootContainerWindow();
+}
+
+function wireLootContainerWindow() {
+  for (const cell of lootContainerOverlay.querySelectorAll("[draggable='true']")) {
+    cell.addEventListener("dragstart", (event) => {
+      const source = cell.dataset.source;
+      const index = Number(cell.dataset.index);
+      const itemName = source === "container"
+        ? activeLootContainer?.userData.contents[index]?.name
+        : getInventoryEntryName(state.inventory[index]);
+      if (!itemName) return;
+      event.dataTransfer.setData("text/plain", JSON.stringify({ source, index, itemName }));
+      setItemDragImage(event, itemName);
+    });
+  }
+
+  lootContainerInventory.ondragover = (event) => event.preventDefault();
+  lootContainerInventory.ondrop = handleLootContainerDrop;
+  lootContainerGrid.ondragover = (event) => event.preventDefault();
+  lootContainerGrid.ondrop = handleLootContainerDrop;
+  for (const slot of lootContainerEquipment.querySelectorAll("[data-equipment-slot]")) {
+    slot.ondragover = (event) => event.preventDefault();
+    slot.ondrop = handleLootContainerDrop;
+  }
+
+  for (const cell of lootContainerGrid.querySelectorAll("[data-source='container']")) {
+    cell.addEventListener("dblclick", async () => {
+      await moveContainerItemToInventory({
+        source: "container",
+        index: Number(cell.dataset.index),
+        itemName: activeLootContainer?.userData.contents[Number(cell.dataset.index)]?.name,
+      });
+    });
+  }
+}
+
+async function handleLootContainerDrop(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  const raw = event.dataTransfer.getData("text/plain");
+  if (!raw || !activeLootContainer) return;
+  const payload = JSON.parse(raw);
+  if (event.currentTarget === lootContainerInventory) await moveContainerItemToInventory(payload);
+  else if (event.currentTarget === lootContainerGrid && activeLootContainer.userData.gridRevealed) moveInventoryItemToContainer(payload);
+  else if (event.currentTarget.dataset.equipmentSlot) {
+    const slot = event.currentTarget.dataset.equipmentSlot;
+    const changed = payload.source === "container"
+      ? moveContainerItemToEquipment(payload, slot)
+      : moveItemToEquipment(payload, slot);
+    if (changed) {
+      renderLootContainerWindow();
+      renderBaseHud();
+      updateHud();
+    }
+  }
+}
+
+function renderLootContainerEquipment() {
+  lootContainerEquipment.innerHTML = `
+    ${renderTransferEquipmentSlot(EQUIPMENT_SLOTS.PRIMARY, "Primary")}
+    ${renderTransferEquipmentSlot(EQUIPMENT_SLOTS.SIDEARM, "Sidearm")}
+    ${renderTransferEquipmentSlot(EQUIPMENT_SLOTS.ARMOR, "Armor")}
+    ${renderTransferEquipmentSlot(EQUIPMENT_SLOTS.BACKPACK, "Backpack")}
+  `;
+}
+
+async function moveContainerItemToInventory(payload) {
+  if (payload.source !== "container" || !activeLootContainer) return false;
+  const entry = activeLootContainer.userData.contents[payload.index];
+  if (!entry?.identified || entry.name !== payload.itemName) return false;
+  const available = getAvailableInventorySpaceForItem(entry.name);
+  if (available <= 0) {
+    showPrompt("No inventory space available.");
+    return false;
+  }
+  const maxQty = Math.min(entry.qty, available);
+  const qty = maxQty > 1
+    ? await requestQuantityPrompt({
+      title: "Take Items",
+      text: `${getItemLabel(entry.name)} x${entry.qty}. Choose how many to take.`,
+      max: maxQty,
+    })
+    : maxQty;
+  if (qty <= 0 || !activeLootContainer) return false;
+  const currentEntry = activeLootContainer.userData.contents[payload.index];
+  if (currentEntry !== entry) return false;
+  const added = addInventoryQuantity(entry.name, qty);
+  if (added <= 0) return false;
+  entry.qty -= added;
+  if (entry.qty <= 0) activeLootContainer.userData.contents.splice(payload.index, 1);
+  renderLootContainerWindow();
+  updateHud();
+  renderQuickbar();
+  return true;
+}
+
+function moveInventoryItemToContainer(payload) {
+  if (payload.source !== "inventory" || !activeLootContainer) return false;
+  const entry = state.inventory[payload.index];
+  const itemName = getInventoryEntryName(entry);
+  if (!entry || itemName !== payload.itemName) return false;
+  const contents = activeLootContainer.userData.contents;
+  const existingStack = isStackableInventoryItem(itemName)
+    ? contents.find((containerEntry) => containerEntry.name === itemName && containerEntry.identified)
+    : null;
+  if (!existingStack && contents.length >= 10) {
+    showPrompt("Container is full.");
+    return false;
+  }
+  if (existingStack) existingStack.qty += getInventoryEntryQty(entry);
+  else contents.push({ name: itemName, qty: getInventoryEntryQty(entry), identified: true });
+  state.inventory.splice(payload.index, 1);
+  cleanQuickbarAssignments();
+  renderLootContainerWindow();
+  updateHud();
+  renderQuickbar();
+  return true;
+}
+
+function moveContainerItemToEquipment(payload, slot) {
+  if (payload.source !== "container" || !activeLootContainer) return false;
+  const entry = activeLootContainer.userData.contents[payload.index];
+  const item = getItem(entry?.name);
+  if (!entry?.identified || entry.name !== payload.itemName || item.slot !== slot) {
+    lootContainerStatus.textContent = "That item does not fit there";
+    return false;
+  }
+
+  const previous = state.equipment[slot];
+  if (previous && getAvailableInventorySpaceForItem(previous) <= 0) {
+    lootContainerStatus.textContent = "No room to swap equipped item";
+    return false;
+  }
+  if (previous && addInventoryQuantity(previous, 1) !== 1) return false;
+
+  state.equipment[slot] = entry.name;
+  entry.qty -= 1;
+  if (entry.qty <= 0) activeLootContainer.userData.contents.splice(payload.index, 1);
+  trimInventoryToCapacity();
+  normalizeQuickbarSelection();
+  return true;
 }
 
 function openPauseMenu() {
@@ -6756,6 +7297,7 @@ function restoreLoadedGameToBase() {
   playerAction = createDefaultPlayerActionState();
   promptEl.classList.add("hidden");
   inventoryOverlay.classList.add("hidden");
+  closeLootContainerWindow();
   basePanel.classList.add("hidden");
   runEnd.classList.add("hidden");
   missionHud.classList.add("hidden");
@@ -6822,7 +7364,8 @@ function renderInventory() {
     const hasItem = Boolean(state.equipment[slot]);
     button.disabled = false;
     button.setAttribute("aria-disabled", String(!hasItem));
-    button.onclick = hasItem ? () => unequipItem(slot) : null;
+    button.onclick = null;
+    button.draggable = hasItem;
   }
 
   ui.inventorySlots.innerHTML = "";
@@ -6843,17 +7386,11 @@ function renderInventory() {
     });
     if (!entry) {
       slot.classList.add("inventory-slot--empty");
-      slot.innerHTML = `
-        <div class="inventory-slot__icon-frame"></div>
-        <span>Empty Slot</span>
-        <b>-</b>
-        <div class="inventory-slot__actions"></div>
-      `;
+      slot.innerHTML = `<div class="inventory-slot__icon-frame"></div>`;
       ui.inventorySlots.append(slot);
       continue;
     }
 
-    const item = getItem(itemName);
     slot.draggable = true;
     slot.dataset.source = "inventory";
     slot.title = getItemLabel(itemName);
@@ -6862,14 +7399,8 @@ function renderInventory() {
         <img class="inventory-slot__icon" src="${getItemIconPath(itemName)}" alt="" />
       </div>
       ${qty > 1 ? `<span class="inventory-slot__qty">${qty}</span>` : ""}
-      <span>${getItemTypeLabel(itemName)}</span>
       <b>${getItemLabel(itemName)}</b>
-      <div class="inventory-slot__actions"></div>
     `;
-    const actions = slot.querySelector(".inventory-slot__actions");
-    if (item.healHp) actions.append(makeInventoryActionButton("Use", () => useInventoryItem(index)));
-    if (item.slot) actions.append(makeInventoryActionButton("Equip", () => equipInventoryItem(index)));
-    actions.append(makeInventoryActionButton("Drop", () => dropInventoryItem(index)));
     ui.inventorySlots.append(slot);
   }
   wireInventoryDragAndDrop();
@@ -6890,6 +7421,7 @@ function renderInventoryEquipmentSlots() {
         <b>${getItemLabel(itemName)}</b>
       </div>
     `;
+    button.dataset.itemName = itemName || "";
   }
 }
 
@@ -6900,10 +7432,82 @@ function wireInventoryDragAndDrop() {
       event.dataTransfer.setData("text/plain", JSON.stringify({
         source: "inventory",
         index: Number(item.dataset.index),
+        itemName,
       }));
+      activeInventoryDrag = { source: "inventory", index: Number(item.dataset.index), itemName };
       setItemDragImage(event, itemName);
     });
+    item.addEventListener("dragend", clearInventoryDragState);
   }
+
+  for (const target of inventoryOverlay.querySelectorAll("[data-slot]")) {
+    target.ondragstart = (event) => {
+      const slot = target.dataset.slot;
+      const itemName = state.equipment[slot];
+      if (!itemName) {
+        event.preventDefault();
+        return;
+      }
+      activeInventoryDrag = { source: "equipment", slot, itemName };
+      event.dataTransfer.setData("text/plain", JSON.stringify(activeInventoryDrag));
+      setItemDragImage(event, itemName);
+    };
+    target.ondragend = clearInventoryDragState;
+    target.ondragover = (event) => {
+      event.preventDefault();
+      const valid = Boolean(
+        activeInventoryDrag?.itemName &&
+        getItem(activeInventoryDrag.itemName).slot === target.dataset.slot
+      );
+      target.classList.toggle("equipment-slot--drop-valid", valid);
+      target.classList.toggle("equipment-slot--drop-invalid", !valid);
+      event.dataTransfer.dropEffect = valid ? "move" : "none";
+    };
+    target.ondragleave = () => {
+      target.classList.remove("equipment-slot--drop-valid", "equipment-slot--drop-invalid");
+    };
+    target.ondrop = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      target.classList.remove("equipment-slot--drop-valid", "equipment-slot--drop-invalid");
+      const payload = readItemDragPayload(event);
+      if (!payload || payload.source !== "inventory") return;
+      const itemName = getInventoryEntryName(state.inventory[payload.index]);
+      const targetSlot = target.dataset.slot;
+      if (!itemName || itemName !== payload.itemName) return;
+      if (getItem(itemName).slot !== targetSlot) {
+        showInventoryHint(`${getItemLabel(itemName)} does not fit the ${getEquipmentSlotLabel(targetSlot)} slot.`);
+        return;
+      }
+      equipInventoryItem(payload.index);
+    };
+  }
+
+  for (const target of ui.inventorySlots.querySelectorAll("[data-drop-target='inventory']")) {
+    target.ondragover = (event) => {
+      event.preventDefault();
+      target.classList.add("inventory-slot--drop-target");
+    };
+    target.ondragleave = () => target.classList.remove("inventory-slot--drop-target");
+    target.ondrop = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      target.classList.remove("inventory-slot--drop-target");
+      const payload = readItemDragPayload(event);
+      if (payload?.source === "equipment") unequipItem(payload.slot);
+    };
+  }
+
+  inventoryOverlay.ondragover = (event) => {
+    if (!event.target.closest(".inventory-window")) event.preventDefault();
+  };
+  inventoryOverlay.ondrop = (event) => {
+    if (event.target.closest(".inventory-window")) return;
+    event.preventDefault();
+    const payload = readItemDragPayload(event);
+    if (payload?.source === "inventory") dropInventoryItem(payload.index);
+    else if (payload?.source === "equipment") dropEquippedItem(payload.slot);
+  };
 
   for (const target of document.querySelectorAll("[data-quick-slot]")) {
     target.addEventListener("dragover", (event) => event.preventDefault());
@@ -6915,6 +7519,29 @@ function wireInventoryDragAndDrop() {
       renderQuickbar();
       renderInventory();
     });
+  }
+}
+
+function clearInventoryDragState() {
+  activeInventoryDrag = null;
+  for (const target of inventoryOverlay.querySelectorAll(
+    ".equipment-slot--drop-valid, .equipment-slot--drop-invalid, .inventory-slot--drop-target"
+  )) {
+    target.classList.remove(
+      "equipment-slot--drop-valid",
+      "equipment-slot--drop-invalid",
+      "inventory-slot--drop-target"
+    );
+  }
+}
+
+function readItemDragPayload(event) {
+  const raw = event.dataTransfer?.getData("text/plain");
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
   }
 }
 
@@ -6976,17 +7603,6 @@ function inventoryHasItem(itemName) {
   return state.inventory.some((entry) => getInventoryEntryName(entry) === itemName);
 }
 
-function makeInventoryActionButton(label, onClick) {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.textContent = label;
-  button.addEventListener("click", (event) => {
-    event.stopPropagation();
-    onClick();
-  });
-  return button;
-}
-
 function useInventoryItem(index) {
   const itemName = getInventoryEntryName(state.inventory[index]);
   const item = getItem(itemName);
@@ -7013,6 +7629,19 @@ function dropInventoryItem(index) {
   cleanQuickbarAssignments();
   if (state.mode === "mission") dropItemNearPlayer(itemName);
   else showInventoryHint(`${getItemLabel(itemName)} dropped.`);
+  renderInventory();
+  renderBaseHud();
+  updateHud();
+}
+
+function dropEquippedItem(slot) {
+  const itemName = state.equipment[slot];
+  if (!itemName) return;
+  state.equipment[slot] = null;
+  if (state.mode === "mission") dropItemNearPlayer(itemName);
+  else showInventoryHint(`${getItemLabel(itemName)} dropped.`);
+  trimInventoryToCapacity();
+  normalizeQuickbarSelection();
   renderInventory();
   renderBaseHud();
   updateHud();
@@ -7142,21 +7771,24 @@ function getArmorClass() {
 }
 
 function getItem(itemName) {
-  return itemCatalog[itemName] || { label: itemName };
+  const itemId = resolveItemId(itemName);
+  return itemCatalog[itemId] || { label: itemName };
+}
+
+function resolveItemId(itemName) {
+  if (itemCatalog[itemName]) return itemName;
+  return ITEM_ALIASES[itemName] || itemIdsByLabel[itemName] || itemName;
+}
+
+function getItemIdsByLootTag(lootTag) {
+  return Object.values(ITEM_DATABASE)
+    .filter((item) => item.containerEligible && item.lootTags.includes(lootTag))
+    .map((item) => item.id);
 }
 
 function getItemLabel(itemName) {
   if (!itemName) return "Empty";
   return getItem(itemName).label || itemName;
-}
-
-function getItemTypeLabel(itemName) {
-  const slot = getItem(itemName).slot;
-  if (!slot) return "Item";
-  if (slot === EQUIPMENT_SLOTS.PRIMARY) return "Primary";
-  if (slot === EQUIPMENT_SLOTS.SIDEARM) return "Sidearm";
-  if (slot === EQUIPMENT_SLOTS.ARMOR) return "Armor";
-  return "Backpack";
 }
 
 function getEquipmentSlotLabel(slot) {
@@ -7174,7 +7806,7 @@ function getItemIconPath(itemName) {
 
 function renderQuickbar() {
   if (!ui.quickbar) return;
-  const shouldShow = state.mode === "mission" || isInventoryOpen();
+  const shouldShow = (state.mode === "mission" && !isLootContainerOpen()) || isInventoryOpen();
   ui.quickbar.classList.toggle("hidden", !shouldShow);
   ui.quickbar.classList.toggle("quickbar--inventory", isInventoryOpen());
   ui.quickbar.innerHTML = Array.from({ length: 9 }, (_, index) => renderQuickbarCell(index + 1)).join("");
@@ -7357,12 +7989,16 @@ function buildMission(location) {
   floorPlane.position.set(floor.position.x, 0, floor.position.z);
   scene.add(floorPlane);
 
-  addGrid(size);
+  addGrid(Math.max(size, floorWidth / 2, floorDepth / 2));
   generateRooms(layout);
+  addHousePlaceholderFurniture(layout);
   addPlayer(size, layout.spawn);
-  addExits();
+  addExits(layout);
+  if (layout.handcrafted) addHouseLootContainers(location, layout);
+  else addTestLootContainer(location, layout);
   addMissionKeys(layout);
-  addLoot(location);
+  if (layout.handcrafted) addHouseLooseLoot(location, layout);
+  else addLoot(location);
   addZombies(location);
   addRoomFog(layout.rooms);
   updateFogOfWar();
@@ -7372,6 +8008,7 @@ function buildMission(location) {
 }
 
 function clearScene() {
+  closeLootContainerWindow();
   hideMissionInteractionUi();
   for (const zombie of [...zombies, ...deadZombies]) {
     zombie.userData.vocalAudio?.pause();
@@ -7386,6 +8023,7 @@ function clearScene() {
   colliderBounds = new WeakMap();
   colliderGridDirty = true;
   lootNodes = [];
+  lootContainers = [];
   zombies = [];
   deadZombies = [];
   exits = [];
@@ -7413,6 +8051,7 @@ function addGrid(size) {
 }
 
 function createMissionLayout(location) {
+  if (location.id === "house") return createHouseMissionLayout();
   for (let attempt = 0; attempt < 12; attempt++) {
     const layout = buildMissionLayoutAttempt(location);
     if (validateMissionLayout(layout)) return layout;
@@ -7556,6 +8195,90 @@ function addMissionKeys(layout) {
   }
 }
 
+function addHousePlaceholderFurniture(layout) {
+  if (!layout.handcrafted) return;
+  const roomsByKey = new Map(layout.rooms.map((room) => [room.key, room]));
+  const materials = {
+    fabric: new THREE.MeshStandardMaterial({ color: "#66706a", roughness: 0.92, flatShading: true }),
+    wood: new THREE.MeshStandardMaterial({ color: "#6f4c31", roughness: 0.9, flatShading: true }),
+    darkWood: new THREE.MeshStandardMaterial({ color: "#493625", roughness: 0.94, flatShading: true }),
+    metal: new THREE.MeshStandardMaterial({ color: "#747b7d", roughness: 0.62, metalness: 0.48, flatShading: true }),
+    appliance: new THREE.MeshStandardMaterial({ color: "#aaaead", roughness: 0.55, metalness: 0.25, flatShading: true }),
+    mattress: new THREE.MeshStandardMaterial({ color: "#908a79", roughness: 0.96, flatShading: true }),
+    vehicle: new THREE.MeshStandardMaterial({ color: "#3f484b", roughness: 0.68, metalness: 0.35, flatShading: true }),
+  };
+  const definitions = {
+    sofa: { size: [2.5, 0.82, 0.95], material: "fabric", collider: true },
+    coffeeTable: { size: [1.45, 0.48, 0.9], material: "darkWood", collider: false },
+    diningTable: { size: [2.15, 0.76, 1.25], material: "wood", collider: true },
+    counter: { size: [2.45, 0.96, 0.72], material: "appliance", collider: true },
+    cabinet: { size: [1.2, 1.42, 0.62], material: "darkWood", collider: true },
+    appliance: { size: [1.05, 1.25, 0.82], material: "appliance", collider: true },
+    bed: { size: [1.75, 0.62, 2.5], material: "mattress", collider: true },
+    desk: { size: [1.9, 0.78, 0.78], material: "wood", collider: true },
+    shelf: { size: [2.05, 1.65, 0.52], material: "darkWood", collider: true },
+    car: { size: [1.5, 0.92, 2.75], material: "vehicle", collider: true },
+  };
+
+  for (const placement of layout.template.furniture) {
+    const room = roomsByKey.get(placement.room);
+    const definition = definitions[placement.type];
+    if (!room || !definition) continue;
+    const [width, height, depth] = definition.size.map((value) => value * (placement.scale || 1));
+    const mesh = new THREE.Mesh(new THREE.BoxGeometry(width, height, depth), materials[definition.material]);
+    mesh.position.set(room.x + placement.x, height / 2, room.z + placement.z);
+    mesh.rotation.y = placement.rotation || 0;
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    mesh.userData.placeholderFurniture = placement.type;
+    mesh.userData.blocksSight = height > 1.35;
+    scene.add(mesh);
+    if (definition.collider) colliders.push(mesh);
+  }
+  markColliderGridDirty();
+}
+
+function addHouseLootContainers(location, layout) {
+  const sockets = layout.template.containerSockets || [];
+  sockets.forEach((socket, index) => {
+    if (random() > socket.chance) return;
+    const position = getAvailableTemplateSocketPosition(layout, socket, 0.62);
+    if (!position) return;
+    const container = createLowPolyLootCrate();
+    container.position.copy(position);
+    container.rotation.y = index % 2 ? Math.PI / 2 : 0;
+    container.userData.containerName = "Household Storage Crate";
+    container.userData.contents = createTestContainerContents(location, index + 1);
+    container.userData.gridRevealed = false;
+    container.userData.blocksSight = false;
+    scene.add(container);
+    lootContainers.push(container);
+    colliders.push(container);
+  });
+  markColliderGridDirty();
+}
+
+function addHouseLooseLoot(location, layout) {
+  for (const socket of layout.template.looseLootSockets || []) {
+    if (random() > socket.chance) continue;
+    const position = getAvailableTemplateSocketPosition(layout, socket, 0.32);
+    if (!position || isInsideExtractionZone(position)) continue;
+    createLootNode(pick(location.loot), position);
+  }
+}
+
+function getAvailableTemplateSocketPosition(layout, socket, radius) {
+  const room = layout.rooms.find((candidate) => candidate.key === socket.room);
+  if (!room) return null;
+  const offsets = [[0, 0], [0.8, 0], [-0.8, 0], [0, 0.8], [0, -0.8], [0.8, 0.8], [-0.8, -0.8]];
+  for (const [offsetX, offsetZ] of offsets) {
+    const point = new THREE.Vector3(room.x + socket.x + offsetX, 0, room.z + socket.z + offsetZ);
+    clampPointToRoom(point, room, 0.8);
+    if (!hitsCollider(point, radius)) return point;
+  }
+  return null;
+}
+
 function addRoomWalls(room, wallMaterial) {
   for (const side of ["north", "south", "east", "west"]) {
     const door = room.doors.find((item) => item.side === side);
@@ -7570,7 +8293,7 @@ function addRoomWalls(room, wallMaterial) {
 function addWallWithDoorOpening(room, side, material) {
   const door = room.doors.find((item) => item.side === side);
   const hasOpening = Boolean(door) || room.exteriorDoor === side;
-  const opening = hasOpening ? 1.35 : 0;
+  const opening = hasOpening ? (door?.edge.doorWidth || (room.exteriorDoor === side && room.halfW > 3.2 ? 1.7 : 1.35)) : 0;
   const thickness = 0.24;
 
   if (side === "north" || side === "south") {
@@ -7604,9 +8327,10 @@ function addRoomPillars(room, material) {
   for (const [x, z] of corners) addPillar(x, z, material, 0.42);
 
   for (const side of ["north", "south", "east", "west"]) {
-    const hasOpening = room.doors.some((item) => item.side === side) || room.exteriorDoor === side;
+    const door = room.doors.find((item) => item.side === side);
+    const hasOpening = Boolean(door) || room.exteriorDoor === side;
     if (!hasOpening) continue;
-    const openingHalf = 1.35 / 2;
+    const openingHalf = (door?.edge.doorWidth || (room.exteriorDoor === side && room.halfW > 3.2 ? 1.7 : 1.35)) / 2;
     if (side === "north" || side === "south") {
       const z = room.z + (side === "north" ? -room.halfH : room.halfH);
       addPillar(room.x - openingHalf, z, material, 0.32);
@@ -7638,7 +8362,7 @@ function addDoor(edge, material) {
   const x = (from.x + to.x) / 2;
   const z = (from.z + to.z) / 2;
   const vertical = from.x !== to.x;
-  const doorWidth = 1.35;
+  const doorWidth = edge.doorWidth || 1.35;
   const doorThickness = 0.3;
   const hingeSign = vertical ? (to.z >= from.z ? -1 : 1) : (to.x >= from.x ? -1 : 1);
   const hinge = new THREE.Group();
@@ -7910,6 +8634,161 @@ function getSpriteSheetClipInfo(name, clip) {
   };
 }
 
+function createHouseMissionLayout() {
+  const template = pick(HOUSE_MISSION_TEMPLATES);
+  const roomSpan = 7;
+  const half = roomSpan / 2;
+  const rooms = template.rooms.map((definition, id) => ({
+    id,
+    key: definition.key,
+    label: definition.label,
+    gx: definition.gx,
+    gz: definition.gz,
+    x: definition.gx * roomSpan,
+    z: definition.gz * roomSpan,
+    halfW: half,
+    halfH: half,
+    depth: Infinity,
+    doors: [],
+  }));
+  const roomsByKey = new Map(rooms.map((room) => [room.key, room]));
+  const edges = template.connections.map(([fromKey, toKey]) => {
+    const from = roomsByKey.get(fromKey);
+    const to = roomsByKey.get(toKey);
+    const dx = to.gx - from.gx;
+    const dz = to.gz - from.gz;
+    const side = dx === 1 ? "east" : dx === -1 ? "west" : dz === 1 ? "south" : "north";
+    const opposite = side === "east" ? "west" : side === "west" ? "east" : side === "south" ? "north" : "south";
+    const edge = { from, to, side, opposite, locked: false, keyRoom: null, doorWidth: 1.7 };
+    from.doors.push({ side, edge });
+    to.doors.push({ side: opposite, edge });
+    return edge;
+  });
+
+  const entranceRoom = roomsByKey.get(template.entrance.room);
+  entranceRoom.depth = 0;
+  const queue = [entranceRoom];
+  while (queue.length) {
+    const room = queue.shift();
+    for (const door of room.doors) {
+      const next = door.edge.from === room ? door.edge.to : door.edge.from;
+      if (next.depth <= room.depth + 1) continue;
+      next.depth = room.depth + 1;
+      queue.push(next);
+    }
+  }
+  for (const room of rooms) if (!Number.isFinite(room.depth)) room.depth = 0;
+
+  const entranceVectors = {
+    north: { dx: 0, dz: -1 }, south: { dx: 0, dz: 1 },
+    east: { dx: 1, dz: 0 }, west: { dx: -1, dz: 0 },
+  };
+  const entrance = { side: template.entrance.side, ...entranceVectors[template.entrance.side] };
+  entranceRoom.exteriorDoor = entrance.side;
+  const spawn = new THREE.Vector3(
+    entranceRoom.x + entrance.dx * (entranceRoom.halfW + 2.65),
+    1.2,
+    entranceRoom.z + entrance.dz * (entranceRoom.halfH + 2.65)
+  );
+  const bounds = rooms.reduce((acc, room) => ({
+    minX: Math.min(acc.minX, room.x - room.halfW),
+    maxX: Math.max(acc.maxX, room.x + room.halfW),
+    minZ: Math.min(acc.minZ, room.z - room.halfH),
+    maxZ: Math.max(acc.maxZ, room.z + room.halfH),
+  }), { minX: Infinity, maxX: -Infinity, minZ: Infinity, maxZ: -Infinity });
+  bounds.minX = Math.min(bounds.minX, spawn.x - 2);
+  bounds.maxX = Math.max(bounds.maxX, spawn.x + 2);
+  bounds.minZ = Math.min(bounds.minZ, spawn.z - 2);
+  bounds.maxZ = Math.max(bounds.maxZ, spawn.z + 2);
+
+  return { rooms, edges, bounds, spawn, entrance, handcrafted: true, template, templateId: template.id };
+}
+
+function addTestLootContainer(location, layout) {
+  if (location.id !== "house" || !layout.spawn || !layout.rooms[0]) return;
+
+  const entranceRoom = layout.rooms[0];
+  const towardRoom = new THREE.Vector3(entranceRoom.x, 0, entranceRoom.z)
+    .sub(layout.spawn.clone().setY(0))
+    .normalize();
+  const side = new THREE.Vector3(-towardRoom.z, 0, towardRoom.x);
+  const position = layout.spawn.clone().setY(0)
+    .addScaledVector(towardRoom, 1.85)
+    .addScaledVector(side, 1.15);
+
+  position.x = THREE.MathUtils.clamp(position.x, entranceRoom.x - entranceRoom.halfW + 0.8, entranceRoom.x + entranceRoom.halfW - 0.8);
+  position.z = THREE.MathUtils.clamp(position.z, entranceRoom.z - entranceRoom.halfH + 0.8, entranceRoom.z + entranceRoom.halfH - 0.8);
+
+  const container = createLowPolyLootCrate();
+  container.position.copy(position);
+  container.rotation.y = Math.atan2(towardRoom.x, towardRoom.z) + Math.PI / 2;
+  container.userData.containerName = "Weathered Supply Crate";
+  container.userData.contents = createTestContainerContents(location);
+  container.userData.gridRevealed = false;
+  container.userData.blocksSight = false;
+  scene.add(container);
+  lootContainers.push(container);
+  colliders.push(container);
+  colliderGridDirty = true;
+}
+
+function createLowPolyLootCrate() {
+  const group = new THREE.Group();
+  const wood = new THREE.MeshStandardMaterial({ color: "#78502f", roughness: 0.94, metalness: 0.02, flatShading: true });
+  const darkWood = new THREE.MeshStandardMaterial({ color: "#49301e", roughness: 0.98, flatShading: true });
+  const metal = new THREE.MeshStandardMaterial({ color: "#505754", roughness: 0.72, metalness: 0.62, flatShading: true });
+
+  const body = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.62, 0.86), darkWood);
+  body.position.y = 0.34;
+  body.castShadow = true;
+  body.receiveShadow = true;
+  group.add(body);
+
+  for (const y of [0.15, 0.34, 0.53]) {
+    const frontSlat = new THREE.Mesh(new THREE.BoxGeometry(1.12, 0.13, 0.055), wood);
+    frontSlat.position.set(0, y, 0.46);
+    frontSlat.castShadow = true;
+    group.add(frontSlat);
+
+    const backSlat = frontSlat.clone();
+    backSlat.position.z = -0.46;
+    group.add(backSlat);
+  }
+
+  const lid = new THREE.Mesh(new THREE.BoxGeometry(1.28, 0.14, 0.94), wood);
+  lid.position.y = 0.73;
+  lid.castShadow = true;
+  group.add(lid);
+
+  for (const x of [-0.54, 0.54]) {
+    for (const z of [-0.41, 0.41]) {
+      const brace = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.7, 0.075), metal);
+      brace.position.set(x, 0.37, z);
+      brace.castShadow = true;
+      group.add(brace);
+    }
+  }
+
+  const latch = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.22, 0.055), metal);
+  latch.position.set(0, 0.59, 0.5);
+  latch.castShadow = true;
+  group.add(latch);
+  group.userData.radius = 0.66;
+  return group;
+}
+
+function createTestContainerContents(location, salt = 0) {
+  const containerRng = createSeededRng((state.runSeed ^ 0x6c8e9cf5 ^ Math.imul(salt + 1, 0x9e3779b1)) >>> 0);
+  const itemCount = Math.floor(containerRng() * (TEST_CONTAINER_MAX_ITEMS + 1));
+  const contents = [];
+  for (let index = 0; index < itemCount; index++) {
+    const itemName = location.loot[Math.floor(containerRng() * location.loot.length)];
+    const qty = getItem(itemName).ammoQty || 1;
+    contents.push({ name: itemName, qty, identified: false });
+  }
+  return contents;
+}
+
 function addLoot(location) {
   const count = 5 + location.stars * 3;
   for (let i = 0; i < count; i++) {
@@ -8007,7 +8886,15 @@ function addZombies(location) {
       depthTest: true,
     });
     const zombie = new THREE.Sprite(material);
-    zombie.position.copy(getRandomPointInRoom(room, 1.0, 1.05));
+    let spawnPoint = getRandomPointInRoom(room, 1.0, 1.05);
+    for (let attempt = 0; attempt < 20; attempt++) {
+      const candidate = getRandomPointInRoom(room, 1.0, 1.05);
+      if (!hitsCollider(candidate, 0.58) && !isInsideExtractionZone(candidate, 1.2)) {
+        spawnPoint = candidate;
+        break;
+      }
+    }
+    zombie.position.copy(spawnPoint);
     zombie.scale.set(2.5, 2.5, 1);
     zombie.userData = {
       health: 35 + location.stars * 10,
@@ -8030,7 +8917,14 @@ function addZombies(location) {
   }
 }
 
-function addExits() {
+function addExits(layout = null) {
+  if (layout?.handcrafted) {
+    const exit = createExtractionGrid();
+    exit.position.set(layout.spawn.x, 0.06, layout.spawn.z);
+    scene.add(exit);
+    exits.push(exit);
+    return;
+  }
   const startRoom = missionRooms[0];
   const sortedRooms = [...missionRooms].sort((a, b) => b.depth - a.depth);
   const farRoom = sortedRooms[0] || startRoom;
@@ -8159,6 +9053,10 @@ function animate() {
   requestAnimationFrame(animate);
   try {
     const dt = Math.min(clock.getDelta(), MAX_FRAME_DT);
+    if (state.mode === "menu") {
+      renderer.render(mainMenuScene, mainMenuCamera);
+      return;
+    }
     if (isPaused()) {
       renderer.render(scene, camera);
       return;
@@ -8653,7 +9551,7 @@ function updateFogOfWar() {
     if (room.fogTile) room.fogTile.visible = !visible;
   }
 
-  for (const node of [...lootNodes, ...zombies, ...deadZombies, ...exits]) {
+  for (const node of [...lootNodes, ...lootContainers, ...zombies, ...deadZombies, ...exits]) {
     node.visible = isPointVisibleFromPlayer(node.position);
   }
 
@@ -8735,6 +9633,12 @@ function getObjectWorldPosition(object) {
 function findInteraction() {
   interactTarget = null;
   hideMissionInteractionUi(true);
+  const nearbyContainer = lootContainers.find((node) => node.visible && node.position.distanceTo(player.position) < 1.75);
+  if (nearbyContainer) {
+    interactTarget = nearbyContainer;
+    showInteractionHint(nearbyContainer.position, 1.15);
+    return;
+  }
   const nearbyLoot = lootNodes.find((node) => node.visible && node.position.distanceTo(player.position) < 1.4);
   if (nearbyLoot) {
     interactTarget = nearbyLoot;
@@ -8810,7 +9714,14 @@ function hideMissionInteractionUi(keepPlayerNotice = false) {
 function interact() {
   if (!interactTarget || state.mode !== "mission") return;
   if (isPlayerActionMovementLocked()) return;
-  if (lootNodes.includes(interactTarget)) {
+  if (lootContainers.includes(interactTarget)) {
+    const containerTarget = interactTarget;
+    requestPlayerActionState(PLAYER_ACTION_STATES.INTERACT, {
+      facing: getMouseFacingDirection(),
+      duration: 0.38,
+      onComplete: () => openLootContainerWindow(containerTarget),
+    });
+  } else if (lootNodes.includes(interactTarget)) {
     const lootTarget = interactTarget;
     const facing = getMouseFacingDirection();
     requestPlayerActionState(PLAYER_ACTION_STATES.PICKUP, {
@@ -9122,6 +10033,7 @@ function applyResolution() {
   document.documentElement.style.setProperty("--game-height", `${height}px`);
   document.documentElement.style.setProperty("--game-scale", String(scale));
   renderer.setSize(width, height);
+  resizeMainMenuScene();
   cameraConfig.view = Math.min(cameraConfig.view, getDefaultCameraView());
   applyCameraProjection();
 }
