@@ -1131,6 +1131,9 @@ const texturePaths = {
   baseFenceSimpleAlbedo: "./assets/textures/base_fence_simple_albedo.png",
   baseFenceSimpleBump: "./assets/textures/base_fence_simple_bump.png",
   baseFenceSimpleRoughness: "./assets/textures/base_fence_simple_roughness.png",
+  crateWoodAlbedo: "./assets/textures/crate_wood_albedo.png",
+  crateWoodBump: "./assets/textures/crate_wood_bump.png",
+  crateWoodRoughness: "./assets/textures/crate_wood_roughness.png",
   baseCarpet: "./assets/textures/base_green_carpet.png",
   workbench: "./assets/textures/base_workbench.png",
   workbenchScrewdriverGrip: "./assets/textures/workbench_screwdriver_grip.png",
@@ -2551,30 +2554,7 @@ function addBaseStation(id, label, x, z, color, factory) {
 }
 
 function makeCrate(width, height, depth) {
-  const group = new THREE.Group();
-  const crate = new THREE.Mesh(
-    new THREE.BoxGeometry(width, height, depth),
-    createTextureMaterial(texturePaths.itemBox, 1, 1, "#7d8582")
-  );
-  crate.position.y = height / 2;
-  crate.castShadow = true;
-  group.add(crate);
-  const strapMaterial = new THREE.MeshStandardMaterial({ color: "#3b241a", roughness: 0.82 });
-  const frontStrap = new THREE.Mesh(new THREE.BoxGeometry(width + 0.04, 0.08, 0.08), strapMaterial);
-  frontStrap.position.set(0, height * 0.67, -depth / 2 - 0.03);
-  frontStrap.castShadow = true;
-  group.add(frontStrap);
-  const sideStrap = new THREE.Mesh(new THREE.BoxGeometry(0.1, height + 0.04, depth + 0.04), strapMaterial);
-  sideStrap.position.set(-width * 0.36, height / 2, 0);
-  sideStrap.castShadow = true;
-  group.add(sideStrap);
-  const latch = new THREE.Mesh(
-    new THREE.BoxGeometry(0.22, 0.16, 0.08),
-    new THREE.MeshStandardMaterial({ color: "#a98048", roughness: 0.42 })
-  );
-  latch.position.set(0.38, height * 0.68, -depth / 2 - 0.08);
-  group.add(latch);
-  return group;
+  return createWoodenSupplyCrate(width, height, depth);
 }
 
 function makeBench() {
@@ -8733,47 +8713,179 @@ function addTestLootContainer(location, layout) {
 }
 
 function createLowPolyLootCrate() {
+  return createWoodenSupplyCrate(1.28, 0.8, 0.94);
+}
+
+let crateMaterialPalette = null;
+
+function getCrateMaterialPalette() {
+  if (crateMaterialPalette) return crateMaterialPalette;
+
+  const makeWoodMaterial = (rotation, color) => {
+    const configureMap = (path, isColor = false) => {
+      const texture = loadTextureWithFallback(path);
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      texture.repeat.set(1.35, 1.35);
+      texture.center.set(0.5, 0.5);
+      texture.rotation = rotation;
+      texture.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+      if (isColor) texture.colorSpace = THREE.SRGBColorSpace;
+      return texture;
+    };
+    return new THREE.MeshStandardMaterial({
+      map: configureMap(texturePaths.crateWoodAlbedo, true),
+      bumpMap: configureMap(texturePaths.crateWoodBump),
+      bumpScale: 0.025,
+      roughnessMap: configureMap(texturePaths.crateWoodRoughness),
+      color,
+      roughness: 0.92,
+      metalness: 0.01,
+    });
+  };
+
+  const steelMap = loadTextureWithFallback(texturePaths.workbenchToolSteel);
+  steelMap.wrapS = THREE.RepeatWrapping;
+  steelMap.wrapT = THREE.RepeatWrapping;
+  steelMap.repeat.set(1.5, 1.5);
+  steelMap.colorSpace = THREE.SRGBColorSpace;
+
+  crateMaterialPalette = {
+    horizontal: makeWoodMaterial(Math.PI / 2, "#b88955"),
+    vertical: makeWoodMaterial(0, "#9f7448"),
+    dark: makeWoodMaterial(Math.PI / 2, "#5d412b"),
+    steel: new THREE.MeshStandardMaterial({
+      map: steelMap,
+      color: "#555b58",
+      roughness: 0.66,
+      metalness: 0.68,
+    }),
+    steelDark: new THREE.MeshStandardMaterial({
+      color: "#292d2b",
+      roughness: 0.58,
+      metalness: 0.76,
+    }),
+  };
+  return crateMaterialPalette;
+}
+
+function createBeveledCratePiece(width, height, depth, material, bevel = 0.012) {
+  const edge = Math.min(bevel, width * 0.18, height * 0.18, depth * 0.18);
+  const shape = new THREE.Shape();
+  shape.moveTo(-width / 2, -height / 2);
+  shape.lineTo(width / 2, -height / 2);
+  shape.lineTo(width / 2, height / 2);
+  shape.lineTo(-width / 2, height / 2);
+  shape.closePath();
+  const geometry = new THREE.ExtrudeGeometry(shape, {
+    depth: Math.max(0.001, depth - edge * 2),
+    bevelEnabled: true,
+    bevelSegments: 1,
+    bevelSize: edge,
+    bevelThickness: edge,
+    curveSegments: 1,
+    steps: 1,
+  });
+  geometry.center();
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  return mesh;
+}
+
+function createWoodenSupplyCrate(width = 1.28, height = 0.8, depth = 0.94) {
   const group = new THREE.Group();
-  const wood = new THREE.MeshStandardMaterial({ color: "#78502f", roughness: 0.94, metalness: 0.02, flatShading: true });
-  const darkWood = new THREE.MeshStandardMaterial({ color: "#49301e", roughness: 0.98, flatShading: true });
-  const metal = new THREE.MeshStandardMaterial({ color: "#505754", roughness: 0.72, metalness: 0.62, flatShading: true });
+  const materials = getCrateMaterialPalette();
+  const boardDepth = Math.max(0.045, Math.min(width, depth) * 0.055);
+  const postSize = Math.max(0.075, Math.min(width, depth) * 0.095);
+  const insetWidth = width - postSize * 2.15;
+  const insetDepth = depth - postSize * 2.15;
+  const wallBottom = height * 0.12;
+  const wallTop = height * 0.78;
+  const wallHeight = wallTop - wallBottom;
+  const slatGap = height * 0.018;
+  const slatHeight = (wallHeight - slatGap * 3) / 4;
 
-  const body = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.62, 0.86), darkWood);
-  body.position.y = 0.34;
-  body.castShadow = true;
-  body.receiveShadow = true;
-  group.add(body);
+  const addPiece = (pieceWidth, pieceHeight, pieceDepth, x, y, z, material, bevel) => {
+    const piece = createBeveledCratePiece(pieceWidth, pieceHeight, pieceDepth, material, bevel);
+    piece.position.set(x, y, z);
+    group.add(piece);
+    return piece;
+  };
 
-  for (const y of [0.15, 0.34, 0.53]) {
-    const frontSlat = new THREE.Mesh(new THREE.BoxGeometry(1.12, 0.13, 0.055), wood);
-    frontSlat.position.set(0, y, 0.46);
-    frontSlat.castShadow = true;
-    group.add(frontSlat);
+  addPiece(width - postSize * 0.7, height * 0.64, depth - postSize * 0.7, 0, height * 0.43, 0, materials.dark, 0.018);
 
-    const backSlat = frontSlat.clone();
-    backSlat.position.z = -0.46;
-    group.add(backSlat);
-  }
-
-  const lid = new THREE.Mesh(new THREE.BoxGeometry(1.28, 0.14, 0.94), wood);
-  lid.position.y = 0.73;
-  lid.castShadow = true;
-  group.add(lid);
-
-  for (const x of [-0.54, 0.54]) {
-    for (const z of [-0.41, 0.41]) {
-      const brace = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.7, 0.075), metal);
-      brace.position.set(x, 0.37, z);
-      brace.castShadow = true;
-      group.add(brace);
+  for (let index = 0; index < 4; index++) {
+    const y = wallBottom + slatHeight / 2 + index * (slatHeight + slatGap);
+    for (const z of [-depth / 2 - boardDepth * 0.18, depth / 2 + boardDepth * 0.18]) {
+      addPiece(insetWidth, slatHeight, boardDepth, 0, y, z, materials.horizontal, 0.01);
+    }
+    for (const x of [-width / 2 - boardDepth * 0.18, width / 2 + boardDepth * 0.18]) {
+      addPiece(boardDepth, slatHeight, insetDepth, x, y, 0, materials.horizontal, 0.01);
     }
   }
 
-  const latch = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.22, 0.055), metal);
-  latch.position.set(0, 0.59, 0.5);
-  latch.castShadow = true;
-  group.add(latch);
-  group.userData.radius = 0.66;
+  for (const x of [-width / 2 + postSize / 2, width / 2 - postSize / 2]) {
+    for (const z of [-depth / 2 + postSize / 2, depth / 2 - postSize / 2]) {
+      addPiece(postSize, height * 0.83, postSize, x, height * 0.415, z, materials.vertical, 0.016);
+    }
+  }
+
+  const railHeight = height * 0.085;
+  for (const y of [height * 0.08, height * 0.79]) {
+    for (const z of [-depth / 2 - boardDepth * 0.42, depth / 2 + boardDepth * 0.42]) {
+      addPiece(width + boardDepth * 0.55, railHeight, boardDepth * 1.35, 0, y, z, materials.horizontal, 0.012);
+    }
+    for (const x of [-width / 2 - boardDepth * 0.42, width / 2 + boardDepth * 0.42]) {
+      addPiece(boardDepth * 1.35, railHeight, depth - postSize * 0.5, x, y, 0, materials.horizontal, 0.012);
+    }
+  }
+
+  const lidGap = width * 0.012;
+  const lidBoardCount = 5;
+  const lidBoardWidth = (width - postSize * 0.55 - lidGap * (lidBoardCount - 1)) / lidBoardCount;
+  for (let index = 0; index < lidBoardCount; index++) {
+    const x = -width / 2 + postSize * 0.275 + lidBoardWidth / 2 + index * (lidBoardWidth + lidGap);
+    addPiece(lidBoardWidth, height * 0.075, depth + boardDepth * 0.15, x, height * 0.9, 0, materials.vertical, 0.012);
+  }
+  for (const x of [-width * 0.36, width * 0.36]) {
+    addPiece(postSize * 0.72, height * 0.055, depth + boardDepth * 0.38, x, height * 0.945, 0, materials.dark, 0.009);
+  }
+
+  const braceRun = insetWidth * 0.78;
+  const braceRise = wallHeight * 0.76;
+  const braceLength = Math.hypot(braceRun, braceRise);
+  const braceAngle = Math.atan2(braceRise, braceRun);
+  for (const z of [-depth / 2 - boardDepth * 0.95, depth / 2 + boardDepth * 0.95]) {
+    const brace = addPiece(braceLength, railHeight * 0.72, boardDepth * 0.72, 0, height * 0.46, z, materials.dark, 0.009);
+    brace.rotation.z = z > 0 ? braceAngle : -braceAngle;
+  }
+
+  const plateSize = postSize * 1.12;
+  for (const x of [-width / 2 + postSize / 2, width / 2 - postSize / 2]) {
+    for (const z of [-depth / 2 - boardDepth * 0.72, depth / 2 + boardDepth * 0.72]) {
+      for (const y of [height * 0.09, height * 0.8]) {
+        addPiece(plateSize, railHeight * 1.15, boardDepth * 0.42, x, y, z, materials.steel, 0.006);
+      }
+    }
+  }
+
+  const frontZ = depth / 2 + boardDepth * 1.23;
+  addPiece(width * 0.2, height * 0.19, boardDepth * 0.48, 0, height * 0.72, frontZ, materials.steel, 0.008);
+  addPiece(width * 0.075, height * 0.17, boardDepth * 0.6, 0, height * 0.615, frontZ + boardDepth * 0.08, materials.steelDark, 0.006);
+
+  const rivetGeometry = new THREE.CylinderGeometry(postSize * 0.1, postSize * 0.1, boardDepth * 0.2, 8);
+  for (const x of [-width * 0.075, width * 0.075]) {
+    for (const y of [height * 0.68, height * 0.76]) {
+      const rivet = new THREE.Mesh(rivetGeometry, materials.steelDark);
+      rivet.rotation.x = Math.PI / 2;
+      rivet.position.set(x, y, frontZ + boardDepth * 0.32);
+      rivet.castShadow = true;
+      group.add(rivet);
+    }
+  }
+
+  group.userData.radius = Math.max(width, depth) * 0.52;
   return group;
 }
 
