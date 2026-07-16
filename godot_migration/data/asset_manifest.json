@@ -9,85 +9,166 @@
     "height": 128
   },
   {
-    "path": "res://assets/female_8dir.gif",
-    "source_path": "assets/female_8dir.gif",
+    "path": "res://assets/audio/abandoned_house.mp3",
+    "source_path": "assets/audio/abandoned_house.mp3",
     "category": "source_or_reference",
-    "type": "gif",
-    "bytes": 19881,
-    "width": 128,
-    "height": 128
+    "type": "mp3",
+    "bytes": 1808970,
+    "width": null,
+    "height": null
   },
   {
-    "path": "res://assets/female_walk_east.gif",
-    "source_path": "assets/female_walk_east.gif",
+    "path": "res://assets/audio/ammo_pickup_1.mp3",
+    "source_path": "assets/audio/ammo_pickup_1.mp3",
     "category": "source_or_reference",
-    "type": "gif",
-    "bytes": 17908,
-    "width": 128,
-    "height": 128
+    "type": "mp3",
+    "bytes": 25389,
+    "width": null,
+    "height": null
   },
   {
-    "path": "res://assets/female_walk_north.gif",
-    "source_path": "assets/female_walk_north.gif",
+    "path": "res://assets/audio/ammo_pickup_2.mp3",
+    "source_path": "assets/audio/ammo_pickup_2.mp3",
     "category": "source_or_reference",
-    "type": "gif",
-    "bytes": 19101,
-    "width": 128,
-    "height": 128
+    "type": "mp3",
+    "bytes": 25389,
+    "width": null,
+    "height": null
   },
   {
-    "path": "res://assets/female_walk_north_east.gif",
-    "source_path": "assets/female_walk_north_east.gif",
+    "path": "res://assets/audio/base_theme.mp3",
+    "source_path": "assets/audio/base_theme.mp3",
     "category": "source_or_reference",
-    "type": "gif",
-    "bytes": 19025,
-    "width": 128,
-    "height": 128
+    "type": "mp3",
+    "bytes": 1505114,
+    "width": null,
+    "height": null
   },
   {
-    "path": "res://assets/female_walk_north_west.gif",
-    "source_path": "assets/female_walk_north_west.gif",
+    "path": "res://assets/audio/door_close.mp3",
+    "source_path": "assets/audio/door_close.mp3",
     "category": "source_or_reference",
-    "type": "gif",
-    "bytes": 18762,
-    "width": 128,
-    "height": 128
+    "type": "mp3",
+    "bytes": 25389,
+    "width": null,
+    "height": null
   },
   {
-    "path": "res://assets/female_walk_south.gif",
-    "source_path": "assets/female_walk_south.gif",
+    "path": "res://assets/audio/door_locked.mp3",
+    "source_path": "assets/audio/door_locked.mp3",
     "category": "source_or_reference",
-    "type": "gif",
-    "bytes": 19322,
-    "width": 128,
-    "height": 128
+    "type": "mp3",
+    "bytes": 25389,
+    "width": null,
+    "height": null
   },
   {
-    "path": "res://assets/female_walk_south_east.gif",
-    "source_path": "assets/female_walk_south_east.gif",
+    "path": "res://assets/audio/door_open_1.mp3",
+    "source_path": "assets/audio/door_open_1.mp3",
     "category": "source_or_reference",
-    "type": "gif",
-    "bytes": 18863,
-    "width": 128,
-    "height": 128
+    "type": "mp3",
+    "bytes": 49581,
+    "width": null,
+    "height": null
   },
   {
-    "path": "res://assets/female_walk_south_west.gif",
-    "source_path": "assets/female_walk_south_west.gif",
+    "path": "res://assets/audio/door_open_2.mp3",
+    "source_path": "assets/audio/door_open_2.mp3",
     "category": "source_or_reference",
-    "type": "gif",
-    "bytes": 19850,
-    "width": 128,
-    "height": 128
+    "type": "mp3",
+    "bytes": 49581,
+    "width": null,
+    "height": null
   },
   {
-    "path": "res://assets/female_walk_west.gif",
-    "source_path": "assets/female_walk_west.gif",
+    "path": "res://assets/audio/door_unlock.mp3",
+    "source_path": "assets/audio/door_unlock.mp3",
     "category": "source_or_reference",
-    "type": "gif",
-    "bytes": 18549,
-    "width": 128,
-    "height": 128
+    "type": "mp3",
+    "bytes": 25389,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/audio/pickup_1.mp3",
+    "source_path": "assets/audio/pickup_1.mp3",
+    "category": "source_or_reference",
+    "type": "mp3",
+    "bytes": 25389,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/audio/pickup_2.mp3",
+    "source_path": "assets/audio/pickup_2.mp3",
+    "category": "source_or_reference",
+    "type": "mp3",
+    "bytes": 25389,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/audio/pickup_3.mp3",
+    "source_path": "assets/audio/pickup_3.mp3",
+    "category": "source_or_reference",
+    "type": "mp3",
+    "bytes": 25389,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/audio/zombie_1.mp3",
+    "source_path": "assets/audio/zombie_1.mp3",
+    "category": "enemy_animation",
+    "type": "mp3",
+    "bytes": 49581,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/audio/zombie_2.mp3",
+    "source_path": "assets/audio/zombie_2.mp3",
+    "category": "enemy_animation",
+    "type": "mp3",
+    "bytes": 49581,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/audio/zombie_3.mp3",
+    "source_path": "assets/audio/zombie_3.mp3",
+    "category": "enemy_animation",
+    "type": "mp3",
+    "bytes": 49581,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/audio/zombie_4.mp3",
+    "source_path": "assets/audio/zombie_4.mp3",
+    "category": "enemy_animation",
+    "type": "mp3",
+    "bytes": 49581,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/audio/zombie_death.mp3",
+    "source_path": "assets/audio/zombie_death.mp3",
+    "category": "enemy_animation",
+    "type": "mp3",
+    "bytes": 25389,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/audio/zombie_hit.mp3",
+    "source_path": "assets/audio/zombie_hit.mp3",
+    "category": "enemy_animation",
+    "type": "mp3",
+    "bytes": 25389,
+    "width": null,
+    "height": null
   },
   {
     "path": "res://assets/items/antibiotics_bottle.png",
@@ -103,7 +184,16 @@
     "source_path": "assets/items/apple.png",
     "category": "item_icon",
     "type": "png",
-    "bytes": 612,
+    "bytes": 7822,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/apple_juice.png",
+    "source_path": "assets/items/apple_juice.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16588,
     "width": 128,
     "height": 128
   },
@@ -130,7 +220,7 @@
     "source_path": "assets/items/banana.png",
     "category": "item_icon",
     "type": "png",
-    "bytes": 398,
+    "bytes": 7013,
     "width": 128,
     "height": 128
   },
@@ -139,7 +229,7 @@
     "source_path": "assets/items/bandages.png",
     "category": "item_icon",
     "type": "png",
-    "bytes": 430,
+    "bytes": 11282,
     "width": 128,
     "height": 128
   },
@@ -198,11 +288,29 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/can_of_beans_v2.png",
+    "source_path": "assets/items/can_of_beans_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20517,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/can_of_tuna.png",
     "source_path": "assets/items/can_of_tuna.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 477,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/can_of_tuna_v2.png",
+    "source_path": "assets/items/can_of_tuna_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 22821,
     "width": 128,
     "height": 128
   },
@@ -221,6 +329,33 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 537,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/energy_drink.png",
+    "source_path": "assets/items/energy_drink.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14941,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/first_aid_kit.png",
+    "source_path": "assets/items/first_aid_kit.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10423,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/gears.png",
+    "source_path": "assets/items/gears.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17145,
     "width": 128,
     "height": 128
   },
@@ -283,7 +418,7 @@
     "source_path": "assets/items/large_backpack.png",
     "category": "item_icon",
     "type": "png",
-    "bytes": 464,
+    "bytes": 15495,
     "width": 128,
     "height": 128
   },
@@ -297,11 +432,65 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/medium_backpack.png",
+    "source_path": "assets/items/medium_backpack.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12194,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/milk.png",
+    "source_path": "assets/items/milk.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18225,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/orange.png",
+    "source_path": "assets/items/orange.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10860,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/orange_juice.png",
+    "source_path": "assets/items/orange_juice.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16755,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/pineapple_juice.png",
+    "source_path": "assets/items/pineapple_juice.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16009,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/rubbing_alcohol_bottle.png",
     "source_path": "assets/items/rubbing_alcohol_bottle.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 571,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/screws.png",
+    "source_path": "assets/items/screws.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15645,
     "width": 128,
     "height": 128
   },
@@ -328,7 +517,7 @@
     "source_path": "assets/items/simple_backpack.png",
     "category": "item_icon",
     "type": "png",
-    "bytes": 434,
+    "bytes": 10078,
     "width": 128,
     "height": 128
   },
@@ -338,6 +527,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 531,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/soda_cola.png",
+    "source_path": "assets/items/soda_cola.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18750,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/soda_lemon.png",
+    "source_path": "assets/items/soda_lemon.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18946,
     "width": 128,
     "height": 128
   },
@@ -355,9 +562,648 @@
     "source_path": "assets/items/water_bottle.png",
     "category": "item_icon",
     "type": "png",
-    "bytes": 575,
+    "bytes": 8341,
     "width": 128,
     "height": 128
+  },
+  {
+    "path": "res://assets/items/water_bottle_500ml.png",
+    "source_path": "assets/items/water_bottle_500ml.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14468,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/luis/luis_idle_east.gif",
+    "source_path": "assets/luis/luis_idle_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 18021,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_idle_north.gif",
+    "source_path": "assets/luis/luis_idle_north.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 19728,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_idle_north_east.gif",
+    "source_path": "assets/luis/luis_idle_north_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 19311,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_idle_north_west.gif",
+    "source_path": "assets/luis/luis_idle_north_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 19326,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_idle_south.gif",
+    "source_path": "assets/luis/luis_idle_south.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 23077,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_idle_south_east.gif",
+    "source_path": "assets/luis/luis_idle_south_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 21828,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_idle_south_west.gif",
+    "source_path": "assets/luis/luis_idle_south_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 21882,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_idle_west.gif",
+    "source_path": "assets/luis/luis_idle_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 18024,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_rotation_8dir.gif",
+    "source_path": "assets/luis/luis_rotation_8dir.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 18450,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_run_east.gif",
+    "source_path": "assets/luis/luis_run_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 16787,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_run_north.gif",
+    "source_path": "assets/luis/luis_run_north.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 17913,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_run_north_east.gif",
+    "source_path": "assets/luis/luis_run_north_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 17375,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_run_north_west.gif",
+    "source_path": "assets/luis/luis_run_north_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 17390,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_run_south.gif",
+    "source_path": "assets/luis/luis_run_south.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 18761,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_run_south_east.gif",
+    "source_path": "assets/luis/luis_run_south_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 17695,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_run_south_west.gif",
+    "source_path": "assets/luis/luis_run_south_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 17681,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_run_west.gif",
+    "source_path": "assets/luis/luis_run_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 16793,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_walk_east.gif",
+    "source_path": "assets/luis/luis_walk_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 15593,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_walk_north.gif",
+    "source_path": "assets/luis/luis_walk_north.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 17465,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_walk_north_east.gif",
+    "source_path": "assets/luis/luis_walk_north_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 17765,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_walk_north_west.gif",
+    "source_path": "assets/luis/luis_walk_north_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 17763,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_walk_south.gif",
+    "source_path": "assets/luis/luis_walk_south.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 20486,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_walk_south_east.gif",
+    "source_path": "assets/luis/luis_walk_south_east.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 18509,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_walk_south_west.gif",
+    "source_path": "assets/luis/luis_walk_south_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 18506,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/luis/luis_walk_west.gif",
+    "source_path": "assets/luis/luis_walk_west.gif",
+    "category": "source_or_reference",
+    "type": "gif",
+    "bytes": 15595,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/map_templates/house/house_3_room_01_reference.png",
+    "source_path": "assets/map_templates/house/house_3_room_01_reference.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1604915,
+    "width": 1408,
+    "height": 768
+  },
+  {
+    "path": "res://assets/map_templates/house/house_3_room_02_reference.png",
+    "source_path": "assets/map_templates/house/house_3_room_02_reference.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1735161,
+    "width": 1408,
+    "height": 768
+  },
+  {
+    "path": "res://assets/map_templates/house/house_3_room_03_reference.png",
+    "source_path": "assets/map_templates/house/house_3_room_03_reference.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1294401,
+    "width": 1408,
+    "height": 768
+  },
+  {
+    "path": "res://assets/map_templates/house/house_3_room_04_reference.png",
+    "source_path": "assets/map_templates/house/house_3_room_04_reference.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1294872,
+    "width": 1408,
+    "height": 768
+  },
+  {
+    "path": "res://assets/map_templates/manifest.json",
+    "source_path": "assets/map_templates/manifest.json",
+    "category": "source_or_reference",
+    "type": "json",
+    "bytes": 2808,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/player_alynne_firearm_aim_east_sheet.png",
+    "source_path": "assets/player_alynne_firearm_aim_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3058,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_firearm_aim_north_east_sheet.png",
+    "source_path": "assets/player_alynne_firearm_aim_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3271,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_firearm_aim_north_sheet.png",
+    "source_path": "assets/player_alynne_firearm_aim_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3309,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_firearm_aim_north_west_sheet.png",
+    "source_path": "assets/player_alynne_firearm_aim_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3240,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_firearm_aim_south_east_sheet.png",
+    "source_path": "assets/player_alynne_firearm_aim_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3613,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_firearm_aim_south_sheet.png",
+    "source_path": "assets/player_alynne_firearm_aim_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3934,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_firearm_aim_south_west_sheet.png",
+    "source_path": "assets/player_alynne_firearm_aim_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3623,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_firearm_aim_west_sheet.png",
+    "source_path": "assets/player_alynne_firearm_aim_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3094,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_idle_east_sheet.png",
+    "source_path": "assets/player_alynne_idle_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3058,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_idle_north_east_sheet.png",
+    "source_path": "assets/player_alynne_idle_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3271,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_idle_north_sheet.png",
+    "source_path": "assets/player_alynne_idle_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3309,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_idle_north_west_sheet.png",
+    "source_path": "assets/player_alynne_idle_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3240,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_idle_south_east_sheet.png",
+    "source_path": "assets/player_alynne_idle_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3613,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_idle_south_sheet.png",
+    "source_path": "assets/player_alynne_idle_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19337,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_idle_south_west_sheet.png",
+    "source_path": "assets/player_alynne_idle_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3623,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_idle_west_sheet.png",
+    "source_path": "assets/player_alynne_idle_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 3094,
+    "width": 496,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_pickup_east_sheet.png",
+    "source_path": "assets/player_alynne_pickup_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19946,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_pickup_north_east_sheet.png",
+    "source_path": "assets/player_alynne_pickup_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21181,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_pickup_north_sheet.png",
+    "source_path": "assets/player_alynne_pickup_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19101,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_pickup_north_west_sheet.png",
+    "source_path": "assets/player_alynne_pickup_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21008,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_pickup_south_east_sheet.png",
+    "source_path": "assets/player_alynne_pickup_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22773,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_pickup_south_sheet.png",
+    "source_path": "assets/player_alynne_pickup_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23954,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_pickup_south_west_sheet.png",
+    "source_path": "assets/player_alynne_pickup_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22759,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_pickup_west_sheet.png",
+    "source_path": "assets/player_alynne_pickup_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19837,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_run_east_sheet.png",
+    "source_path": "assets/player_alynne_run_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21222,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_run_north_east_sheet.png",
+    "source_path": "assets/player_alynne_run_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21774,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_run_north_sheet.png",
+    "source_path": "assets/player_alynne_run_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19263,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_run_north_west_sheet.png",
+    "source_path": "assets/player_alynne_run_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19924,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_run_south_east_sheet.png",
+    "source_path": "assets/player_alynne_run_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22589,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_run_south_sheet.png",
+    "source_path": "assets/player_alynne_run_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21609,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_run_south_west_sheet.png",
+    "source_path": "assets/player_alynne_run_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22469,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_run_west_sheet.png",
+    "source_path": "assets/player_alynne_run_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21232,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_walk_east_sheet.png",
+    "source_path": "assets/player_alynne_walk_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 20813,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_walk_north_east_sheet.png",
+    "source_path": "assets/player_alynne_walk_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21218,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_walk_north_sheet.png",
+    "source_path": "assets/player_alynne_walk_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22542,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_walk_north_west_sheet.png",
+    "source_path": "assets/player_alynne_walk_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21212,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_walk_south_east_sheet.png",
+    "source_path": "assets/player_alynne_walk_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23136,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_walk_south_sheet.png",
+    "source_path": "assets/player_alynne_walk_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 26256,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_walk_south_west_sheet.png",
+    "source_path": "assets/player_alynne_walk_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23129,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_alynne_walk_west_sheet.png",
+    "source_path": "assets/player_alynne_walk_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 20816,
+    "width": 1116,
+    "height": 124
   },
   {
     "path": "res://assets/player_breathing_east_sheet.png",
@@ -675,6 +1521,222 @@
     "height": 120
   },
   {
+    "path": "res://assets/player_luis_idle_east_sheet.png",
+    "source_path": "assets/player_luis_idle_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21197,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_idle_north_east_sheet.png",
+    "source_path": "assets/player_luis_idle_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23495,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_idle_north_sheet.png",
+    "source_path": "assets/player_luis_idle_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22246,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_idle_north_west_sheet.png",
+    "source_path": "assets/player_luis_idle_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23476,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_idle_south_east_sheet.png",
+    "source_path": "assets/player_luis_idle_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 29994,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_idle_south_sheet.png",
+    "source_path": "assets/player_luis_idle_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 32247,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_idle_south_west_sheet.png",
+    "source_path": "assets/player_luis_idle_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 30132,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_idle_west_sheet.png",
+    "source_path": "assets/player_luis_idle_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21191,
+    "width": 1116,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_run_east_sheet.png",
+    "source_path": "assets/player_luis_run_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23508,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_run_north_east_sheet.png",
+    "source_path": "assets/player_luis_run_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23881,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_run_north_sheet.png",
+    "source_path": "assets/player_luis_run_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 24152,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_run_north_west_sheet.png",
+    "source_path": "assets/player_luis_run_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23854,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_run_south_east_sheet.png",
+    "source_path": "assets/player_luis_run_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 25409,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_run_south_sheet.png",
+    "source_path": "assets/player_luis_run_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 28131,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_run_south_west_sheet.png",
+    "source_path": "assets/player_luis_run_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 25295,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_run_west_sheet.png",
+    "source_path": "assets/player_luis_run_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23639,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_walk_east_sheet.png",
+    "source_path": "assets/player_luis_walk_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19799,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_walk_north_east_sheet.png",
+    "source_path": "assets/player_luis_walk_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23984,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_walk_north_sheet.png",
+    "source_path": "assets/player_luis_walk_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 22694,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_walk_north_west_sheet.png",
+    "source_path": "assets/player_luis_walk_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23817,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_walk_south_east_sheet.png",
+    "source_path": "assets/player_luis_walk_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 26548,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_walk_south_sheet.png",
+    "source_path": "assets/player_luis_walk_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 30619,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_walk_south_west_sheet.png",
+    "source_path": "assets/player_luis_walk_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 26426,
+    "width": 992,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_luis_walk_west_sheet.png",
+    "source_path": "assets/player_luis_walk_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19719,
+    "width": 992,
+    "height": 124
+  },
+  {
     "path": "res://assets/player_male_idle_east_sheet.png",
     "source_path": "assets/player_male_idle_east_sheet.png",
     "category": "player_animation",
@@ -990,6 +2052,78 @@
     "height": 128
   },
   {
+    "path": "res://assets/player_pickup_east_sheet.png",
+    "source_path": "assets/player_pickup_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 25216,
+    "width": 1080,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_pickup_north_east_sheet.png",
+    "source_path": "assets/player_pickup_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21635,
+    "width": 1080,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_pickup_north_sheet.png",
+    "source_path": "assets/player_pickup_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 23755,
+    "width": 1080,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_pickup_north_west_sheet.png",
+    "source_path": "assets/player_pickup_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 21441,
+    "width": 1080,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_pickup_south_east_sheet.png",
+    "source_path": "assets/player_pickup_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 24913,
+    "width": 1080,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_pickup_south_sheet.png",
+    "source_path": "assets/player_pickup_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 24613,
+    "width": 1080,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_pickup_south_west_sheet.png",
+    "source_path": "assets/player_pickup_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 24996,
+    "width": 1080,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_pickup_west_sheet.png",
+    "source_path": "assets/player_pickup_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 25389,
+    "width": 1080,
+    "height": 120
+  },
+  {
     "path": "res://assets/player_run_east_sheet.png",
     "source_path": "assets/player_run_east_sheet.png",
     "category": "player_animation",
@@ -1087,6 +2221,231 @@
     "bytes": 31001,
     "width": 1024,
     "height": 128
+  },
+  {
+    "path": "res://assets/player_src_alynne_idle_south.gif",
+    "source_path": "assets/player_src_alynne_idle_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16522,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_pickup_east.gif",
+    "source_path": "assets/player_src_alynne_pickup_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16403,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_pickup_north.gif",
+    "source_path": "assets/player_src_alynne_pickup_north.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16447,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_pickup_north_east.gif",
+    "source_path": "assets/player_src_alynne_pickup_north_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17557,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_pickup_north_west.gif",
+    "source_path": "assets/player_src_alynne_pickup_north_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17553,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_pickup_south.gif",
+    "source_path": "assets/player_src_alynne_pickup_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18250,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_pickup_south_east.gif",
+    "source_path": "assets/player_src_alynne_pickup_south_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17485,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_pickup_south_west.gif",
+    "source_path": "assets/player_src_alynne_pickup_south_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17518,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_pickup_west.gif",
+    "source_path": "assets/player_src_alynne_pickup_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16432,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_run_east.gif",
+    "source_path": "assets/player_src_alynne_run_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16150,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_run_north.gif",
+    "source_path": "assets/player_src_alynne_run_north.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15652,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_run_north_east.gif",
+    "source_path": "assets/player_src_alynne_run_north_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16412,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_run_north_west.gif",
+    "source_path": "assets/player_src_alynne_run_north_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 15699,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_run_south.gif",
+    "source_path": "assets/player_src_alynne_run_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16311,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_run_south_east.gif",
+    "source_path": "assets/player_src_alynne_run_south_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16368,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_run_south_west.gif",
+    "source_path": "assets/player_src_alynne_run_south_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16390,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_run_west.gif",
+    "source_path": "assets/player_src_alynne_run_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 16152,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_walk_east.gif",
+    "source_path": "assets/player_src_alynne_walk_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17096,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_walk_north.gif",
+    "source_path": "assets/player_src_alynne_walk_north.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18656,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_walk_north_east.gif",
+    "source_path": "assets/player_src_alynne_walk_north_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18012,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_walk_north_west.gif",
+    "source_path": "assets/player_src_alynne_walk_north_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18044,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_walk_south.gif",
+    "source_path": "assets/player_src_alynne_walk_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 19802,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_walk_south_east.gif",
+    "source_path": "assets/player_src_alynne_walk_south_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17991,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_walk_south_west.gif",
+    "source_path": "assets/player_src_alynne_walk_south_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17974,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "path": "res://assets/player_src_alynne_walk_west.gif",
+    "source_path": "assets/player_src_alynne_walk_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17126,
+    "width": 124,
+    "height": 124
   },
   {
     "path": "res://assets/player_src_breathing_east.gif",
@@ -1467,6 +2826,78 @@
     "height": 124
   },
   {
+    "path": "res://assets/player_src_pickup_east.gif",
+    "source_path": "assets/player_src_pickup_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18528,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_pickup_north.gif",
+    "source_path": "assets/player_src_pickup_north.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18086,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_pickup_north_east.gif",
+    "source_path": "assets/player_src_pickup_north_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17087,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_pickup_north_west.gif",
+    "source_path": "assets/player_src_pickup_north_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 17075,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_pickup_south.gif",
+    "source_path": "assets/player_src_pickup_south.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18254,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_pickup_south_east.gif",
+    "source_path": "assets/player_src_pickup_south_east.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18424,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_pickup_south_west.gif",
+    "source_path": "assets/player_src_pickup_south_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18450,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "path": "res://assets/player_src_pickup_west.gif",
+    "source_path": "assets/player_src_pickup_west.gif",
+    "category": "player_animation",
+    "type": "gif",
+    "bytes": 18521,
+    "width": 120,
+    "height": 120
+  },
+  {
     "path": "res://assets/player_src_run_east.gif",
     "source_path": "assets/player_src_run_east.gif",
     "category": "player_animation",
@@ -1701,6 +3132,24 @@
     "height": 1366
   },
   {
+    "path": "res://assets/portraits/alynne_active.jpeg",
+    "source_path": "assets/portraits/alynne_active.jpeg",
+    "category": "source_or_reference",
+    "type": "jpeg",
+    "bytes": 133298,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/portraits/alynne_restyled.png",
+    "source_path": "assets/portraits/alynne_restyled.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1097134,
+    "width": 1024,
+    "height": 1024
+  },
+  {
     "path": "res://assets/portraits/ava_belmont.png",
     "source_path": "assets/portraits/ava_belmont.png",
     "category": "source_or_reference",
@@ -1708,6 +3157,15 @@
     "bytes": 879166,
     "width": 1024,
     "height": 1024
+  },
+  {
+    "path": "res://assets/portraits/ava_belmont_active.jpeg",
+    "source_path": "assets/portraits/ava_belmont_active.jpeg",
+    "category": "source_or_reference",
+    "type": "jpeg",
+    "bytes": 491127,
+    "width": null,
+    "height": null
   },
   {
     "path": "res://assets/portraits/future_survivor_02.png",
@@ -1791,6 +3249,24 @@
     "height": 1024
   },
   {
+    "path": "res://assets/portraits/luis.jpeg",
+    "source_path": "assets/portraits/luis.jpeg",
+    "category": "source_or_reference",
+    "type": "jpeg",
+    "bytes": 237515,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/portraits/luis_restyled.png",
+    "source_path": "assets/portraits/luis_restyled.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1093670,
+    "width": 1024,
+    "height": 1024
+  },
+  {
     "path": "res://assets/portraits/peter_ashfield.png",
     "source_path": "assets/portraits/peter_ashfield.png",
     "category": "source_or_reference",
@@ -1800,6 +3276,105 @@
     "height": 1024
   },
   {
+    "path": "res://assets/portraits/peter_ashfield_active.jpeg",
+    "source_path": "assets/portraits/peter_ashfield_active.jpeg",
+    "category": "source_or_reference",
+    "type": "jpeg",
+    "bytes": 435290,
+    "width": null,
+    "height": null
+  },
+  {
+    "path": "res://assets/portraits/peter_shared_background.png",
+    "source_path": "assets/portraits/peter_shared_background.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1151343,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/textures/base_bathroom.png",
+    "source_path": "assets/textures/base_bathroom.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 142195,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/base_double_door_albedo.png",
+    "source_path": "assets/textures/base_double_door_albedo.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 2276527,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/textures/base_double_door_bump.png",
+    "source_path": "assets/textures/base_double_door_bump.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 747681,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/textures/base_double_door_roughness.png",
+    "source_path": "assets/textures/base_double_door_roughness.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 291512,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/textures/base_double_door_source.png",
+    "source_path": "assets/textures/base_double_door_source.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 3181570,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/textures/base_fence_simple_albedo.png",
+    "source_path": "assets/textures/base_fence_simple_albedo.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 1957225,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/textures/base_fence_simple_bump.png",
+    "source_path": "assets/textures/base_fence_simple_bump.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 723517,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/textures/base_fence_simple_roughness.png",
+    "source_path": "assets/textures/base_fence_simple_roughness.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 268169,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/textures/base_fence_simple_source.png",
+    "source_path": "assets/textures/base_fence_simple_source.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 2917246,
+    "width": 1254,
+    "height": 1254
+  },
+  {
     "path": "res://assets/textures/base_floor_wood.png",
     "source_path": "assets/textures/base_floor_wood.png",
     "category": "texture",
@@ -1807,6 +3382,15 @@
     "bytes": 427950,
     "width": 512,
     "height": 512
+  },
+  {
+    "path": "res://assets/textures/base_green_carpet.png",
+    "source_path": "assets/textures/base_green_carpet.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 183801,
+    "width": 384,
+    "height": 248
   },
   {
     "path": "res://assets/textures/base_intel_center.png",
@@ -1827,6 +3411,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/textures/base_kitchen.png",
+    "source_path": "assets/textures/base_kitchen.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 112414,
+    "width": 256,
+    "height": 256
+  },
+  {
     "path": "res://assets/textures/base_map.png",
     "source_path": "assets/textures/base_map.png",
     "category": "texture",
@@ -1845,6 +3438,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/textures/base_outer_grass.png",
+    "source_path": "assets/textures/base_outer_grass.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 2424184,
+    "width": 1024,
+    "height": 1024
+  },
+  {
     "path": "res://assets/textures/base_rest_bed.png",
     "source_path": "assets/textures/base_rest_bed.png",
     "category": "texture",
@@ -1854,6 +3456,24 @@
     "height": 128
   },
   {
+    "path": "res://assets/textures/base_rest_bed_generated.png",
+    "source_path": "assets/textures/base_rest_bed_generated.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 177956,
+    "width": 512,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/base_rest_station_source.png",
+    "source_path": "assets/textures/base_rest_station_source.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 747659,
+    "width": 1254,
+    "height": 1254
+  },
+  {
     "path": "res://assets/textures/base_rest_table.png",
     "source_path": "assets/textures/base_rest_table.png",
     "category": "texture",
@@ -1861,6 +3481,24 @@
     "bytes": 932,
     "width": 128,
     "height": 128
+  },
+  {
+    "path": "res://assets/textures/base_rest_table_generated.png",
+    "source_path": "assets/textures/base_rest_table_generated.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 67516,
+    "width": 256,
+    "height": 224
+  },
+  {
+    "path": "res://assets/textures/base_sand_path.png",
+    "source_path": "assets/textures/base_sand_path.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 548297,
+    "width": 512,
+    "height": 512
   },
   {
     "path": "res://assets/textures/base_texture_atlas_generated.png",
@@ -1881,11 +3519,38 @@
     "height": 512
   },
   {
+    "path": "res://assets/textures/base_window_barricade_wood.png",
+    "source_path": "assets/textures/base_window_barricade_wood.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 557574,
+    "width": 512,
+    "height": 512
+  },
+  {
     "path": "res://assets/textures/base_window_boarded.png",
     "source_path": "assets/textures/base_window_boarded.png",
     "category": "texture",
     "type": "png",
     "bytes": 461530,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/base_window_dirty_glass.png",
+    "source_path": "assets/textures/base_window_dirty_glass.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 415687,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/base_window_frame_wood.png",
+    "source_path": "assets/textures/base_window_frame_wood.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 454742,
     "width": 512,
     "height": 512
   },
@@ -1897,6 +3562,186 @@
     "bytes": 4154,
     "width": 128,
     "height": 128
+  },
+  {
+    "path": "res://assets/textures/bathroom_mirror_frame.png",
+    "source_path": "assets/textures/bathroom_mirror_frame.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 388049,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/bathroom_mirror_glass.png",
+    "source_path": "assets/textures/bathroom_mirror_glass.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 713029,
+    "width": 640,
+    "height": 640
+  },
+  {
+    "path": "res://assets/textures/bathroom_shower_chrome.png",
+    "source_path": "assets/textures/bathroom_shower_chrome.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 319490,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/bathroom_shower_drain.png",
+    "source_path": "assets/textures/bathroom_shower_drain.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 408984,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/bathroom_shower_glass.png",
+    "source_path": "assets/textures/bathroom_shower_glass.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 419559,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/bathroom_toilet_basin.png",
+    "source_path": "assets/textures/bathroom_toilet_basin.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 210324,
+    "width": 320,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/bathroom_toilet_bowl.png",
+    "source_path": "assets/textures/bathroom_toilet_bowl.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 223762,
+    "width": 384,
+    "height": 560
+  },
+  {
+    "path": "res://assets/textures/bathroom_toilet_porcelain.png",
+    "source_path": "assets/textures/bathroom_toilet_porcelain.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 330104,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/command_base_funds_label.png",
+    "source_path": "assets/textures/command_base_funds_label.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 737203,
+    "width": 768,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/command_calculator.png",
+    "source_path": "assets/textures/command_calculator.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 321606,
+    "width": 384,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/command_cardboard.png",
+    "source_path": "assets/textures/command_cardboard.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 460870,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/command_funds_junk.png",
+    "source_path": "assets/textures/command_funds_junk.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 622898,
+    "width": 640,
+    "height": 400
+  },
+  {
+    "path": "res://assets/textures/command_scale_ruler.png",
+    "source_path": "assets/textures/command_scale_ruler.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 44942,
+    "width": 512,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/command_walkie_back.png",
+    "source_path": "assets/textures/command_walkie_back.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 427144,
+    "width": 384,
+    "height": 672
+  },
+  {
+    "path": "res://assets/textures/command_walkie_front.png",
+    "source_path": "assets/textures/command_walkie_front.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 512355,
+    "width": 384,
+    "height": 720
+  },
+  {
+    "path": "res://assets/textures/command_walkie_side.png",
+    "source_path": "assets/textures/command_walkie_side.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 322339,
+    "width": 256,
+    "height": 720
+  },
+  {
+    "path": "res://assets/textures/crate_wood_albedo.png",
+    "source_path": "assets/textures/crate_wood_albedo.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 1834256,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/textures/crate_wood_bump.png",
+    "source_path": "assets/textures/crate_wood_bump.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 613421,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/textures/crate_wood_roughness.png",
+    "source_path": "assets/textures/crate_wood_roughness.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 109712,
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/textures/crate_wood_source.png",
+    "source_path": "assets/textures/crate_wood_source.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 2773608,
+    "width": 1254,
+    "height": 1254
   },
   {
     "path": "res://assets/textures/door_worn.png",
@@ -1917,11 +3762,281 @@
     "height": 512
   },
   {
+    "path": "res://assets/textures/map_station_clipboard.png",
+    "source_path": "assets/textures/map_station_clipboard.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 401173,
+    "width": 384,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/map_station_compass.png",
+    "source_path": "assets/textures/map_station_compass.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 385445,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/map_station_compass_brass.png",
+    "source_path": "assets/textures/map_station_compass_brass.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 517929,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/map_station_compass_lid_inner.png",
+    "source_path": "assets/textures/map_station_compass_lid_inner.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 520420,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/map_station_compass_lid_outer.png",
+    "source_path": "assets/textures/map_station_compass_lid_outer.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 514693,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/map_station_map.png",
+    "source_path": "assets/textures/map_station_map.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 1328286,
+    "width": 1024,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/map_station_pen.png",
+    "source_path": "assets/textures/map_station_pen.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 21003,
+    "width": 512,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/medical_bandage_end.png",
+    "source_path": "assets/textures/medical_bandage_end.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 491802,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/medical_bandage_wrap.png",
+    "source_path": "assets/textures/medical_bandage_wrap.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 571427,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/medical_dark_steel.png",
+    "source_path": "assets/textures/medical_dark_steel.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 386962,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/medical_first_aid_box.png",
+    "source_path": "assets/textures/medical_first_aid_box.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 315898,
+    "width": 512,
+    "height": 384
+  },
+  {
+    "path": "res://assets/textures/medical_first_aid_front.png",
+    "source_path": "assets/textures/medical_first_aid_front.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 168343,
+    "width": 512,
+    "height": 232
+  },
+  {
+    "path": "res://assets/textures/medical_first_aid_rear.png",
+    "source_path": "assets/textures/medical_first_aid_rear.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 143112,
+    "width": 512,
+    "height": 232
+  },
+  {
+    "path": "res://assets/textures/medical_first_aid_side.png",
+    "source_path": "assets/textures/medical_first_aid_side.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 108074,
+    "width": 384,
+    "height": 240
+  },
+  {
+    "path": "res://assets/textures/medical_iv_bag.png",
+    "source_path": "assets/textures/medical_iv_bag.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 310989,
+    "width": 384,
+    "height": 576
+  },
+  {
+    "path": "res://assets/textures/medical_iv_stand_metal.png",
+    "source_path": "assets/textures/medical_iv_stand_metal.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 445784,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/medical_scalpel.png",
+    "source_path": "assets/textures/medical_scalpel.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 506236,
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "path": "res://assets/textures/medical_tubing.png",
+    "source_path": "assets/textures/medical_tubing.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 920715,
+    "width": 1254,
+    "height": 1254
+  },
+  {
     "path": "res://assets/textures/pillar_concrete.png",
     "source_path": "assets/textures/pillar_concrete.png",
     "category": "texture",
     "type": "png",
     "bytes": 9266,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/rest_bed_frame_wood.png",
+    "source_path": "assets/textures/rest_bed_frame_wood.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 29152,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/rest_bed_sheet.png",
+    "source_path": "assets/textures/rest_bed_sheet.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 151077,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/rest_drawer_handle_metal.png",
+    "source_path": "assets/textures/rest_drawer_handle_metal.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 97695,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/rest_lamp_glass.png",
+    "source_path": "assets/textures/rest_lamp_glass.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 83700,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/rest_lantern.png",
+    "source_path": "assets/textures/rest_lantern.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 107412,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/rest_mattress.png",
+    "source_path": "assets/textures/rest_mattress.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 141976,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/rest_mug.png",
+    "source_path": "assets/textures/rest_mug.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 82223,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/rest_pillow.png",
+    "source_path": "assets/textures/rest_pillow.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 16101,
+    "width": 128,
+    "height": 105
+  },
+  {
+    "path": "res://assets/textures/rest_pillow_bottom.png",
+    "source_path": "assets/textures/rest_pillow_bottom.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 33893,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/textures/rest_pillow_fabric.png",
+    "source_path": "assets/textures/rest_pillow_fabric.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 492555,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "path": "res://assets/textures/rest_pillow_side.png",
+    "source_path": "assets/textures/rest_pillow_side.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 7386,
+    "width": 128,
+    "height": 32
+  },
+  {
+    "path": "res://assets/textures/rest_table_wood.png",
+    "source_path": "assets/textures/rest_table_wood.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 26479,
     "width": 128,
     "height": 128
   },
@@ -1942,6 +4057,150 @@
     "bytes": 570825,
     "width": 512,
     "height": 512
+  },
+  {
+    "path": "res://assets/textures/workbench_black_mat.png",
+    "source_path": "assets/textures/workbench_black_mat.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 91244,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/workbench_goggles_frame.png",
+    "source_path": "assets/textures/workbench_goggles_frame.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 78224,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/workbench_goggles_lens.png",
+    "source_path": "assets/textures/workbench_goggles_lens.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 72846,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/workbench_saw_blade.png",
+    "source_path": "assets/textures/workbench_saw_blade.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 97639,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/workbench_saw_handle.png",
+    "source_path": "assets/textures/workbench_saw_handle.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 102799,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/workbench_screwdriver_grip.png",
+    "source_path": "assets/textures/workbench_screwdriver_grip.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 95414,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/textures/workbench_tool_rack.png",
+    "source_path": "assets/textures/workbench_tool_rack.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 319317,
+    "width": 756,
+    "height": 240
+  },
+  {
+    "path": "res://assets/textures/workbench_tool_steel.png",
+    "source_path": "assets/textures/workbench_tool_steel.png",
+    "category": "texture",
+    "type": "png",
+    "bytes": 126595,
+    "width": 256,
+    "height": 256
+  },
+  {
+    "path": "res://assets/ui/inventory/inventory_frame.png",
+    "source_path": "assets/ui/inventory/inventory_frame.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 766670,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/ui/inventory/inventory_frame_source.png",
+    "source_path": "assets/ui/inventory/inventory_frame_source.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1314399,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/ui/inventory/inventory_header.png",
+    "source_path": "assets/ui/inventory/inventory_header.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1068382,
+    "width": 1450,
+    "height": 490
+  },
+  {
+    "path": "res://assets/ui/inventory/inventory_header_source.png",
+    "source_path": "assets/ui/inventory/inventory_header_source.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1694323,
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/ui/inventory/inventory_slot.png",
+    "source_path": "assets/ui/inventory/inventory_slot.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 715076,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/ui/inventory/inventory_slot_source.png",
+    "source_path": "assets/ui/inventory/inventory_slot_source.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1186572,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/ui/main_menu.png",
+    "source_path": "assets/ui/main_menu.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 2355916,
+    "width": 1408,
+    "height": 768
+  },
+  {
+    "path": "res://assets/ui/outbreak_city_map.png",
+    "source_path": "assets/ui/outbreak_city_map.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 3400860,
+    "width": 1586,
+    "height": 992
   },
   {
     "path": "res://assets/zombie_dark_death_east_sheet.png",

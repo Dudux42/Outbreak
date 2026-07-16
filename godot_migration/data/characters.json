@@ -13,15 +13,23 @@
     "status": "active",
     "playable": true,
     "runtimeProfileId": "male",
-    "portrait": "res://assets/portraits/peter_ashfield.png"
+    "portrait": "res://assets/portraits/peter_shared_background.png"
   },
   {
     "id": "alynne",
     "name": "Alynne",
-    "status": "future",
-    "playable": false,
-    "runtimeProfileId": null,
-    "portrait": "res://assets/portraits/alynne.png"
+    "status": "active",
+    "playable": true,
+    "runtimeProfileId": "alynne",
+    "portrait": "res://assets/portraits/alynne_restyled.png"
+  },
+  {
+    "id": "luis",
+    "name": "Luis",
+    "status": "active",
+    "playable": true,
+    "runtimeProfileId": "luis",
+    "portrait": "res://assets/portraits/luis_restyled.png"
   },
   {
     "id": "future_survivor_02",

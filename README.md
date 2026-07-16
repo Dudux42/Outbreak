@@ -1,116 +1,134 @@
 # Outbreak
 
-Outbreak is a browser-based top-down zombie survival prototype built with Three.js. The game currently focuses on a safehouse-to-mission loop: manage gear at the base, scout a location from the map, enter a generated interior, loot supplies, fight or avoid zombies, and extract.
+Outbreak is an isometric survival-horror zombie game prototype built with Three.js and Vite. It combines 3D environments with eight-direction pixel-art characters, extraction missions, persistent safehouse progression, and roguelike variation between runs.
 
-## Current Features
+The browser build is the current playable design reference. A future Godot rebuild is prepared under `godot_migration/`, but it does not replace the Three.js prototype.
 
-- Top-down 3D scene rendered with Three.js.
-- Safehouse hub with item box, workbench, medical station, intel center, and map table.
-- Procedural mission layouts with rooms, doors, pillars, loot, zombies, extraction zones, and line-of-sight fog.
-- Eight-direction player sprites with idle, walk, run, aim, combat, interaction, pickup, victory, and death action states.
-- Inventory, equipment, stash, item icons, quickbar, and drag-and-drop item movement.
-- Keyboard quickbar binding for inventory items.
-- Ranged and melee weapon handling through selected quickbar slots.
-- Vite development/build setup.
+## Core Loop
 
-## Controls
+1. Manage a survivor's equipment and carried inventory in the safehouse.
+2. Use safehouse stations to store items, upgrade facilities, heal, save, switch survivors, and select a destination.
+3. Enter a mission outside the generated complex.
+4. Explore connected rooms, unlock doors, search containers, collect loot, and fight or avoid zombies.
+5. Extract through an available exit.
+6. Keep extracted loot, improve the safehouse, re-equip, and repeat.
 
-- `WASD`: Move
-- `Shift`: Run
-- Mouse move: Aim/facing direction
-- Right mouse button: Aim
-- Left mouse button: Attack or shoot while aiming and holding a weapon
-- `E`: Interact with loot, doors, and extraction zones
-- `Tab`: Open inventory
-- `1`: Hold equipped primary weapon
-- `2`: Hold equipped sidearm
-- `3` to `9`: Use or select custom quickbar slots
-- Mouse wheel: Zoom in/out
+Death ends the current run and forfeits carried mission loot. The larger permadeath, injury, infection, and base-defense systems in the design documentation are planned and are not fully implemented.
 
-In the inventory screen, hover an item and press `3` through `9` to bind it to the quickbar.
+## Current Build
 
-## Getting Started
+- Isometric Three.js renderer with orthographic camera, shadows, fog, and zoom.
+- Visual safehouse with autonomous survivor sprites and clickable stations.
+- Four playable survivors: Ava Belmont, Peter Ashfield, Alynne, and Luis.
+- Per-survivor inventory, equipment, magazines, and quickbar state.
+- Inventory, item box, loot-container search, drag-and-drop transfer, equipment, and quickbar UI.
+- Six selectable mission locations gated by Intel Center level.
+- Four handcrafted house templates plus procedural room-graph generation for other locations.
+- Visible animated doors, locked doors, accessible key placement, exterior spawning, and map bounds.
+- Eight-direction locomotion, aiming, pickup animation, action-state fallbacks, and debug diagnostics.
+- Firearm and melee combat, ammunition, reloads, zombie AI, zombie variants, and persistent corpses.
+- Multiple extraction points, success/failure flow, local save data, audio settings, and resolution settings.
+- Generated environment textures and native Three.js prop meshes, including the wooden supply crate.
+- An expanding item database with tags, aliases, runtime stats, item metadata, and approved inventory icon rules.
 
-Install dependencies:
+See [Current Build](docs/CURRENT_BUILD.md) for the implemented, partial, and planned matrix.
+
+## Quick Start
+
+Requirements:
+
+- Node.js 18 or newer
+- npm
+
+Install dependencies and start the development server:
 
 ```bash
 npm install
-```
-
-Start the local development server:
-
-```bash
 npm run dev
 ```
 
-Build the production version:
+Open `http://127.0.0.1:5173/`.
+
+Build and preview the production bundle:
 
 ```bash
 npm run build
-```
-
-Preview the production build:
-
-```bash
 npm run preview
 ```
 
-## Project Structure
+There is no automated test suite yet. `npm run build` plus focused browser verification is the minimum acceptance check.
+
+## Controls
+
+| Input | Action |
+| --- | --- |
+| `WASD` | Move during missions |
+| `Shift` | Run while moving |
+| Mouse movement | Set facing and aim direction |
+| Hold right mouse | Aim |
+| Left mouse | Attack or shoot while aiming; click safehouse stations in base mode |
+| `E` | Interact, pick up, use doors, search containers, or extract |
+| `R` | Reload held firearm |
+| `Tab` | Open or close inventory and pause gameplay |
+| `1` | Select equipped primary weapon |
+| `2` | Select equipped sidearm |
+| `3` to `9` | Select custom quickbar slots |
+| Hover inventory item + `3` to `9` | Bind item to a quickbar slot |
+| `Y` | Toggle animation/debug panel |
+| `Escape` | Close the active panel or open the pause menu |
+| Mouse wheel | Zoom camera |
+| Left-drag in safehouse | Pan the safehouse camera |
+
+## Documentation
+
+- [Documentation Index](docs/README.md)
+- [Architecture](Architecture.md)
+- [Game Design](docs/GAME_DESIGN.md)
+- [Current Build](docs/CURRENT_BUILD.md)
+- [Gameplay Systems](docs/GAMEPLAY_SYSTEMS.md)
+- [Data and Asset Pipeline](docs/DATA_AND_ASSETS.md)
+- [Handoff Guide](docs/HANDOFF.md)
+- [Contributing](CONTRIBUTING.md)
+- [Agent Instructions](AGENTS.md)
+- [Item Icon Style Guide](ITEM_ICON_STYLE_GUIDE.md)
+- [Godot Migration Kit](godot_migration/README.md)
+
+## Repository Layout
 
 ```text
-assets/                 Game sprites, item icons, and generated textures
-src/main.js             Main game logic and Three.js scene setup
-src/styles.css          HUD, inventory, base panel, map, and modal styling
-src/vendor/             Local vendored Three.js module
-tools/                  Texture and sprite-sheet generation helpers
-index.html              Game shell
-vite.config.js          Vite build configuration
+assets/                     Runtime art and audio
+  audio/                    Music and sound effects
+  items/                    Item icons
+  map_templates/            Handcrafted mission references and manifest
+  portraits/                Active and future survivor portraits
+  textures/                 Environment and prop material maps
+  ui/                       Main menu and inventory UI artwork
+docs/                       Design, system, pipeline, and handoff documentation
+godot_migration/            Generated migration data and Godot planning scaffold
+src/
+  data/itemDatabase.js      Broad item registry, aliases, tags, and item metadata
+  data/houseMissionTemplates.js  Handcrafted house layouts and spawn sockets
+  main.js                   Current runtime, gameplay, UI, scene, and state logic
+  styles.css                Browser UI styling
+  vendor/three.module.js    Three.js module used by the runtime
+tools/                      Sprite, portrait, texture, and migration-data builders
+index.html                  DOM shell for canvas, HUDs, panels, and modals
+vite.config.js              Development and production asset handling
 ```
 
-## Art Pipeline Notes
+Generated `dist/`, dependency `node_modules/`, temporary `tmp/`, and local `output/` content are not source files and should not be edited or committed unless a task explicitly requires it.
 
-The repository includes source GIFs and generated sprite sheets for the player animations. The helper script in `tools/build_sprite_sheets.py` can rebuild sheets from source GIFs, including chroma-key cleanup.
+## Important Technical Notes
 
-Texture generation helpers live in `tools/generate_game_textures.py`. Generated textures and item icons are committed under `assets/`.
+- Most runtime logic still lives in `src/main.js`. Read [Architecture](Architecture.md) before changing shared state or the frame loop.
+- The item system has two layers: `ITEM_DATABASE` owns broad labels, loot tags, aliases, and newer metadata; `itemCatalog` in `src/main.js` adds runtime stats, slots, icons, and weapon behavior.
+- New hunger, thirst, rarity, and consumable metadata is not yet fully connected to gameplay. Do not describe data-only effects as working mechanics.
+- Save data uses browser `localStorage` under `outbreak.save.v1`. Settings use `outbreak.settings.v1`.
+- Assets are loaded from `assets/`; sprite sheets use nearest-neighbor filtering and chroma-keyed transparency.
+- All inventory icon work must follow [ITEM_ICON_STYLE_GUIDE.md](ITEM_ICON_STYLE_GUIDE.md).
+- Do not overwrite approved custom art or source GIFs unless the task explicitly asks for replacement.
+- The external post-apocalyptic UI pack was used as visual reference. Its supplied PNG elements remain reference-only unless the user explicitly requests direct use.
 
-## Godot Migration
+## Project Status
 
-Godot migration prep lives in `godot_migration/`. It includes exported JSON data, an asset manifest, a suggested Godot scene layout, a migration plan, and a starter `OutbreakDataLoader.gd`. Regenerate the migration data with `node tools/export_godot_data.mjs` after changing item, location, upgrade, texture, or animation definitions.
-
-## Current Issues and Future Plans
-
-This build is still in heavy prototype mode. The player now uses a single action-state controller for idle, walk, run, aim, pickup, interact, death, attack, 2hAttack, shoot, 2hShoot, work, and victory. Several action states intentionally use fallback idle or aim clips until final sprite sheets exist. The `Y` debug panel shows the active player action state, selected sprite sheet, loaded texture, quickbar slot, and held weapon to help track animation problems during testing.
-
-Short-term work:
-
-- Replace placeholder or rough weapon-ready animations with final sprite sheets for handgun, melee, and shotgun states.
-- Continue cleaning up inventory, item box, quickbar, and drag-and-drop behavior.
-- Balance movement, aiming, reloading, melee reach, zombie pressure, and ammo availability.
-- Expand loot tables by map type and connect station upgrades to real gameplay effects.
-
-Long-term work:
-
-- Split `src/main.js` into smaller gameplay, UI, world, and entity modules.
-- Add save data, crafting, station upgrades, and more mission location types.
-- Improve performance with broader spatial partitioning and AI update budgets.
-- Add automated checks for sprite-sheet assets, item definitions, and animation state coverage.
-
-## Major Systems Roadmap
-
-The following systems define the intended long-term progression model. Details and balance values remain subject to iteration.
-
-1. **Base construction:** The safehouse begins as a simple main hall. Blocked rooms must first be cleared through the Command Center, then assigned and constructed as full-room stations using resources.
-2. **Exterior construction:** Outdoor plots will support structures such as gardens, exterior dormitories, watchtowers, and other future facilities.
-3. **Fence upgrades:** The Command Center will manage perimeter improvements that increase security against zombie attacks.
-4. **Base attacks:** Zombie assaults may become playable defense missions or simulated outcomes. Rooms, barricades, defenses, and stored resources will affect damage and success.
-5. **Character statistics:** Survivors will improve attributes including health, stamina, fighting, shooting, and looting.
-6. **Backgrounds, traits, and abilities:** Every survivor will have individual bonuses and unlocks. For example, Ava's Survivalist trait may improve health and stamina while unlocking kitchen recipes.
-7. **Injury, infection, and permadeath:** Injuries apply specific penalties, infection can eventually kill and turn a survivor, and mission deaths are permanent. Medical treatment can temporarily halt infection, while a rare craftable cure becomes a late-game objective.
-8. **Automated missions:** Survivors can be sent on lower-yield scavenging runs with simulated injury and infection risk.
-9. **Location-based injuries:** Zombie attacks can cause injuries such as damaged legs or arms, reducing movement, attack power, accuracy, or other related abilities until treated.
-
-These systems should be implemented incrementally, with save-data migration and UI support considered before each feature becomes persistent.
-
-## Prototype Status
-
-This is an active prototype. The current codebase still keeps most gameplay systems in `src/main.js`; modularization, deeper station upgrades, loot balancing, crafting, save data, and full combat polish are planned future passes.
+This is an active prototype, not a finished game. Preserve working behavior, keep changes focused, update relevant documentation when contracts change, and clearly distinguish temporary fallbacks from final systems.

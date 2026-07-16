@@ -2,6 +2,8 @@
   {
     "id": "house",
     "name": "Abandoned House",
+    "category": "house",
+    "mapShape": "house",
     "stars": 1,
     "lootType": "Food, tools, basic medicine",
     "loot": [
@@ -21,6 +23,8 @@
   {
     "id": "pharmacy",
     "name": "Corner Pharmacy",
+    "category": "medical",
+    "mapShape": "wide",
     "stars": 2,
     "lootType": "Medicine and recovery supplies",
     "loot": [
@@ -40,6 +44,8 @@
   {
     "id": "supermarket",
     "name": "Supermarket",
+    "category": "market",
+    "mapShape": "wide",
     "stars": 3,
     "lootType": "Food, water, bags, utility items",
     "loot": [
@@ -61,6 +67,8 @@
   {
     "id": "police",
     "name": "Police Station",
+    "category": "police",
+    "mapShape": "compound",
     "stars": 4,
     "lootType": "Weapons, ammo, armor, comms",
     "loot": [
@@ -85,6 +93,8 @@
   {
     "id": "warehouse",
     "name": "Freight Warehouse",
+    "category": "hardware",
+    "mapShape": "warehouse",
     "stars": 3,
     "lootType": "Tools, batteries, storage gear",
     "loot": [
@@ -109,6 +119,8 @@
   {
     "id": "clinic",
     "name": "Riverside Clinic",
+    "category": "medical",
+    "mapShape": "tall",
     "stars": 5,
     "lootType": "Rare medicine and trauma supplies",
     "loot": [

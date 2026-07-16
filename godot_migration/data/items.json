@@ -6,7 +6,6 @@
     "tags": [
       "Food"
     ],
-    "healHp": 12,
     "icon": "res://assets/items/apple.png"
   },
   "Banana": {
@@ -16,7 +15,6 @@
     "tags": [
       "Food"
     ],
-    "healHp": 10,
     "icon": "res://assets/items/banana.png"
   },
   "Orange": {
@@ -26,28 +24,70 @@
     "tags": [
       "Food"
     ],
-    "healHp": 10,
-    "icon": "res://assets/items/apple.png"
+    "icon": "res://assets/items/orange.png"
   },
-  "Juice Box": {
-    "id": "Juice Box",
-    "label": "Juice Box",
-    "texture": "juiceBox",
+  "apple juice": {
+    "id": "apple juice",
+    "label": "Apple Juice",
+    "texture": "appleJuice",
     "tags": [
       "Drink"
     ],
-    "healHp": 8,
-    "icon": "res://assets/items/juice_box.png"
+    "icon": "res://assets/items/apple_juice.png"
+  },
+  "orange juice": {
+    "id": "orange juice",
+    "label": "Orange Juice",
+    "texture": "orangeJuice",
+    "tags": [
+      "Drink"
+    ],
+    "icon": "res://assets/items/orange_juice.png"
+  },
+  "pineapple juice": {
+    "id": "pineapple juice",
+    "label": "Pineapple Juice",
+    "texture": "pineappleJuice",
+    "tags": [
+      "Drink"
+    ],
+    "icon": "res://assets/items/pineapple_juice.png"
+  },
+  "Milk": {
+    "id": "Milk",
+    "label": "Milk",
+    "texture": "milk",
+    "tags": [
+      "Drink"
+    ],
+    "icon": "res://assets/items/milk.png"
   },
   "soda": {
     "id": "soda",
-    "label": "Soda",
-    "texture": "sodaCan",
+    "label": "Soda (Cola)",
+    "texture": "sodaCola",
     "tags": [
       "Drink"
     ],
-    "healHp": 5,
-    "icon": "res://assets/items/soda_can.png"
+    "icon": "res://assets/items/soda_cola.png"
+  },
+  "soda lemon": {
+    "id": "soda lemon",
+    "label": "Soda (Lemon)",
+    "texture": "sodaLemon",
+    "tags": [
+      "Drink"
+    ],
+    "icon": "res://assets/items/soda_lemon.png"
+  },
+  "energy drink": {
+    "id": "energy drink",
+    "label": "Energy Drink",
+    "texture": "energyDrink",
+    "tags": [
+      "Drink"
+    ],
+    "icon": "res://assets/items/energy_drink.png"
   },
   "water bottle": {
     "id": "water bottle",
@@ -56,8 +96,7 @@
     "tags": [
       "Drink"
     ],
-    "healHp": 10,
-    "icon": "res://assets/items/water_bottle.png"
+    "icon": "res://assets/items/water_bottle_500ml.png"
   },
   "bandage": {
     "id": "bandage",
@@ -88,7 +127,7 @@
       "Aid"
     ],
     "healHp": 55,
-    "icon": "res://assets/items/bandages.png"
+    "icon": "res://assets/items/first_aid_kit.png"
   },
   "painkillers": {
     "id": "painkillers",
@@ -118,8 +157,7 @@
     "tags": [
       "Food"
     ],
-    "healHp": 18,
-    "icon": "res://assets/items/can_of_beans.png"
+    "icon": "res://assets/items/can_of_beans_v2.png"
   },
   "can of tuna": {
     "id": "can of tuna",
@@ -128,8 +166,7 @@
     "tags": [
       "Food"
     ],
-    "healHp": 20,
-    "icon": "res://assets/items/can_of_tuna.png"
+    "icon": "res://assets/items/can_of_tuna_v2.png"
   },
   "can of spam": {
     "id": "can of spam",
@@ -144,11 +181,20 @@
   "Gears": {
     "id": "Gears",
     "label": "Gears",
-    "texture": "spareParts",
+    "texture": "gears",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/gears.png"
+  },
+  "screws": {
+    "id": "screws",
+    "label": "Screws",
+    "texture": "screws",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/screws.png"
   },
   "nails": {
     "id": "nails",
@@ -627,12 +673,12 @@
     "id": "medium backpack",
     "slot": "backpack",
     "label": "Medium Backpack",
-    "texture": "largeBackpack",
+    "texture": "mediumBackpack",
     "tags": [
       "Equipment"
     ],
     "slots": 8,
-    "icon": "res://assets/items/large_backpack.png"
+    "icon": "res://assets/items/medium_backpack.png"
   },
   "large backpack": {
     "id": "large backpack",
@@ -677,6 +723,17 @@
       "Armor"
     ],
     "icon": "res://assets/items/body_armor_level_3.png"
+  },
+  "level 4 body armor": {
+    "id": "level 4 body armor",
+    "slot": "armor",
+    "label": "Level 4 Body Armor",
+    "armorClass": 4,
+    "texture": "bodyArmorLevel4",
+    "tags": [
+      "Armor"
+    ],
+    "icon": "res://assets/items/body_armor_level_4.png"
   },
   "Syringe": {
     "id": "Syringe",
