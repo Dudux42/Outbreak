@@ -324,7 +324,7 @@
     "attackSpeed": 0.75,
     "staminaCost": 15,
     "knockback": 0.75,
-    "icon": "res://assets/items/hammer.png"
+    "icon": "res://assets/items/hammer_long_handle_v2.png"
   },
   "crowbar": {
     "id": "crowbar",
@@ -380,15 +380,15 @@
   "RAM": {
     "id": "RAM",
     "label": "RAM",
-    "texture": "spareParts",
+    "texture": "ramModule",
     "tags": [
-      "Base Resource"
+      "Base Technical"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/ram_module_v2.png"
   },
-  "GPU": {
-    "id": "GPU",
-    "label": "GPU",
+  "graphics card": {
+    "id": "graphics card",
+    "label": "Graphics Card",
     "texture": "spareParts",
     "tags": [
       "Base Resource"
@@ -413,9 +413,9 @@
     ],
     "icon": "res://assets/items/spare_parts.png"
   },
-  "PSU": {
-    "id": "PSU",
-    "label": "PSU",
+  "power supply unit": {
+    "id": "power supply unit",
+    "label": "Power Supply Unit",
     "texture": "spareParts",
     "tags": [
       "Base Resource"
@@ -621,7 +621,7 @@
     "attackSpeed": 1.1,
     "staminaCost": 25,
     "knockback": 1.25,
-    "icon": "res://assets/items/hammer.png"
+    "icon": "res://assets/items/hammer_long_handle_v2.png"
   },
   "Katana": {
     "id": "Katana",
@@ -739,6 +739,177 @@
       "Base Resource"
     ],
     "icon": "res://assets/items/pipe_wrench_v2.png"
+  },
+  "pliers": {
+    "id": "pliers",
+    "label": "Pliers",
+    "texture": "pliers",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/pliers_v2.png"
+  },
+  "wrench": {
+    "id": "wrench",
+    "label": "Wrench",
+    "texture": "wrench",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/wrench_v2.png"
+  },
+  "safety goggles": {
+    "id": "safety goggles",
+    "label": "Safety Goggles",
+    "texture": "safetyGoggles",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/safety_goggles_v2.png"
+  },
+  "duct tape": {
+    "id": "duct tape",
+    "label": "Duct Tape",
+    "texture": "ductTape",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/duct_tape_v2.png"
+  },
+  "corrugated hose": {
+    "id": "corrugated hose",
+    "label": "Corrugated Hose",
+    "texture": "corrugatedHose",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/corrugated_hose_v4.png"
+  },
+  "insulating tape": {
+    "id": "insulating tape",
+    "label": "Insulating Tape",
+    "texture": "insulatingTape",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/insulating_tape_v2.png"
+  },
+  "plexiglass": {
+    "id": "plexiglass",
+    "label": "Plexiglass",
+    "texture": "plexiglass",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/plexiglass_v2.png"
+  },
+  "screw nuts": {
+    "id": "screw nuts",
+    "label": "Screw Nuts",
+    "texture": "screwNuts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/screw_nuts_bag_v2.png"
+  },
+  "sealing foam": {
+    "id": "sealing foam",
+    "label": "Sealing Foam",
+    "texture": "sealingFoam",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/sealing_foam_v2.png"
+  },
+  "silicone tube": {
+    "id": "silicone tube",
+    "label": "Silicone Tube",
+    "texture": "siliconeTube",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/silicone_tube_v2.png"
+  },
+  "superglue": {
+    "id": "superglue",
+    "label": "Superglue",
+    "texture": "superglue",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/superglue_v2.png"
+  },
+  "wood glue": {
+    "id": "wood glue",
+    "label": "Wood Glue",
+    "texture": "woodGlue",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/wood_glue_v2.png"
+  },
+  "spark plug": {
+    "id": "spark plug",
+    "label": "Spark Plug",
+    "texture": "sparkPlug",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spark_plug_v2.png"
+  },
+  "usb adapter": {
+    "id": "usb adapter",
+    "label": "USB Adapter",
+    "texture": "usbAdapter",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/usb_adapter_v2.png"
+  },
+  "aa battery": {
+    "id": "aa battery",
+    "label": "AA Battery",
+    "texture": "aaBattery",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/aa_battery_pair_v3.png"
+  },
+  "wd 40": {
+    "id": "wd 40",
+    "label": "WD-40",
+    "texture": "wd40",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/wd_40_v2.png"
+  },
+  "awl": {
+    "id": "awl",
+    "label": "Awl",
+    "texture": "awl",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/awl_v2.png"
+  },
+  "multitool": {
+    "id": "multitool",
+    "label": "Multitool",
+    "texture": "multitool",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/multitool_v2.png"
+  },
+  "wi fi camera": {
+    "id": "wi fi camera",
+    "label": "Wi-Fi Camera",
+    "texture": "wifiCamera",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/wifi_camera_v2.png"
   },
   "small backpack": {
     "id": "small backpack",

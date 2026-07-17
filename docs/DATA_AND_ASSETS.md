@@ -43,16 +43,20 @@ When adding an item, update all relevant layers and test the merged result in th
 
 Pipeline:
 
-1. Select approved same-family icons as references.
-2. Generate one centered item on a flat removable chroma background.
-3. Remove chroma with soft matte and despill.
-4. Downscale to exactly `128x128` RGBA.
-5. Inspect transparent corners, silhouette, wear, label readability, padding, and category scale.
-6. Save under a new descriptive filename until approved.
-7. Attach by updating `itemTexturePaths` only after approval unless integration was explicitly requested.
-8. Regenerate Godot data and build.
+1. Follow the canonical order returned by `Object.keys(ITEM_DATABASE)` for the current full-list icon pass.
+2. Select approved same-family icons as references.
+3. Generate one centered item or one coherent item group on a flat removable chroma background.
+4. Remove chroma with soft matte and despill.
+5. Crop to alpha bounds, fit within the guide's safe composition box, and center on an exact `128x128` RGBA canvas.
+6. Inspect transparent corners, silhouette, wear, materials, label or pictogram readability, padding, and category scale at actual inventory size.
+7. Save under a new descriptive filename until approved.
+8. Attach only after approval unless integration was explicitly requested. Update the exact canonical ID in `itemCatalog` and add the file path in `itemTexturePaths`.
+9. Build, load the app in a browser, inspect the console, and verify the direct asset route.
+10. Regenerate Godot data when migration output is in scope. An explicit request to defer Godot work takes precedence for that pass.
 
 Do not silently overwrite approved art.
+
+The item-list pass is intentionally sequential: generate one candidate, wait for approval, attach it, then move to the next canonical item. As of 2026-07-17, icons through `RAM` are approved and attached; the next queued item is `GPU` (displayed as Graphics Card).
 
 ## Sprite Sheets
 

@@ -171,6 +171,24 @@
     "height": null
   },
   {
+    "path": "res://assets/items/aa_battery_pair_v3.png",
+    "source_path": "assets/items/aa_battery_pair_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16895,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/aa_battery_v2.png",
+    "source_path": "assets/items/aa_battery_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13761,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/antibiotics_bottle.png",
     "source_path": "assets/items/antibiotics_bottle.png",
     "category": "item_icon",
@@ -203,6 +221,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 16588,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/awl_v2.png",
+    "source_path": "assets/items/awl_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12004,
     "width": 128,
     "height": 128
   },
@@ -387,11 +414,29 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/corrugated_hose_v4.png",
+    "source_path": "assets/items/corrugated_hose_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19640,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/crowbar.png",
     "source_path": "assets/items/crowbar.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 537,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/duct_tape_v2.png",
+    "source_path": "assets/items/duct_tape_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18479,
     "width": 128,
     "height": 128
   },
@@ -459,6 +504,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/hammer_long_handle_v2.png",
+    "source_path": "assets/items/hammer_long_handle_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9162,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/handgun.png",
     "source_path": "assets/items/handgun.png",
     "category": "item_icon",
@@ -482,6 +536,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 12628,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/insulating_tape_v2.png",
+    "source_path": "assets/items/insulating_tape_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8810,
     "width": 128,
     "height": 128
   },
@@ -603,6 +666,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/multitool_v2.png",
+    "source_path": "assets/items/multitool_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13651,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/nails_box_v2.png",
     "source_path": "assets/items/nails_box_v2.png",
     "category": "item_icon",
@@ -666,6 +738,33 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/plexiglass_v2.png",
+    "source_path": "assets/items/plexiglass_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14361,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/pliers_v2.png",
+    "source_path": "assets/items/pliers_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14390,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/ram_module_v2.png",
+    "source_path": "assets/items/ram_module_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9894,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/rubbing_alcohol_bottle.png",
     "source_path": "assets/items/rubbing_alcohol_bottle.png",
     "category": "item_icon",
@@ -680,6 +779,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 12463,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/safety_goggles_v2.png",
+    "source_path": "assets/items/safety_goggles_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17670,
     "width": 128,
     "height": 128
   },
@@ -720,6 +828,24 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/screw_nuts_bag_v2.png",
+    "source_path": "assets/items/screw_nuts_bag_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17716,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/sealing_foam_v2.png",
+    "source_path": "assets/items/sealing_foam_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10668,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/shotgun.png",
     "source_path": "assets/items/shotgun.png",
     "category": "item_icon",
@@ -734,6 +860,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 12979,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/silicone_tube_v2.png",
+    "source_path": "assets/items/silicone_tube_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10155,
     "width": 128,
     "height": 128
   },
@@ -783,11 +918,38 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/spark_plug_v2.png",
+    "source_path": "assets/items/spark_plug_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11250,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/superglue_v2.png",
+    "source_path": "assets/items/superglue_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11388,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/tape_measure_v2.png",
     "source_path": "assets/items/tape_measure_v2.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 15960,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/usb_adapter_v2.png",
+    "source_path": "assets/items/usb_adapter_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19903,
     "width": 128,
     "height": 128
   },
@@ -806,6 +968,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 14468,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/wd_40_v2.png",
+    "source_path": "assets/items/wd_40_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11345,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/wifi_camera_v2.png",
+    "source_path": "assets/items/wifi_camera_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16283,
     "width": 128,
     "height": 128
   },
@@ -833,6 +1013,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 7077,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/wood_glue_v2.png",
+    "source_path": "assets/items/wood_glue_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12886,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/wrench_v2.png",
+    "source_path": "assets/items/wrench_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11297,
     "width": 128,
     "height": 128
   },
