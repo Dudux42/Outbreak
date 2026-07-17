@@ -56,7 +56,7 @@ Pipeline:
 
 Do not silently overwrite approved art.
 
-The item-list pass is intentionally sequential: generate one candidate, wait for approval, attach it, then move to the next canonical item. As of 2026-07-17, icons through `RAM` are approved and attached; the next queued item is `GPU` (displayed as Graphics Card).
+The item-list pass is intentionally sequential: generate one candidate, wait for approval, attach it, then move to the next canonical item. As of 2026-07-17, icons through `power supply unit` are approved and attached. Generation is paused before `light bulb` pending further instructions.
 
 ## Sprite Sheets
 

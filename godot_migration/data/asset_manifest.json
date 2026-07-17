@@ -495,6 +495,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/graphics_card_v2.png",
+    "source_path": "assets/items/graphics_card_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17440,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/hammer.png",
     "source_path": "assets/items/hammer.png",
     "category": "item_icon",
@@ -666,6 +675,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/motherboard_v2.png",
+    "source_path": "assets/items/motherboard_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20968,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/multitool_v2.png",
     "source_path": "assets/items/multitool_v2.png",
     "category": "item_icon",
@@ -752,6 +770,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 14390,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/power_supply_unit_v2.png",
+    "source_path": "assets/items/power_supply_unit_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21674,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/processor_v2.png",
+    "source_path": "assets/items/processor_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16263,
     "width": 128,
     "height": 128
   },

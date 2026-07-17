@@ -389,38 +389,38 @@
   "graphics card": {
     "id": "graphics card",
     "label": "Graphics Card",
-    "texture": "spareParts",
+    "texture": "graphicsCard",
     "tags": [
-      "Base Resource"
+      "Base Technical"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/graphics_card_v2.png"
   },
   "processor": {
     "id": "processor",
     "label": "Processor",
-    "texture": "spareParts",
+    "texture": "processor",
     "tags": [
-      "Base Resource"
+      "Base Technical"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/processor_v2.png"
   },
   "motherboard": {
     "id": "motherboard",
     "label": "Motherboard",
-    "texture": "spareParts",
+    "texture": "motherboard",
     "tags": [
-      "Base Resource"
+      "Base Technical"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/motherboard_v2.png"
   },
   "power supply unit": {
     "id": "power supply unit",
     "label": "Power Supply Unit",
-    "texture": "spareParts",
+    "texture": "powerSupplyUnit",
     "tags": [
-      "Base Resource"
+      "Base Technical"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/power_supply_unit_v2.png"
   },
   "Handgun": {
     "id": "Handgun",

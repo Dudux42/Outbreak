@@ -2,7 +2,7 @@
 
 This document is the reality check for the current repository. It separates working systems from partial scaffolding and future design.
 
-Last documentation audit: 2026-07-16.
+Last documentation audit: 2026-07-17.
 
 ## Implemented
 
@@ -43,7 +43,7 @@ Last documentation audit: 2026-07-16.
 - Item box stash transfers.
 - Loot-container search delay, per-item reveal, and transfers.
 - Broad item database, aliases, loot tags, runtime weapon/armor/backpack stats, and extended metadata for food, drinks, medical supplies, tools, and construction resources.
-- Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, and base-resource icon sets in active expansion.
+- Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, construction-resource, and technical-electronics icons through the power supply unit.
 
 ### Missions
 

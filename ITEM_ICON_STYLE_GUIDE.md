@@ -88,4 +88,4 @@ Approved category anchors from the current icon pass include:
 - Packaging and workshop supplies: `assets/items/sealing_foam_v2.png`, `assets/items/silicone_tube_v2.png`, `assets/items/superglue_v2.png`, `assets/items/wood_glue_v2.png`, `assets/items/wd_40_v2.png`
 - Hardware and hand tools: `assets/items/bolts_box_v2.png`, `assets/items/screw_nuts_bag_v2.png`, `assets/items/screwdriver_blue_v3.png`, `assets/items/awl_v2.png`, `assets/items/multitool_v2.png`
 - Clear materials: `assets/items/safety_goggles_v2.png`, `assets/items/plexiglass_v2.png`
-- Electrical and technical items: `assets/items/usb_adapter_v2.png`, `assets/items/aa_battery_pair_v3.png`, `assets/items/wifi_camera_v2.png`, `assets/items/ram_module_v2.png`
+- Electrical and technical items: `assets/items/usb_adapter_v2.png`, `assets/items/aa_battery_pair_v3.png`, `assets/items/wifi_camera_v2.png`, `assets/items/ram_module_v2.png`, `assets/items/graphics_card_v2.png`, `assets/items/processor_v2.png`, `assets/items/motherboard_v2.png`, `assets/items/power_supply_unit_v2.png`
