@@ -180,6 +180,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/antibiotics_bottle_v2.png",
+    "source_path": "assets/items/antibiotics_bottle_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13772,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/apple.png",
     "source_path": "assets/items/apple.png",
     "category": "item_icon",
@@ -212,6 +221,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 526,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/bag_of_chips_v2.png",
+    "source_path": "assets/items/bag_of_chips_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 23102,
     "width": 128,
     "height": 128
   },
@@ -279,6 +297,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/bolts_box_v2.png",
+    "source_path": "assets/items/bolts_box_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17767,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/can_of_beans.png",
     "source_path": "assets/items/can_of_beans.png",
     "category": "item_icon",
@@ -293,6 +320,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 20517,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/can_of_sardines.png",
+    "source_path": "assets/items/can_of_sardines.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 24504,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/can_of_spam.png",
+    "source_path": "assets/items/can_of_spam.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 25398,
     "width": 128,
     "height": 128
   },
@@ -315,6 +360,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/car_battery_v2.png",
+    "source_path": "assets/items/car_battery_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21333,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/combat_knife.png",
     "source_path": "assets/items/combat_knife.png",
     "category": "item_icon",
@@ -324,11 +378,29 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/cookies_v2.png",
+    "source_path": "assets/items/cookies_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 23388,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/crowbar.png",
     "source_path": "assets/items/crowbar.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 537,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/electrical_drill_v2.png",
+    "source_path": "assets/items/electrical_drill_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14125,
     "width": 128,
     "height": 128
   },
@@ -347,6 +419,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 10423,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/first_aid_kit_v2.png",
+    "source_path": "assets/items/first_aid_kit_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15994,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/first_aid_spray_v2.png",
+    "source_path": "assets/items/first_aid_spray_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8411,
     "width": 128,
     "height": 128
   },
@@ -387,6 +477,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/hand_drill_v2.png",
+    "source_path": "assets/items/hand_drill_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12628,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/juice_box.png",
     "source_path": "assets/items/juice_box.png",
     "category": "item_icon",
@@ -423,11 +522,29 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/level_v2.png",
+    "source_path": "assets/items/level_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15508,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/mac_n_cheese_box.png",
     "source_path": "assets/items/mac_n_cheese_box.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 463,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/mac_n_cheese_box_v2.png",
+    "source_path": "assets/items/mac_n_cheese_box_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 22785,
     "width": 128,
     "height": 128
   },
@@ -441,11 +558,65 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/metal_bar_v2.png",
+    "source_path": "assets/items/metal_bar_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 5778,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/metal_sheet_single_v3.png",
+    "source_path": "assets/items/metal_sheet_single_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 6348,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/metal_sheet_v2.png",
+    "source_path": "assets/items/metal_sheet_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11592,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/military_bandage_v2.png",
+    "source_path": "assets/items/military_bandage_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17603,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/milk.png",
     "source_path": "assets/items/milk.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 18225,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/nails_box_v2.png",
+    "source_path": "assets/items/nails_box_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16465,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/nail_gun_v2.png",
+    "source_path": "assets/items/nail_gun_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19810,
     "width": 128,
     "height": 128
   },
@@ -468,11 +639,29 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/painkillers_v2.png",
+    "source_path": "assets/items/painkillers_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19627,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/pineapple_juice.png",
     "source_path": "assets/items/pineapple_juice.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 16009,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/pipe_wrench_v2.png",
+    "source_path": "assets/items/pipe_wrench_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13677,
     "width": 128,
     "height": 128
   },
@@ -486,11 +675,47 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/rubbing_alcohol_bottle_v2.png",
+    "source_path": "assets/items/rubbing_alcohol_bottle_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12463,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/screwdriver_blue_v3.png",
+    "source_path": "assets/items/screwdriver_blue_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 7217,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/screwdriver_v2.png",
+    "source_path": "assets/items/screwdriver_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8877,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/screws.png",
     "source_path": "assets/items/screws.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 15645,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/screws_box_v2.png",
+    "source_path": "assets/items/screws_box_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17449,
     "width": 128,
     "height": 128
   },
@@ -558,6 +783,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/tape_measure_v2.png",
+    "source_path": "assets/items/tape_measure_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15960,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/water_bottle.png",
     "source_path": "assets/items/water_bottle.png",
     "category": "item_icon",
@@ -572,6 +806,33 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 14468,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/wire_round_v3.png",
+    "source_path": "assets/items/wire_round_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15845,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/wire_v2.png",
+    "source_path": "assets/items/wire_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14691,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/wooden_stick_v2.png",
+    "source_path": "assets/items/wooden_stick_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 7077,
     "width": 128,
     "height": 128
   },

@@ -105,8 +105,16 @@
     "tags": [
       "Aid"
     ],
-    "healHp": 25,
     "icon": "res://assets/items/bandages.png"
+  },
+  "military bandage": {
+    "id": "military bandage",
+    "label": "Military Bandage",
+    "texture": "militaryBandage",
+    "tags": [
+      "Aid"
+    ],
+    "icon": "res://assets/items/military_bandage_v2.png"
   },
   "rubbing alcohol": {
     "id": "rubbing alcohol",
@@ -115,9 +123,7 @@
     "tags": [
       "Aid"
     ],
-    "healHp": 5,
-    "disinfect": true,
-    "icon": "res://assets/items/rubbing_alcohol_bottle.png"
+    "icon": "res://assets/items/rubbing_alcohol_bottle_v2.png"
   },
   "first aid kit": {
     "id": "first aid kit",
@@ -126,8 +132,16 @@
     "tags": [
       "Aid"
     ],
-    "healHp": 55,
-    "icon": "res://assets/items/first_aid_kit.png"
+    "icon": "res://assets/items/first_aid_kit_v2.png"
+  },
+  "first aid spray": {
+    "id": "first aid spray",
+    "label": "First Aid Spray",
+    "texture": "firstAidSpray",
+    "tags": [
+      "Aid"
+    ],
+    "icon": "res://assets/items/first_aid_spray_v2.png"
   },
   "painkillers": {
     "id": "painkillers",
@@ -136,8 +150,7 @@
     "tags": [
       "Aid"
     ],
-    "healHp": 15,
-    "icon": "res://assets/items/antibiotics_bottle.png"
+    "icon": "res://assets/items/painkillers_v2.png"
   },
   "antibiotics": {
     "id": "antibiotics",
@@ -146,9 +159,7 @@
     "tags": [
       "Aid"
     ],
-    "healHp": 35,
-    "cureInfection": true,
-    "icon": "res://assets/items/antibiotics_bottle.png"
+    "icon": "res://assets/items/antibiotics_bottle_v2.png"
   },
   "can of beans": {
     "id": "can of beans",
@@ -175,8 +186,43 @@
     "tags": [
       "Food"
     ],
-    "healHp": 20,
-    "icon": "res://assets/items/can_of_beans.png"
+    "icon": "res://assets/items/can_of_spam.png"
+  },
+  "can of sardines": {
+    "id": "can of sardines",
+    "label": "Can of Sardines",
+    "texture": "canOfSardines",
+    "tags": [
+      "Food"
+    ],
+    "icon": "res://assets/items/can_of_sardines.png"
+  },
+  "bag of chips": {
+    "id": "bag of chips",
+    "label": "Bag of Chips",
+    "texture": "bagOfChips",
+    "tags": [
+      "Food"
+    ],
+    "icon": "res://assets/items/bag_of_chips_v2.png"
+  },
+  "mac 'n' cheese box": {
+    "id": "mac 'n' cheese box",
+    "label": "Mac 'n' Cheese Box",
+    "texture": "macNCheeseBox",
+    "tags": [
+      "Food"
+    ],
+    "icon": "res://assets/items/mac_n_cheese_box_v2.png"
+  },
+  "cookies": {
+    "id": "cookies",
+    "label": "Cookies",
+    "texture": "cookies",
+    "tags": [
+      "Food"
+    ],
+    "icon": "res://assets/items/cookies_v2.png"
   },
   "Gears": {
     "id": "Gears",
@@ -194,70 +240,70 @@
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/screws.png"
+    "icon": "res://assets/items/screws_box_v2.png"
   },
   "nails": {
     "id": "nails",
     "label": "Nails",
-    "texture": "spareParts",
+    "texture": "nails",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/nails_box_v2.png"
   },
   "bolts": {
     "id": "bolts",
     "label": "Bolts",
-    "texture": "spareParts",
+    "texture": "bolts",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/bolts_box_v2.png"
   },
   "wooden stick": {
     "id": "wooden stick",
     "label": "Wooden Stick",
-    "texture": "spareParts",
+    "texture": "woodenStick",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/wooden_stick_v2.png"
   },
   "metal bar": {
     "id": "metal bar",
     "label": "Metal Bar",
-    "texture": "spareParts",
+    "texture": "metalBar",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/metal_bar_v2.png"
   },
   "metal sheet": {
     "id": "metal sheet",
     "label": "Metal Sheet",
-    "texture": "spareParts",
+    "texture": "metalSheet",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/metal_sheet_single_v3.png"
   },
-  "battery": {
-    "id": "battery",
-    "label": "Battery",
-    "texture": "spareParts",
+  "car battery": {
+    "id": "car battery",
+    "label": "Car Battery",
+    "texture": "carBattery",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/car_battery_v2.png"
   },
   "wire": {
     "id": "wire",
     "label": "Wire",
-    "texture": "spareParts",
+    "texture": "wire",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/wire_round_v3.png"
   },
   "hammer": {
     "id": "hammer",
@@ -325,11 +371,11 @@
   "screwdriver": {
     "id": "screwdriver",
     "label": "Screwdriver",
-    "texture": "spareParts",
+    "texture": "screwdriver",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/screwdriver_blue_v3.png"
   },
   "RAM": {
     "id": "RAM",
@@ -643,20 +689,56 @@
   "Nail gun": {
     "id": "Nail gun",
     "label": "Nail Gun",
-    "texture": "spareParts",
+    "texture": "nailGun",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/nail_gun_v2.png"
   },
-  "Drill": {
-    "id": "Drill",
-    "label": "Drill",
-    "texture": "spareParts",
+  "electrical drill": {
+    "id": "electrical drill",
+    "label": "Electrical Drill",
+    "texture": "electricalDrill",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/electrical_drill_v2.png"
+  },
+  "hand drill": {
+    "id": "hand drill",
+    "label": "Hand Drill",
+    "texture": "handDrill",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/hand_drill_v2.png"
+  },
+  "tape measure": {
+    "id": "tape measure",
+    "label": "Tape Measure",
+    "texture": "tapeMeasure",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/tape_measure_v2.png"
+  },
+  "level": {
+    "id": "level",
+    "label": "Level",
+    "texture": "levelTool",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/level_v2.png"
+  },
+  "pipe wrench": {
+    "id": "pipe wrench",
+    "label": "Pipe Wrench",
+    "texture": "pipeWrench",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/pipe_wrench_v2.png"
   },
   "small backpack": {
     "id": "small backpack",

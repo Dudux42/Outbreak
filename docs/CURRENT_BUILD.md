@@ -42,8 +42,8 @@ Last documentation audit: 2026-07-16.
 - Quickbar slots `1` through `9`, with primary/sidearm ownership for slots `1` and `2`.
 - Item box stash transfers.
 - Loot-container search delay, per-item reveal, and transfers.
-- Broad item database, aliases, loot tags, runtime weapon/armor/backpack stats, and extended metadata for initial food/drink items.
-- Approved `128x128` inventory icon specification and a growing consumable icon set.
+- Broad item database, aliases, loot tags, runtime weapon/armor/backpack stats, and extended metadata for food, drinks, medical supplies, tools, and construction resources.
+- Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, and base-resource icon sets in active expansion.
 
 ### Missions
 
@@ -93,9 +93,9 @@ Last documentation audit: 2026-07-16.
 - Aim/combat/interact/work/victory/death can use idle or firearm-aim fallbacks.
 - The dark zombie variant currently has minimal one-frame animation data.
 
-### Item Metadata and Consumables
+### Item Metadata and Use Effects
 
-- `ITEM_DATABASE` includes initial descriptions, rarity, stack limits, spawn quantities, hunger/thirst effects, buffs, returned-container data, exclusions, and crafting flags.
+- `ITEM_DATABASE` includes descriptions, rarity, stack limits, spawn quantities, intended use effects, buffs, returned-container data, exclusions, crafting flags, and tool/resource metadata for the currently detailed item groups.
 - The runtime use action still primarily understands `healHp` from `itemCatalog`.
 - Hunger, thirst, stamina, speed buffs, empty-container returns, spoilage, trading, scrapping, and location exclusions are not fully implemented.
 - Some broad database items use generic fallback icons and have no specialized gameplay behavior.
