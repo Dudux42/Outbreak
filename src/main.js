@@ -43,6 +43,9 @@ import {
   getPlayerAnimationClipName,
   getPlayerAnimationDuration,
 } from "./systems/player/playerAnimationSelection.js";
+import {
+  createSpriteSheetAnimator,
+} from "./systems/player/spriteSheetAnimator.js";
 import { createSeededRng } from "./utils/seededRandom.js";
 
 const baseMusic = new Audio(baseThemeUrl);
@@ -1465,7 +1468,9 @@ function setActiveCharacter(characterId) {
   updateCharacterUi();
   updateBaseSurvivorSelection();
   if (!player || state.mode === "base") return;
-  playerAnimator = createSpriteSheetAnimator(playerAnimationClips);
+  playerAnimator = createRuntimeSpriteSheetAnimator(playerAnimationClips, {
+    onClipChange: syncPlayerAnimationClip,
+  });
   player.material.map = playerAnimator.texture;
   player.material.needsUpdate = true;
   setPlayerActionState(PLAYER_ACTION_STATES.IDLE, { facing: lastAimDirection, immediate: true });
@@ -1906,7 +1911,7 @@ function addBaseSurvivors() {
 
 function createBaseSurvivor(characterId, position, targetOffset = 0) {
   const profile = getCharacterProfile(characterId);
-  const animator = createSpriteSheetAnimator(profile.animations);
+  const animator = createRuntimeSpriteSheetAnimator(profile.animations);
   const material = new THREE.SpriteMaterial({
     map: animator.texture,
     transparent: true,
@@ -8375,7 +8380,9 @@ function addRoomFog(rooms) {
 }
 
 function addPlayer(size, spawnPosition = null) {
-  playerAnimator = createSpriteSheetAnimator(playerAnimationClips);
+  playerAnimator = createRuntimeSpriteSheetAnimator(playerAnimationClips, {
+    onClipChange: syncPlayerAnimationClip,
+  });
   const material = new THREE.SpriteMaterial({
     map: playerAnimator.texture,
     transparent: true,
@@ -8395,93 +8402,17 @@ function addPlayer(size, spawnPosition = null) {
   setPlayerActionState(PLAYER_ACTION_STATES.IDLE, { facing: lastAimDirection, immediate: true });
 }
 
-function createSpriteSheetAnimator(clips) {
-  const loader = new THREE.TextureLoader();
-  const preparedClips = Object.fromEntries(
-    Object.entries(clips).map(([name, clip]) => [name, createSpriteSheetClip(loader, clip)])
-  );
-  let activeName = "idle_south";
-  let frame = 0;
-  let elapsed = 0;
-  let distanceAccumulator = 0;
+function createRuntimeSpriteSheetAnimator(clips, options = {}) {
+  return createSpriteSheetAnimator(clips, {
+    ...options,
+    prepareClip: (name, clip) => createSpriteSheetClip(textureLoader, clip),
+  });
+}
 
-  setSheetFrame(preparedClips.idle_south, 0);
-
-  return {
-    texture: preparedClips.idle_south.texture,
-    setClip(name, material) {
-      const nextName = preparedClips[name] ? name : "idle_south";
-      if (!preparedClips[name]) console.warn(`[Outbreak] Missing animation clip: ${name}`);
-      if (nextName === activeName) {
-        if (material && material.map !== preparedClips[activeName].texture) {
-          material.map = preparedClips[activeName].texture;
-          material.needsUpdate = true;
-        }
-        if (player && material === player.material) {
-          player.userData.animationClip = activeName;
-        }
-        return;
-      }
-      activeName = nextName;
-      frame = 0;
-      elapsed = 0;
-      distanceAccumulator = 0;
-      setSheetFrame(preparedClips[activeName], frame);
-      if (material) {
-        material.map = preparedClips[activeName].texture;
-        material.needsUpdate = true;
-      }
-      if (player && material === player.material) {
-        player.userData.animationClip = activeName;
-      }
-    },
-    update(dt) {
-      const activeClip = preparedClips[activeName];
-      elapsed += dt;
-      if (elapsed < activeClip.frameDuration) return;
-      elapsed %= activeClip.frameDuration;
-      frame = (frame + 1) % activeClip.frames;
-      setSheetFrame(activeClip, frame);
-    },
-    holdFrame(name, material, frameIndex = 0) {
-      this.setClip(name, material);
-      frame = frameIndex;
-      elapsed = 0;
-      distanceAccumulator = 0;
-      setSheetFrame(preparedClips[activeName], frame);
-    },
-    advanceByDistance(distance) {
-      const activeClip = preparedClips[activeName];
-      const cycleDistance = 2.35;
-      distanceAccumulator = (distanceAccumulator + distance) % cycleDistance;
-      frame = Math.floor((distanceAccumulator / cycleDistance) * activeClip.frames);
-      setSheetFrame(activeClip, frame);
-    },
-    holdCurrentFrame() {
-      elapsed = 0;
-      setSheetFrame(preparedClips[activeName], frame);
-    },
-    getActiveName() {
-      return activeName;
-    },
-    hasClip(name) {
-      return Boolean(preparedClips[name]);
-    },
-    getActiveClipInfo() {
-      return getSpriteSheetClipInfo(activeName, preparedClips[activeName]);
-    },
-    getClipInfo(name) {
-      return getSpriteSheetClipInfo(name, preparedClips[name]);
-    },
-    forceClipTexture(name, material) {
-      if (!preparedClips[name] || !material) return false;
-      if (material.map !== preparedClips[name].texture) {
-        material.map = preparedClips[name].texture;
-        material.needsUpdate = true;
-      }
-      return true;
-    },
-  };
+function syncPlayerAnimationClip(name, material) {
+  if (player && material === player.material) {
+    player.userData.animationClip = name;
+  }
 }
 
 function createSpriteSheetClip(loader, clip) {
@@ -8499,29 +8430,6 @@ function createSpriteSheetClip(loader, clip) {
     src: clip.src,
     frames: clip.frames,
     frameDuration: clip.frameDuration,
-  };
-}
-
-function setSheetFrame(clip, frame) {
-  clip.texture.offset.x = frame / clip.frames;
-}
-
-function getSpriteSheetClipInfo(name, clip) {
-  if (!clip) return { name, exists: false };
-  const image = clip.texture.image || clip.texture.source?.data || null;
-  const source = image?.currentSrc || image?.src || clip.texture.userData?.sourcePath || clip.src;
-  return {
-    name,
-    exists: true,
-    src: clip.src,
-    activeSource: source,
-    loaded: Boolean(image?.width || image?.naturalWidth),
-    width: image?.width || image?.naturalWidth || null,
-    height: image?.height || image?.naturalHeight || null,
-    frames: clip.frames,
-    frameDuration: clip.frameDuration,
-    offsetX: clip.texture.offset.x,
-    repeatX: clip.texture.repeat.x,
   };
 }
 
@@ -8838,7 +8746,7 @@ function addZombies(location) {
     const spawnRooms = missionRooms.filter((room) => room.id !== 0);
     const room = pick(spawnRooms.length ? spawnRooms : missionRooms);
     const enemyType = pick(enemyTypes);
-    const animator = createSpriteSheetAnimator(enemyType.animations);
+    const animator = createRuntimeSpriteSheetAnimator(enemyType.animations);
     const material = new THREE.SpriteMaterial({
       map: animator.texture,
       transparent: true,

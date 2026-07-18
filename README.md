@@ -123,6 +123,7 @@ src/
   systems/missions/proceduralMissionLayout.js  Procedural room graph and spawn data
   systems/player/playerActionState.js  Player action states and pure animation selectors
   systems/player/playerAnimationSelection.js  Player sprite-clip selection and duration helpers
+  systems/player/spriteSheetAnimator.js  Sprite-sheet clip state machine and frame timing
   utils/seededRandom.js     Deterministic seeded random-number generator
   main.js                   Current runtime, gameplay, UI, scene, and state logic
   styles.css                Browser UI styling

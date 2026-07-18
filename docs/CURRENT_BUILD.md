@@ -95,7 +95,7 @@ Last documentation audit: 2026-07-17.
 - Procedural non-handcrafted room-graph generation extracted behind injected random/vector dependencies; scene construction remains in the runtime.
 - Handcrafted house-template layout construction extracted behind an injected vector factory; furniture, loot, and scene construction remain in the runtime.
 - Player action vocabulary/configuration and pure locomotion selectors extracted; runtime action mutation and sprite playback remain in `main.js`.
-- Focused Node unit tests protect seeded generation, core item/inventory contracts, versioned save handling, procedural/handcrafted mission-layout invariants, player action-state selectors, and animation clip selection.
+- Focused Node unit tests protect seeded generation, core item/inventory contracts, versioned save handling, procedural/handcrafted mission-layout invariants, player action-state selectors, animation clip selection, and sprite-sheet animator behavior.
 
 The `0.2` architecture work targets only the browser Three.js prototype. Godot migration artifacts are frozen and out of scope unless the user explicitly changes that direction.
 

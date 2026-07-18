@@ -106,11 +106,15 @@ Builds a selected house template into rooms, connected edges, breadth-first room
 
 ### `src/systems/player/playerActionState.js`
 
-Owns the player action vocabulary, priorities, movement-lock/terminal configuration, locomotion selection, default action state, and pure distance-advance selectors. Runtime state mutation, timers, sprite-sheet loading, and animation playback remain in `src/main.js`.
+Owns the player action vocabulary, priorities, movement-lock/terminal configuration, locomotion selection, default action state, and pure distance-advance selectors. Runtime state mutation and sprite-sheet loading remain in `src/main.js`; animation playback state is delegated to `src/systems/player/spriteSheetAnimator.js`.
 
 ### `src/systems/player/playerAnimationSelection.js`
 
-Owns pure sprite-clip naming, aim fallback selection, and action-duration calculations. Asset loading and animator mutation remain in `src/main.js`.
+Owns pure sprite-clip naming, aim fallback selection, and action-duration calculations. Asset loading remains in `src/main.js`; animator mutation is delegated to `src/systems/player/spriteSheetAnimator.js`.
+
+### `src/systems/player/spriteSheetAnimator.js`
+
+Owns sprite-sheet clip switching, frame timing, distance-driven advancement, frame holding, and clip metadata against injected prepared texture clips. Three.js texture loading and material wiring remain in `src/main.js`.
 
 ### `src/services/savePayload.js`
 
