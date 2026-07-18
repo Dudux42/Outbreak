@@ -114,6 +114,7 @@ godot_migration/            Generated migration data and Godot planning scaffold
 src/
   data/itemDatabase.js      Broad item registry, aliases, tags, and item metadata
   data/houseMissionTemplates.js  Handcrafted house layouts and spawn sockets
+  services/savePayload.js   Versioned save serialization and guarded storage reads
   systems/inventory/inventoryRules.js  Inventory entry, stacking, and capacity rules
   systems/inventory/itemLookup.js  Pure item identity and lookup helpers
   utils/seededRandom.js     Deterministic seeded random-number generator

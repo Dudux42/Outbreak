@@ -23,6 +23,7 @@ import ammoPickupSoundTwoUrl from "../assets/audio/ammo_pickup_2.mp3";
 import abandonedHouseMusicUrl from "../assets/audio/abandoned_house.mp3";
 import { ITEM_ALIASES, ITEM_DATABASE } from "./data/itemDatabase.js";
 import { HOUSE_MISSION_TEMPLATES } from "./data/houseMissionTemplates.js";
+import { createSavePayload as buildSavePayload, readStoredJson } from "./services/savePayload.js";
 import { createInventoryRules } from "./systems/inventory/inventoryRules.js";
 import { createItemLookup } from "./systems/inventory/itemLookup.js";
 import { createSeededRng } from "./utils/seededRandom.js";
@@ -1504,24 +1505,11 @@ function updateCharacterUi() {
 
 function createSavePayload() {
   persistActiveCharacterLoadout();
-  return {
+  return buildSavePayload({
     version: SAVE_VERSION,
     savedAt: new Date().toISOString(),
-    state: {
-      character: state.character,
-      health: state.health,
-      keys: state.keys,
-      runSeed: state.runSeed,
-      characterLoadouts: state.characterLoadouts,
-      inventory: state.inventory,
-      quickbar: state.quickbar,
-      activeQuickSlot: state.activeQuickSlot,
-      magazines: state.magazines,
-      equipment: state.equipment,
-      stash: state.stash,
-      upgrades: state.upgrades,
-    },
-  };
+    state,
+  });
 }
 
 function saveGame() {
@@ -1538,24 +1526,15 @@ function saveGame() {
 }
 
 function getSavedAtLabel() {
-  try {
-    const raw = localStorage.getItem(SAVE_STORAGE_KEY);
-    if (!raw) return "No save yet";
-    const payload = JSON.parse(raw);
-    if (!payload?.savedAt) return "No save yet";
-    return new Date(payload.savedAt).toLocaleString();
-  } catch {
-    return "Unavailable";
-  }
+  const { value: payload, error } = readStoredJson(localStorage, SAVE_STORAGE_KEY);
+  if (error) return "Unavailable";
+  if (!payload?.savedAt) return "No save yet";
+  return new Date(payload.savedAt).toLocaleString();
 }
 
 function loadSavedGame() {
-  let payload = null;
-  try {
-    const raw = localStorage.getItem(SAVE_STORAGE_KEY);
-    if (!raw) return false;
-    payload = JSON.parse(raw);
-  } catch (error) {
+  const { value: payload, error } = readStoredJson(localStorage, SAVE_STORAGE_KEY);
+  if (error) {
     console.warn("[Outbreak] Save load failed:", error);
     return false;
   }

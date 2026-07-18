@@ -89,7 +89,8 @@ Last documentation audit: 2026-07-17.
 - Deterministic seeded random-number generation extracted into a focused ES module.
 - Pure item identity, alias, label, and loot-tag lookup extracted into a focused inventory-system module.
 - Inventory entry, ammunition stacking, quantity transfer, and backpack-capacity rules extracted behind state-aware runtime wrappers.
-- Focused Node unit tests protect seeded generation and core item/inventory contracts.
+- Versioned save-payload construction and guarded storage parsing extracted without changing the version 1 schema or Safehouse load behavior.
+- Focused Node unit tests protect seeded generation, core item/inventory contracts, and versioned save serialization/parsing.
 
 The `0.2` architecture work targets only the browser Three.js prototype. Godot migration artifacts are frozen and out of scope unless the user explicitly changes that direction.
 
