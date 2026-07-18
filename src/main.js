@@ -27,6 +27,7 @@ import { normalizeLoadedSaveState } from "./services/saveMigration.js";
 import { createSavePayload as buildSavePayload, readStoredJson } from "./services/savePayload.js";
 import { createInventoryRules } from "./systems/inventory/inventoryRules.js";
 import { createItemLookup } from "./systems/inventory/itemLookup.js";
+import { validateMissionLayout } from "./systems/missions/missionLayoutValidation.js";
 import { createSeededRng } from "./utils/seededRandom.js";
 
 const baseMusic = new Audio(baseThemeUrl);
@@ -8157,18 +8158,6 @@ function chooseEntrance(startRoom, occupied, roomSpan) {
     { side: "north", dx: 0, dz: -1 },
   ];
   return candidates.find((item) => !occupied.has(`${startRoom.gx + item.dx},${startRoom.gz + item.dz}`)) || candidates[0];
-}
-
-function validateMissionLayout(layout) {
-  if (!layout.rooms.every((room) => room.doors.length > 0)) return false;
-  if (!layout.spawn || !layout.rooms[0].exteriorDoor) return false;
-  for (const edge of layout.edges) {
-    if (!edge.locked) continue;
-    if (!edge.keyRoom) return false;
-    if (edge.keyRoom.id === edge.to.id) return false;
-    if (edge.keyRoom.depth >= edge.to.depth) return false;
-  }
-  return layout.edges.length >= layout.rooms.length - 1;
 }
 
 function generateRooms(layout) {

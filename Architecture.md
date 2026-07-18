@@ -92,6 +92,10 @@ Creates the pure item identity and lookup boundary used by the runtime. It resol
 
 Creates the inventory entry, stacking, quantity, and backpack-capacity rules used by the runtime. The module receives item lookup as a dependency and operates on inventory arrays supplied by the caller; active-survivor state and UI side effects remain in `src/main.js`.
 
+### `src/systems/missions/missionLayoutValidation.js`
+
+Owns the behavior-preserving mission-layout checks for room doors, exterior spawn/entrance, locked-door key depth, and minimum tree edge count. The current validator assumes layouts are produced by the parent-child generator; full independent graph-reachability validation is intentionally deferred to a separate behavioral change.
+
 ### `src/services/savePayload.js`
 
 Owns pure versioned save-payload construction and guarded JSON reads from injected browser-like storage. Applying loaded state, character-loadout compatibility, mode transitions, and UI feedback remain in `src/main.js`.

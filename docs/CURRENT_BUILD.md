@@ -91,7 +91,8 @@ Last documentation audit: 2026-07-17.
 - Inventory entry, ammunition stacking, quantity transfer, and backpack-capacity rules extracted behind state-aware runtime wrappers.
 - Versioned save-payload construction and guarded storage parsing extracted without changing the version 1 schema or Safehouse load behavior.
 - Loaded-save normalization extracted with tolerant missing-field defaults, bounds enforcement, upgrade merging, and legacy loadout compatibility injection.
-- Focused Node unit tests protect seeded generation, core item/inventory contracts, and versioned save serialization, parsing, and loaded-state normalization.
+- Mission layout validation extracted without changing procedural generation, spawning, doors, keys, or scene construction.
+- Focused Node unit tests protect seeded generation, core item/inventory contracts, versioned save handling, and current mission-layout validation invariants.
 
 The `0.2` architecture work targets only the browser Three.js prototype. Godot migration artifacts are frozen and out of scope unless the user explicitly changes that direction.
 
