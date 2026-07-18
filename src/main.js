@@ -23,6 +23,7 @@ import ammoPickupSoundTwoUrl from "../assets/audio/ammo_pickup_2.mp3";
 import abandonedHouseMusicUrl from "../assets/audio/abandoned_house.mp3";
 import { ITEM_ALIASES, ITEM_DATABASE } from "./data/itemDatabase.js";
 import { HOUSE_MISSION_TEMPLATES } from "./data/houseMissionTemplates.js";
+import { normalizeLoadedSaveState } from "./services/saveMigration.js";
 import { createSavePayload as buildSavePayload, readStoredJson } from "./services/savePayload.js";
 import { createInventoryRules } from "./systems/inventory/inventoryRules.js";
 import { createItemLookup } from "./systems/inventory/itemLookup.js";
@@ -1541,16 +1542,13 @@ function loadSavedGame() {
   if (!payload || !payload.state) return false;
 
   const saved = payload.state;
-  state.mode = "base";
-  state.character = getCharacterProfile(saved.character).id;
-  state.health = Number.isFinite(saved.health) ? THREE.MathUtils.clamp(saved.health, 1, 100) : state.health;
-  state.keys = Number.isFinite(saved.keys) ? Math.max(0, saved.keys) : 0;
-  state.runSeed = Number.isFinite(saved.runSeed) ? saved.runSeed >>> 0 : state.runSeed;
-  state.characterLoadouts = normalizeCharacterLoadouts(saved.characterLoadouts, saved);
+  Object.assign(state, normalizeLoadedSaveState({
+    saved,
+    currentState: state,
+    resolveCharacterId: (characterId) => getCharacterProfile(characterId).id,
+    normalizeCharacterLoadouts,
+  }));
   syncActiveCharacterLoadout();
-  state.stash = Array.isArray(saved.stash) ? saved.stash : state.stash;
-  state.upgrades = { ...state.upgrades, ...(saved.upgrades || {}) };
-  state.activeLocation = null;
   playerAnimationClips = getCharacterProfile(state.character).animations;
   rng = createSeededRng(state.runSeed);
   return true;

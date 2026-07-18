@@ -96,6 +96,10 @@ Creates the inventory entry, stacking, quantity, and backpack-capacity rules use
 
 Owns pure versioned save-payload construction and guarded JSON reads from injected browser-like storage. Applying loaded state, character-loadout compatibility, mode transitions, and UI feedback remain in `src/main.js`.
 
+### `src/services/saveMigration.js`
+
+Normalizes loaded save fields into a Safehouse-ready state patch with tolerant defaults, health/key bounds, unsigned run seeds, merged upgrades, and injected character/loadout compatibility. Applying the patch and resynchronizing active loadout references remain runtime responsibilities.
+
 ### `src/utils/seededRandom.js`
 
 Exports the deterministic seeded random-number generator used by the runtime. Random selection helpers remain in `src/main.js` so mission generation order and behavior are unchanged during this first modularization step.
