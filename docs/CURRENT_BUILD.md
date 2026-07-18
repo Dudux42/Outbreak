@@ -93,7 +93,8 @@ Last documentation audit: 2026-07-17.
 - Loaded-save normalization extracted with tolerant missing-field defaults, bounds enforcement, upgrade merging, and legacy loadout compatibility injection.
 - Mission layout validation extracted without changing procedural generation, spawning, doors, keys, or scene construction.
 - Procedural non-handcrafted room-graph generation extracted behind injected random/vector dependencies; scene construction remains in the runtime.
-- Focused Node unit tests protect seeded generation, core item/inventory contracts, versioned save handling, and mission-layout generation/validation invariants.
+- Handcrafted house-template layout construction extracted behind an injected vector factory; furniture, loot, and scene construction remain in the runtime.
+- Focused Node unit tests protect seeded generation, core item/inventory contracts, versioned save handling, and procedural/handcrafted mission-layout invariants.
 
 The `0.2` architecture work targets only the browser Three.js prototype. Godot migration artifacts are frozen and out of scope unless the user explicitly changes that direction.
 

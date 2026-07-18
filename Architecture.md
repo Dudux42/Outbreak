@@ -100,6 +100,10 @@ Owns the behavior-preserving mission-layout checks for room doors, exterior spaw
 
 Builds non-handcrafted room graphs, doors/edges, locked-door key assignments, exterior entrance, spawn coordinates, and bounds from injected location and random-selection dependencies. It returns data only; Three.js scene construction remains in `src/main.js`.
 
+### `src/systems/missions/handcraftedMissionLayout.js`
+
+Builds a selected house template into rooms, connected edges, breadth-first room depths, entrance/spawn data, bounds, and template metadata. It returns data only; furniture, loot sockets, and scene construction remain in `src/main.js`.
+
 ### `src/services/savePayload.js`
 
 Owns pure versioned save-payload construction and guarded JSON reads from injected browser-like storage. Applying loaded state, character-loadout compatibility, mode transitions, and UI feedback remain in `src/main.js`.
