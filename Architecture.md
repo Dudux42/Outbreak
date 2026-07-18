@@ -96,6 +96,10 @@ Creates the inventory entry, stacking, quantity, and backpack-capacity rules use
 
 Owns the behavior-preserving mission-layout checks for room doors, exterior spawn/entrance, locked-door key depth, and minimum tree edge count. The current validator assumes layouts are produced by the parent-child generator; full independent graph-reachability validation is intentionally deferred to a separate behavioral change.
 
+### `src/systems/missions/proceduralMissionLayout.js`
+
+Builds non-handcrafted room graphs, doors/edges, locked-door key assignments, exterior entrance, spawn coordinates, and bounds from injected location and random-selection dependencies. It returns data only; Three.js scene construction remains in `src/main.js`.
+
 ### `src/services/savePayload.js`
 
 Owns pure versioned save-payload construction and guarded JSON reads from injected browser-like storage. Applying loaded state, character-loadout compatibility, mode transitions, and UI feedback remain in `src/main.js`.

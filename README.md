@@ -119,6 +119,7 @@ src/
   systems/inventory/inventoryRules.js  Inventory entry, stacking, and capacity rules
   systems/inventory/itemLookup.js  Pure item identity and lookup helpers
   systems/missions/missionLayoutValidation.js  Mission layout invariant checks
+  systems/missions/proceduralMissionLayout.js  Procedural room graph and spawn data
   utils/seededRandom.js     Deterministic seeded random-number generator
   main.js                   Current runtime, gameplay, UI, scene, and state logic
   styles.css                Browser UI styling
