@@ -115,6 +115,7 @@ src/
   data/itemDatabase.js      Broad item registry, aliases, tags, and item metadata
   data/houseMissionTemplates.js  Handcrafted house layouts and spawn sockets
   data/animationDatabase.js  Player and enemy sprite-sheet clip registries
+  data/locationDatabase.js  Playable locations and surveyed map sites
   services/saveMigration.js  Tolerant loaded-save normalization
   services/savePayload.js   Versioned save serialization and guarded storage reads
   systems/inventory/inventoryRules.js  Inventory entry, stacking, and capacity rules
