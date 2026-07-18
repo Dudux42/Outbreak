@@ -88,6 +88,10 @@ Exports four handcrafted house graphs. Each template defines:
 
 Creates the pure item identity and lookup boundary used by the runtime. It resolves canonical IDs, compatibility aliases, and player-facing labels without importing global state, and filters database items by container loot tag.
 
+### `src/systems/inventory/inventoryRules.js`
+
+Creates the inventory entry, stacking, quantity, and backpack-capacity rules used by the runtime. The module receives item lookup as a dependency and operates on inventory arrays supplied by the caller; active-survivor state and UI side effects remain in `src/main.js`.
+
 ### `src/utils/seededRandom.js`
 
 Exports the deterministic seeded random-number generator used by the runtime. Random selection helpers remain in `src/main.js` so mission generation order and behavior are unchanged during this first modularization step.

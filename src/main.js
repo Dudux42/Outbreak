@@ -23,6 +23,7 @@ import ammoPickupSoundTwoUrl from "../assets/audio/ammo_pickup_2.mp3";
 import abandonedHouseMusicUrl from "../assets/audio/abandoned_house.mp3";
 import { ITEM_ALIASES, ITEM_DATABASE } from "./data/itemDatabase.js";
 import { HOUSE_MISSION_TEMPLATES } from "./data/houseMissionTemplates.js";
+import { createInventoryRules } from "./systems/inventory/inventoryRules.js";
 import { createItemLookup } from "./systems/inventory/itemLookup.js";
 import { createSeededRng } from "./utils/seededRandom.js";
 
@@ -783,6 +784,22 @@ const {
   itemAliases: ITEM_ALIASES,
 });
 
+const {
+  addInventoryQuantity: addInventoryQuantityByRules,
+  cloneInventoryEntries,
+  getAvailableInventorySpaceForItem: getAvailableInventorySpaceByRules,
+  getInventoryCapacityForEquipment,
+  getInventoryEntryName,
+  getInventoryEntryQty,
+  isAmmoItem,
+  isStackableInventoryItem,
+  makeInventoryEntry,
+} = createInventoryRules({
+  getItem,
+  defaultCapacity: 6,
+  defaultStackLimit: AMMO_STACK_LIMIT,
+});
+
 function makeDefaultMagazines(overrides = {}) {
   return {
     Handgun: 15,
@@ -791,12 +808,6 @@ function makeDefaultMagazines(overrides = {}) {
     "assault rifle": 0,
     ...overrides,
   };
-}
-
-function cloneInventoryEntries(entries = []) {
-  return entries
-    .filter(Boolean)
-    .map((entry) => (typeof entry === "string" ? entry : { name: entry.name, qty: entry.qty }));
 }
 
 function makeCharacterLoadout({
@@ -6757,7 +6768,7 @@ function renderRestProfileInventory(loadout) {
 }
 
 function getLoadoutInventoryCapacity(loadout) {
-  return getItem(loadout.equipment.backpack).slots || 6;
+  return getInventoryCapacityForEquipment(loadout.equipment);
 }
 
 function renderMapPanel() {
@@ -7644,26 +7655,6 @@ function formatUpgradeCost(cost) {
   return `${cost.qty} ${cost.item}`;
 }
 
-function makeInventoryEntry(itemName, qty = 1) {
-  return isStackableInventoryItem(itemName) ? { name: itemName, qty } : itemName;
-}
-
-function getInventoryEntryName(entry) {
-  return typeof entry === "string" ? entry : entry?.name;
-}
-
-function getInventoryEntryQty(entry) {
-  return typeof entry === "string" ? 1 : entry?.qty || 0;
-}
-
-function isAmmoItem(itemName) {
-  return Boolean(getItem(itemName).ammoType && getItem(itemName).stackLimit);
-}
-
-function isStackableInventoryItem(itemName) {
-  return isAmmoItem(itemName);
-}
-
 function getInventoryAmmoCount(ammoType) {
   return state.inventory.reduce((total, entry) => {
     const itemName = getInventoryEntryName(entry);
@@ -7789,41 +7780,11 @@ function addItemToInventory(itemName, qty = 1) {
 }
 
 function addInventoryQuantity(itemName, qty = 1) {
-  let remaining = qty;
-  if (isStackableInventoryItem(itemName)) {
-    for (const entry of state.inventory) {
-      if (remaining <= 0) break;
-      if (getInventoryEntryName(entry) !== itemName || typeof entry === "string") continue;
-      const limit = getItem(itemName).stackLimit || AMMO_STACK_LIMIT;
-      const room = limit - entry.qty;
-      if (room <= 0) continue;
-      const added = Math.min(room, remaining);
-      entry.qty += added;
-      remaining -= added;
-    }
-  }
-
-  while (remaining > 0 && state.inventory.length < getInventoryCapacity()) {
-    if (isStackableInventoryItem(itemName)) {
-      const added = Math.min(getItem(itemName).stackLimit || AMMO_STACK_LIMIT, remaining);
-      state.inventory.push(makeInventoryEntry(itemName, added));
-      remaining -= added;
-    } else {
-      state.inventory.push(itemName);
-      remaining -= 1;
-    }
-  }
-
-  return qty - remaining;
+  return addInventoryQuantityByRules(state.inventory, itemName, qty, getInventoryCapacity());
 }
 
 function getAvailableInventorySpaceForItem(itemName) {
-  if (!isStackableInventoryItem(itemName)) return getInventoryCapacity() - state.inventory.length;
-  const stackRoom = state.inventory.reduce((total, entry) => {
-    if (getInventoryEntryName(entry) !== itemName || typeof entry === "string") return total;
-    return total + Math.max(0, (getItem(itemName).stackLimit || AMMO_STACK_LIMIT) - entry.qty);
-  }, 0);
-  return stackRoom + Math.max(0, getInventoryCapacity() - state.inventory.length) * (getItem(itemName).stackLimit || AMMO_STACK_LIMIT);
+  return getAvailableInventorySpaceByRules(state.inventory, itemName, getInventoryCapacity());
 }
 
 function trimInventoryToCapacity() {
@@ -7854,7 +7815,7 @@ function showInventoryHint(text) {
 }
 
 function getInventoryCapacity() {
-  return getItem(state.equipment.backpack).slots || 6;
+  return getInventoryCapacityForEquipment(state.equipment);
 }
 
 function getArmorClass() {
