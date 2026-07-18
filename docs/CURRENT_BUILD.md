@@ -43,7 +43,7 @@ Last documentation audit: 2026-07-17.
 - Item box stash transfers.
 - Loot-container search delay, per-item reveal, and transfers.
 - Broad item database, aliases, loot tags, runtime weapon/armor/backpack stats, and extended metadata for food, drinks, medical supplies, tools, and construction resources.
-- Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, construction-resource, and technical-electronics icons through the power supply unit.
+- Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, construction-resource, and technical-electronics icons through the magnet.
 
 ### Missions
 

@@ -13,6 +13,7 @@ The player does not directly control a survivor in the safehouse. Survivor sprit
 Station panels:
 
 - Item Box: stash and loadout transfer, storage upgrade.
+- New-game Item Boxes begin with one of every catalog item except mission keys; pre-stocked item quantities are preserved rather than duplicated.
 - Workbench: craft presentation and upgrade.
 - Medical Unit: healing actions and upgrade.
 - Intel Center: bonuses, upgrade, and no-cost save.

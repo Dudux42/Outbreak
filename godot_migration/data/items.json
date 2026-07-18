@@ -911,6 +911,24 @@
     ],
     "icon": "res://assets/items/wifi_camera_v2.png"
   },
+  "light bulb": {
+    "id": "light bulb",
+    "label": "Light Bulb",
+    "texture": "lightBulb",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/light_bulb.png"
+  },
+  "magnet": {
+    "id": "magnet",
+    "label": "Magnet",
+    "texture": "magnet",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/magnet.png"
+  },
   "small backpack": {
     "id": "small backpack",
     "slot": "backpack",

@@ -603,6 +603,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/light_bulb.png",
+    "source_path": "assets/items/light_bulb.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18646,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/mac_n_cheese_box.png",
     "source_path": "assets/items/mac_n_cheese_box.png",
     "category": "item_icon",
@@ -617,6 +626,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 22785,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/magnet.png",
+    "source_path": "assets/items/magnet.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17985,
     "width": 128,
     "height": 128
   },
@@ -1336,7 +1354,7 @@
     "source_path": "assets/map_templates/manifest.json",
     "category": "source_or_reference",
     "type": "json",
-    "bytes": 2808,
+    "bytes": 2704,
     "width": null,
     "height": null
   },

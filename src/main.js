@@ -743,6 +743,8 @@ const itemCatalog = {
   processor: { label: "Processor", texture: "processor", tags: ["Base Technical"] },
   motherboard: { label: "Motherboard", texture: "motherboard", tags: ["Base Technical"] },
   "power supply unit": { label: "Power Supply Unit", texture: "powerSupplyUnit", tags: ["Base Technical"] },
+  "light bulb": { label: "Light Bulb", texture: "lightBulb", tags: ["Base Technical"] },
+  magnet: { label: "Magnet", texture: "magnet", tags: ["Base Technical"] },
   "small backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Small Backpack", texture: "simpleBackpack", tags: ["Equipment"], slots: 6 },
   "medium backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Medium Backpack", texture: "mediumBackpack", tags: ["Equipment"], slots: 8 },
   "large backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Large Backpack", texture: "largeBackpack", tags: ["Equipment"], slots: 10 },
@@ -915,7 +917,7 @@ function updateVolumeSetting(settingKey, input, output) {
 }
 
 function makeInitialStash() {
-  return [
+  const stash = [
     { name: "bandage", qty: 2 },
     { name: "handgun ammo", qty: 30 },
     { name: "shotgun shells", qty: 6 },
@@ -923,6 +925,16 @@ function makeInitialStash() {
     { name: "axe", qty: 1 },
     { name: "Gears", qty: 3 },
   ];
+  const stockedItemLabels = new Set(stash.map((entry) => getItemLabel(entry.name).toLowerCase()));
+
+  for (const itemId of Object.keys(itemCatalog)) {
+    const itemLabel = getItemLabel(itemId).toLowerCase();
+    if (itemLabel === "key" || stockedItemLabels.has(itemLabel)) continue;
+    stash.push({ name: itemId, qty: 1 });
+    stockedItemLabels.add(itemLabel);
+  }
+
+  return stash;
 }
 
 const state = {
@@ -1248,6 +1260,8 @@ const itemTexturePaths = {
   processor: "./assets/items/processor_v2.png",
   motherboard: "./assets/items/motherboard_v2.png",
   powerSupplyUnit: "./assets/items/power_supply_unit_v2.png",
+  lightBulb: "./assets/items/light_bulb.png",
+  magnet: "./assets/items/magnet.png",
   kitchenKnife: "./assets/items/kitchen_knife.png",
   bandages: "./assets/items/bandages.png",
   militaryBandage: "./assets/items/military_bandage_v2.png",
