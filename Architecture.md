@@ -84,6 +84,10 @@ Exports four handcrafted house graphs. Each template defines:
 - Probabilistic container sockets.
 - Probabilistic loose-loot sockets.
 
+### `src/data/animationDatabase.js`
+
+Owns the shared animation-direction list, player sprite-sheet clip registries, and enemy animation templates. Texture loading and runtime animation wiring remain in `src/main.js`; clip playback state remains in `src/systems/player/spriteSheetAnimator.js`.
+
 ### `src/systems/inventory/itemLookup.js`
 
 Creates the pure item identity and lookup boundary used by the runtime. It resolves canonical IDs, compatibility aliases, and player-facing labels without importing global state, and filters database items by container loot tag.
