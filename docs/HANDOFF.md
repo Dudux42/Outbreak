@@ -17,7 +17,8 @@ This file is the shortest path for a new chat or contributor to begin useful wor
 - Item data is split between `ITEM_DATABASE` and runtime `itemCatalog`.
 - House layouts are the main extracted mission-data module.
 - Godot files are migration preparation, not the active runtime.
-- Automated tests currently cover only the extracted seeded random-number generator; gameplay still requires focused browser verification.
+- During `0.2` architecture work, do not update, regenerate, or modify `godot_migration/` unless the user explicitly changes the scope.
+- Automated tests currently cover the extracted seeded random-number generator and item lookup helpers; gameplay still requires focused browser verification.
 - `output/` is local/untracked and should normally remain out of commits.
 
 ## Before Editing

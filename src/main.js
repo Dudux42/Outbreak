@@ -23,6 +23,7 @@ import ammoPickupSoundTwoUrl from "../assets/audio/ammo_pickup_2.mp3";
 import abandonedHouseMusicUrl from "../assets/audio/abandoned_house.mp3";
 import { ITEM_ALIASES, ITEM_DATABASE } from "./data/itemDatabase.js";
 import { HOUSE_MISSION_TEMPLATES } from "./data/houseMissionTemplates.js";
+import { createItemLookup } from "./systems/inventory/itemLookup.js";
 import { createSeededRng } from "./utils/seededRandom.js";
 
 const baseMusic = new Audio(baseThemeUrl);
@@ -760,10 +761,6 @@ const itemCatalog = {
   Key: { label: "Key", texture: "key", tags: ["Key"] },
 };
 
-const itemIdsByLabel = Object.freeze(Object.fromEntries(
-  Object.values(ITEM_DATABASE).map((item) => [item.label, item.id])
-));
-
 for (const [itemId, databaseItem] of Object.entries(ITEM_DATABASE)) {
   const gameplayItem = itemCatalog[itemId] || {};
   itemCatalog[itemId] = {
@@ -774,6 +771,17 @@ for (const [itemId, databaseItem] of Object.entries(ITEM_DATABASE)) {
     tags: gameplayItem.tags || [],
   };
 }
+
+const {
+  getItem,
+  getItemIdsByLootTag,
+  getItemLabel,
+  resolveItemId,
+} = createItemLookup({
+  itemCatalog,
+  itemDatabase: ITEM_DATABASE,
+  itemAliases: ITEM_ALIASES,
+});
 
 function makeDefaultMagazines(overrides = {}) {
   return {
@@ -7851,27 +7859,6 @@ function getInventoryCapacity() {
 
 function getArmorClass() {
   return getItem(state.equipment.armor).armorClass || 1;
-}
-
-function getItem(itemName) {
-  const itemId = resolveItemId(itemName);
-  return itemCatalog[itemId] || { label: itemName };
-}
-
-function resolveItemId(itemName) {
-  if (itemCatalog[itemName]) return itemName;
-  return ITEM_ALIASES[itemName] || itemIdsByLabel[itemName] || itemName;
-}
-
-function getItemIdsByLootTag(lootTag) {
-  return Object.values(ITEM_DATABASE)
-    .filter((item) => item.containerEligible && item.lootTags.includes(lootTag))
-    .map((item) => item.id);
-}
-
-function getItemLabel(itemName) {
-  if (!itemName) return "Empty";
-  return getItem(itemName).label || itemName;
 }
 
 function getEquipmentSlotLabel(slot) {

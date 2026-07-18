@@ -87,7 +87,10 @@ Last documentation audit: 2026-07-17.
 ### Architecture
 
 - Deterministic seeded random-number generation extracted into a focused ES module.
-- Focused Node unit tests protect the seeded generator's exact output contract.
+- Pure item identity, alias, label, and loot-tag lookup extracted into a focused inventory-system module.
+- Focused Node unit tests protect seeded generation and item identity/lookup contracts.
+
+The `0.2` architecture work targets only the browser Three.js prototype. Godot migration artifacts are frozen and out of scope unless the user explicitly changes that direction.
 
 ## Partial or Placeholder
 

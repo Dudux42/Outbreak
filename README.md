@@ -114,6 +114,7 @@ godot_migration/            Generated migration data and Godot planning scaffold
 src/
   data/itemDatabase.js      Broad item registry, aliases, tags, and item metadata
   data/houseMissionTemplates.js  Handcrafted house layouts and spawn sockets
+  systems/inventory/itemLookup.js  Pure item identity and lookup helpers
   utils/seededRandom.js     Deterministic seeded random-number generator
   main.js                   Current runtime, gameplay, UI, scene, and state logic
   styles.css                Browser UI styling
@@ -133,6 +134,7 @@ Generated `dist/`, dependency `node_modules/`, temporary `tmp/`, and local `outp
 - New hunger, thirst, rarity, and consumable metadata is not yet fully connected to gameplay. Do not describe data-only effects as working mechanics.
 - Save data uses browser `localStorage` under `outbreak.save.v1`. Settings use `outbreak.settings.v1`.
 - Assets are loaded from `assets/`; sprite sheets use nearest-neighbor filtering and chroma-keyed transparency.
+- Godot migration artifacts are out of scope for the `0.2` architecture work and should not be regenerated or modified unless that scope is explicitly changed.
 - All inventory icon work must follow [ITEM_ICON_STYLE_GUIDE.md](ITEM_ICON_STYLE_GUIDE.md).
 - Do not overwrite approved custom art or source GIFs unless the task explicitly asks for replacement.
 - The external post-apocalyptic UI pack was used as visual reference. Its supplied PNG elements remain reference-only unless the user explicitly requests direct use.

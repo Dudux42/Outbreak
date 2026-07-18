@@ -84,6 +84,10 @@ Exports four handcrafted house graphs. Each template defines:
 - Probabilistic container sockets.
 - Probabilistic loose-loot sockets.
 
+### `src/systems/inventory/itemLookup.js`
+
+Creates the pure item identity and lookup boundary used by the runtime. It resolves canonical IDs, compatibility aliases, and player-facing labels without importing global state, and filters database items by container loot tag.
+
 ### `src/utils/seededRandom.js`
 
 Exports the deterministic seeded random-number generator used by the runtime. Random selection helpers remain in `src/main.js` so mission generation order and behavior are unchanged during this first modularization step.
@@ -227,6 +231,8 @@ Audio uses browser `Audio` elements rather than Three.js positional audio. Music
 ## Godot Migration Boundary
 
 `tools/export_godot_data.mjs` reads current JavaScript data and writes JSON under `godot_migration/data/`. The generated JSON is a migration artifact, not the browser runtime source of truth.
+
+Godot migration is explicitly out of scope for the `0.2` architecture work. Do not update, regenerate, or modify `godot_migration/` unless the user explicitly changes that scope.
 
 Do not port `src/main.js` line by line. The Godot plan treats current player-facing behavior and data as the specification while rebuilding scenes, signals, resources, collision, UI, and animation natively.
 

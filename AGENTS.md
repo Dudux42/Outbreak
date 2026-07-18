@@ -26,6 +26,12 @@ Outbreak is a browser-based isometric zombie survival prototype built with Vite 
 - `godot_migration/`: migration artifacts and future Godot implementation plan.
 - `docs/`: design, current-state, systems, pipeline, and handoff documentation.
 
+## 0.2 Development Scope
+
+- The active `0.2` work focuses on the browser-based Three.js prototype and its incremental architecture modularization.
+- Do not update, regenerate, or otherwise touch `godot_migration/` during `0.2` work unless the user explicitly reintroduces Godot migration into scope.
+- Existing local modifications under `godot_migration/` are out of scope and must remain untouched.
+
 Do not edit generated `dist/`, dependency `node_modules/`, temporary `tmp/`, or local `output/` content by hand. Do not commit `output/` unless the user explicitly requests those artifacts.
 
 ## Product Truths
