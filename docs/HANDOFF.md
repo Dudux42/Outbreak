@@ -15,10 +15,10 @@ This file is the shortest path for a new chat or contributor to begin useful wor
 - The active product is the browser Three.js prototype.
 - `src/main.js` owns most runtime behavior.
 - Item data is split between `ITEM_DATABASE` and runtime `itemCatalog`.
-- House layouts and location/map registries are extracted mission-data modules.
+- House layouts, location/map registries, and the survivor roster are extracted data modules.
 - Godot files are migration preparation, not the active runtime.
 - During `0.2` architecture work, do not update, regenerate, or modify `godot_migration/` unless the user explicitly changes the scope.
-- Automated tests currently cover seeded random generation, core item/inventory rules, save handling, procedural/handcrafted mission-layout invariants, player action-state selectors, animation clip selection, sprite-sheet animator behavior, animation database contracts, and location database contracts; gameplay still requires focused browser verification.
+- Automated tests currently cover seeded random generation, core item/inventory rules, save handling, procedural/handcrafted mission-layout invariants, player action-state selectors, animation clip selection, sprite-sheet animator behavior, animation database contracts, location database contracts, and character database contracts; gameplay still requires focused browser verification.
 - `output/` is local/untracked and should normally remain out of commits.
 
 ## Before Editing

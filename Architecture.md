@@ -49,7 +49,7 @@ The main module currently owns:
 
 - Audio creation and playback.
 - DOM queries and UI event wiring.
-- Constants, character profiles, enemy types, and runtime item stats.
+- Constants, enemy types, and runtime item stats.
 - Global game state and browser persistence.
 - Three.js renderer, scenes, camera, lights, materials, meshes, and sprites.
 - Safehouse construction, stations, autonomous survivor movement, and navigation graph.
@@ -91,6 +91,10 @@ Owns the shared animation-direction list, player sprite-sheet clip registries, a
 ### `src/data/locationDatabase.js`
 
 Owns the playable location registry, map category labels, and surveyed-but-not-yet-playable map sites. Availability checks, map rendering, and mission startup remain in `src/main.js`.
+
+### `src/data/characterDatabase.js`
+
+Owns survivor profile metadata, animation-set references, portrait bindings supplied by the runtime, and the active/future character roster. Character switching, loadout synchronization, and save compatibility remain in `src/main.js`.
 
 ### `src/systems/inventory/itemLookup.js`
 

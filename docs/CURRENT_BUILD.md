@@ -97,7 +97,8 @@ Last documentation audit: 2026-07-17.
 - Player action vocabulary/configuration and pure locomotion selectors extracted; runtime action mutation and sprite playback remain in `main.js`.
 - Player and enemy animation clip registries extracted into `src/data/animationDatabase.js`; texture loading and runtime wiring remain in `main.js`.
 - Playable location definitions, map category labels, and surveyed map sites extracted into `src/data/locationDatabase.js`; map rendering and availability checks remain in `main.js`.
-- Focused Node unit tests protect seeded generation, core item/inventory contracts, versioned save handling, procedural/handcrafted mission-layout invariants, player action-state selectors, animation clip selection, sprite-sheet animator behavior, and animation database contracts.
+- Survivor profiles and active/future character roster extracted into `src/data/characterDatabase.js`; runtime portrait asset binding and character switching remain in `main.js`.
+- Focused Node unit tests protect seeded generation, core item/inventory contracts, versioned save handling, procedural/handcrafted mission-layout invariants, player action-state selectors, animation clip selection, sprite-sheet animator behavior, animation database contracts, and character database contracts.
 
 The `0.2` architecture work targets only the browser Three.js prototype. Godot migration artifacts are frozen and out of scope unless the user explicitly changes that direction.
 

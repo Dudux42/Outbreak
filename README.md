@@ -116,6 +116,7 @@ src/
   data/houseMissionTemplates.js  Handcrafted house layouts and spawn sockets
   data/animationDatabase.js  Player and enemy sprite-sheet clip registries
   data/locationDatabase.js  Playable locations and surveyed map sites
+  data/characterDatabase.js  Survivor profiles and active/future roster
   services/saveMigration.js  Tolerant loaded-save normalization
   services/savePayload.js   Versioned save serialization and guarded storage reads
   systems/inventory/inventoryRules.js  Inventory entry, stacking, and capacity rules
