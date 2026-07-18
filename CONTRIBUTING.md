@@ -30,6 +30,12 @@ npm run build
 npm run preview
 ```
 
+Run the available focused unit tests:
+
+```bash
+npm test
+```
+
 ## Working Agreement
 
 - Keep each change focused on one coherent outcome.

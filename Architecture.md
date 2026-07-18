@@ -84,6 +84,10 @@ Exports four handcrafted house graphs. Each template defines:
 - Probabilistic container sockets.
 - Probabilistic loose-loot sockets.
 
+### `src/utils/seededRandom.js`
+
+Exports the deterministic seeded random-number generator used by the runtime. Random selection helpers remain in `src/main.js` so mission generation order and behavior are unchanged during this first modularization step.
+
 ### `src/styles.css` and `index.html`
 
 `index.html` is the stable DOM contract for all HUDs, panels, and modals. `src/styles.css` owns presentation, responsive behavior, and the charcoal/gunmetal/rust UI language. JavaScript commonly renders station and inventory contents with HTML templates, so class names are a contract between the files.
@@ -231,7 +235,7 @@ Do not port `src/main.js` line by line. The Godot plan treats current player-fac
 - `src/main.js` has broad ownership and a large regression surface.
 - Runtime items are split between two data layers.
 - DOM templates and CSS classes are coupled by string names.
-- No automated tests currently protect generation, inventory, or save migration.
+- Automated coverage is currently limited to the extracted seeded random-number generator; generation, inventory, and save migration still lack regression tests.
 - Many assets are imported by string paths, so broken paths are found at runtime.
 - Some action states use temporary clip fallbacks.
 - Generated Godot data can drift if the exporter is not rerun.
@@ -240,7 +244,7 @@ Do not port `src/main.js` line by line. The Godot plan treats current player-fac
 
 When modularization is explicitly requested, extract in this order:
 
-1. Pure item normalization and inventory helpers.
+1. Pure utilities, item normalization, and inventory helpers.
 2. Save payload and migration helpers.
 3. Mission layout generation and validation.
 4. Animation clip definitions and action-state selection.

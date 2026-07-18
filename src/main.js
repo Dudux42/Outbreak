@@ -23,6 +23,7 @@ import ammoPickupSoundTwoUrl from "../assets/audio/ammo_pickup_2.mp3";
 import abandonedHouseMusicUrl from "../assets/audio/abandoned_house.mp3";
 import { ITEM_ALIASES, ITEM_DATABASE } from "./data/itemDatabase.js";
 import { HOUSE_MISSION_TEMPLATES } from "./data/houseMissionTemplates.js";
+import { createSeededRng } from "./utils/seededRandom.js";
 
 const baseMusic = new Audio(baseThemeUrl);
 baseMusic.loop = true;
@@ -10304,15 +10305,4 @@ function shuffle(list) {
 
 function random() {
   return rng();
-}
-
-function createSeededRng(seed) {
-  let value = seed >>> 0;
-  return () => {
-    value += 0x6d2b79f5;
-    let next = value;
-    next = Math.imul(next ^ (next >>> 15), next | 1);
-    next ^= next + Math.imul(next ^ (next >>> 7), next | 61);
-    return ((next ^ (next >>> 14)) >>> 0) / 4294967296;
-  };
 }

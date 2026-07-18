@@ -56,7 +56,13 @@ npm run build
 npm run preview
 ```
 
-There is no automated test suite yet. `npm run build` plus focused browser verification is the minimum acceptance check.
+Run the available focused unit tests:
+
+```bash
+npm test
+```
+
+Automated coverage is still limited. `npm run build` plus focused browser verification remains the minimum acceptance check for gameplay changes.
 
 ## Controls
 
@@ -108,9 +114,11 @@ godot_migration/            Generated migration data and Godot planning scaffold
 src/
   data/itemDatabase.js      Broad item registry, aliases, tags, and item metadata
   data/houseMissionTemplates.js  Handcrafted house layouts and spawn sockets
+  utils/seededRandom.js     Deterministic seeded random-number generator
   main.js                   Current runtime, gameplay, UI, scene, and state logic
   styles.css                Browser UI styling
   vendor/three.module.js    Three.js module used by the runtime
+tests/                      Focused Node unit tests for extracted pure modules
 tools/                      Sprite, portrait, texture, and migration-data builders
 index.html                  DOM shell for canvas, HUDs, panels, and modals
 vite.config.js              Development and production asset handling

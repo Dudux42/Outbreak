@@ -84,6 +84,11 @@ Last documentation audit: 2026-07-17.
 - Native procedural wooden supply crate with dedicated albedo, bump, and roughness maps.
 - Godot migration exporter and generated JSON data.
 
+### Architecture
+
+- Deterministic seeded random-number generation extracted into a focused ES module.
+- Focused Node unit tests protect the seeded generator's exact output contract.
+
 ## Partial or Placeholder
 
 ### Animation Coverage
@@ -151,7 +156,7 @@ Last documentation audit: 2026-07-17.
 
 - `src/main.js` is large and tightly coupled.
 - Item behavior is split between database and runtime catalog layers.
-- No test suite catches regressions automatically.
+- Automated coverage is minimal and does not yet protect inventory, missions, save migration, or browser integration.
 - Generated Godot JSON can drift.
 - String asset paths can fail only at runtime.
 - Some UI and animation behavior depends on fallback content.
