@@ -121,6 +121,7 @@ src/
   systems/missions/handcraftedMissionLayout.js  Handcrafted house layout data
   systems/missions/missionLayoutValidation.js  Mission layout invariant checks
   systems/missions/proceduralMissionLayout.js  Procedural room graph and spawn data
+  systems/player/playerActionState.js  Player action states and pure animation selectors
   utils/seededRandom.js     Deterministic seeded random-number generator
   main.js                   Current runtime, gameplay, UI, scene, and state logic
   styles.css                Browser UI styling
