@@ -39,6 +39,10 @@ import {
   getPlayerActionConfig,
   shouldAdvanceActionByDistance,
 } from "./systems/player/playerActionState.js";
+import {
+  getPlayerAnimationClipName,
+  getPlayerAnimationDuration,
+} from "./systems/player/playerAnimationSelection.js";
 import { createSeededRng } from "./utils/seededRandom.js";
 
 const baseMusic = new Audio(baseThemeUrl);
@@ -9154,21 +9158,16 @@ function isPlayerInTerminalAction() {
 }
 
 function getClipForPlayerAction(stateName, facing, options = {}) {
-  const direction = DIRECTIONS.includes(facing) ? facing : "south";
-  if (stateName === PLAYER_ACTION_STATES.AIM) {
-    const heldItem = options.heldItem || getQuickbarItem();
-    const stance = getAimAnimationStance(heldItem);
-    const locomotion = options.isMoving ? "walk" : "idle";
-    const aimClip = `aim_${stance}_${locomotion}_${direction}`;
-    if (playerAnimator?.hasClip(aimClip)) return aimClip;
-
-    const locomotionFallback = `${locomotion}_${direction}`;
-    return playerAnimator?.hasClip(locomotionFallback) ? locomotionFallback : null;
-  }
-  const clipGroup = ACTION_STATE_CLIP_GROUPS[stateName];
-  if (!clipGroup) return null;
-  const clipName = `${clipGroup}_${direction}`;
-  return playerAnimator?.hasClip(clipName) ? clipName : null;
+  const heldItem = options.heldItem || getQuickbarItem();
+  const clipName = getPlayerAnimationClipName({
+    stateName,
+    facing,
+    directions: DIRECTIONS,
+    availableClips: playerAnimationClips,
+    aimStance: getAimAnimationStance(heldItem),
+    isMoving: options.isMoving,
+  });
+  return clipName && playerAnimator?.hasClip(clipName) ? clipName : null;
 }
 
 function getAimAnimationStance(itemName) {
@@ -9178,11 +9177,13 @@ function getAimAnimationStance(itemName) {
 }
 
 function getActionAnimationDuration(stateName, facing, fallbackDuration) {
-  const direction = DIRECTIONS.includes(facing) ? facing : "south";
-  const clipGroup = ACTION_STATE_CLIP_GROUPS[stateName];
-  const clip = clipGroup ? playerAnimationClips[`${clipGroup}_${direction}`] : null;
-  if (!clip) return fallbackDuration;
-  return clip.frames * clip.frameDuration;
+  return getPlayerAnimationDuration({
+    stateName,
+    facing,
+    directions: DIRECTIONS,
+    animationClips: playerAnimationClips,
+    fallbackDuration,
+  });
 }
 
 function applyPlayerActionAnimation({ stateName, facing, dt, distance }) {

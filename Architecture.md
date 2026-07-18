@@ -108,6 +108,10 @@ Builds a selected house template into rooms, connected edges, breadth-first room
 
 Owns the player action vocabulary, priorities, movement-lock/terminal configuration, locomotion selection, default action state, and pure distance-advance selectors. Runtime state mutation, timers, sprite-sheet loading, and animation playback remain in `src/main.js`.
 
+### `src/systems/player/playerAnimationSelection.js`
+
+Owns pure sprite-clip naming, aim fallback selection, and action-duration calculations. Asset loading and animator mutation remain in `src/main.js`.
+
 ### `src/services/savePayload.js`
 
 Owns pure versioned save-payload construction and guarded JSON reads from injected browser-like storage. Applying loaded state, character-loadout compatibility, mode transitions, and UI feedback remain in `src/main.js`.

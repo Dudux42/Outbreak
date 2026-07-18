@@ -122,6 +122,7 @@ src/
   systems/missions/missionLayoutValidation.js  Mission layout invariant checks
   systems/missions/proceduralMissionLayout.js  Procedural room graph and spawn data
   systems/player/playerActionState.js  Player action states and pure animation selectors
+  systems/player/playerAnimationSelection.js  Player sprite-clip selection and duration helpers
   utils/seededRandom.js     Deterministic seeded random-number generator
   main.js                   Current runtime, gameplay, UI, scene, and state logic
   styles.css                Browser UI styling

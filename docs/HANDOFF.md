@@ -18,7 +18,7 @@ This file is the shortest path for a new chat or contributor to begin useful wor
 - House layouts are the main extracted mission-data module.
 - Godot files are migration preparation, not the active runtime.
 - During `0.2` architecture work, do not update, regenerate, or modify `godot_migration/` unless the user explicitly changes the scope.
-- Automated tests currently cover seeded random generation, core item/inventory rules, save handling, procedural/handcrafted mission-layout invariants, and player action-state selectors; gameplay still requires focused browser verification.
+- Automated tests currently cover seeded random generation, core item/inventory rules, save handling, procedural/handcrafted mission-layout invariants, player action-state selectors, and animation clip selection; gameplay still requires focused browser verification.
 - `output/` is local/untracked and should normally remain out of commits.
 
 ## Before Editing
