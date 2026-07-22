@@ -929,6 +929,645 @@
     ],
     "icon": "res://assets/items/magnet.png"
   },
+  "hard drive": {
+    "id": "hard drive",
+    "label": "Hard Drive",
+    "texture": "hardDrive",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/hard_drive_v2.png"
+  },
+  "ssd drive": {
+    "id": "ssd drive",
+    "label": "SSD Drive",
+    "texture": "ssdDrive",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/ssd_drive_v2.png"
+  },
+  "mouse": {
+    "id": "mouse",
+    "label": "Mouse",
+    "texture": "mouse",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/mouse_v3.png"
+  },
+  "keyboard": {
+    "id": "keyboard",
+    "label": "Keyboard",
+    "texture": "keyboard",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/keyboard_v5.png"
+  },
+  "power bank": {
+    "id": "power bank",
+    "label": "Power Bank",
+    "texture": "powerBank",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/power_bank_v3.png"
+  },
+  "led light bulb": {
+    "id": "led light bulb",
+    "label": "LED Light Bulb",
+    "texture": "ledLightBulb",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/led_light_bulb_v2.png"
+  },
+  "t-shaped plug": {
+    "id": "t-shaped plug",
+    "label": "T-Shaped Plug",
+    "texture": "tShapedPlug",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/t_shaped_plug_v3.png"
+  },
+  "power bar": {
+    "id": "power bar",
+    "label": "Power Bar",
+    "texture": "powerBar",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/power_bar_v2.png"
+  },
+  "extension cord": {
+    "id": "extension cord",
+    "label": "Extension Cord",
+    "texture": "extensionCord",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/extension_cord_v2.png"
+  },
+  "usb-c cable": {
+    "id": "usb-c cable",
+    "label": "USB-C Cable",
+    "texture": "usbCCable",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/usb_c_cable_v2.png"
+  },
+  "microphone": {
+    "id": "microphone",
+    "label": "Microphone",
+    "texture": "microphone",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/microphone_v2.png"
+  },
+  "calculator": {
+    "id": "calculator",
+    "label": "Calculator",
+    "texture": "calculator",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/calculator_v2.png"
+  },
+  "walkie talkie": {
+    "id": "walkie talkie",
+    "label": "Walkie-Talkie",
+    "texture": "walkieTalkie",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/walkie_talkie_v2.png"
+  },
+  "smartphone": {
+    "id": "smartphone",
+    "label": "Smartphone",
+    "texture": "smartphone",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/smartphone_v2.png"
+  },
+  "lcd screen": {
+    "id": "lcd screen",
+    "label": "LCD Screen",
+    "texture": "lcdScreen",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/lcd_screen_v2.png"
+  },
+  "bundle of wires": {
+    "id": "bundle of wires",
+    "label": "Bundle of Wires",
+    "texture": "bundleOfWires",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/bundle_of_wires_v2.png"
+  },
+  "capacitors": {
+    "id": "capacitors",
+    "label": "Capacitors",
+    "texture": "capacitors",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/capacitors_v2.png"
+  },
+  "cpu fan": {
+    "id": "cpu fan",
+    "label": "CPU Fan",
+    "texture": "cpuFan",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/cpu_fan_v2.png"
+  },
+  "power cord": {
+    "id": "power cord",
+    "label": "Power Cord",
+    "texture": "powerCord",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/power_cord_v2.png"
+  },
+  "printed circuit board": {
+    "id": "printed circuit board",
+    "label": "Printed Circuit Board",
+    "texture": "printedCircuitBoard",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/printed_circuit_board_v2.png"
+  },
+  "flash drive": {
+    "id": "flash drive",
+    "label": "Flash Drive",
+    "texture": "flashDrive",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/flash_drive_v2.png"
+  },
+  "floppy disk": {
+    "id": "floppy disk",
+    "label": "Floppy Disk",
+    "texture": "floppyDisk",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/floppy_disk_v2.png"
+  },
+  "game cd": {
+    "id": "game cd",
+    "label": "Game CD",
+    "texture": "gameCd",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/game_cd_v3.png"
+  },
+  "wi fi router": {
+    "id": "wi fi router",
+    "label": "Wi-Fi Router",
+    "texture": "wifiRouter",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/wifi_router_v2.png"
+  },
+  "webcam": {
+    "id": "webcam",
+    "label": "Webcam",
+    "texture": "webcam",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/webcam_v2.png"
+  },
+  "syringe": {
+    "id": "syringe",
+    "label": "Syringe",
+    "texture": "syringe",
+    "tags": [
+      "Base Medical"
+    ],
+    "icon": "res://assets/items/syringe_v3.png"
+  },
+  "blood test kit": {
+    "id": "blood test kit",
+    "label": "Blood Test Kit",
+    "texture": "bloodTestKit",
+    "tags": [
+      "Base Medical"
+    ],
+    "icon": "res://assets/items/blood_test_kit_v4.png"
+  },
+  "suture needles": {
+    "id": "suture needles",
+    "label": "Suture Needles",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "cotton balls": {
+    "id": "cotton balls",
+    "label": "Cotton Balls",
+    "texture": "cottonBalls",
+    "tags": [
+      "Base Medical"
+    ],
+    "icon": "res://assets/items/cotton_balls_v2.png"
+  },
+  "empty iv bag": {
+    "id": "empty iv bag",
+    "label": "Empty IV Bag",
+    "texture": "emptyIvBag",
+    "tags": [
+      "Base Medical"
+    ],
+    "icon": "res://assets/items/empty_iv_bag_v2.png"
+  },
+  "tweezers": {
+    "id": "tweezers",
+    "label": "Tweezers",
+    "texture": "tweezers",
+    "tags": [
+      "Base Medical"
+    ],
+    "icon": "res://assets/items/tweezers_v2.png"
+  },
+  "surgical gloves": {
+    "id": "surgical gloves",
+    "label": "Surgical Gloves",
+    "texture": "surgicalGloves",
+    "tags": [
+      "Base Medical"
+    ],
+    "icon": "res://assets/items/surgical_gloves_v2.png"
+  },
+  "surgical tubes": {
+    "id": "surgical tubes",
+    "label": "Surgical Tubes",
+    "texture": "surgicalTubes",
+    "tags": [
+      "Base Medical"
+    ],
+    "icon": "res://assets/items/surgical_tubes_v3.png"
+  },
+  "scalpel": {
+    "id": "scalpel",
+    "label": "Scalpel",
+    "texture": "scalpel",
+    "tags": [
+      "Base Medical"
+    ],
+    "icon": "res://assets/items/scalpel_v2.png"
+  },
+  "bottle of multivitamins": {
+    "id": "bottle of multivitamins",
+    "label": "Bottle of Multivitamins",
+    "texture": "multivitamins",
+    "tags": [
+      "Base Medical"
+    ],
+    "icon": "res://assets/items/multivitamins_v3.png"
+  },
+  "bottle of saline solution": {
+    "id": "bottle of saline solution",
+    "label": "Bottle of Saline Solution",
+    "texture": "salineSolution",
+    "tags": [
+      "Base Medical"
+    ],
+    "icon": "res://assets/items/saline_solution_v3.png"
+  },
+  "ophthalmoscope": {
+    "id": "ophthalmoscope",
+    "label": "Ophthalmoscope",
+    "texture": "ophthalmoscope",
+    "tags": [
+      "Base Medical"
+    ],
+    "icon": "res://assets/items/ophthalmoscope_v3.png"
+  },
+  "compass": {
+    "id": "compass",
+    "label": "Compass",
+    "texture": "compass",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/compass_v2.png"
+  },
+  "clipboard": {
+    "id": "clipboard",
+    "label": "Clipboard",
+    "texture": "clipboard",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/clipboard_v2.png"
+  },
+  "pen": {
+    "id": "pen",
+    "label": "Pen",
+    "texture": "pen",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/pen_v2.png"
+  },
+  "pencil": {
+    "id": "pencil",
+    "label": "Pencil",
+    "texture": "pencil",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/pencil_v2.png"
+  },
+  "matchbox": {
+    "id": "matchbox",
+    "label": "Matchbox",
+    "texture": "matchbox",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/matchbox_v2.png"
+  },
+  "lighter": {
+    "id": "lighter",
+    "label": "Lighter",
+    "texture": "lighter",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/lighter_v3.png"
+  },
+  "cigarette box": {
+    "id": "cigarette box",
+    "label": "Cigarette Box",
+    "texture": "cigaretteBox",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/cigarette_box_v3.png"
+  },
+  "tea box": {
+    "id": "tea box",
+    "label": "Tea Box",
+    "texture": "teaBox",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/tea_box_v2.png"
+  },
+  "fabric": {
+    "id": "fabric",
+    "label": "Fabric",
+    "texture": "fabric",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/fabric_v4.png"
+  },
+  "coffee beans": {
+    "id": "coffee beans",
+    "label": "Coffee Beans",
+    "texture": "coffeeBeans",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/coffee_beans_v3.png"
+  },
+  "metal spare parts": {
+    "id": "metal spare parts",
+    "label": "Metal Spare Parts",
+    "texture": "metalSpareParts",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/metal_spare_parts_v1.png"
+  },
+  "bag of salt": {
+    "id": "bag of salt",
+    "label": "Bag of Salt",
+    "texture": "bagOfSalt",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/bag_of_salt_v3.png"
+  },
+  "bag of sugar": {
+    "id": "bag of sugar",
+    "label": "Bag of Sugar",
+    "texture": "bagOfSugar",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/bag_of_sugar_v2.png"
+  },
+  "toilet paper": {
+    "id": "toilet paper",
+    "label": "Toilet Paper",
+    "texture": "toiletPaper",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/toilet_paper_v2.png"
+  },
+  "soap": {
+    "id": "soap",
+    "label": "Soap",
+    "texture": "soap",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/soap_v2.png"
+  },
+  "weapon parts": {
+    "id": "weapon parts",
+    "label": "Weapon Parts",
+    "texture": "weaponParts",
+    "tags": [
+      "Base Weapon"
+    ],
+    "icon": "res://assets/items/weapon_parts_v2.png"
+  },
+  "gunpowder": {
+    "id": "gunpowder",
+    "label": "Gunpowder",
+    "texture": "gunpowder",
+    "tags": [
+      "Base Weapon"
+    ],
+    "icon": "res://assets/items/gunpowder_v3.png"
+  },
+  "handgun casing": {
+    "id": "handgun casing",
+    "label": "Handgun Casing",
+    "texture": "handgunCasing",
+    "tags": [
+      "Base Weapon"
+    ],
+    "icon": "res://assets/items/handgun_casing_v2.png"
+  },
+  "shell casing": {
+    "id": "shell casing",
+    "label": "Shell Casing",
+    "texture": "shellCasing",
+    "tags": [
+      "Base Weapon"
+    ],
+    "icon": "res://assets/items/shell_casing_v2.png"
+  },
+  "submachine gun casing": {
+    "id": "submachine gun casing",
+    "label": "Submachine Gun Casing",
+    "texture": "submachineGunCasing",
+    "tags": [
+      "Base Weapon"
+    ],
+    "icon": "res://assets/items/submachine_gun_casing_v1.png"
+  },
+  "assault rifle casing": {
+    "id": "assault rifle casing",
+    "label": "Assault Rifle Casing",
+    "texture": "assaultRifleCasing",
+    "tags": [
+      "Base Weapon"
+    ],
+    "icon": "res://assets/items/assault_rifle_casing_v1.png"
+  },
+  "gold chain": {
+    "id": "gold chain",
+    "label": "Gold Chain",
+    "texture": "goldChain",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/gold_chain_v1.png"
+  },
+  "silver necklace": {
+    "id": "silver necklace",
+    "label": "Silver Necklace",
+    "texture": "silverNecklace",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/silver_necklace_v1.png"
+  },
+  "diamond ring": {
+    "id": "diamond ring",
+    "label": "Diamond Ring",
+    "texture": "diamondRing",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/diamond_ring_v3.png"
+  },
+  "zombie bobblehead": {
+    "id": "zombie bobblehead",
+    "label": "Zombie Bobblehead",
+    "texture": "zombieBobblehead",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/zombie_bobblehead_option_a_v1.png"
+  },
+  "ava bobblehead": {
+    "id": "ava bobblehead",
+    "label": "Ava Bobblehead",
+    "texture": "avaBobblehead",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/ava_bobblehead_v2.png"
+  },
+  "peter bobblehead": {
+    "id": "peter bobblehead",
+    "label": "Peter Bobblehead",
+    "texture": "peterBobblehead",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/peter_bobblehead_v4.png"
+  },
+  "alynne bobblehead": {
+    "id": "alynne bobblehead",
+    "label": "Alynne Bobblehead",
+    "texture": "alynneBobblehead",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/alynne_bobblehead_v3.png"
+  },
+  "luis bobblehead": {
+    "id": "luis bobblehead",
+    "label": "Luis Bobblehead",
+    "texture": "luisBobblehead",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/luis_bobblehead_v3.png"
+  },
+  "lara bobblehead": {
+    "id": "lara bobblehead",
+    "label": "Lara Bobblehead",
+    "texture": "laraBobblehead",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/lara_bobblehead_v5.png"
+  },
+  "jasper bobblehead": {
+    "id": "jasper bobblehead",
+    "label": "Jasper Bobblehead",
+    "texture": "jasperBobblehead",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/jasper_bobblehead_v5.png"
+  },
+  "davis bobblehead": {
+    "id": "davis bobblehead",
+    "label": "Davis Bobblehead",
+    "texture": "davisBobblehead",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/davis_bobblehead_v2.png"
+  },
+  "bianca bobblehead": {
+    "id": "bianca bobblehead",
+    "label": "Bianca Bobblehead",
+    "texture": "biancaBobblehead",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/bianca_bobblehead_v1.png"
+  },
+  "rachel bobblehead": {
+    "id": "rachel bobblehead",
+    "label": "Rachel Bobblehead",
+    "texture": "rachelBobblehead",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/rachel_bobblehead_v1.png"
+  },
   "small backpack": {
     "id": "small backpack",
     "slot": "backpack",
@@ -1018,15 +1657,6 @@
   "blood kit": {
     "id": "blood kit",
     "label": "Blood Kit",
-    "texture": "spareParts",
-    "tags": [
-      "Base Resource"
-    ],
-    "icon": "res://assets/items/spare_parts.png"
-  },
-  "suture needles": {
-    "id": "suture needles",
-    "label": "Suture Needles",
     "texture": "spareParts",
     "tags": [
       "Base Resource"

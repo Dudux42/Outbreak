@@ -2,7 +2,7 @@
 
 This document is the reality check for the current repository. It separates working systems from partial scaffolding and future design.
 
-Last documentation audit: 2026-07-17.
+Last documentation audit: 2026-07-22.
 
 ## Implemented
 
@@ -43,7 +43,7 @@ Last documentation audit: 2026-07-17.
 - Item box stash transfers.
 - Loot-container search delay, per-item reveal, and transfers.
 - Broad item database, aliases, loot tags, runtime weapon/armor/backpack stats, and extended metadata for food, drinks, medical supplies, tools, and construction resources.
-- Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, construction-resource, and technical-electronics icons through the magnet.
+- Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, construction-resource, technical-electronics, weapon-component, general-supply, and collectible icons through the Rachel and Bianca bobbleheads.
 
 ### Missions
 
@@ -80,6 +80,7 @@ Last documentation audit: 2026-07-17.
 
 - Sprite-sheet builders for survivors and zombies.
 - Portrait preparation tools.
+- Shared and character-specific art-direction guides with approved survivor reference/source sprites for directional asset development.
 - Environment texture generators and dedicated PBR-map builders.
 - Native procedural wooden supply crate with dedicated albedo, bump, and roughness maps.
 - Godot migration exporter and generated JSON data.

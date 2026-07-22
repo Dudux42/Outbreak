@@ -72,6 +72,10 @@ This is the default specification for every new or replacement inventory icon in
 
 ## Approved Style Anchors
 
+### Bobblehead Style Lock
+
+`assets/items/ava_bobblehead_v2.png` is the approved bobblehead style master. All subsequent character bobbleheads must match its compact chibi proportions, oversized expressive head, small body, rounded dark base, crisp pixel-art outline, saturated-but-controlled palette, clean cel-shaded highlights, simplified readable facial features, consistent padding, and polished inventory-icon finish. This is a style lock only: each character's approved face, hair, clothing, equipment, pose, and colors remain authoritative and must not be replaced with Ava's identity.
+
 Use the closest relevant approved assets as references. Strong general anchors currently include:
 
 - `assets/items/soda_cola.png`

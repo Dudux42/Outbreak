@@ -189,6 +189,33 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/alynne_bobblehead_v1.png",
+    "source_path": "assets/items/alynne_bobblehead_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9266,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/alynne_bobblehead_v2.png",
+    "source_path": "assets/items/alynne_bobblehead_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9070,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/alynne_bobblehead_v3.png",
+    "source_path": "assets/items/alynne_bobblehead_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10230,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/antibiotics_bottle.png",
     "source_path": "assets/items/antibiotics_bottle.png",
     "category": "item_icon",
@@ -221,6 +248,33 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 16588,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/assault_rifle_casing_v1.png",
+    "source_path": "assets/items/assault_rifle_casing_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14695,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/ava_bobblehead_v1.png",
+    "source_path": "assets/items/ava_bobblehead_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12463,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/ava_bobblehead_v2.png",
+    "source_path": "assets/items/ava_bobblehead_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10865,
     "width": 128,
     "height": 128
   },
@@ -261,6 +315,60 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/bag_of_salt_v1.png",
+    "source_path": "assets/items/bag_of_salt_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20825,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/bag_of_salt_v2.png",
+    "source_path": "assets/items/bag_of_salt_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18703,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/bag_of_salt_v3.png",
+    "source_path": "assets/items/bag_of_salt_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18305,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/bag_of_salt_v4.png",
+    "source_path": "assets/items/bag_of_salt_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17839,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/bag_of_sugar_v1.png",
+    "source_path": "assets/items/bag_of_sugar_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19726,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/bag_of_sugar_v2.png",
+    "source_path": "assets/items/bag_of_sugar_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17407,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/banana.png",
     "source_path": "assets/items/banana.png",
     "category": "item_icon",
@@ -284,6 +392,42 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 573,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/bianca_bobblehead_v1.png",
+    "source_path": "assets/items/bianca_bobblehead_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11088,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/blood_test_kit_v2.png",
+    "source_path": "assets/items/blood_test_kit_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 22952,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/blood_test_kit_v3.png",
+    "source_path": "assets/items/blood_test_kit_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19471,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/blood_test_kit_v4.png",
+    "source_path": "assets/items/blood_test_kit_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16501,
     "width": 128,
     "height": 128
   },
@@ -329,6 +473,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 17767,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/bundle_of_wires_v2.png",
+    "source_path": "assets/items/bundle_of_wires_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18686,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/calculator_v2.png",
+    "source_path": "assets/items/calculator_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19610,
     "width": 128,
     "height": 128
   },
@@ -387,6 +549,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/capacitors_v2.png",
+    "source_path": "assets/items/capacitors_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20982,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/car_battery_v2.png",
     "source_path": "assets/items/car_battery_v2.png",
     "category": "item_icon",
@@ -396,11 +567,74 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/cigarette_box_v2.png",
+    "source_path": "assets/items/cigarette_box_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16614,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/cigarette_box_v3.png",
+    "source_path": "assets/items/cigarette_box_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16016,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/clipboard_v2.png",
+    "source_path": "assets/items/clipboard_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16986,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/coffee_beans_v1.png",
+    "source_path": "assets/items/coffee_beans_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18769,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/coffee_beans_v2.png",
+    "source_path": "assets/items/coffee_beans_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19186,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/coffee_beans_v3.png",
+    "source_path": "assets/items/coffee_beans_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11622,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/combat_knife.png",
     "source_path": "assets/items/combat_knife.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 559,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/compass_v2.png",
+    "source_path": "assets/items/compass_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15163,
     "width": 128,
     "height": 128
   },
@@ -423,11 +657,74 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/cotton_balls_v2.png",
+    "source_path": "assets/items/cotton_balls_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20809,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/cpu_fan_v2.png",
+    "source_path": "assets/items/cpu_fan_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 23353,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/crowbar.png",
     "source_path": "assets/items/crowbar.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 537,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/davis_bobblehead_v1.png",
+    "source_path": "assets/items/davis_bobblehead_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12027,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/davis_bobblehead_v2.png",
+    "source_path": "assets/items/davis_bobblehead_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13172,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/diamond_ring_v1.png",
+    "source_path": "assets/items/diamond_ring_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13045,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/diamond_ring_v2.png",
+    "source_path": "assets/items/diamond_ring_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13107,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/diamond_ring_v3.png",
+    "source_path": "assets/items/diamond_ring_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14343,
     "width": 128,
     "height": 128
   },
@@ -450,11 +747,56 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/empty_iv_bag_v2.png",
+    "source_path": "assets/items/empty_iv_bag_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14096,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/energy_drink.png",
     "source_path": "assets/items/energy_drink.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 14941,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/extension_cord_v2.png",
+    "source_path": "assets/items/extension_cord_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20864,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/fabric_v2.png",
+    "source_path": "assets/items/fabric_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19268,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/fabric_v3.png",
+    "source_path": "assets/items/fabric_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13867,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/fabric_v4.png",
+    "source_path": "assets/items/fabric_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13375,
     "width": 128,
     "height": 128
   },
@@ -486,6 +828,33 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/flash_drive_v2.png",
+    "source_path": "assets/items/flash_drive_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14209,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/floppy_disk_v2.png",
+    "source_path": "assets/items/floppy_disk_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18026,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/game_cd_v3.png",
+    "source_path": "assets/items/game_cd_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 23226,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/gears.png",
     "source_path": "assets/items/gears.png",
     "category": "item_icon",
@@ -495,11 +864,47 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/gold_chain_v1.png",
+    "source_path": "assets/items/gold_chain_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9504,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/graphics_card_v2.png",
     "source_path": "assets/items/graphics_card_v2.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 17440,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/gunpowder_v1.png",
+    "source_path": "assets/items/gunpowder_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16804,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/gunpowder_v2.png",
+    "source_path": "assets/items/gunpowder_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16155,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/gunpowder_v3.png",
+    "source_path": "assets/items/gunpowder_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16249,
     "width": 128,
     "height": 128
   },
@@ -540,6 +945,24 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/handgun_casing_v1.png",
+    "source_path": "assets/items/handgun_casing_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17446,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/handgun_casing_v2.png",
+    "source_path": "assets/items/handgun_casing_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17491,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/hand_drill_v2.png",
     "source_path": "assets/items/hand_drill_v2.png",
     "category": "item_icon",
@@ -549,11 +972,74 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/hard_drive_v2.png",
+    "source_path": "assets/items/hard_drive_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20800,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/headphones_v2.png",
+    "source_path": "assets/items/headphones_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17128,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/insulating_tape_v2.png",
     "source_path": "assets/items/insulating_tape_v2.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 8810,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/jasper_bobblehead_v1.png",
+    "source_path": "assets/items/jasper_bobblehead_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12593,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/jasper_bobblehead_v2.png",
+    "source_path": "assets/items/jasper_bobblehead_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12777,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/jasper_bobblehead_v3.png",
+    "source_path": "assets/items/jasper_bobblehead_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12827,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/jasper_bobblehead_v4.png",
+    "source_path": "assets/items/jasper_bobblehead_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10588,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/jasper_bobblehead_v5.png",
+    "source_path": "assets/items/jasper_bobblehead_v5.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11533,
     "width": 128,
     "height": 128
   },
@@ -576,11 +1062,65 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/keyboard_v5.png",
+    "source_path": "assets/items/keyboard_v5.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14459,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/kitchen_knife.png",
     "source_path": "assets/items/kitchen_knife.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 561,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/lara_bobblehead_v1.png",
+    "source_path": "assets/items/lara_bobblehead_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10409,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/lara_bobblehead_v2.png",
+    "source_path": "assets/items/lara_bobblehead_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11437,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/lara_bobblehead_v3.png",
+    "source_path": "assets/items/lara_bobblehead_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12014,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/lara_bobblehead_v4.png",
+    "source_path": "assets/items/lara_bobblehead_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12394,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/lara_bobblehead_v5.png",
+    "source_path": "assets/items/lara_bobblehead_v5.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12142,
     "width": 128,
     "height": 128
   },
@@ -594,6 +1134,24 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/lcd_screen_v2.png",
+    "source_path": "assets/items/lcd_screen_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19225,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/led_light_bulb_v2.png",
+    "source_path": "assets/items/led_light_bulb_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9734,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/level_v2.png",
     "source_path": "assets/items/level_v2.png",
     "category": "item_icon",
@@ -603,11 +1161,56 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/lighter_v2.png",
+    "source_path": "assets/items/lighter_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16085,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/lighter_v3.png",
+    "source_path": "assets/items/lighter_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13333,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/light_bulb.png",
     "source_path": "assets/items/light_bulb.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 18646,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/luis_bobblehead_v1.png",
+    "source_path": "assets/items/luis_bobblehead_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12115,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/luis_bobblehead_v2.png",
+    "source_path": "assets/items/luis_bobblehead_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13044,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/luis_bobblehead_v3.png",
+    "source_path": "assets/items/luis_bobblehead_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13576,
     "width": 128,
     "height": 128
   },
@@ -635,6 +1238,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 17985,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/matchbox_v2.png",
+    "source_path": "assets/items/matchbox_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16419,
     "width": 128,
     "height": 128
   },
@@ -675,6 +1287,24 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/metal_spare_parts_v1.png",
+    "source_path": "assets/items/metal_spare_parts_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21171,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/microphone_v2.png",
+    "source_path": "assets/items/microphone_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9697,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/military_bandage_v2.png",
     "source_path": "assets/items/military_bandage_v2.png",
     "category": "item_icon",
@@ -702,11 +1332,47 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/mouse_v2.png",
+    "source_path": "assets/items/mouse_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18010,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/mouse_v3.png",
+    "source_path": "assets/items/mouse_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11014,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/multitool_v2.png",
     "source_path": "assets/items/multitool_v2.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 13651,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/multivitamins_v2.png",
+    "source_path": "assets/items/multivitamins_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15445,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/multivitamins_v3.png",
+    "source_path": "assets/items/multivitamins_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15052,
     "width": 128,
     "height": 128
   },
@@ -725,6 +1391,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 19810,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/ophthalmoscope_v2.png",
+    "source_path": "assets/items/ophthalmoscope_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8964,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/ophthalmoscope_v3.png",
+    "source_path": "assets/items/ophthalmoscope_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8243,
     "width": 128,
     "height": 128
   },
@@ -752,6 +1436,60 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 19627,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/pencil_v2.png",
+    "source_path": "assets/items/pencil_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9136,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/pen_v2.png",
+    "source_path": "assets/items/pen_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8709,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/peter_bobblehead_v1.png",
+    "source_path": "assets/items/peter_bobblehead_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14154,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/peter_bobblehead_v2.png",
+    "source_path": "assets/items/peter_bobblehead_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11326,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/peter_bobblehead_v3.png",
+    "source_path": "assets/items/peter_bobblehead_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11643,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/peter_bobblehead_v4.png",
+    "source_path": "assets/items/peter_bobblehead_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12284,
     "width": 128,
     "height": 128
   },
@@ -792,6 +1530,51 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/plunger_v1.png",
+    "source_path": "assets/items/plunger_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 7698,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/power_bank_v2.png",
+    "source_path": "assets/items/power_bank_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19477,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/power_bank_v3.png",
+    "source_path": "assets/items/power_bank_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21207,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/power_bar_v2.png",
+    "source_path": "assets/items/power_bar_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18166,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/power_cord_v2.png",
+    "source_path": "assets/items/power_cord_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20425,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/power_supply_unit_v2.png",
     "source_path": "assets/items/power_supply_unit_v2.png",
     "category": "item_icon",
@@ -801,11 +1584,29 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/printed_circuit_board_v2.png",
+    "source_path": "assets/items/printed_circuit_board_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21350,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/processor_v2.png",
     "source_path": "assets/items/processor_v2.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 16263,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/rachel_bobblehead_v1.png",
+    "source_path": "assets/items/rachel_bobblehead_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11201,
     "width": 128,
     "height": 128
   },
@@ -842,6 +1643,33 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 17670,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/saline_solution_v2.png",
+    "source_path": "assets/items/saline_solution_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13973,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/saline_solution_v3.png",
+    "source_path": "assets/items/saline_solution_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12196,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/scalpel_v2.png",
+    "source_path": "assets/items/scalpel_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8595,
     "width": 128,
     "height": 128
   },
@@ -900,6 +1728,24 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/shell_casing_v1.png",
+    "source_path": "assets/items/shell_casing_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15264,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/shell_casing_v2.png",
+    "source_path": "assets/items/shell_casing_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15472,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/shotgun.png",
     "source_path": "assets/items/shotgun.png",
     "category": "item_icon",
@@ -927,11 +1773,47 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/silver_necklace_v1.png",
+    "source_path": "assets/items/silver_necklace_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 6637,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/simple_backpack.png",
     "source_path": "assets/items/simple_backpack.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 10078,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/smartphone_v2.png",
+    "source_path": "assets/items/smartphone_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14149,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/soap_v1.png",
+    "source_path": "assets/items/soap_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16611,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/soap_v2.png",
+    "source_path": "assets/items/soap_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14567,
     "width": 128,
     "height": 128
   },
@@ -981,11 +1863,83 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/ssd_drive_v2.png",
+    "source_path": "assets/items/ssd_drive_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17837,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/submachine_gun_casing_v1.png",
+    "source_path": "assets/items/submachine_gun_casing_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12124,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/superglue_v2.png",
     "source_path": "assets/items/superglue_v2.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 11388,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/surgical_gloves_v2.png",
+    "source_path": "assets/items/surgical_gloves_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20397,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/surgical_tubes_v2.png",
+    "source_path": "assets/items/surgical_tubes_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21821,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/surgical_tubes_v3.png",
+    "source_path": "assets/items/surgical_tubes_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18383,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/suture_needles_v2.png",
+    "source_path": "assets/items/suture_needles_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19646,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/syringe_v2.png",
+    "source_path": "assets/items/syringe_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11235,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/syringe_v3.png",
+    "source_path": "assets/items/syringe_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 7416,
     "width": 128,
     "height": 128
   },
@@ -999,11 +1953,74 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/tea_box_v2.png",
+    "source_path": "assets/items/tea_box_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21906,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/toilet_paper_v1.png",
+    "source_path": "assets/items/toilet_paper_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 22054,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/toilet_paper_v2.png",
+    "source_path": "assets/items/toilet_paper_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21182,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/tweezers_v2.png",
+    "source_path": "assets/items/tweezers_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8987,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/t_shaped_plug_v3.png",
+    "source_path": "assets/items/t_shaped_plug_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 22703,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/usb_adapter_v2.png",
     "source_path": "assets/items/usb_adapter_v2.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 19903,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/usb_c_cable_v2.png",
+    "source_path": "assets/items/usb_c_cable_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21783,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/walkie_talkie_v2.png",
+    "source_path": "assets/items/walkie_talkie_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12725,
     "width": 128,
     "height": 128
   },
@@ -1035,11 +2052,47 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/weapon_parts_v1.png",
+    "source_path": "assets/items/weapon_parts_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20530,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/weapon_parts_v2.png",
+    "source_path": "assets/items/weapon_parts_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19443,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/webcam_v2.png",
+    "source_path": "assets/items/webcam_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20931,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/wifi_camera_v2.png",
     "source_path": "assets/items/wifi_camera_v2.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 16283,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/wifi_router_v2.png",
+    "source_path": "assets/items/wifi_router_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15296,
     "width": 128,
     "height": 128
   },
@@ -1085,6 +2138,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 11297,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/zombie_bobblehead_option_a_v1.png",
+    "source_path": "assets/items/zombie_bobblehead_option_a_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14145,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/zombie_bobblehead_option_b_v1.png",
+    "source_path": "assets/items/zombie_bobblehead_option_b_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12635,
     "width": 128,
     "height": 128
   },
@@ -1354,7 +2425,7 @@
     "source_path": "assets/map_templates/manifest.json",
     "category": "source_or_reference",
     "type": "json",
-    "bytes": 2704,
+    "bytes": 2808,
     "width": null,
     "height": null
   },
@@ -3804,6 +4875,465 @@
     "type": "png",
     "bytes": 1151343,
     "width": 1024,
+    "height": 1024
+  },
+  {
+    "path": "res://assets/sprites/alynne/reference/alynne_reference_south_v1.png",
+    "source_path": "assets/sprites/alynne/reference/alynne_reference_south_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 6490,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/alynne/reference/alynne_reference_south_v2.png",
+    "source_path": "assets/sprites/alynne/reference/alynne_reference_south_v2.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 6548,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/alynne/reference/alynne_reference_south_v3.png",
+    "source_path": "assets/sprites/alynne/reference/alynne_reference_south_v3.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 6350,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/ava/reference/ava_reference_south.png",
+    "source_path": "assets/sprites/ava/reference/ava_reference_south.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7444,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/ava/reference/ava_reference_south_v1.png",
+    "source_path": "assets/sprites/ava/reference/ava_reference_south_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7109,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/ava/reference/ava_reference_south_v2.png",
+    "source_path": "assets/sprites/ava/reference/ava_reference_south_v2.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 9266,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/ava/reference/ava_reference_south_v3.png",
+    "source_path": "assets/sprites/ava/reference/ava_reference_south_v3.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 9067,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/ava/reference/ava_reference_south_v4.png",
+    "source_path": "assets/sprites/ava/reference/ava_reference_south_v4.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7444,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/ava/reference/ava_reference_south_west_v1.png",
+    "source_path": "assets/sprites/ava/reference/ava_reference_south_west_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7366,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/ava/reference/ava_reference_south_west_v2.png",
+    "source_path": "assets/sprites/ava/reference/ava_reference_south_west_v2.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7188,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/ava/reference/ava_reference_south_west_v3.png",
+    "source_path": "assets/sprites/ava/reference/ava_reference_south_west_v3.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 6792,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/ava/reference/ava_reference_south_west_v4.png",
+    "source_path": "assets/sprites/ava/reference/ava_reference_south_west_v4.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7057,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/ava/reference/ava_reference_south_west_v5.png",
+    "source_path": "assets/sprites/ava/reference/ava_reference_south_west_v5.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 6955,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/bianca/reference/bianca_reference_south_v1.png",
+    "source_path": "assets/sprites/bianca/reference/bianca_reference_south_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7468,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/bianca/source/bianca_south_chroma_v1.png",
+    "source_path": "assets/sprites/bianca/source/bianca_south_chroma_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1324850,
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "path": "res://assets/sprites/bianca/source/bianca_south_transparent_v1.png",
+    "source_path": "assets/sprites/bianca/source/bianca_south_transparent_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 515152,
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "path": "res://assets/sprites/davis/reference/davis_reference_south_v1.png",
+    "source_path": "assets/sprites/davis/reference/davis_reference_south_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 11673,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/davis/source/davis_south_chroma_v1.png",
+    "source_path": "assets/sprites/davis/source/davis_south_chroma_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1212680,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/davis/source/davis_south_transparent_v1.png",
+    "source_path": "assets/sprites/davis/source/davis_south_transparent_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 562038,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/jasper/reference/jasper_reference_south_draft_v1.png",
+    "source_path": "assets/sprites/jasper/reference/jasper_reference_south_draft_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7430,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/jasper/reference/jasper_reference_south_draft_v2.png",
+    "source_path": "assets/sprites/jasper/reference/jasper_reference_south_draft_v2.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7215,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/jasper/reference/jasper_reference_south_v1.png",
+    "source_path": "assets/sprites/jasper/reference/jasper_reference_south_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7187,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/jasper/source/jasper_south_chroma_v1.png",
+    "source_path": "assets/sprites/jasper/source/jasper_south_chroma_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1125752,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/jasper/source/jasper_south_chroma_v2.png",
+    "source_path": "assets/sprites/jasper/source/jasper_south_chroma_v2.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1140400,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/jasper/source/jasper_south_transparent_v1.png",
+    "source_path": "assets/sprites/jasper/source/jasper_south_transparent_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 396644,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/jasper/source/jasper_south_transparent_v2.png",
+    "source_path": "assets/sprites/jasper/source/jasper_south_transparent_v2.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 397817,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/lara/reference/lara_reference_south_v1.png",
+    "source_path": "assets/sprites/lara/reference/lara_reference_south_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 9968,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/lara/reference/lara_reference_south_v2.png",
+    "source_path": "assets/sprites/lara/reference/lara_reference_south_v2.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 9551,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/lara/reference/lara_reference_south_v3.png",
+    "source_path": "assets/sprites/lara/reference/lara_reference_south_v3.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 9625,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/lara/reference/lara_reference_south_v4.png",
+    "source_path": "assets/sprites/lara/reference/lara_reference_south_v4.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 9781,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/lara/source/lara_south_chroma_v1.png",
+    "source_path": "assets/sprites/lara/source/lara_south_chroma_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1143131,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/lara/source/lara_south_chroma_v2.png",
+    "source_path": "assets/sprites/lara/source/lara_south_chroma_v2.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1177362,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/lara/source/lara_south_chroma_v3.png",
+    "source_path": "assets/sprites/lara/source/lara_south_chroma_v3.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1382406,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/lara/source/lara_south_chroma_v4.png",
+    "source_path": "assets/sprites/lara/source/lara_south_chroma_v4.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1188106,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/lara/source/lara_south_transparent_v1.png",
+    "source_path": "assets/sprites/lara/source/lara_south_transparent_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 436072,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/lara/source/lara_south_transparent_v2.png",
+    "source_path": "assets/sprites/lara/source/lara_south_transparent_v2.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 449271,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/lara/source/lara_south_transparent_v3.png",
+    "source_path": "assets/sprites/lara/source/lara_south_transparent_v3.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 453908,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/lara/source/lara_south_transparent_v4.png",
+    "source_path": "assets/sprites/lara/source/lara_south_transparent_v4.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 454770,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/luis/reference/luis_reference_south_v1.png",
+    "source_path": "assets/sprites/luis/reference/luis_reference_south_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7100,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/luis/reference/luis_reference_south_v2.png",
+    "source_path": "assets/sprites/luis/reference/luis_reference_south_v2.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7158,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/luis/source/luis_reference_south_v1_chroma.png",
+    "source_path": "assets/sprites/luis/source/luis_reference_south_v1_chroma.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1172701,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/luis/source/luis_reference_south_v1_transparent.png",
+    "source_path": "assets/sprites/luis/source/luis_reference_south_v1_transparent.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 509626,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/luis/source/luis_reference_south_v2_chroma.png",
+    "source_path": "assets/sprites/luis/source/luis_reference_south_v2_chroma.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1218583,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/luis/source/luis_reference_south_v2_transparent.png",
+    "source_path": "assets/sprites/luis/source/luis_reference_south_v2_transparent.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 524812,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/peter/reference/peter_reference_south_v1.png",
+    "source_path": "assets/sprites/peter/reference/peter_reference_south_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7359,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/peter/source/peter_reference_south_v1_chroma.png",
+    "source_path": "assets/sprites/peter/source/peter_reference_south_v1_chroma.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1162200,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/peter/source/peter_reference_south_v1_transparent.png",
+    "source_path": "assets/sprites/peter/source/peter_reference_south_v1_transparent.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 465963,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/rachel/reference/rachel_reference_south_v1.png",
+    "source_path": "assets/sprites/rachel/reference/rachel_reference_south_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 7785,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/sprites/rachel/source/rachel_south_chroma_v1.png",
+    "source_path": "assets/sprites/rachel/source/rachel_south_chroma_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1176208,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/rachel/source/rachel_south_transparent_v1.png",
+    "source_path": "assets/sprites/rachel/source/rachel_south_transparent_v1.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 460667,
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "path": "res://assets/sprites/templates/slim_female_direction_template.png",
+    "source_path": "assets/sprites/templates/slim_female_direction_template.png",
+    "category": "source_or_reference",
+    "type": "png",
+    "bytes": 1660602,
+    "width": 1536,
     "height": 1024
   },
   {

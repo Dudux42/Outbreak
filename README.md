@@ -87,6 +87,7 @@ There is no automated test suite yet. `npm run build` plus focused browser verif
 - [Current Build](docs/CURRENT_BUILD.md)
 - [Gameplay Systems](docs/GAMEPLAY_SYSTEMS.md)
 - [Data and Asset Pipeline](docs/DATA_AND_ASSETS.md)
+- [Character Art Direction](docs/ART_DIRECTION.md)
 - [Handoff Guide](docs/HANDOFF.md)
 - [Contributing](CONTRIBUTING.md)
 - [Agent Instructions](AGENTS.md)
