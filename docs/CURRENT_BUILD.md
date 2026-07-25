@@ -2,7 +2,9 @@
 
 This document is the reality check for the current repository. It separates working systems from partial scaffolding and future design.
 
-Last documentation audit: 2026-07-22.
+Last documentation audit: 2026-07-25.
+
+For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PROJECT_MASTER_HANDOFF.md).
 
 ## Implemented
 
@@ -42,8 +44,9 @@ Last documentation audit: 2026-07-22.
 - Quickbar slots `1` through `9`, with primary/sidearm ownership for slots `1` and `2`.
 - Item box stash transfers.
 - Loot-container search delay, per-item reveal, and transfers.
-- Broad item database, aliases, loot tags, runtime weapon/armor/backpack stats, and extended metadata for food, drinks, medical supplies, tools, and construction resources.
-- Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, construction-resource, technical-electronics, weapon-component, general-supply, and collectible icons through the Rachel and Bianca bobbleheads.
+- Item database with 193 canonical records, 45 compatibility aliases, 15 loot tags, named firearm/ammunition families, runtime weapon/armor/backpack stats, and extended metadata for food, drinks, medical supplies, tools, electronics, collectibles, and construction resources.
+- Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, construction-resource, technical-electronics, weapon-component, general-supply, and collectible icons through Sci-Fi VHS.
+- Newly attached collectible icons for Dog Statue, Tiger Statue, Teddy Bear, Cloth Doll, Toy Car, Wristwatch, Police Badge, Table Clock, Cookbook, and Sci-Fi VHS.
 
 ### Missions
 
@@ -81,6 +84,7 @@ Last documentation audit: 2026-07-22.
 - Sprite-sheet builders for survivors and zombies.
 - Portrait preparation tools.
 - Shared and character-specific art-direction guides with approved survivor reference/source sprites for directional asset development.
+- Approved SOUTH references for future non-playable survivors Lara, Jasper, Bianca, Rachel, and Davis.
 - Environment texture generators and dedicated PBR-map builders.
 - Native procedural wooden supply crate with dedicated albedo, bump, and roughness maps.
 - Godot migration exporter and generated JSON data.
@@ -100,6 +104,7 @@ Last documentation audit: 2026-07-22.
 - The runtime use action still primarily understands `healHp` from `itemCatalog`.
 - Hunger, thirst, stamina, speed buffs, empty-container returns, spoilage, trading, scrapping, and location exclusions are not fully implemented.
 - Some broad database items use generic fallback icons and have no specialized gameplay behavior.
+- `gaming_magazine_v2.png` is the current Gaming Magazine candidate and remains unattached pending approval.
 
 ### Stations and Progression
 

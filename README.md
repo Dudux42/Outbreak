@@ -82,6 +82,7 @@ There is no automated test suite yet. `npm run build` plus focused browser verif
 ## Documentation
 
 - [Documentation Index](docs/README.md)
+- [Project Master Handoff](docs/PROJECT_MASTER_HANDOFF.md)
 - [Architecture](Architecture.md)
 - [Game Design](docs/GAME_DESIGN.md)
 - [Current Build](docs/CURRENT_BUILD.md)

@@ -4,7 +4,7 @@ This file is the shortest path for a new chat or contributor to begin useful wor
 
 ## First Five Minutes
 
-1. Read `README.md` and `docs/CURRENT_BUILD.md`.
+1. Read `README.md`, `docs/PROJECT_MASTER_HANDOFF.md`, and `docs/CURRENT_BUILD.md`.
 2. Run `git status --short --branch` and do not overwrite local changes.
 3. Read the relevant section of `Architecture.md` and `docs/GAMEPLAY_SYSTEMS.md`.
 4. Search `src/main.js` for the existing system before proposing new abstractions.

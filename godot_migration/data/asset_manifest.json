@@ -594,6 +594,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/cloth_doll_v1.png",
+    "source_path": "assets/items/cloth_doll_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 19964,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/coffee_beans_v1.png",
     "source_path": "assets/items/coffee_beans_v1.png",
     "category": "item_icon",
@@ -635,6 +644,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 15163,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/cookbook_v1.png",
+    "source_path": "assets/items/cookbook_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21326,
     "width": 128,
     "height": 128
   },
@@ -725,6 +743,42 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 14343,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/dog_statue_v1.png",
+    "source_path": "assets/items/dog_statue_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17565,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/dog_statue_v2.png",
+    "source_path": "assets/items/dog_statue_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21320,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/dog_statue_v3.png",
+    "source_path": "assets/items/dog_statue_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15742,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/dog_statue_v4.png",
+    "source_path": "assets/items/dog_statue_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17113,
     "width": 128,
     "height": 128
   },
@@ -851,6 +905,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 23226,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/gaming_magazine_v1.png",
+    "source_path": "assets/items/gaming_magazine_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21551,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/gaming_magazine_v2.png",
+    "source_path": "assets/items/gaming_magazine_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 24900,
     "width": 128,
     "height": 128
   },
@@ -1539,6 +1611,33 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/police_badge_v1.png",
+    "source_path": "assets/items/police_badge_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18532,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/police_badge_v2.png",
+    "source_path": "assets/items/police_badge_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16687,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/police_badge_v3.png",
+    "source_path": "assets/items/police_badge_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15413,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/power_bank_v2.png",
     "source_path": "assets/items/power_bank_v2.png",
     "category": "item_icon",
@@ -1670,6 +1769,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 8595,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/sci_fi_vhs_v1.png",
+    "source_path": "assets/items/sci_fi_vhs_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15827,
     "width": 128,
     "height": 128
   },
@@ -1944,6 +2052,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/table_clock_v1.png",
+    "source_path": "assets/items/table_clock_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17933,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/tape_measure_v2.png",
     "source_path": "assets/items/tape_measure_v2.png",
     "category": "item_icon",
@@ -1962,6 +2079,24 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/teddy_bear_v1.png",
+    "source_path": "assets/items/teddy_bear_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18934,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/tiger_statue_v1.png",
+    "source_path": "assets/items/tiger_statue_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15636,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/toilet_paper_v1.png",
     "source_path": "assets/items/toilet_paper_v1.png",
     "category": "item_icon",
@@ -1976,6 +2111,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 21182,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/toy_car_v1.png",
+    "source_path": "assets/items/toy_car_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17496,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/toy_car_v2.png",
+    "source_path": "assets/items/toy_car_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17165,
     "width": 128,
     "height": 128
   },
@@ -2138,6 +2291,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 11297,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/wristwatch_v1.png",
+    "source_path": "assets/items/wristwatch_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9110,
     "width": 128,
     "height": 128
   },

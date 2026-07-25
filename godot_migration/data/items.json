@@ -1568,6 +1568,96 @@
     ],
     "icon": "res://assets/items/rachel_bobblehead_v1.png"
   },
+  "dog statue": {
+    "id": "dog statue",
+    "label": "Dog Statue",
+    "texture": "dogStatue",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/dog_statue_v4.png"
+  },
+  "tiger statue": {
+    "id": "tiger statue",
+    "label": "Tiger Statue",
+    "texture": "tigerStatue",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/tiger_statue_v1.png"
+  },
+  "teddy bear": {
+    "id": "teddy bear",
+    "label": "Teddy Bear",
+    "texture": "teddyBear",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/teddy_bear_v1.png"
+  },
+  "cloth doll": {
+    "id": "cloth doll",
+    "label": "Cloth Doll",
+    "texture": "clothDoll",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/cloth_doll_v1.png"
+  },
+  "toy car": {
+    "id": "toy car",
+    "label": "Toy Car",
+    "texture": "toyCar",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/toy_car_v2.png"
+  },
+  "wristwatch": {
+    "id": "wristwatch",
+    "label": "Wristwatch",
+    "texture": "wristwatch",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/wristwatch_v1.png"
+  },
+  "police badge": {
+    "id": "police badge",
+    "label": "Police Badge",
+    "texture": "policeBadge",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/police_badge_v3.png"
+  },
+  "table clock": {
+    "id": "table clock",
+    "label": "Table Clock",
+    "texture": "tableClock",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/table_clock_v1.png"
+  },
+  "cookbook": {
+    "id": "cookbook",
+    "label": "Cookbook",
+    "texture": "cookbook",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/cookbook_v1.png"
+  },
+  "sci-fi vhs": {
+    "id": "sci-fi vhs",
+    "label": "Sci-Fi VHS",
+    "texture": "sciFiVhs",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/sci_fi_vhs_v1.png"
+  },
   "small backpack": {
     "id": "small backpack",
     "slot": "backpack",
