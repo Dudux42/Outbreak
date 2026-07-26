@@ -189,6 +189,8 @@ Settings persist separately and can exist without a game save.
 
 ## Debugging
 
+Use the left-center `Debug Items` control during gameplay to select any canonical database item, choose a quantity, and add it directly to the Item Box. Opening the control pauses gameplay, and an already-open Item Box refreshes immediately after insertion.
+
 Press `Y` during gameplay to inspect:
 
 - Reported action state.

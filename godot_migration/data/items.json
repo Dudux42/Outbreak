@@ -62,6 +62,15 @@
     ],
     "icon": "res://assets/items/milk.png"
   },
+  "milk": {
+    "id": "milk",
+    "label": "Milk",
+    "texture": "milk",
+    "tags": [
+      "Drink"
+    ],
+    "icon": "res://assets/items/milk.png"
+  },
   "soda": {
     "id": "soda",
     "label": "Soda (Cola)",
@@ -215,6 +224,15 @@
     ],
     "icon": "res://assets/items/mac_n_cheese_box_v2.png"
   },
+  "mac n cheese box": {
+    "id": "mac n cheese box",
+    "label": "Mac 'n' Cheese Box",
+    "texture": "macNCheeseBox",
+    "tags": [
+      "Food"
+    ],
+    "icon": "res://assets/items/mac_n_cheese_box_v2.png"
+  },
   "cookies": {
     "id": "cookies",
     "label": "Cookies",
@@ -330,7 +348,7 @@
     "id": "crowbar",
     "slot": "primary",
     "label": "Crowbar",
-    "texture": "crowbar",
+    "texture": "crowbar_v3",
     "tags": [
       "Weapon"
     ],
@@ -345,13 +363,13 @@
     "attackSpeed": 0.85,
     "staminaCost": 17,
     "knockback": 0.85,
-    "icon": "res://assets/items/crowbar.png"
+    "icon": "res://assets/items/crowbar_v3.png"
   },
   "axe": {
     "id": "axe",
     "slot": "primary",
     "label": "Axe",
-    "texture": "axe",
+    "texture": "axe_v4",
     "tags": [
       "Weapon"
     ],
@@ -366,7 +384,7 @@
     "attackSpeed": 1,
     "staminaCost": 22,
     "knockback": 1,
-    "icon": "res://assets/items/axe.png"
+    "icon": "res://assets/items/axe_v4.png"
   },
   "screwdriver": {
     "id": "screwdriver",
@@ -422,149 +440,11 @@
     ],
     "icon": "res://assets/items/power_supply_unit_v2.png"
   },
-  "Handgun": {
-    "id": "Handgun",
-    "slot": "sidearm",
-    "label": "Handgun",
-    "texture": "handgun",
-    "tags": [
-      "Weapon"
-    ],
-    "subTags": {
-      "hands": "1 handed",
-      "combat": "Firearm"
-    },
-    "weaponKind": "firearm",
-    "hands": 1,
-    "ammoType": "handgun ammo",
-    "magazineSize": 15,
-    "reserveAmmo": 30,
-    "damage": 45,
-    "range": 9,
-    "fireRate": 0.35,
-    "icon": "res://assets/items/handgun.png"
-  },
-  "shotgun": {
-    "id": "shotgun",
-    "slot": "primary",
-    "label": "Shotgun",
-    "texture": "shotgun",
-    "tags": [
-      "Weapon"
-    ],
-    "subTags": {
-      "hands": "2 handed",
-      "combat": "Firearm"
-    },
-    "weaponKind": "firearm",
-    "hands": 2,
-    "ammoType": "shotgun shells",
-    "magazineSize": 6,
-    "reserveAmmo": 18,
-    "damage": 65,
-    "range": 7,
-    "spread": 8,
-    "pellets": 6,
-    "fireRate": 0.9,
-    "icon": "res://assets/items/shotgun.png"
-  },
-  "submachine-gun": {
-    "id": "submachine-gun",
-    "slot": "primary",
-    "label": "Submachine Gun",
-    "texture": "handgun",
-    "tags": [
-      "Weapon"
-    ],
-    "subTags": {
-      "hands": "2 handed",
-      "combat": "Firearm"
-    },
-    "weaponKind": "firearm",
-    "hands": 2,
-    "ammoType": "submachine-gun ammo",
-    "magazineSize": 30,
-    "reserveAmmo": 60,
-    "damage": 32,
-    "range": 8,
-    "fireRate": 0.12,
-    "icon": "res://assets/items/handgun.png"
-  },
-  "assault rifle": {
-    "id": "assault rifle",
-    "slot": "primary",
-    "label": "Assault Rifle",
-    "texture": "shotgun",
-    "tags": [
-      "Weapon"
-    ],
-    "subTags": {
-      "hands": "2 handed",
-      "combat": "Firearm"
-    },
-    "weaponKind": "firearm",
-    "hands": 2,
-    "ammoType": "assault rifle ammo",
-    "magazineSize": 30,
-    "reserveAmmo": 60,
-    "damage": 42,
-    "range": 11,
-    "fireRate": 0.16,
-    "icon": "res://assets/items/shotgun.png"
-  },
-  "handgun ammo": {
-    "id": "handgun ammo",
-    "label": "Handgun Ammo",
-    "texture": "handgunAmmo",
-    "tags": [
-      "Ammunition"
-    ],
-    "ammoType": "handgun ammo",
-    "ammoQty": 15,
-    "stackLimit": 60,
-    "icon": "res://assets/items/handgun_ammo.png"
-  },
-  "shotgun shells": {
-    "id": "shotgun shells",
-    "label": "Shotgun Shells",
-    "texture": "shotgunAmmo",
-    "tags": [
-      "Ammunition"
-    ],
-    "ammoType": "shotgun shells",
-    "ammoQty": 6,
-    "stackLimit": 60,
-    "icon": "res://assets/items/shotgun_ammo.png"
-  },
-  "submachine-gun ammo": {
-    "id": "submachine-gun ammo",
-    "label": "Submachine Gun Ammo",
-    "texture": "handgunAmmo",
-    "tags": [
-      "Ammunition"
-    ],
-    "ammoType": "submachine-gun ammo",
-    "ammoQty": 30,
-    "stackLimit": 60,
-    "icon": "res://assets/items/handgun_ammo.png"
-  },
-  "assault rifle ammo": {
-    "id": "assault rifle ammo",
-    "label": "Assault Rifle Ammo",
-    "texture": "handgunAmmo",
-    "tags": [
-      "Ammunition"
-    ],
-    "ammoType": "assault rifle ammo",
-    "ammoQty": 30,
-    "stackLimit": 60,
-    "icon": "res://assets/items/handgun_ammo.png"
-  },
   "baseball bat": {
     "id": "baseball bat",
     "slot": "primary",
     "label": "Baseball Bat",
-    "texture": "baseballBat",
+    "texture": "baseball_bat_v2",
     "tags": [
       "Weapon"
     ],
@@ -579,13 +459,13 @@
     "attackSpeed": 0.7,
     "staminaCost": 14,
     "knockback": 1.05,
-    "icon": "res://assets/items/baseball_bat.png"
+    "icon": "res://assets/items/baseball_bat_v2.png"
   },
   "hatchet": {
     "id": "hatchet",
     "slot": "primary",
     "label": "Hatchet",
-    "texture": "axe",
+    "texture": "hatchet_v2",
     "tags": [
       "Weapon"
     ],
@@ -600,34 +480,22 @@
     "attackSpeed": 0.7,
     "staminaCost": 15,
     "knockback": 0.65,
-    "icon": "res://assets/items/axe.png"
+    "icon": "res://assets/items/hatchet_v2.png"
   },
   "sledgehammer": {
     "id": "sledgehammer",
-    "slot": "primary",
     "label": "Sledgehammer",
-    "texture": "hammer",
+    "texture": "sledgehammer",
     "tags": [
       "Weapon"
     ],
-    "subTags": {
-      "hands": "2 handed",
-      "combat": "Melee"
-    },
-    "weaponKind": "melee",
-    "hands": 2,
-    "damage": 62,
-    "reach": 1.9,
-    "attackSpeed": 1.1,
-    "staminaCost": 25,
-    "knockback": 1.25,
-    "icon": "res://assets/items/hammer_long_handle_v2.png"
+    "icon": "res://assets/items/sledgehammer_v3.png"
   },
   "Katana": {
     "id": "Katana",
     "slot": "primary",
     "label": "Katana",
-    "texture": "combatKnife",
+    "texture": "katana",
     "tags": [
       "Weapon"
     ],
@@ -642,13 +510,13 @@
     "attackSpeed": 0.68,
     "staminaCost": 18,
     "knockback": 0.72,
-    "icon": "res://assets/items/combat_knife.png"
+    "icon": "res://assets/items/katana_v2.png"
   },
   "combat knife": {
     "id": "combat knife",
     "slot": "primary",
     "label": "Combat Knife",
-    "texture": "combatKnife",
+    "texture": "combat_knife_v2",
     "tags": [
       "Weapon"
     ],
@@ -663,13 +531,13 @@
     "attackSpeed": 0.4,
     "staminaCost": 9,
     "knockback": 0.4,
-    "icon": "res://assets/items/combat_knife.png"
+    "icon": "res://assets/items/combat_knife_v2.png"
   },
   "kitchen knife": {
     "id": "kitchen knife",
     "slot": "primary",
     "label": "Kitchen Knife",
-    "texture": "kitchenKnife",
+    "texture": "kitchen_knife_v2",
     "tags": [
       "Weapon"
     ],
@@ -684,7 +552,7 @@
     "attackSpeed": 0.45,
     "staminaCost": 8,
     "knockback": 0.35,
-    "icon": "res://assets/items/kitchen_knife.png"
+    "icon": "res://assets/items/kitchen_knife_v2.png"
   },
   "Nail gun": {
     "id": "Nail gun",
@@ -992,6 +860,15 @@
     ],
     "icon": "res://assets/items/t_shaped_plug_v3.png"
   },
+  "t shaped plug": {
+    "id": "t shaped plug",
+    "label": "T-Shaped Plug",
+    "texture": "tShapedPlug",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/t_shaped_plug_v3.png"
+  },
   "power bar": {
     "id": "power bar",
     "label": "Power Bar",
@@ -1019,6 +896,15 @@
     ],
     "icon": "res://assets/items/usb_c_cable_v2.png"
   },
+  "usb c cable": {
+    "id": "usb c cable",
+    "label": "USB-C Cable",
+    "texture": "usbCCable",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/usb_c_cable_v2.png"
+  },
   "microphone": {
     "id": "microphone",
     "label": "Microphone",
@@ -1027,6 +913,15 @@
       "Base Technical"
     ],
     "icon": "res://assets/items/microphone_v2.png"
+  },
+  "headphones": {
+    "id": "headphones",
+    "label": "Headphones",
+    "texture": "headphones",
+    "tags": [
+      "Base Technical"
+    ],
+    "icon": "res://assets/items/headphones_v2.png"
   },
   "calculator": {
     "id": "calculator",
@@ -1175,11 +1070,11 @@
   "suture needles": {
     "id": "suture needles",
     "label": "Suture Needles",
-    "texture": "spareParts",
+    "texture": "sutureNeedles",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/suture_needles_v2.png"
   },
   "cotton balls": {
     "id": "cotton balls",
@@ -1413,7 +1308,7 @@
     "tags": [
       "Base Weapon"
     ],
-    "icon": "res://assets/items/gunpowder_v3.png"
+    "icon": "res://assets/items/gunpowder_v4.png"
   },
   "handgun casing": {
     "id": "handgun casing",
@@ -1422,7 +1317,7 @@
     "tags": [
       "Base Weapon"
     ],
-    "icon": "res://assets/items/handgun_casing_v2.png"
+    "icon": "res://assets/items/handgun_casing_v3.png"
   },
   "shell casing": {
     "id": "shell casing",
@@ -1431,7 +1326,7 @@
     "tags": [
       "Base Weapon"
     ],
-    "icon": "res://assets/items/shell_casing_v2.png"
+    "icon": "res://assets/items/shell_casing_v3.png"
   },
   "submachine gun casing": {
     "id": "submachine gun casing",
@@ -1440,7 +1335,7 @@
     "tags": [
       "Base Weapon"
     ],
-    "icon": "res://assets/items/submachine_gun_casing_v1.png"
+    "icon": "res://assets/items/submachine_gun_casing_v2.png"
   },
   "assault rifle casing": {
     "id": "assault rifle casing",
@@ -1449,7 +1344,7 @@
     "tags": [
       "Base Weapon"
     ],
-    "icon": "res://assets/items/assault_rifle_casing_v1.png"
+    "icon": "res://assets/items/assault_rifle_casing_v2.png"
   },
   "gold chain": {
     "id": "gold chain",
@@ -1458,7 +1353,7 @@
     "tags": [
       "Collectible"
     ],
-    "icon": "res://assets/items/gold_chain_v1.png"
+    "icon": "res://assets/items/gold_chain_v2.png"
   },
   "silver necklace": {
     "id": "silver necklace",
@@ -1467,7 +1362,7 @@
     "tags": [
       "Collectible"
     ],
-    "icon": "res://assets/items/silver_necklace_v1.png"
+    "icon": "res://assets/items/silver_necklace_v2.png"
   },
   "diamond ring": {
     "id": "diamond ring",
@@ -1658,6 +1553,240 @@
     ],
     "icon": "res://assets/items/sci_fi_vhs_v1.png"
   },
+  "gaming magazine": {
+    "id": "gaming magazine",
+    "label": "Gaming Magazine",
+    "texture": "gamingMagazine",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/gaming_magazine_v3.png"
+  },
+  "fishing rod": {
+    "id": "fishing rod",
+    "label": "Fishing Rod",
+    "texture": "fishingRod",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/fishing_rod_v1.png"
+  },
+  "glock 17": {
+    "id": "glock 17",
+    "label": "Glock 17",
+    "texture": "glock17",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/glock_17_v1.png"
+  },
+  "beretta m9": {
+    "id": "beretta m9",
+    "label": "Beretta M9",
+    "texture": "berettaM9",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/beretta_m9_v1.png"
+  },
+  "m1911": {
+    "id": "m1911",
+    "label": "M1911",
+    "texture": "m1911",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/m1911_v1.png"
+  },
+  "taurus 38": {
+    "id": "taurus 38",
+    "label": "Taurus 38",
+    "texture": "taurus38",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/taurus_38_v1.png"
+  },
+  "model 629": {
+    "id": "model 629",
+    "label": "Model 629",
+    "texture": "model629",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/model_629_v1.png"
+  },
+  "mossberg 500": {
+    "id": "mossberg 500",
+    "label": "Mossberg 500",
+    "texture": "mossberg500",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/mossberg_500_v2.png"
+  },
+  "benelli m4": {
+    "id": "benelli m4",
+    "label": "Benelli M4",
+    "texture": "benelliM4",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/benelli_m4_v1.png"
+  },
+  "uzi": {
+    "id": "uzi",
+    "label": "Uzi",
+    "texture": "uzi",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/uzi_v2.png"
+  },
+  "h&k mp5": {
+    "id": "h&k mp5",
+    "label": "H&K MP5",
+    "texture": "mp5",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/mp5_v2.png"
+  },
+  "kriss vector": {
+    "id": "kriss vector",
+    "label": "Kriss Vector",
+    "texture": "krissVector",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/kriss_vector_v3.png"
+  },
+  "m4a1": {
+    "id": "m4a1",
+    "label": "M4A1",
+    "texture": "m4a1",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/m4a1_v3.png"
+  },
+  "akm": {
+    "id": "akm",
+    "label": "AKM",
+    "texture": "akm",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/akm_v1.png"
+  },
+  "winchester model 70": {
+    "id": "winchester model 70",
+    "label": "Winchester Model 70",
+    "texture": "winchesterModel70",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/winchester_model_70_v1.png"
+  },
+  "springfield m1a": {
+    "id": "springfield m1a",
+    "label": "Springfield M1A",
+    "texture": "springfieldM1A",
+    "tags": [
+      "Weapon"
+    ],
+    "icon": "res://assets/items/springfield_m1a_v1.png"
+  },
+  "9mm": {
+    "id": "9mm",
+    "label": "9mm",
+    "texture": "nineMmAmmo",
+    "tags": [
+      "Ammunition"
+    ],
+    "icon": "res://assets/items/nine_mm_ammo_v1.png"
+  },
+  ".45 acp": {
+    "id": ".45 acp",
+    "label": ".45 ACP",
+    "texture": "fortyFiveAcp",
+    "tags": [
+      "Ammunition"
+    ],
+    "icon": "res://assets/items/fortyfive_acp_v2.png"
+  },
+  "rt 85": {
+    "id": "rt 85",
+    "label": "RT 85",
+    "texture": "rt85Ammo",
+    "tags": [
+      "Ammunition"
+    ],
+    "icon": "res://assets/items/rt85_ammo_v1.png"
+  },
+  ".44 magnum": {
+    "id": ".44 magnum",
+    "label": ".44 Magnum",
+    "texture": "fortyFourMagnum",
+    "tags": [
+      "Ammunition"
+    ],
+    "icon": "res://assets/items/fortyfour_magnum_v2.png"
+  },
+  "20 gauge": {
+    "id": "20 gauge",
+    "label": "20 Gauge",
+    "texture": "twentyGauge",
+    "tags": [
+      "Ammunition"
+    ],
+    "icon": "res://assets/items/twenty_gauge_v2.png"
+  },
+  "12 gauge": {
+    "id": "12 gauge",
+    "label": "12 Gauge",
+    "texture": "twelveGauge",
+    "tags": [
+      "Ammunition"
+    ],
+    "icon": "res://assets/items/twelve_gauge_v1.png"
+  },
+  "5.56x45": {
+    "id": "5.56x45",
+    "label": "5.56x45",
+    "texture": "fivefiveSix",
+    "tags": [
+      "Ammunition"
+    ],
+    "icon": "res://assets/items/fivefive_six_v1.png"
+  },
+  "7.62x39": {
+    "id": "7.62x39",
+    "label": "7.62x39",
+    "texture": "seven62Thirtynine",
+    "tags": [
+      "Ammunition"
+    ],
+    "icon": "res://assets/items/seven62_thirtynine_v1.png"
+  },
+  ".308": {
+    "id": ".308",
+    "label": ".308",
+    "texture": "threeOhEight",
+    "tags": [
+      "Ammunition"
+    ],
+    "icon": "res://assets/items/308_ammo_v1.png"
+  },
+  "7.62x51": {
+    "id": "7.62x51",
+    "label": "7.62x51",
+    "texture": "seven62Fiftyone",
+    "tags": [
+      "Ammunition"
+    ],
+    "icon": "res://assets/items/762x51_ammo_v1.png"
+  },
   "small backpack": {
     "id": "small backpack",
     "slot": "backpack",
@@ -1696,71 +1825,89 @@
     "slot": "armor",
     "label": "Level 1 Body Armor",
     "armorClass": 1,
-    "texture": "bodyArmorLevel1",
+    "texture": "body_armor_level_1_v3",
     "tags": [
       "Armor"
     ],
-    "icon": "res://assets/items/body_armor_level_1.png"
+    "icon": "res://assets/items/body_armor_level_1_v3.png"
   },
   "level 2 body armor": {
     "id": "level 2 body armor",
     "slot": "armor",
     "label": "Level 2 Body Armor",
     "armorClass": 2,
-    "texture": "bodyArmorLevel2",
+    "texture": "body_armor_level_2_v1",
     "tags": [
       "Armor"
     ],
-    "icon": "res://assets/items/body_armor_level_2.png"
+    "icon": "res://assets/items/body_armor_level_2_v1.png"
   },
   "level 3 body armor": {
     "id": "level 3 body armor",
     "slot": "armor",
     "label": "Level 3 Body Armor",
     "armorClass": 3,
-    "texture": "bodyArmorLevel3",
+    "texture": "body_armor_level_3_v1",
     "tags": [
       "Armor"
     ],
-    "icon": "res://assets/items/body_armor_level_3.png"
+    "icon": "res://assets/items/body_armor_level_3_v1.png"
   },
   "level 4 body armor": {
     "id": "level 4 body armor",
     "slot": "armor",
     "label": "Level 4 Body Armor",
     "armorClass": 4,
-    "texture": "bodyArmorLevel4",
+    "texture": "body_armor_level_4_v1",
     "tags": [
       "Armor"
     ],
-    "icon": "res://assets/items/body_armor_level_4.png"
+    "icon": "res://assets/items/body_armor_level_4_v1.png"
   },
   "Syringe": {
     "id": "Syringe",
     "label": "Syringe",
-    "texture": "spareParts",
+    "texture": "syringe",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/syringe_v3.png"
   },
   "blood kit": {
     "id": "blood kit",
     "label": "Blood Kit",
-    "texture": "spareParts",
+    "texture": "bloodTestKit",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/blood_test_kit_v4.png"
   },
   "Cotton balls": {
     "id": "Cotton balls",
     "label": "Cotton Balls",
-    "texture": "spareParts",
+    "texture": "cottonBalls",
     "tags": [
       "Base Resource"
     ],
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/cotton_balls_v2.png"
+  },
+  "plunger": {
+    "id": "plunger",
+    "label": "Plunger",
+    "texture": "plunger",
+    "tags": [
+      "Base General"
+    ],
+    "icon": "res://assets/items/plunger_v1.png"
+  },
+  "sci fi vhs": {
+    "id": "sci fi vhs",
+    "label": "Sci-Fi VHS",
+    "texture": "sciFiVhs",
+    "tags": [
+      "Collectible"
+    ],
+    "icon": "res://assets/items/sci_fi_vhs_v1.png"
   },
   "Key": {
     "id": "Key",

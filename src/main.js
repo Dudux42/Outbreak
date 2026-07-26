@@ -187,6 +187,12 @@ const settingsMessage = document.querySelector("#settingsMessage");
 const weaponHud = document.querySelector("#weaponHud");
 const debugPanel = document.querySelector("#debugPanel");
 const debugPanelContent = document.querySelector("#debugPanelContent");
+const debugItemSpawner = document.querySelector("#debugItemSpawner");
+const debugItemSpawnerToggle = document.querySelector("#debugItemSpawnerToggle");
+const debugItemSpawnerPanel = document.querySelector("#debugItemSpawnerPanel");
+const debugItemSelect = document.querySelector("#debugItemSelect");
+const debugItemQuantity = document.querySelector("#debugItemQuantity");
+const debugItemSpawnerStatus = document.querySelector("#debugItemSpawnerStatus");
 const quantityPrompt = document.querySelector("#quantityPrompt");
 const quantityPromptForm = document.querySelector("#quantityPromptForm");
 const quantityPromptTitle = document.querySelector("#quantityPromptTitle");
@@ -298,7 +304,7 @@ const locations = [
     mapShape: "house",
     stars: 1,
     lootType: "Food, tools, basic medicine",
-    loot: ["can of beans", "Apple", "bandage", "Gears", "kitchen knife", "water bottle", "handgun ammo"],
+    loot: ["can of beans", "Apple", "bandage", "Gears", "kitchen knife", "water bottle", "9mm"],
     rooms: 7,
     mapX: 43,
     mapY: 32,
@@ -337,7 +343,7 @@ const locations = [
     mapShape: "compound",
     stars: 4,
     lootType: "Weapons, ammo, armor, comms",
-    loot: ["Handgun", "shotgun", "submachine-gun", "assault rifle", "handgun ammo", "shotgun shells", "submachine-gun ammo", "assault rifle ammo", "combat knife", "level 1 body armor", "level 2 body armor", "level 3 body armor"],
+    loot: ["beretta m9", "mossberg 500", "uzi", "m4a1", "9mm", "12 gauge", ".45 acp", "5.56x45", "combat knife", "level 1 body armor", "level 2 body armor", "level 3 body armor"],
     rooms: 13,
     mapX: 70,
     mapY: 64,
@@ -663,6 +669,7 @@ const itemCatalog = {
   "orange juice": { label: "Orange Juice", texture: "orangeJuice", tags: ["Drink"] },
   "pineapple juice": { label: "Pineapple Juice", texture: "pineappleJuice", tags: ["Drink"] },
   Milk: { label: "Milk", texture: "milk", tags: ["Drink"] },
+  milk: { label: "Milk", texture: "milk", tags: ["Drink"] },
   soda: { label: "Soda (Cola)", texture: "sodaCola", tags: ["Drink"] },
   "soda lemon": { label: "Soda (Lemon)", texture: "sodaLemon", tags: ["Drink"] },
   "energy drink": { label: "Energy Drink", texture: "energyDrink", tags: ["Drink"] },
@@ -680,6 +687,7 @@ const itemCatalog = {
   "can of sardines": { label: "Can of Sardines", texture: "canOfSardines", tags: ["Food"] },
   "bag of chips": { label: "Bag of Chips", texture: "bagOfChips", tags: ["Food"] },
   "mac 'n' cheese box": { label: "Mac 'n' Cheese Box", texture: "macNCheeseBox", tags: ["Food"] },
+  "mac n cheese box": { label: "Mac 'n' Cheese Box", texture: "macNCheeseBox", tags: ["Food"] },
   cookies: { label: "Cookies", texture: "cookies", tags: ["Food"] },
   Gears: { label: "Gears", texture: "gears", tags: ["Base Resource"] },
   screws: { label: "Screws", texture: "screws", tags: ["Base Resource"] },
@@ -691,28 +699,20 @@ const itemCatalog = {
   "car battery": { label: "Car Battery", texture: "carBattery", tags: ["Base Resource"] },
   wire: { label: "Wire", texture: "wire", tags: ["Base Resource"] },
   hammer: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Hammer", texture: "hammer", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Melee" }, weaponKind: "melee", hands: 1, damage: 32, reach: 1.75, attackSpeed: 0.75, staminaCost: 15, knockback: 0.75 },
-  crowbar: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Crowbar", texture: "crowbar", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 38, reach: 1.85, attackSpeed: 0.85, staminaCost: 17, knockback: 0.85 },
-  axe: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Axe", texture: "axe", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 52, reach: 1.95, attackSpeed: 1.0, staminaCost: 22, knockback: 1.0 },
+  crowbar: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Crowbar", texture: "crowbar_v3", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 38, reach: 1.85, attackSpeed: 0.85, staminaCost: 17, knockback: 0.85 },
+  axe: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Axe", texture: "axe_v4", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 52, reach: 1.95, attackSpeed: 1.0, staminaCost: 22, knockback: 1.0 },
   screwdriver: { label: "Screwdriver", texture: "screwdriver", tags: ["Base Resource"] },
-  RAM: { label: "RAM", texture: "spareParts", tags: ["Base Resource"] },
-  "graphics card": { label: "Graphics Card", texture: "spareParts", tags: ["Base Resource"] },
-  processor: { label: "Processor", texture: "spareParts", tags: ["Base Resource"] },
-  motherboard: { label: "Motherboard", texture: "spareParts", tags: ["Base Resource"] },
-  "power supply unit": { label: "Power Supply Unit", texture: "spareParts", tags: ["Base Resource"] },
-  Handgun: { slot: EQUIPMENT_SLOTS.SIDEARM, label: "Handgun", texture: "handgun", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Firearm" }, weaponKind: "firearm", hands: 1, ammoType: "handgun ammo", magazineSize: 15, reserveAmmo: 30, damage: 45, range: 9, fireRate: 0.35 },
-  shotgun: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Shotgun", texture: "shotgun", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Firearm" }, weaponKind: "firearm", hands: 2, ammoType: "shotgun shells", magazineSize: 6, reserveAmmo: 18, damage: 65, range: 7, spread: 8, pellets: 6, fireRate: 0.9 },
-  "submachine-gun": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Submachine Gun", texture: "handgun", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Firearm" }, weaponKind: "firearm", hands: 2, ammoType: "submachine-gun ammo", magazineSize: 30, reserveAmmo: 60, damage: 32, range: 8, fireRate: 0.12 },
-  "assault rifle": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Assault Rifle", texture: "shotgun", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Firearm" }, weaponKind: "firearm", hands: 2, ammoType: "assault rifle ammo", magazineSize: 30, reserveAmmo: 60, damage: 42, range: 11, fireRate: 0.16 },
-  "handgun ammo": { label: "Handgun Ammo", texture: "handgunAmmo", tags: ["Ammunition"], ammoType: "handgun ammo", ammoQty: 15, stackLimit: AMMO_STACK_LIMIT },
-  "shotgun shells": { label: "Shotgun Shells", texture: "shotgunAmmo", tags: ["Ammunition"], ammoType: "shotgun shells", ammoQty: 6, stackLimit: AMMO_STACK_LIMIT },
-  "submachine-gun ammo": { label: "Submachine Gun Ammo", texture: "handgunAmmo", tags: ["Ammunition"], ammoType: "submachine-gun ammo", ammoQty: 30, stackLimit: AMMO_STACK_LIMIT },
-  "assault rifle ammo": { label: "Assault Rifle Ammo", texture: "handgunAmmo", tags: ["Ammunition"], ammoType: "assault rifle ammo", ammoQty: 30, stackLimit: AMMO_STACK_LIMIT },
-  "baseball bat": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Baseball Bat", texture: "baseballBat", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 30, reach: 2.05, attackSpeed: 0.7, staminaCost: 14, knockback: 1.05 },
-  hatchet: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Hatchet", texture: "axe", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Melee" }, weaponKind: "melee", hands: 1, damage: 34, reach: 1.65, attackSpeed: 0.7, staminaCost: 15, knockback: 0.65 },
+  RAM: { label: "RAM", texture: "ramModule", tags: ["Base Resource"] },
+  "graphics card": { label: "Graphics Card", texture: "graphicsCard", tags: ["Base Resource"] },
+  processor: { label: "Processor", texture: "processor", tags: ["Base Resource"] },
+  motherboard: { label: "Motherboard", texture: "motherboard", tags: ["Base Resource"] },
+  "power supply unit": { label: "Power Supply Unit", texture: "powerSupplyUnit", tags: ["Base Resource"] },
+  "baseball bat": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Baseball Bat", texture: "baseball_bat_v2", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 30, reach: 2.05, attackSpeed: 0.7, staminaCost: 14, knockback: 1.05 },
+  hatchet: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Hatchet", texture: "hatchet_v2", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Melee" }, weaponKind: "melee", hands: 1, damage: 34, reach: 1.65, attackSpeed: 0.7, staminaCost: 15, knockback: 0.65 },
   sledgehammer: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Sledgehammer", texture: "hammer", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 62, reach: 1.9, attackSpeed: 1.1, staminaCost: 25, knockback: 1.25 },
-  Katana: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Katana", texture: "combatKnife", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 58, reach: 2.05, attackSpeed: 0.68, staminaCost: 18, knockback: 0.72 },
-  "combat knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Combat Knife", texture: "combatKnife", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Melee" }, weaponKind: "melee", hands: 1, damage: 24, reach: 1.55, attackSpeed: 0.4, staminaCost: 9, knockback: 0.4 },
-  "kitchen knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Kitchen Knife", texture: "kitchenKnife", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Melee" }, weaponKind: "melee", hands: 1, damage: 18, reach: 1.45, attackSpeed: 0.45, staminaCost: 8, knockback: 0.35 },
+  Katana: { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Katana", texture: "katana", tags: ["Weapon"], subTags: { hands: "2 handed", combat: "Melee" }, weaponKind: "melee", hands: 2, damage: 58, reach: 2.05, attackSpeed: 0.68, staminaCost: 18, knockback: 0.72 },
+  "combat knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Combat Knife", texture: "combat_knife_v2", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Melee" }, weaponKind: "melee", hands: 1, damage: 24, reach: 1.55, attackSpeed: 0.4, staminaCost: 9, knockback: 0.4 },
+  "kitchen knife": { slot: EQUIPMENT_SLOTS.PRIMARY, label: "Kitchen Knife", texture: "kitchen_knife_v2", tags: ["Weapon"], subTags: { hands: "1 handed", combat: "Melee" }, weaponKind: "melee", hands: 1, damage: 18, reach: 1.45, attackSpeed: 0.45, staminaCost: 8, knockback: 0.35 },
   "Nail gun": { label: "Nail Gun", texture: "nailGun", tags: ["Base Resource"] },
   "electrical drill": { label: "Electrical Drill", texture: "electricalDrill", tags: ["Base Resource"] },
   "hand drill": { label: "Hand Drill", texture: "handDrill", tags: ["Base Resource"] },
@@ -752,10 +752,13 @@ const itemCatalog = {
   "power bank": { label: "Power Bank", texture: "powerBank", tags: ["Base Technical"] },
   "led light bulb": { label: "LED Light Bulb", texture: "ledLightBulb", tags: ["Base Technical"] },
   "t-shaped plug": { label: "T-Shaped Plug", texture: "tShapedPlug", tags: ["Base Technical"] },
+  "t shaped plug": { label: "T-Shaped Plug", texture: "tShapedPlug", tags: ["Base Technical"] },
   "power bar": { label: "Power Bar", texture: "powerBar", tags: ["Base Technical"] },
   "extension cord": { label: "Extension Cord", texture: "extensionCord", tags: ["Base Technical"] },
   "usb-c cable": { label: "USB-C Cable", texture: "usbCCable", tags: ["Base Technical"] },
+  "usb c cable": { label: "USB-C Cable", texture: "usbCCable", tags: ["Base Technical"] },
   microphone: { label: "Microphone", texture: "microphone", tags: ["Base Technical"] },
+  headphones: { label: "Headphones", texture: "headphones", tags: ["Base Technical"] },
   calculator: { label: "Calculator", texture: "calculator", tags: ["Base Technical"] },
   "walkie talkie": { label: "Walkie-Talkie", texture: "walkieTalkie", tags: ["Base Technical"] },
   smartphone: { label: "Smartphone", texture: "smartphone", tags: ["Base Technical"] },
@@ -826,17 +829,46 @@ const itemCatalog = {
   "table clock": { label: "Table Clock", texture: "tableClock", tags: ["Collectible"] },
   cookbook: { label: "Cookbook", texture: "cookbook", tags: ["Collectible"] },
   "sci-fi vhs": { label: "Sci-Fi VHS", texture: "sciFiVhs", tags: ["Collectible"] },
+  "gaming magazine": { label: "Gaming Magazine", texture: "gamingMagazine", tags: ["Collectible"] },
+  "fishing rod": { label: "Fishing Rod", texture: "fishingRod", tags: ["Collectible"] },
+  "glock 17": { label: "Glock 17", texture: "glock17", tags: ["Weapon"] },
+  "beretta m9": { label: "Beretta M9", texture: "berettaM9", tags: ["Weapon"] },
+  "m1911": { label: "M1911", texture: "m1911", tags: ["Weapon"] },
+  "taurus 38": { label: "Taurus 38", texture: "taurus38", tags: ["Weapon"] },
+  "model 629": { label: "Model 629", texture: "model629", tags: ["Weapon"] },
+  "mossberg 500": { label: "Mossberg 500", texture: "mossberg500", tags: ["Weapon"] },
+  "benelli m4": { label: "Benelli M4", texture: "benelliM4", tags: ["Weapon"] },
+  uzi: { label: "Uzi", texture: "uzi", tags: ["Weapon"] },
+  "h&k mp5": { label: "H&K MP5", texture: "mp5", tags: ["Weapon"] },
+  "kriss vector": { label: "Kriss Vector", texture: "krissVector", tags: ["Weapon"] },
+  m4a1: { label: "M4A1", texture: "m4a1", tags: ["Weapon"] },
+  akm: { label: "AKM", texture: "akm", tags: ["Weapon"] },
+  "winchester model 70": { label: "Winchester Model 70", texture: "winchesterModel70", tags: ["Weapon"] },
+  "springfield m1a": { label: "Springfield M1A", texture: "springfieldM1A", tags: ["Weapon"] },
+  "9mm": { label: "9mm", texture: "nineMmAmmo", tags: ["Ammunition"] },
+  ".45 acp": { label: ".45 ACP", texture: "fortyFiveAcp", tags: ["Ammunition"] },
+  "rt 85": { label: "RT 85", texture: "rt85Ammo", tags: ["Ammunition"] },
+  ".44 magnum": { label: ".44 Magnum", texture: "fortyFourMagnum", tags: ["Ammunition"] },
+  "20 gauge": { label: "20 Gauge", texture: "twentyGauge", tags: ["Ammunition"] },
+  "12 gauge": { label: "12 Gauge", texture: "twelveGauge", tags: ["Ammunition"] },
+  "5.56x45": { label: "5.56x45", texture: "fivefiveSix", tags: ["Ammunition"] },
+  "7.62x39": { label: "7.62x39", texture: "seven62Thirtynine", tags: ["Ammunition"] },
+  ".308": { label: ".308", texture: "threeOhEight", tags: ["Ammunition"] },
+  "7.62x51": { label: "7.62x51", texture: "seven62Fiftyone", tags: ["Ammunition"] },
+  sledgehammer: { label: "Sledgehammer", texture: "sledgehammer", tags: ["Weapon"] },
   "small backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Small Backpack", texture: "simpleBackpack", tags: ["Equipment"], slots: 6 },
   "medium backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Medium Backpack", texture: "mediumBackpack", tags: ["Equipment"], slots: 8 },
   "large backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Large Backpack", texture: "largeBackpack", tags: ["Equipment"], slots: 10 },
-  "level 1 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 1 Body Armor", armorClass: 1, texture: "bodyArmorLevel1", tags: ["Armor"] },
-  "level 2 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 2 Body Armor", armorClass: 2, texture: "bodyArmorLevel2", tags: ["Armor"] },
-  "level 3 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 3 Body Armor", armorClass: 3, texture: "bodyArmorLevel3", tags: ["Armor"] },
-  "level 4 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 4 Body Armor", armorClass: 4, texture: "bodyArmorLevel4", tags: ["Armor"] },
-  Syringe: { label: "Syringe", texture: "spareParts", tags: ["Base Resource"] },
-  "blood kit": { label: "Blood Kit", texture: "spareParts", tags: ["Base Resource"] },
-  "suture needles": { label: "Suture Needles", texture: "spareParts", tags: ["Base Resource"] },
-  "Cotton balls": { label: "Cotton Balls", texture: "spareParts", tags: ["Base Resource"] },
+  "level 1 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 1 Body Armor", armorClass: 1, texture: "body_armor_level_1_v3", tags: ["Armor"] },
+  "level 2 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 2 Body Armor", armorClass: 2, texture: "body_armor_level_2_v1", tags: ["Armor"] },
+  "level 3 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 3 Body Armor", armorClass: 3, texture: "body_armor_level_3_v1", tags: ["Armor"] },
+  "level 4 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 4 Body Armor", armorClass: 4, texture: "body_armor_level_4_v1", tags: ["Armor"] },
+  Syringe: { label: "Syringe", texture: "syringe", tags: ["Base Resource"] },
+  "blood kit": { label: "Blood Kit", texture: "bloodTestKit", tags: ["Base Resource"] },
+  "suture needles": { label: "Suture Needles", texture: "sutureNeedles", tags: ["Base Resource"] },
+  "Cotton balls": { label: "Cotton Balls", texture: "cottonBalls", tags: ["Base Resource"] },
+  plunger: { label: "Plunger", texture: "plunger", tags: ["Base General"] },
+  "sci fi vhs": { label: "Sci-Fi VHS", texture: "sciFiVhs", tags: ["Collectible"] },
   Key: { label: "Key", texture: "key", tags: ["Key"] },
 };
 
@@ -855,20 +887,61 @@ for (const [itemId, databaseItem] of Object.entries(ITEM_DATABASE)) {
   };
 }
 
+const REMOVED_ITEM_REPLACEMENTS = Object.freeze({
+  handgun: "beretta m9",
+  shotgun: "mossberg 500",
+  submachinegun: "uzi",
+  "submachine gun": "uzi",
+  "submachine-gun": "uzi",
+  "assault rifle": "m4a1",
+  "handgun ammo": "9mm",
+  "shotgun shells": "12 gauge",
+  "shotgun ammo": "12 gauge",
+  "submachine gun ammo": ".45 acp",
+  "submachine-gun ammo": ".45 acp",
+  "assault rifle ammo": "5.56x45",
+});
+
+function normalizeRemovedItemName(itemName) {
+  if (typeof itemName !== "string") return itemName;
+  return REMOVED_ITEM_REPLACEMENTS[itemName.toLowerCase()] || itemName;
+}
+
 function makeDefaultMagazines(overrides = {}) {
+  const normalizedOverrides = Object.fromEntries(
+    Object.entries(overrides).map(([itemName, quantity]) => [
+      normalizeRemovedItemName(itemName),
+      quantity,
+    ])
+  );
   return {
-    Handgun: 15,
-    shotgun: 0,
-    "submachine-gun": 0,
-    "assault rifle": 0,
-    ...overrides,
+    "beretta m9": 15,
+    "mossberg 500": 0,
+    uzi: 0,
+    m4a1: 0,
+    ...normalizedOverrides,
   };
 }
 
 function cloneInventoryEntries(entries = []) {
   return entries
     .filter(Boolean)
-    .map((entry) => (typeof entry === "string" ? entry : { name: entry.name, qty: entry.qty }));
+    .map((entry) => (
+      typeof entry === "string"
+        ? normalizeRemovedItemName(entry)
+        : { name: normalizeRemovedItemName(entry.name), qty: entry.qty }
+    ));
+}
+
+function normalizeStashEntries(entries = []) {
+  const normalized = new Map();
+  for (const entry of entries) {
+    if (!entry) continue;
+    const itemName = normalizeRemovedItemName(typeof entry === "string" ? entry : entry.name);
+    const quantity = typeof entry === "string" ? 1 : Math.max(1, Math.floor(Number(entry.qty) || 1));
+    normalized.set(itemName, Math.min(999, (normalized.get(itemName) || 0) + quantity));
+  }
+  return Array.from(normalized, ([name, qty]) => ({ name, qty }));
 }
 
 function makeCharacterLoadout({
@@ -878,20 +951,25 @@ function makeCharacterLoadout({
   magazines = {},
   equipment = {},
 } = {}) {
-  const normalizedQuickbar = Array.isArray(quickbar) ? quickbar.slice(0, 9) : Array(9).fill(null);
+  const normalizedQuickbar = Array.isArray(quickbar)
+    ? quickbar.slice(0, 9).map((itemName) => normalizeRemovedItemName(itemName))
+    : Array(9).fill(null);
   while (normalizedQuickbar.length < 9) normalizedQuickbar.push(null);
-  return {
-    inventory: cloneInventoryEntries(inventory),
-    quickbar: normalizedQuickbar,
-    activeQuickSlot,
-    magazines: makeDefaultMagazines(magazines),
-    equipment: {
+  const normalizedEquipment = Object.fromEntries(
+    Object.entries({
       primary: null,
       sidearm: null,
       armor: null,
       backpack: "small backpack",
       ...equipment,
-    },
+    }).map(([slot, itemName]) => [slot, normalizeRemovedItemName(itemName)])
+  );
+  return {
+    inventory: cloneInventoryEntries(inventory),
+    quickbar: normalizedQuickbar,
+    activeQuickSlot,
+    magazines: makeDefaultMagazines(magazines),
+    equipment: normalizedEquipment,
   };
 }
 
@@ -900,7 +978,7 @@ function makeDefaultCharacterLoadouts() {
     female: makeCharacterLoadout({
       equipment: {
         primary: null,
-        sidearm: "Handgun",
+        sidearm: "beretta m9",
         armor: null,
         backpack: "small backpack",
       },
@@ -1000,9 +1078,9 @@ function updateVolumeSetting(settingKey, input, output) {
 function makeInitialStash() {
   const stash = [
     { name: "bandage", qty: 2 },
-    { name: "handgun ammo", qty: 30 },
-    { name: "shotgun shells", qty: 6 },
-    { name: "shotgun", qty: 1 },
+    { name: "9mm", qty: 30 },
+    { name: "12 gauge", qty: 6 },
+    { name: "mossberg 500", qty: 1 },
     { name: "axe", qty: 1 },
     { name: "Gears", qty: 3 },
   ];
@@ -1028,15 +1106,10 @@ const state = {
   inventory: [],
   quickbar: Array(9).fill(null),
   activeQuickSlot: null,
-  magazines: {
-    Handgun: 15,
-    shotgun: 0,
-    "submachine-gun": 0,
-    "assault rifle": 0,
-  },
+  magazines: makeDefaultMagazines(),
   equipment: {
     primary: null,
-    sidearm: "Handgun",
+    sidearm: "beretta m9",
     armor: null,
     backpack: "small backpack",
   },
@@ -1354,6 +1427,7 @@ const itemTexturePaths = {
   extensionCord: "./assets/items/extension_cord_v2.png",
   usbCCable: "./assets/items/usb_c_cable_v2.png",
   microphone: "./assets/items/microphone_v2.png",
+  headphones: "./assets/items/headphones_v2.png",
   calculator: "./assets/items/calculator_v2.png",
   walkieTalkie: "./assets/items/walkie_talkie_v2.png",
   smartphone: "./assets/items/smartphone_v2.png",
@@ -1366,6 +1440,32 @@ const itemTexturePaths = {
   flashDrive: "./assets/items/flash_drive_v2.png",
   floppyDisk: "./assets/items/floppy_disk_v2.png",
   gameCd: "./assets/items/game_cd_v3.png",
+  glock17: "./assets/items/glock_17_v1.png",
+  berettaM9: "./assets/items/beretta_m9_v1.png",
+  m1911: "./assets/items/m1911_v1.png",
+  taurus38: "./assets/items/taurus_38_v1.png",
+  model629: "./assets/items/model_629_v1.png",
+  mossberg500: "./assets/items/mossberg_500_v2.png",
+  benelliM4: "./assets/items/benelli_m4_v1.png",
+  uzi: "./assets/items/uzi_v2.png",
+  mp5: "./assets/items/mp5_v2.png",
+  krissVector: "./assets/items/kriss_vector_v3.png",
+  m4a1: "./assets/items/m4a1_v3.png",
+  akm: "./assets/items/akm_v1.png",
+  winchesterModel70: "./assets/items/winchester_model_70_v1.png",
+  springfieldM1A: "./assets/items/springfield_m1a_v1.png",
+  nineMmAmmo: "./assets/items/nine_mm_ammo_v1.png",
+  fortyFiveAcp: "./assets/items/fortyfive_acp_v2.png",
+  rt85Ammo: "./assets/items/rt85_ammo_v1.png",
+  fortyFourMagnum: "./assets/items/fortyfour_magnum_v2.png",
+  twentyGauge: "./assets/items/twenty_gauge_v2.png",
+  twelveGauge: "./assets/items/twelve_gauge_v1.png",
+  fivefiveSix: "./assets/items/fivefive_six_v1.png",
+  seven62Thirtynine: "./assets/items/seven62_thirtynine_v1.png",
+  threeOhEight: "./assets/items/308_ammo_v1.png",
+  seven62Fiftyone: "./assets/items/762x51_ammo_v1.png",
+  sledgehammer: "./assets/items/sledgehammer_v3.png",
+  katana: "./assets/items/katana_v2.png",
   wifiRouter: "./assets/items/wifi_router_v2.png",
   webcam: "./assets/items/webcam_v2.png",
   syringe: "./assets/items/syringe_v3.png",
@@ -1395,14 +1495,15 @@ const itemTexturePaths = {
   bagOfSugar: "./assets/items/bag_of_sugar_v2.png",
   toiletPaper: "./assets/items/toilet_paper_v2.png",
   soap: "./assets/items/soap_v2.png",
+  plunger: "./assets/items/plunger_v1.png",
   weaponParts: "./assets/items/weapon_parts_v2.png",
-  gunpowder: "./assets/items/gunpowder_v3.png",
-  handgunCasing: "./assets/items/handgun_casing_v2.png",
-  shellCasing: "./assets/items/shell_casing_v2.png",
-  submachineGunCasing: "./assets/items/submachine_gun_casing_v1.png",
-  assaultRifleCasing: "./assets/items/assault_rifle_casing_v1.png",
-  goldChain: "./assets/items/gold_chain_v1.png",
-  silverNecklace: "./assets/items/silver_necklace_v1.png",
+  gunpowder: "./assets/items/gunpowder_v4.png",
+  handgunCasing: "./assets/items/handgun_casing_v3.png",
+  shellCasing: "./assets/items/shell_casing_v3.png",
+  submachineGunCasing: "./assets/items/submachine_gun_casing_v2.png",
+  assaultRifleCasing: "./assets/items/assault_rifle_casing_v2.png",
+  goldChain: "./assets/items/gold_chain_v2.png",
+    silverNecklace: "./assets/items/silver_necklace_v2.png",
   diamondRing: "./assets/items/diamond_ring_v3.png",
   zombieBobblehead: "./assets/items/zombie_bobblehead_option_a_v1.png",
   avaBobblehead: "./assets/items/ava_bobblehead_v2.png",
@@ -1424,20 +1525,24 @@ const itemTexturePaths = {
   tableClock: "./assets/items/table_clock_v1.png",
   cookbook: "./assets/items/cookbook_v1.png",
   sciFiVhs: "./assets/items/sci_fi_vhs_v1.png",
+  gamingMagazine: "./assets/items/gaming_magazine_v3.png",
+  fishingRod: "./assets/items/fishing_rod_v1.png",
   kitchenKnife: "./assets/items/kitchen_knife.png",
+  kitchen_knife_v2: "./assets/items/kitchen_knife_v2.png",
   bandages: "./assets/items/bandages.png",
   militaryBandage: "./assets/items/military_bandage_v2.png",
   antibioticsBottle: "./assets/items/antibiotics_bottle_v2.png",
   rubbingAlcoholBottle: "./assets/items/rubbing_alcohol_bottle_v2.png",
   combatKnife: "./assets/items/combat_knife.png",
-  handgun: "./assets/items/handgun.png",
-  handgunAmmo: "./assets/items/handgun_ammo.png",
-  shotgun: "./assets/items/shotgun.png",
-  shotgunAmmo: "./assets/items/shotgun_ammo.png",
+  combat_knife_v2: "./assets/items/combat_knife_v2.png",
   bodyArmorLevel1: "./assets/items/body_armor_level_1.png",
+  body_armor_level_1_v3: "./assets/items/body_armor_level_1_v3.png",
   bodyArmorLevel2: "./assets/items/body_armor_level_2.png",
+  body_armor_level_2_v1: "./assets/items/body_armor_level_2_v1.png",
   bodyArmorLevel3: "./assets/items/body_armor_level_3.png",
+  body_armor_level_3_v1: "./assets/items/body_armor_level_3_v1.png",
   bodyArmorLevel4: "./assets/items/body_armor_level_4.png",
+  body_armor_level_4_v1: "./assets/items/body_armor_level_4_v1.png",
   waterBottle: "./assets/items/water_bottle_500ml.png",
   sodaCan: "./assets/items/soda_can.png",
   sodaCola: "./assets/items/soda_cola.png",
@@ -1463,8 +1568,14 @@ const itemTexturePaths = {
   painkillers: "./assets/items/painkillers_v2.png",
   hammer: "./assets/items/hammer_long_handle_v2.png",
   crowbar: "./assets/items/crowbar.png",
+  crowbar_v3: "./assets/items/crowbar_v3.png",
   axe: "./assets/items/axe.png",
+  axe_v3: "./assets/items/axe_v3.png",
+  axe_v4: "./assets/items/axe_v4.png",
   baseballBat: "./assets/items/baseball_bat.png",
+  baseball_bat_v2: "./assets/items/baseball_bat_v2.png",
+  hatchet_v1: "./assets/items/hatchet_v1.png",
+  hatchet_v2: "./assets/items/hatchet_v2.png",
   simpleBackpack: "./assets/items/simple_backpack.png",
   mediumBackpack: "./assets/items/medium_backpack.png",
   largeBackpack: "./assets/items/large_backpack.png",
@@ -1552,12 +1663,14 @@ let baseRoutine = {
   facing: "south",
 };
 
+initializeDebugItemSpawner();
 initThree();
 showMainMenu();
 animate();
 
 window.addEventListener("resize", resize);
 window.addEventListener("keydown", (event) => {
+  if (debugItemSpawner?.contains(event.target) && event.code !== "Escape") return;
   if (isMainMenuOpen()) {
     if (event.code === "Escape" || event.code === "Tab" || event.code.startsWith("Key")) event.preventDefault();
     return;
@@ -1711,7 +1824,7 @@ function loadSavedGame() {
   state.runSeed = Number.isFinite(saved.runSeed) ? saved.runSeed >>> 0 : state.runSeed;
   state.characterLoadouts = normalizeCharacterLoadouts(saved.characterLoadouts, saved);
   syncActiveCharacterLoadout();
-  state.stash = Array.isArray(saved.stash) ? saved.stash : state.stash;
+  state.stash = Array.isArray(saved.stash) ? normalizeStashEntries(saved.stash) : state.stash;
   state.upgrades = { ...state.upgrades, ...(saved.upgrades || {}) };
   state.activeLocation = null;
   playerAnimationClips = getCharacterProfile(state.character).animations;
@@ -6682,8 +6795,8 @@ function renderWorkbenchPanel() {
       <section class="panel-block">
         <h3>Available Crafts</h3>
         <div class="craft-list">
-          <div class="craft-row"><b>Handgun Ammo x6</b><span>2 Gears + 1 metal bar</span></div>
-          <div class="craft-row"><b>Shotgun Shells x4</b><span>2 metal sheet + 1 bolts</span></div>
+          <div class="craft-row"><b>9mm Ammo x6</b><span>2 Gears + 1 metal bar</span></div>
+          <div class="craft-row"><b>12 Gauge x4</b><span>2 metal sheet + 1 bolts</span></div>
           <div class="craft-row"><b>Weapon Repair</b><span>3 Gears</span></div>
         </div>
       </section>
@@ -7078,6 +7191,8 @@ function toggleInventory() {
 function showMainMenu() {
   keys.clear();
   state.mode = "menu";
+  closeDebugItemSpawner();
+  debugItemSpawner?.classList.add("hidden");
   canvas.style.cursor = "default";
   mainMenuMessage.textContent = "";
   mainMenu.classList.remove("hidden");
@@ -7194,6 +7309,10 @@ function loadGameFromMainMenu() {
 function handleEscapeKey() {
   keys.clear();
   if (isMainMenuOpen()) return;
+  if (isDebugItemSpawnerOpen()) {
+    closeDebugItemSpawner();
+    return;
+  }
   if (!quantityPrompt.classList.contains("hidden")) {
     quantityPromptCancel.click();
     return;
@@ -7236,6 +7355,7 @@ function isInventoryOpen() {
 function isPaused() {
   return (
     isMainMenuOpen() ||
+    isDebugItemSpawnerOpen() ||
     isInventoryOpen() ||
     isLootContainerOpen() ||
     isPauseMenuOpen() ||
@@ -7548,6 +7668,7 @@ function restoreLoadedGameToBase() {
   weaponHud.classList.add("hidden");
   baseHud.classList.remove("hidden");
   state.mode = "base";
+  debugItemSpawner?.classList.remove("hidden");
   buildBaseScene();
   renderBaseHud();
   renderQuickbar();
@@ -10285,6 +10406,70 @@ function addToStash(name, qty) {
   const existing = state.stash.find((item) => item.name === name);
   if (existing) existing.qty = Math.min(999, existing.qty + qty);
   else state.stash.push({ name, qty: Math.min(999, qty) });
+}
+
+function initializeDebugItemSpawner() {
+  if (
+    !debugItemSpawner ||
+    !debugItemSpawnerToggle ||
+    !debugItemSpawnerPanel ||
+    !debugItemSelect ||
+    !debugItemQuantity
+  ) return;
+
+  const items = Object.values(ITEM_DATABASE)
+    .slice()
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+  for (const item of items) {
+    const option = document.createElement("option");
+    option.value = item.id;
+    option.textContent = item.label;
+    debugItemSelect.append(option);
+  }
+
+  debugItemSpawnerToggle.addEventListener("click", () => {
+    const shouldOpen = debugItemSpawnerPanel.classList.contains("hidden");
+    debugItemSpawnerPanel.classList.toggle("hidden", !shouldOpen);
+    debugItemSpawnerToggle.setAttribute("aria-expanded", String(shouldOpen));
+    if (shouldOpen) {
+      keys.clear();
+      resetAimingInput();
+      debugItemSpawnerStatus.textContent = "";
+      debugItemSelect.focus();
+    }
+  });
+
+  debugItemSpawnerPanel.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const itemId = debugItemSelect.value;
+    if (!ITEM_DATABASE[itemId]) return;
+    const quantity = THREE.MathUtils.clamp(
+      Math.floor(Number(debugItemQuantity.value) || 1),
+      1,
+      999
+    );
+    debugItemQuantity.value = String(quantity);
+    addToStash(itemId, quantity);
+    debugItemSpawnerStatus.textContent = `Added ${getItemLabel(itemId)} x${quantity}.`;
+
+    const panelBody = basePanel.querySelector(".base-panel__body");
+    if (!basePanel.classList.contains("hidden") && panelBody?.dataset.station === "itemBox") {
+      renderItemBoxPanel();
+    }
+    updateDebugPanel();
+  });
+}
+
+function isDebugItemSpawnerOpen() {
+  return Boolean(debugItemSpawnerPanel && !debugItemSpawnerPanel.classList.contains("hidden"));
+}
+
+function closeDebugItemSpawner() {
+  if (!debugItemSpawnerPanel || !debugItemSpawnerToggle) return;
+  debugItemSpawnerPanel.classList.add("hidden");
+  debugItemSpawnerToggle.setAttribute("aria-expanded", "false");
+  debugItemSpawnerStatus.textContent = "";
 }
 
 function updateHud() {

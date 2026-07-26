@@ -171,6 +171,24 @@
     "height": null
   },
   {
+    "path": "res://assets/items/308_ammo_v1.png",
+    "source_path": "assets/items/308_ammo_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15659,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/762x51_ammo_v1.png",
+    "source_path": "assets/items/762x51_ammo_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16332,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/aa_battery_pair_v3.png",
     "source_path": "assets/items/aa_battery_pair_v3.png",
     "category": "item_icon",
@@ -185,6 +203,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 13761,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/akm_v1.png",
+    "source_path": "assets/items/akm_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 7535,
     "width": 128,
     "height": 128
   },
@@ -261,6 +288,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/assault_rifle_casing_v2.png",
+    "source_path": "assets/items/assault_rifle_casing_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14638,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/ava_bobblehead_v1.png",
     "source_path": "assets/items/ava_bobblehead_v1.png",
     "category": "item_icon",
@@ -293,6 +329,33 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 562,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/axe_v2.png",
+    "source_path": "assets/items/axe_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12248,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/axe_v3.png",
+    "source_path": "assets/items/axe_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21019,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/axe_v4.png",
+    "source_path": "assets/items/axe_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11781,
     "width": 128,
     "height": 128
   },
@@ -396,6 +459,33 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/baseball_bat_v2.png",
+    "source_path": "assets/items/baseball_bat_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 7645,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/benelli_m4_v1.png",
+    "source_path": "assets/items/benelli_m4_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 5612,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/beretta_m9_v1.png",
+    "source_path": "assets/items/beretta_m9_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11962,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/bianca_bobblehead_v1.png",
     "source_path": "assets/items/bianca_bobblehead_v1.png",
     "category": "item_icon",
@@ -441,11 +531,38 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/body_armor_level_1_v2.png",
+    "source_path": "assets/items/body_armor_level_1_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10677,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/body_armor_level_1_v3.png",
+    "source_path": "assets/items/body_armor_level_1_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13005,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/body_armor_level_2.png",
     "source_path": "assets/items/body_armor_level_2.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 595,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/body_armor_level_2_v1.png",
+    "source_path": "assets/items/body_armor_level_2_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17079,
     "width": 128,
     "height": 128
   },
@@ -459,11 +576,29 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/body_armor_level_3_v1.png",
+    "source_path": "assets/items/body_armor_level_3_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15073,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/body_armor_level_4.png",
     "source_path": "assets/items/body_armor_level_4.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 609,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/body_armor_level_4_v1.png",
+    "source_path": "assets/items/body_armor_level_4_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 21256,
     "width": 128,
     "height": 128
   },
@@ -639,6 +774,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/combat_knife_v2.png",
+    "source_path": "assets/items/combat_knife_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9138,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/compass_v2.png",
     "source_path": "assets/items/compass_v2.png",
     "category": "item_icon",
@@ -698,6 +842,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 537,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/crowbar_v2.png",
+    "source_path": "assets/items/crowbar_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9272,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/crowbar_v3.png",
+    "source_path": "assets/items/crowbar_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 6925,
     "width": 128,
     "height": 128
   },
@@ -882,6 +1044,24 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/fishing_rod_v1.png",
+    "source_path": "assets/items/fishing_rod_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8069,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/fivefive_six_v1.png",
+    "source_path": "assets/items/fivefive_six_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15053,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/flash_drive_v2.png",
     "source_path": "assets/items/flash_drive_v2.png",
     "category": "item_icon",
@@ -896,6 +1076,42 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 18026,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/fortyfive_acp_v1.png",
+    "source_path": "assets/items/fortyfive_acp_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18476,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/fortyfive_acp_v2.png",
+    "source_path": "assets/items/fortyfive_acp_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18542,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/fortyfour_magnum_v1.png",
+    "source_path": "assets/items/fortyfour_magnum_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17996,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/fortyfour_magnum_v2.png",
+    "source_path": "assets/items/fortyfour_magnum_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16040,
     "width": 128,
     "height": 128
   },
@@ -927,6 +1143,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/gaming_magazine_v3.png",
+    "source_path": "assets/items/gaming_magazine_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 24428,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/gears.png",
     "source_path": "assets/items/gears.png",
     "category": "item_icon",
@@ -936,11 +1161,29 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/glock_17_v1.png",
+    "source_path": "assets/items/glock_17_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11062,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/gold_chain_v1.png",
     "source_path": "assets/items/gold_chain_v1.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 9504,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/gold_chain_v2.png",
+    "source_path": "assets/items/gold_chain_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8916,
     "width": 128,
     "height": 128
   },
@@ -981,6 +1224,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/gunpowder_v4.png",
+    "source_path": "assets/items/gunpowder_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16570,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/hammer.png",
     "source_path": "assets/items/hammer.png",
     "category": "item_icon",
@@ -1008,15 +1260,6 @@
     "height": 128
   },
   {
-    "path": "res://assets/items/handgun_ammo.png",
-    "source_path": "assets/items/handgun_ammo.png",
-    "category": "item_icon",
-    "type": "png",
-    "bytes": 20715,
-    "width": 128,
-    "height": 128
-  },
-  {
     "path": "res://assets/items/handgun_casing_v1.png",
     "source_path": "assets/items/handgun_casing_v1.png",
     "category": "item_icon",
@@ -1035,6 +1278,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/handgun_casing_v3.png",
+    "source_path": "assets/items/handgun_casing_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16992,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/hand_drill_v2.png",
     "source_path": "assets/items/hand_drill_v2.png",
     "category": "item_icon",
@@ -1049,6 +1301,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 20800,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/hatchet_v1.png",
+    "source_path": "assets/items/hatchet_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13463,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/hatchet_v2.png",
+    "source_path": "assets/items/hatchet_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11807,
     "width": 128,
     "height": 128
   },
@@ -1125,6 +1395,24 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/katana_v1.png",
+    "source_path": "assets/items/katana_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10337,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/katana_v2.png",
+    "source_path": "assets/items/katana_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 5236,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/key.png",
     "source_path": "assets/items/key.png",
     "category": "item_icon",
@@ -1148,6 +1436,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 561,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/kitchen_knife_v2.png",
+    "source_path": "assets/items/kitchen_knife_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9666,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/kriss_vector_v3.png",
+    "source_path": "assets/items/kriss_vector_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11037,
     "width": 128,
     "height": 128
   },
@@ -1287,6 +1593,42 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/m1911_v1.png",
+    "source_path": "assets/items/m1911_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11948,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/m4a1_v1.png",
+    "source_path": "assets/items/m4a1_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 7296,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/m4a1_v2.png",
+    "source_path": "assets/items/m4a1_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8585,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/m4a1_v3.png",
+    "source_path": "assets/items/m4a1_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8349,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/mac_n_cheese_box.png",
     "source_path": "assets/items/mac_n_cheese_box.png",
     "category": "item_icon",
@@ -1395,6 +1737,33 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/model_629_v1.png",
+    "source_path": "assets/items/model_629_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12077,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/mossberg_500_v1.png",
+    "source_path": "assets/items/mossberg_500_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 5219,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/mossberg_500_v2.png",
+    "source_path": "assets/items/mossberg_500_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 5322,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/motherboard_v2.png",
     "source_path": "assets/items/motherboard_v2.png",
     "category": "item_icon",
@@ -1418,6 +1787,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 11014,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/mp5_v1.png",
+    "source_path": "assets/items/mp5_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10509,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/mp5_v2.png",
+    "source_path": "assets/items/mp5_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 7581,
     "width": 128,
     "height": 128
   },
@@ -1463,6 +1850,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 19810,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/nine_mm_ammo_v1.png",
+    "source_path": "assets/items/nine_mm_ammo_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18718,
     "width": 128,
     "height": 128
   },
@@ -1719,6 +2115,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/rt85_ammo_v1.png",
+    "source_path": "assets/items/rt85_ammo_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17725,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/rubbing_alcohol_bottle.png",
     "source_path": "assets/items/rubbing_alcohol_bottle.png",
     "category": "item_icon",
@@ -1836,6 +2241,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/seven62_thirtynine_v1.png",
+    "source_path": "assets/items/seven62_thirtynine_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15963,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/shell_casing_v1.png",
     "source_path": "assets/items/shell_casing_v1.png",
     "category": "item_icon",
@@ -1850,6 +2264,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 15472,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/shell_casing_v3.png",
+    "source_path": "assets/items/shell_casing_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 16270,
     "width": 128,
     "height": 128
   },
@@ -1890,11 +2313,47 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/silver_necklace_v2.png",
+    "source_path": "assets/items/silver_necklace_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 6926,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/simple_backpack.png",
     "source_path": "assets/items/simple_backpack.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 10078,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/sledgehammer_v1.png",
+    "source_path": "assets/items/sledgehammer_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9516,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/sledgehammer_v2.png",
+    "source_path": "assets/items/sledgehammer_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9263,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/sledgehammer_v3.png",
+    "source_path": "assets/items/sledgehammer_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 6838,
     "width": 128,
     "height": 128
   },
@@ -1971,6 +2430,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/springfield_m1a_v1.png",
+    "source_path": "assets/items/springfield_m1a_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 6031,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/ssd_drive_v2.png",
     "source_path": "assets/items/ssd_drive_v2.png",
     "category": "item_icon",
@@ -1985,6 +2453,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 12124,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/submachine_gun_casing_v2.png",
+    "source_path": "assets/items/submachine_gun_casing_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10758,
     "width": 128,
     "height": 128
   },
@@ -2070,6 +2547,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/taurus_38_v1.png",
+    "source_path": "assets/items/taurus_38_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 13689,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/tea_box_v2.png",
     "source_path": "assets/items/tea_box_v2.png",
     "category": "item_icon",
@@ -2142,6 +2628,33 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/twelve_gauge_v1.png",
+    "source_path": "assets/items/twelve_gauge_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18188,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/twenty_gauge_v1.png",
+    "source_path": "assets/items/twenty_gauge_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17359,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/twenty_gauge_v2.png",
+    "source_path": "assets/items/twenty_gauge_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18430,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/t_shaped_plug_v3.png",
     "source_path": "assets/items/t_shaped_plug_v3.png",
     "category": "item_icon",
@@ -2165,6 +2678,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 21783,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/uzi_v1.png",
+    "source_path": "assets/items/uzi_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 12578,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/uzi_v2.png",
+    "source_path": "assets/items/uzi_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11853,
     "width": 128,
     "height": 128
   },
@@ -2246,6 +2777,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 15296,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/winchester_model_70_v1.png",
+    "source_path": "assets/items/winchester_model_70_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 5292,
     "width": 128,
     "height": 128
   },

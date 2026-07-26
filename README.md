@@ -26,6 +26,7 @@ Death ends the current run and forfeits carried mission loot. The larger permade
 - Four handcrafted house templates plus procedural room-graph generation for other locations.
 - Visible animated doors, locked doors, accessible key placement, exterior spawning, and map bounds.
 - Eight-direction locomotion, aiming, pickup animation, action-state fallbacks, and debug diagnostics.
+- Left-center debug item spawner for adding any canonical item to the Item Box.
 - Firearm and melee combat, ammunition, reloads, zombie AI, zombie variants, and persistent corpses.
 - Multiple extraction points, success/failure flow, local save data, audio settings, and resolution settings.
 - Generated environment textures and native Three.js prop meshes, including the wooden supply crate.

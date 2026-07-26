@@ -4,11 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Outbreak Run Prototype</title>
-    <link rel="stylesheet" href="./src/styles.css?v=inventory-drag-v2" />
+    <link rel="stylesheet" href="./src/styles.css?v=debug-items-v3" />
   </head>
   <body>
     <main id="app">
       <canvas id="game"></canvas>
+
+      <section id="debugItemSpawner" class="debug-item-spawner hidden" aria-label="Debug item spawner">
+        <button
+          id="debugItemSpawnerToggle"
+          class="debug-item-spawner__toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="debugItemSpawnerPanel"
+        >
+          Debug Items
+        </button>
+        <form id="debugItemSpawnerPanel" class="debug-item-spawner__panel hidden">
+          <label>
+            <span>Item</span>
+            <select id="debugItemSelect" aria-label="Item to add"></select>
+          </label>
+          <label>
+            <span>Quantity</span>
+            <input id="debugItemQuantity" type="number" min="1" max="999" value="1" inputmode="numeric" />
+          </label>
+          <button class="debug-item-spawner__add" type="submit">Add to Item Box</button>
+          <p id="debugItemSpawnerStatus" class="debug-item-spawner__status" aria-live="polite"></p>
+        </form>
+      </section>
 
       <section id="mainMenu" class="main-menu" aria-label="Main menu">
         <div class="main-menu__artwork">

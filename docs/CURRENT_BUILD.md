@@ -35,6 +35,7 @@ For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PRO
 - Central action-state controller with movement locks and priorities.
 - Mouse-facing behavior and distance-synchronized locomotion playback.
 - `Y` animation/debug panel.
+- Left-center debug item spawner with canonical item selection, quantity control, and direct Item Box insertion.
 
 ### Inventory and Items
 
@@ -44,7 +45,7 @@ For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PRO
 - Quickbar slots `1` through `9`, with primary/sidearm ownership for slots `1` and `2`.
 - Item box stash transfers.
 - Loot-container search delay, per-item reveal, and transfers.
-- Item database with 193 canonical records, 45 compatibility aliases, 15 loot tags, named firearm/ammunition families, runtime weapon/armor/backpack stats, and extended metadata for food, drinks, medical supplies, tools, electronics, collectibles, and construction resources.
+- Item database with 193 canonical records, 26 compatibility aliases, 15 loot tags, named firearm/ammunition families, runtime weapon/armor/backpack stats, and extended metadata for food, drinks, medical supplies, tools, electronics, collectibles, and construction resources.
 - Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, construction-resource, technical-electronics, weapon-component, general-supply, and collectible icons through Sci-Fi VHS.
 - Newly attached collectible icons for Dog Statue, Tiger Statue, Teddy Bear, Cloth Doll, Toy Car, Wristwatch, Police Badge, Table Clock, Cookbook, and Sci-Fi VHS.
 

@@ -271,7 +271,7 @@ The audited database contains 193 canonical item records, 45 aliases, and 15 loo
 
 - Firearms: Glock 17, Beretta M9, M1911, Taurus 38, Model 629, Mossberg 500, Benelli M4, Uzi, H&K MP5, Kriss Vector, M4A1, AKM, Winchester Model 70, and Springfield M1A.
 - Ammunition: 9mm, .45 ACP, RT 85, .44 Magnum, 20 Gauge, 12 Gauge, 5.56x45, 7.62x39, .308, and 7.62x51.
-- Legacy terms such as Handgun, Shotgun, Submachine Gun, Assault Rifle, Rifle, and their old ammunition labels resolve through aliases.
+- Retired generic Handgun, Shotgun, Submachine Gun, and Assault Rifle items and their old ammunition labels are not live aliases or catalog entries. Older saves convert those names to their canonical replacements during load. Rifle and Rifle Ammo remain intentional compatibility aliases for Winchester Model 70 and .308.
 
 ### 8.3 Current collectible icon boundary
 
