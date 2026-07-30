@@ -1,5 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
+import { femalePlayerAnimationClips } from "../src/data/animationDatabase.js";
+import { characterDatabase } from "../src/data/characterDatabase.js";
+import { locations } from "../src/data/locationDatabase.js";
+import {
+  PLAYER_ACTION_CONFIG,
+  PLAYER_ACTION_STATES,
+} from "../src/systems/player/playerActionState.js";
 
 const root = process.cwd();
 const sourcePath = path.join(root, "src", "main.js");
@@ -28,7 +35,6 @@ const EQUIPMENT_SLOTS = {
 
 const AMMO_STACK_LIMIT = 60;
 const AIM_ASSET_VERSION = "firearm-aim-1";
-let playerActionStatesForEval = {};
 
 function extractConst(name) {
   const marker = `const ${name} =`;
@@ -52,9 +58,8 @@ function evaluateExpression(expression) {
     "EQUIPMENT_SLOTS",
     "AMMO_STACK_LIMIT",
     "AIM_ASSET_VERSION",
-    "PLAYER_ACTION_STATES",
     `"use strict"; return (${expression});`
-  )(EQUIPMENT_SLOTS, AMMO_STACK_LIMIT, AIM_ASSET_VERSION, playerActionStatesForEval);
+  )(EQUIPMENT_SLOTS, AMMO_STACK_LIMIT, AIM_ASSET_VERSION);
 }
 
 function stripQuery(assetPath) {
@@ -96,22 +101,16 @@ function readImageSize(filePath) {
   return { width: null, height: null };
 }
 
-const locations = evaluateExpression(extractConst("locations"));
 const itemCatalog = evaluateExpression(extractConst("itemCatalog"));
 const upgradeData = evaluateExpression(extractConst("upgradeData"));
 const texturePaths = evaluateExpression(extractConst("texturePaths"));
 const itemTexturePaths = evaluateExpression(extractConst("itemTexturePaths"));
-const characterDatabase = evaluateExpression(extractConst("characterDatabase"));
-const playerAnimationClips = evaluateExpression(extractConst("femalePlayerAnimationClips"));
+const playerAnimationClips = structuredClone(femalePlayerAnimationClips);
 const zombieAnimationClips = {};
 const enemyTypes = [
   { id: "civilian_zombie", name: "Civilian Zombie", prefix: "zombie", frames: { idle: 1, walk: 9, death: 13 } },
   { id: "dark_civilian_zombie", name: "Dark Civilian Zombie", prefix: "zombie_dark", frames: { idle: 1, walk: 1, death: 1 } },
 ];
-const playerActionStates = evaluateExpression(extractConst("PLAYER_ACTION_STATES"));
-playerActionStatesForEval = playerActionStates;
-const playerActionConfig = evaluateExpression(extractConst("PLAYER_ACTION_CONFIG"));
-
 for (const direction of DIRECTIONS) {
   playerAnimationClips[`firearm_aim_${direction}`] = {
     src: `./assets/player_firearm_aim_${direction}_sheet.png?v=${AIM_ASSET_VERSION}`,
@@ -218,8 +217,8 @@ writeJson("asset_manifest.json", assetManifest);
 writeJson("migration_constants.json", {
   directions: DIRECTIONS,
   equipment_slots: EQUIPMENT_SLOTS,
-  player_action_states: playerActionStates,
-  player_action_config: playerActionConfig,
+  player_action_states: PLAYER_ACTION_STATES,
+  player_action_config: PLAYER_ACTION_CONFIG,
   ammo_stack_limit: AMMO_STACK_LIMIT,
 });
 

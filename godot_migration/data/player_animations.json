@@ -1,59 +1,59 @@
 {
   "idle_south": {
     "id": "idle_south",
-    "sheet": "res://assets/player_breathing_south_sheet.png",
-    "frames": 4,
-    "frame_duration_seconds": 0.24,
-    "fps": 4.167
+    "sheet": "res://assets/player_ava_idle_south_sheet.png",
+    "frames": 16,
+    "frame_duration_seconds": 0.15,
+    "fps": 6.667
   },
   "idle_north": {
     "id": "idle_north",
-    "sheet": "res://assets/player_breathing_north_sheet.png",
-    "frames": 4,
-    "frame_duration_seconds": 0.24,
-    "fps": 4.167
+    "sheet": "res://assets/player_ava_idle_north_sheet.png",
+    "frames": 16,
+    "frame_duration_seconds": 0.15,
+    "fps": 6.667
   },
   "idle_north_east": {
     "id": "idle_north_east",
-    "sheet": "res://assets/player_breathing_north_east_sheet.png",
-    "frames": 4,
-    "frame_duration_seconds": 0.24,
-    "fps": 4.167
+    "sheet": "res://assets/player_ava_idle_north_east_sheet.png",
+    "frames": 16,
+    "frame_duration_seconds": 0.15,
+    "fps": 6.667
   },
   "idle_east": {
     "id": "idle_east",
-    "sheet": "res://assets/player_breathing_east_sheet.png",
-    "frames": 4,
-    "frame_duration_seconds": 0.24,
-    "fps": 4.167
+    "sheet": "res://assets/player_ava_idle_east_sheet.png",
+    "frames": 16,
+    "frame_duration_seconds": 0.15,
+    "fps": 6.667
   },
   "idle_south_east": {
     "id": "idle_south_east",
-    "sheet": "res://assets/player_breathing_south_east_sheet.png",
-    "frames": 4,
-    "frame_duration_seconds": 0.24,
-    "fps": 4.167
+    "sheet": "res://assets/player_ava_idle_south_east_sheet.png",
+    "frames": 16,
+    "frame_duration_seconds": 0.15,
+    "fps": 6.667
   },
   "idle_south_west": {
     "id": "idle_south_west",
-    "sheet": "res://assets/player_breathing_south_west_sheet.png",
-    "frames": 4,
-    "frame_duration_seconds": 0.24,
-    "fps": 4.167
+    "sheet": "res://assets/player_ava_idle_south_west_sheet.png",
+    "frames": 16,
+    "frame_duration_seconds": 0.15,
+    "fps": 6.667
   },
   "idle_west": {
     "id": "idle_west",
-    "sheet": "res://assets/player_breathing_west_sheet.png",
-    "frames": 4,
-    "frame_duration_seconds": 0.24,
-    "fps": 4.167
+    "sheet": "res://assets/player_ava_idle_west_sheet.png",
+    "frames": 16,
+    "frame_duration_seconds": 0.15,
+    "fps": 6.667
   },
   "idle_north_west": {
     "id": "idle_north_west",
-    "sheet": "res://assets/player_breathing_north_west_sheet.png",
-    "frames": 4,
-    "frame_duration_seconds": 0.24,
-    "fps": 4.167
+    "sheet": "res://assets/player_ava_idle_north_west_sheet.png",
+    "frames": 16,
+    "frame_duration_seconds": 0.15,
+    "fps": 6.667
   },
   "walk_north": {
     "id": "walk_north",
@@ -166,6 +166,62 @@
     "frames": 8,
     "frame_duration_seconds": 0.11,
     "fps": 9.091
+  },
+  "pickup_north": {
+    "id": "pickup_north",
+    "sheet": "res://assets/player_pickup_north_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "pickup_north_east": {
+    "id": "pickup_north_east",
+    "sheet": "res://assets/player_pickup_north_east_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "pickup_east": {
+    "id": "pickup_east",
+    "sheet": "res://assets/player_pickup_east_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "pickup_south_east": {
+    "id": "pickup_south_east",
+    "sheet": "res://assets/player_pickup_south_east_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "pickup_south": {
+    "id": "pickup_south",
+    "sheet": "res://assets/player_pickup_south_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "pickup_south_west": {
+    "id": "pickup_south_west",
+    "sheet": "res://assets/player_pickup_south_west_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "pickup_west": {
+    "id": "pickup_west",
+    "sheet": "res://assets/player_pickup_west_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
+  },
+  "pickup_north_west": {
+    "id": "pickup_north_west",
+    "sheet": "res://assets/player_pickup_north_west_sheet.png",
+    "frames": 9,
+    "frame_duration_seconds": 0.08,
+    "fps": 12.5
   },
   "firearm_aim_north": {
     "id": "firearm_aim_north",

@@ -1719,6 +1719,78 @@
     "height": 124
   },
   {
+    "path": "res://assets/player_ava_idle_east_sheet.png",
+    "source_path": "assets/player_ava_idle_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 12075,
+    "width": 2048,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_ava_idle_north_east_sheet.png",
+    "source_path": "assets/player_ava_idle_north_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 15596,
+    "width": 2048,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_ava_idle_north_sheet.png",
+    "source_path": "assets/player_ava_idle_north_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 16543,
+    "width": 2048,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_ava_idle_north_west_sheet.png",
+    "source_path": "assets/player_ava_idle_north_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 14574,
+    "width": 2048,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_ava_idle_south_east_sheet.png",
+    "source_path": "assets/player_ava_idle_south_east_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 15837,
+    "width": 2048,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_ava_idle_south_sheet.png",
+    "source_path": "assets/player_ava_idle_south_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 19845,
+    "width": 2048,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_ava_idle_south_west_sheet.png",
+    "source_path": "assets/player_ava_idle_south_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 17906,
+    "width": 2048,
+    "height": 128
+  },
+  {
+    "path": "res://assets/player_ava_idle_west_sheet.png",
+    "source_path": "assets/player_ava_idle_west_sheet.png",
+    "category": "player_animation",
+    "type": "png",
+    "bytes": 13542,
+    "width": 2048,
+    "height": 128
+  },
+  {
     "path": "res://assets/player_breathing_east_sheet.png",
     "source_path": "assets/player_breathing_east_sheet.png",
     "category": "player_animation",
@@ -3679,15 +3751,6 @@
     "bytes": 491127,
     "width": null,
     "height": null
-  },
-  {
-    "path": "res://assets/portraits/future_survivor_02.png",
-    "source_path": "assets/portraits/future_survivor_02.png",
-    "category": "source_or_reference",
-    "type": "png",
-    "bytes": 1764647,
-    "width": 1254,
-    "height": 1254
   },
   {
     "path": "res://assets/portraits/future_survivor_03.png",
