@@ -118,7 +118,7 @@ After approval and attachment, update `itemTexturePaths`, regenerate Godot data,
 
 ## Animation Contributions
 
-- Preserve eight canonical directions: north, north_east, east, south_east, south, south_west, west, north_west.
+- Preserve all eight canonical directions in the production order: south, south_east, east, north_east, north, north_west, west, south_west. South is front-facing and North is rear-facing.
 - Keep source GIFs and derived sprite sheets when the pipeline depends on both.
 - Verify frame count and frame duration in the clip definition.
 - Remove chroma-key backgrounds without damaging the sprite outline.

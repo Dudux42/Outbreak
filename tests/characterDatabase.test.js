@@ -18,7 +18,7 @@ test("character profiles preserve the playable runtime roster", () => {
 });
 
 test("character database preserves active and future survivor metadata", () => {
-  assert.equal(characterDatabase.length, 13);
+  assert.equal(characterDatabase.length, 12);
   assert.equal(characterDatabase.filter((character) => character.playable).length, 4);
   assert.equal(characterDatabase[0].runtimeProfileId, "female");
   assert.equal(characterDatabase.at(-1).status, "future");

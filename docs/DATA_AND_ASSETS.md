@@ -62,20 +62,24 @@ The item-list pass is intentionally sequential: generate one candidate, wait for
 
 Runtime sprite sheets are horizontal PNG strips. Clip definitions provide path, frame count, and frame duration.
 
+Ava's runtime idle clips use `assets/player_ava_idle_<direction>_sheet.png`. Each of the eight direction files is a `2048x128` RGBA strip containing sixteen `128x128` frames. `femalePlayerAnimationClips` in `src/data/animationDatabase.js` maps them at `0.15` seconds per frame.
+
+Character body templates, the planned 29-action production set, character-brief requirements, and per-action approval workflow are defined in [`CHARACTER_SPRITE_SHEETS.md`](CHARACTER_SPRITE_SHEETS.md). That document describes planned art coverage and must not be read as a claim that every listed action is implemented.
+
 Canonical directions:
 
 ```text
-north
-north_east
-east
-south_east
 south
-south_west
-west
+south_east
+east
+north_east
+north
 north_west
+west
+south_west
 ```
 
-Source GIF naming can vary, but output filenames must use these direction keys.
+South is front-facing and North is rear-facing. Source GIF naming can vary, but output filenames must use these direction keys and match the visible facing direction.
 
 Relevant tools:
 

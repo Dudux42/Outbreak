@@ -10,7 +10,6 @@ PORTRAITS = [
     ("ava_belmont", Path(r"C:\Users\user\Pictures\female character\Gemini_Generated_Image_cderk8cderk8cder.png")),
     ("peter_ashfield", Path(r"C:\Users\user\Pictures\Male Character\Gemini_Generated_Image_p1mal4p1mal4p1ma.png")),
     ("alynne", Path(r"C:\Users\user\Pictures\alynne 2d.jpeg")),
-    ("future_survivor_02", Path(r"C:\Users\user\Pictures\ChatGPT Image Jul 10, 2026, 04_13_33 PM.png")),
     ("future_survivor_03", Path(r"C:\Users\user\Pictures\Gemini_Generated_Image_8oj8sa8oj8sa8oj8.png")),
     ("future_survivor_04", Path(r"C:\Users\user\Pictures\Gemini_Generated_Image_epc3ceepc3ceepc3.png")),
     ("future_survivor_05", Path(r"C:\Users\user\Pictures\Gemini_Generated_Image_m6tfhhm6tfhhm6tf.png")),

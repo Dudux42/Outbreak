@@ -93,6 +93,8 @@ Automated coverage is still limited. `npm run build` plus focused browser verifi
 - [Current Build](docs/CURRENT_BUILD.md)
 - [Gameplay Systems](docs/GAMEPLAY_SYSTEMS.md)
 - [Data and Asset Pipeline](docs/DATA_AND_ASSETS.md)
+- [Character Sprite Sheet Specification](docs/CHARACTER_SPRITE_SHEETS.md)
+- [Character Profiles](docs/characters/README.md)
 - [Handoff Guide](docs/HANDOFF.md)
 - [Contributing](CONTRIBUTING.md)
 - [Agent Instructions](AGENTS.md)

@@ -72,14 +72,6 @@ const characterDatabase = [
     portrait: "./assets/portraits/luis_restyled.png",
   },
   {
-    id: "future_survivor_02",
-    name: "Future Survivor 02",
-    status: "future",
-    playable: false,
-    runtimeProfileId: null,
-    portrait: "./assets/portraits/future_survivor_02.png",
-  },
-  {
     id: "future_survivor_03",
     name: "Future Survivor 03",
     status: "future",

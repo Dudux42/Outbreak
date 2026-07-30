@@ -9,18 +9,21 @@ This directory is the project handoff layer. It records what the game is intende
 3. [`../Architecture.md`](../Architecture.md) - runtime ownership, state, update loop, and data flow.
 4. [`GAMEPLAY_SYSTEMS.md`](GAMEPLAY_SYSTEMS.md) - behavioral contracts for the safehouse, inventory, missions, combat, AI, and saves.
 5. [`DATA_AND_ASSETS.md`](DATA_AND_ASSETS.md) - item data, icons, sprites, textures, audio, templates, and export tools.
-6. [`HANDOFF.md`](HANDOFF.md) - practical start/finish checklist for future work.
+6. [`CHARACTER_SPRITE_SHEETS.md`](CHARACTER_SPRITE_SHEETS.md) - planned body-template, direction, action, and character-brief rules for sprite production.
+7. [`HANDOFF.md`](HANDOFF.md) - practical start/finish checklist for future work.
 
 ## Design and Direction
 
 - [`GAME_DESIGN.md`](GAME_DESIGN.md) - product pillars, core loop, location model, safehouse progression, risk model, visual direction, and roadmap.
 - [`CURRENT_BUILD.md`](CURRENT_BUILD.md) - authoritative reality check against that design.
+- [`characters/README.md`](characters/README.md) - authoritative per-character profiles and asset-production identity references.
 
 ## Development Rules
 
 - [`../CONTRIBUTING.md`](../CONTRIBUTING.md) - development workflow and verification matrix.
 - [`../AGENTS.md`](../AGENTS.md) - mandatory repository rules for coding agents.
 - [`../ITEM_ICON_STYLE_GUIDE.md`](../ITEM_ICON_STYLE_GUIDE.md) - mandatory inventory icon specification.
+- [`CHARACTER_SPRITE_SHEETS.md`](CHARACTER_SPRITE_SHEETS.md) - character sprite-sheet production specification.
 
 ## Godot Migration
 

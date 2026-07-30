@@ -39,7 +39,9 @@ test("animation database keeps the shared directional clip contract", () => {
 });
 
 test("animation database preserves character-specific frame metadata", () => {
-  assert.equal(femalePlayerAnimationClips.idle_south.frames, 4);
+  assert.equal(femalePlayerAnimationClips.idle_south.frames, 16);
+  assert.equal(femalePlayerAnimationClips.idle_south.frameDuration, 0.15);
+  assert.equal(femalePlayerAnimationClips.idle_north_west.src, "./assets/player_ava_idle_north_west_sheet.png");
   assert.equal(malePlayerAnimationClips.idle_south.frames, 9);
   assert.equal(alynnePlayerAnimationClips.idle_south.frames, 8);
   assert.equal(alynnePlayerAnimationClips.idle_north.frames, 4);

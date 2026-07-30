@@ -28,7 +28,7 @@ Last documentation audit: 2026-07-17.
 
 - Ava Belmont, Peter Ashfield, Alynne, and Luis are playable.
 - Independent inventory, equipment, magazine, quickbar, and active-slot loadouts.
-- Eight-direction idle, walk, and run sheets for all active survivors.
+- Eight-direction idle, walk, and run sheets for all active survivors. Ava's idle set uses the approved 16-frame breathing cycle at 0.15 seconds per frame.
 - Pickup animation sheets for Ava, Peter, and Alynne.
 - Central action-state controller with movement locks and priorities.
 - Mouse-facing behavior and distance-synchronized locomotion playback.

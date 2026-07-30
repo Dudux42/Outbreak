@@ -10,14 +10,14 @@ const ANIMATION_DIRECTIONS = Object.freeze([
 ]);
 
 const femalePlayerAnimationClips = {
-  idle_south: { src: "./assets/player_breathing_south_sheet.png", frames: 4, frameDuration: 0.24 },
-  idle_north: { src: "./assets/player_breathing_north_sheet.png", frames: 4, frameDuration: 0.24 },
-  idle_north_east: { src: "./assets/player_breathing_north_east_sheet.png", frames: 4, frameDuration: 0.24 },
-  idle_east: { src: "./assets/player_breathing_east_sheet.png", frames: 4, frameDuration: 0.24 },
-  idle_south_east: { src: "./assets/player_breathing_south_east_sheet.png", frames: 4, frameDuration: 0.24 },
-  idle_south_west: { src: "./assets/player_breathing_south_west_sheet.png", frames: 4, frameDuration: 0.24 },
-  idle_west: { src: "./assets/player_breathing_west_sheet.png", frames: 4, frameDuration: 0.24 },
-  idle_north_west: { src: "./assets/player_breathing_north_west_sheet.png", frames: 4, frameDuration: 0.24 },
+  idle_south: { src: "./assets/player_ava_idle_south_sheet.png", frames: 16, frameDuration: 0.15 },
+  idle_north: { src: "./assets/player_ava_idle_north_sheet.png", frames: 16, frameDuration: 0.15 },
+  idle_north_east: { src: "./assets/player_ava_idle_north_east_sheet.png", frames: 16, frameDuration: 0.15 },
+  idle_east: { src: "./assets/player_ava_idle_east_sheet.png", frames: 16, frameDuration: 0.15 },
+  idle_south_east: { src: "./assets/player_ava_idle_south_east_sheet.png", frames: 16, frameDuration: 0.15 },
+  idle_south_west: { src: "./assets/player_ava_idle_south_west_sheet.png", frames: 16, frameDuration: 0.15 },
+  idle_west: { src: "./assets/player_ava_idle_west_sheet.png", frames: 16, frameDuration: 0.15 },
+  idle_north_west: { src: "./assets/player_ava_idle_north_west_sheet.png", frames: 16, frameDuration: 0.15 },
   walk_north: { src: "./assets/player_walk_north_sheet.png", frames: 8, frameDuration: 0.2 },
   walk_north_east: { src: "./assets/player_walk_north_east_sheet.png", frames: 8, frameDuration: 0.2 },
   walk_east: { src: "./assets/player_walk_east_sheet.png", frames: 8, frameDuration: 0.2 },
