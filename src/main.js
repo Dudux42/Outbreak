@@ -159,6 +159,9 @@ const missionHud = document.querySelector("#missionHud");
 const promptEl = document.querySelector("#prompt");
 const interactionHint = document.querySelector("#interactionHint");
 const playerNotice = document.querySelector("#playerNotice");
+const reloadProgress = document.querySelector("#reloadProgress");
+const reloadProgressFill = document.querySelector("#reloadProgressFill");
+const reloadProgressText = document.querySelector("#reloadProgressText");
 const inventoryOverlay = document.querySelector("#inventoryOverlay");
 const closeInventoryButton = document.querySelector("#closeInventory");
 const lootContainerOverlay = document.querySelector("#lootContainerOverlay");
@@ -171,6 +174,9 @@ const lootContainerInventory = document.querySelector("#lootContainerInventory")
 const lootContainerCapacity = document.querySelector("#lootContainerCapacity");
 const runEnd = document.querySelector("#runEnd");
 const returnBaseButton = document.querySelector("#returnBase");
+const recipeUnlockModal = document.querySelector("#recipeUnlockModal");
+const recipeUnlockText = document.querySelector("#recipeUnlockText");
+const closeRecipeUnlockButton = document.querySelector("#closeRecipeUnlock");
 const pauseMenu = document.querySelector("#pauseMenu");
 const pauseLoadGameButton = document.querySelector("#pauseLoadGame");
 const pauseSettingsButton = document.querySelector("#pauseSettings");
@@ -199,6 +205,20 @@ const quantityPromptTitle = document.querySelector("#quantityPromptTitle");
 const quantityPromptText = document.querySelector("#quantityPromptText");
 const quantityPromptInput = document.querySelector("#quantityPromptInput");
 const quantityPromptCancel = document.querySelector("#quantityPromptCancel");
+const itemContextMenu = document.querySelector("#itemContextMenu");
+const itemContextIcon = document.querySelector("#itemContextIcon");
+const itemContextName = document.querySelector("#itemContextName");
+const itemContextActions = document.querySelector("#itemContextActions");
+const itemInspectOverlay = document.querySelector("#itemInspectOverlay");
+const closeItemInspectButton = document.querySelector("#closeItemInspect");
+const itemInspectName = document.querySelector("#itemInspectName");
+const itemInspectIcon = document.querySelector("#itemInspectIcon");
+const itemInspectDescription = document.querySelector("#itemInspectDescription");
+const itemInspectStats = document.querySelector("#itemInspectStats");
+const weaponModifyOverlay = document.querySelector("#weaponModifyOverlay");
+const closeWeaponModifyButton = document.querySelector("#closeWeaponModify");
+const weaponModifyName = document.querySelector("#weaponModifyName");
+const weaponModifyContent = document.querySelector("#weaponModifyContent");
 
 const ui = {
   baseHealth: document.querySelector("#baseHealth"),
@@ -244,6 +264,8 @@ const EQUIPMENT_SLOTS = Object.freeze({
   ARMOR: "armor",
   BACKPACK: "backpack",
 });
+const BASE_POCKET_SLOTS = 4;
+const MAX_BACKPACK_INVENTORY_SLOTS = 16;
 
 const MAX_FRAME_DT = 0.05;
 const COLLIDER_CELL_SIZE = 12;
@@ -253,7 +275,7 @@ const CONTAINER_ITEM_SEARCH_MS = 1500;
 const TEST_CONTAINER_MAX_ITEMS = 6;
 const ITEM_BOX_BASE_CAPACITY = 240;
 const SAVE_STORAGE_KEY = "outbreak.save.v1";
-const SAVE_VERSION = 1;
+const SAVE_VERSION = 3;
 const SETTINGS_STORAGE_KEY = "outbreak.settings.v1";
 const RESOLUTION_PRESETS = Object.freeze({
   auto: null,
@@ -375,6 +397,19 @@ const locations = [
     mapY: 27,
     intelRequired: 3,
   },
+  {
+    id: "combat_test",
+    name: "Combat Test Range",
+    category: "debug",
+    mapShape: "wide",
+    stars: 1,
+    lootType: "Controlled combat test area",
+    loot: [],
+    rooms: 5,
+    mapX: 50,
+    mapY: 12,
+    intelRequired: 0,
+  },
 ];
 
 const MAP_CATEGORY_LABELS = Object.freeze({
@@ -386,6 +421,7 @@ const MAP_CATEGORY_LABELS = Object.freeze({
   military: "Military",
   technical: "Technical",
   garage: "Garage",
+  debug: "Debug",
 });
 
 const mapSurveySites = Object.freeze([
@@ -661,6 +697,110 @@ const enemyTypes = [
   },
 ];
 
+const ZOMBIE_BASE_HP = 128;
+const FIREARM_ACCURACY_DEVIATION_DEGREES = Object.freeze({
+  1: 9,
+  2: 7.25,
+  3: 5.75,
+  4: 4.5,
+  5: 3.5,
+  6: 2.75,
+  7: 2,
+  8: 1.5,
+  9: 1,
+  10: 0.75,
+});
+const DEFAULT_PROJECTILE_SPEED = 60;
+const DEFAULT_PROJECTILE_RADIUS = 0.04;
+const DEFAULT_FIREARM_RANGE = 9;
+const DEFAULT_GUNSHOT_DETECTION_RADIUS = 18;
+const DEFAULT_AIM_SETTLE_DURATION = 0.35;
+const INITIAL_AIM_SPREAD_MULTIPLIER = 1.5;
+const WALKING_AIM_SPREAD_MULTIPLIER = 1.5;
+const MAXIMUM_ACCUMULATED_RECOIL = 8;
+const RECOIL_RECOVERY_DELAY = 0.12;
+const FIREARM_RELOAD_TIMINGS = Object.freeze({
+  fast: Object.freeze({ magazine: 1.35, per_round: 0.45 }),
+  normal: Object.freeze({ magazine: 1.90, per_round: 0.65 }),
+  slow: Object.freeze({ magazine: 2.60, per_round: 0.90 }),
+});
+const FIREARM_RECOIL_TIERS = Object.freeze({
+  low: Object.freeze({ spreadPerShot: 0.45, recoveryPerSecond: 4.50 }),
+  regular: Object.freeze({ spreadPerShot: 0.75, recoveryPerSecond: 3.75 }),
+  high: Object.freeze({ spreadPerShot: 1.10, recoveryPerSecond: 3.00 }),
+  very_high: Object.freeze({ spreadPerShot: 1.50, recoveryPerSecond: 2.40 }),
+});
+const SHOTGUN_SPREAD_DEGREES = Object.freeze({
+  tight: 10,
+  focused: 14,
+  standard: 18,
+  wide: 22,
+});
+const STAGGER_FORCE_REACTIONS = Object.freeze({
+  weak: Object.freeze({ interruption: 0.35, knockback: 0.10 }),
+  regular: Object.freeze({ interruption: 0.60, knockback: 0.30 }),
+  strong: Object.freeze({ interruption: 0.90, knockback: 0.65 }),
+  aggressive: Object.freeze({ interruption: 1.20, knockback: 1.10 }),
+});
+const ATTACHMENT_EFFECT_LIMITS = Object.freeze({
+  reloadTimeMultiplier: Object.freeze([0.55, 2]),
+  recoilSpreadMultiplier: Object.freeze([0.5, 1.5]),
+  aimSettleTimeMultiplier: Object.freeze([0.6, 1.5]),
+  walkingAimSpreadMultiplier: Object.freeze([0.75, 1.5]),
+  damageMultiplier: Object.freeze([0.75, 1.25]),
+  fireRateMultiplier: Object.freeze([0.75, 1.35]),
+  conditionLossRateMultiplier: Object.freeze([0.6, 1.4]),
+  gunshotDetectionRadiusMultiplier: Object.freeze([0.35, 1.5]),
+  muzzleFlashMultiplier: Object.freeze([0.25, 1.5]),
+  pelletSpreadMultiplier: Object.freeze([0.6, 1.25]),
+});
+const PROJECTILE_HEIGHT = 1.05;
+const PROJECTILE_GEOMETRY = new THREE.BoxGeometry(0.045, 0.045, 0.32);
+const PROJECTILE_MATERIAL = new THREE.MeshBasicMaterial({
+  color: "#ffd36a",
+  transparent: true,
+  opacity: 0.92,
+  depthWrite: false,
+});
+const ZOMBIE_VARIANTS = [
+  {
+    id: "fresh_infected",
+    name: "Fresh Infected",
+    maxHpMultiplier: 1,
+    damageResistance: 0,
+    spawnWeight: 54,
+    visualTypeId: "civilian_zombie",
+    tint: "#ffffff",
+  },
+  {
+    id: "decomposed_infected",
+    name: "Decomposed Infected",
+    maxHpMultiplier: 0.875,
+    damageResistance: -0.1,
+    spawnWeight: 26,
+    visualTypeId: "dark_civilian_zombie",
+    tint: "#b8ad94",
+  },
+  {
+    id: "tough_infected",
+    name: "Tough Infected",
+    maxHpMultiplier: 1.125,
+    damageResistance: 0.2,
+    spawnWeight: 15,
+    visualTypeId: "civilian_zombie",
+    tint: "#aebdba",
+  },
+  {
+    id: "special_infected",
+    name: "Special Infected",
+    maxHpMultiplier: 1.25,
+    damageResistance: 0.35,
+    spawnWeight: 5,
+    visualTypeId: "dark_civilian_zombie",
+    tint: "#ca989d",
+  },
+];
+
 const itemCatalog = {
   Apple: { label: "Apple", texture: "apple", tags: ["Food"] },
   Banana: { label: "Banana", texture: "banana", tags: ["Food"] },
@@ -679,6 +819,22 @@ const itemCatalog = {
   "rubbing alcohol": { label: "Rubbing Alcohol", texture: "rubbingAlcoholBottle", tags: ["Aid"] },
   "first aid kit": { label: "First Aid Kit", texture: "medKit", tags: ["Aid"] },
   "first aid spray": { label: "First Aid Spray", texture: "firstAidSpray", tags: ["Aid"] },
+  "first aid spray recipe": { label: "First Aid Spray Recipe", texture: "medical_recipe_v3", tags: ["Recipe"] },
+  "medical herbs recipe": { label: "Medical Herbs Recipe", texture: "medical_recipe_v3", tags: ["Recipe"] },
+  "vitalis recipe": { label: "Vitalis Recipe", texture: "medical_recipe_v3", tags: ["Recipe"] },
+  "bandage recipe": { label: "Bandage Recipe", texture: "medical_recipe_v3", tags: ["Recipe"] },
+  "saline solution recipe": { label: "Saline Solution Recipe", texture: "medical_recipe_v3", tags: ["Recipe"] },
+  "military bandage recipe": { label: "Military Bandage Recipe", texture: "medical_recipe_v3", tags: ["Recipe"] },
+  "first aid kit recipe": { label: "First Aid Kit Recipe", texture: "medical_recipe_v3", tags: ["Recipe"] },
+  "herbal poultice recipe": { label: "Herbal Poultice Recipe", texture: "medical_recipe_v3", tags: ["Recipe"] },
+  "tourniquet recipe": { label: "Tourniquet Recipe", texture: "medical_recipe_v3", tags: ["Recipe"] },
+  "surgical treatment kit recipe": { label: "Surgical Treatment Kit Recipe", texture: "medical_recipe_v3", tags: ["Recipe"] },
+  "medical herbs": { label: "Medical Herbs", texture: "medical_herbs_v2", tags: ["Aid"] },
+  vitalis: { label: "Vitalis", texture: "vitalis_v1", tags: ["Aid"] },
+  "trauma bag": { label: "Trauma Bag", texture: "trauma_bag_v1", tags: ["Aid"] },
+  "herbal poultice": { label: "Herbal Poultice", texture: "spareParts", tags: ["Aid"] },
+  tourniquet: { label: "Tourniquet", texture: "spareParts", tags: ["Aid"] },
+  "surgical treatment kit": { label: "Surgical Treatment Kit", texture: "spareParts", tags: ["Aid"] },
   painkillers: { label: "Painkillers", texture: "painkillers", tags: ["Aid"] },
   antibiotics: { label: "Antibiotics", texture: "antibioticsBottle", tags: ["Aid"] },
   "can of beans": { label: "Can of Beans", texture: "canOfBeans", tags: ["Food"] },
@@ -778,6 +934,10 @@ const itemCatalog = {
   "suture needles": { label: "Suture Needles", texture: "sutureNeedles", tags: ["Base Medical"] },
   "cotton balls": { label: "Cotton Balls", texture: "cottonBalls", tags: ["Base Medical"] },
   "empty iv bag": { label: "Empty IV Bag", texture: "emptyIvBag", tags: ["Base Medical"] },
+  "empty first aid spray": { label: "Empty First-Aid Spray", texture: "spareParts", tags: ["Base Medical"] },
+  "goldenrod flowers": { label: "Goldenrod Flowers", texture: "spareParts", tags: ["Base Medical"] },
+  "broadleaf plantain leaves": { label: "Broadleaf Plantain Leaves", texture: "spareParts", tags: ["Base Medical"] },
+  "empty auto injector": { label: "Empty Auto-Injector", texture: "spareParts", tags: ["Base Medical"] },
   tweezers: { label: "Tweezers", texture: "tweezers", tags: ["Base Medical"] },
   "surgical gloves": { label: "Surgical Gloves", texture: "surgicalGloves", tags: ["Base Medical"] },
   "surgical tubes": { label: "Surgical Tubes", texture: "surgicalTubes", tags: ["Base Medical"] },
@@ -804,7 +964,7 @@ const itemCatalog = {
   gunpowder: { label: "Gunpowder", texture: "gunpowder", tags: ["Base Weapon"] },
   "handgun casing": { label: "Handgun Casing", texture: "handgunCasing", tags: ["Base Weapon"] },
   "shell casing": { label: "Shell Casing", texture: "shellCasing", tags: ["Base Weapon"] },
-  "submachine gun casing": { label: "Submachine Gun Casing", texture: "submachineGunCasing", tags: ["Base Weapon"] },
+  "rifle casing": { label: "Rifle Casing", texture: "rifleCasing", tags: ["Base Weapon"] },
   "assault rifle casing": { label: "Assault Rifle Casing", texture: "assaultRifleCasing", tags: ["Base Weapon"] },
   "gold chain": { label: "Gold Chain", texture: "goldChain", tags: ["Collectible"] },
   "silver necklace": { label: "Silver Necklace", texture: "silverNecklace", tags: ["Collectible"] },
@@ -831,7 +991,22 @@ const itemCatalog = {
   "sci-fi vhs": { label: "Sci-Fi VHS", texture: "sciFiVhs", tags: ["Collectible"] },
   "gaming magazine": { label: "Gaming Magazine", texture: "gamingMagazine", tags: ["Collectible"] },
   "fishing rod": { label: "Fishing Rod", texture: "fishingRod", tags: ["Collectible"] },
-  "glock 17": { label: "Glock 17", texture: "glock17", tags: ["Weapon"] },
+  "glock 17": {
+    slot: EQUIPMENT_SLOTS.SIDEARM,
+    label: "Glock 17",
+    texture: "glock17",
+    tags: ["Weapon"],
+    subTags: { hands: "1 handed", combat: "Firearm" },
+    weaponKind: "firearm",
+    hands: 1,
+    damage: 24,
+    range: 9,
+    fireRate: 0.28,
+    accuracy: 5,
+    projectileSpeed: 60,
+    ammoType: "9mm",
+    magazineSize: 17,
+  },
   "beretta m9": { label: "Beretta M9", texture: "berettaM9", tags: ["Weapon"] },
   "m1911": { label: "M1911", texture: "m1911", tags: ["Weapon"] },
   "taurus 38": { label: "Taurus 38", texture: "taurus38", tags: ["Weapon"] },
@@ -855,10 +1030,42 @@ const itemCatalog = {
   "7.62x39": { label: "7.62x39", texture: "seven62Thirtynine", tags: ["Ammunition"] },
   ".308": { label: ".308", texture: "threeOhEight", tags: ["Ammunition"] },
   "7.62x51": { label: "7.62x51", texture: "seven62Fiftyone", tags: ["Ammunition"] },
+  "short range sight": { label: "Short-Range Sight", texture: "short_range_sight_v1", tags: ["Weapon Attachment"] },
+  "medium range sight": { label: "Medium-Range Sight", texture: "medium_range_sight_v2", tags: ["Weapon Attachment"] },
+  "long range sight": { label: "Long-Range Sight", texture: "long_range_sight_v1", tags: ["Weapon Attachment"] },
+  "handgun extended magazine": { label: "Handgun Extended Magazine", texture: "handgun_extended_magazine_v2", tags: ["Weapon Attachment"] },
+  "assault rifle extended magazine": { label: "Assault Rifle Extended Magazine", texture: "assault_rifle_extended_magazine_v2", tags: ["Weapon Attachment"] },
+  "handgun quick reload magazine": { label: "Handgun Quick-Reload Magazine", texture: "handgun_quick_reload_magazine_v1", tags: ["Weapon Attachment"] },
+  "assault rifle quick reload magazine": { label: "Assault Rifle Quick-Reload Magazine", texture: "assault_rifle_quick_reload_magazine_v1", tags: ["Weapon Attachment"] },
+  "drum magazine": { label: "Drum Magazine", texture: "drum_magazine_v1", tags: ["Weapon Attachment"] },
+  "speed loader": { label: "Speed Loader", texture: "speed_loader_v2", tags: ["Weapon Attachment"] },
+  suppressor: { label: "Suppressor", texture: "suppressor_v1", tags: ["Weapon Attachment"] },
+  "flash hider": { label: "Flash Hider", texture: "flash_hider_v1", tags: ["Weapon Attachment"] },
+  "muzzle brake": { label: "Muzzle Brake", texture: "muzzle_brake_v1", tags: ["Weapon Attachment"] },
+  choke: { label: "Choke", texture: "choke_v2", tags: ["Weapon Attachment"] },
+  "simple buttstock": { label: "Simple Buttstock", texture: "simple_buttstock_v1", tags: ["Weapon Attachment"] },
+  "advanced buttstock": { label: "Advanced Buttstock", texture: "advanced_buttstock_v1", tags: ["Weapon Attachment"] },
+  "tactical flashlight": { label: "Tactical Flashlight", texture: "tactical_flashlight_v1", tags: ["Weapon Attachment"] },
+  "laser sight": { label: "Laser Sight", texture: "laser_sight_v2", tags: ["Weapon Attachment"] },
+  "laser flashlight combo": { label: "Laser-Flashlight Combo", texture: "laser_flashlight_combo_v1", tags: ["Weapon Attachment"] },
+  "chrome cylinder": { label: "Chrome Cylinder", texture: "chrome_cylinder_v1", tags: ["Weapon Attachment"] },
+  "extended barrel": { label: "Extended Barrel", texture: "extended_barrel_v1", tags: ["Weapon Attachment"] },
+  "rubber grip": { label: "Rubber Grip", texture: "rubber_grip_v1", tags: ["Weapon Attachment"] },
+  "shell carrier": { label: "Shell Carrier", texture: "shell_carrier_v3", tags: ["Weapon Attachment"] },
+  "vertical foregrip": { label: "Vertical Foregrip", texture: "vertical_foregrip_v1", tags: ["Weapon Attachment"] },
+  "cheek rest": { label: "Cheek Rest", texture: "cheek_rest_v1", tags: ["Weapon Attachment"] },
+  "recoil pad": { label: "Recoil Pad", texture: "recoil_pad_v1", tags: ["Weapon Attachment"] },
+  "polished bolt": { label: "Polished Bolt", texture: "polished_bolt_v1", tags: ["Weapon Attachment"] },
+  "extended m1a magazine": { label: "Extended M1A Magazine", texture: "extended_m1a_magazine_v1", tags: ["Weapon Attachment"] },
+  "quick reload m1a magazine": { label: "Quick-Reload M1A Magazine", texture: "quick_reload_m1a_magazine_v2", tags: ["Weapon Attachment"] },
+  "smg extended magazine": { label: "SMG Extended Magazine", texture: "smg_extended_magazine_v2", tags: ["Weapon Attachment"] },
+  "smg quick reload magazine": { label: "SMG Quick-Reload Magazine", texture: "smg_quick_reload_magazine_v1", tags: ["Weapon Attachment"] },
+  "angled grip": { label: "Angled Grip", texture: "angled_grip_v2", tags: ["Weapon Attachment"] },
+  "ergonomic foregrip": { label: "Ergonomic Foregrip", texture: "ergonomic_foregrip_v1", tags: ["Weapon Attachment"] },
   sledgehammer: { label: "Sledgehammer", texture: "sledgehammer", tags: ["Weapon"] },
-  "small backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Small Backpack", texture: "simpleBackpack", tags: ["Equipment"], slots: 6 },
-  "medium backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Medium Backpack", texture: "mediumBackpack", tags: ["Equipment"], slots: 8 },
-  "large backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Large Backpack", texture: "largeBackpack", tags: ["Equipment"], slots: 10 },
+  "small backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Small Backpack", texture: "simpleBackpack", tags: ["Equipment"], additionalSlots: 6 },
+  "medium backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Medium Backpack", texture: "mediumBackpack", tags: ["Equipment"], additionalSlots: 8 },
+  "large backpack": { slot: EQUIPMENT_SLOTS.BACKPACK, label: "Large Backpack", texture: "largeBackpack", tags: ["Equipment"], additionalSlots: 12 },
   "level 1 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 1 Body Armor", armorClass: 1, texture: "body_armor_level_1_v3", tags: ["Armor"] },
   "level 2 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 2 Body Armor", armorClass: 2, texture: "body_armor_level_2_v1", tags: ["Armor"] },
   "level 3 body armor": { slot: EQUIPMENT_SLOTS.ARMOR, label: "Level 3 Body Armor", armorClass: 3, texture: "body_armor_level_3_v1", tags: ["Armor"] },
@@ -872,8 +1079,106 @@ const itemCatalog = {
   Key: { label: "Key", texture: "key", tags: ["Key"] },
 };
 
+const FIREARM_RUNTIME_DEFINITIONS = Object.freeze({
+  "glock 17": {
+    firearmFamily: "handgun", damage: 24, damageVariance: 0.35,
+    reloadSpeedTier: "fast", reloadType: "magazine", accuracy: 5, rpm: 300,
+    firingMechanisms: ["semi_auto"], recoilTier: "low", magazineSize: 17,
+    criticalChance: 0.08, staggerForce: "weak", staggerRate: 11, conditionActionInterval: 20,
+  },
+  "beretta m9": {
+    firearmFamily: "handgun", damage: 29, damageVariance: 0.35,
+    reloadSpeedTier: "fast", reloadType: "magazine", accuracy: 5, rpm: 240,
+    firingMechanisms: ["semi_auto"], recoilTier: "low", magazineSize: 15,
+    criticalChance: 0.10, staggerForce: "weak", staggerRate: 13, conditionActionInterval: 20,
+  },
+  m1911: {
+    firearmFamily: "handgun", damage: 35, damageVariance: 0.25,
+    reloadSpeedTier: "normal", reloadType: "magazine", accuracy: 4, rpm: 210,
+    firingMechanisms: ["semi_auto"], recoilTier: "regular", magazineSize: 7,
+    criticalChance: 0.12, staggerForce: "regular", staggerRate: 16, conditionActionInterval: 17,
+  },
+  "taurus 38": {
+    firearmFamily: "revolver", damage: 26, damageVariance: 0.35,
+    reloadSpeedTier: "normal", reloadType: "per_round", accuracy: 6, rpm: 180,
+    firingMechanisms: ["double_action"], recoilTier: "regular", magazineSize: 5,
+    criticalChance: 0.08, staggerForce: "regular", staggerRate: 12, conditionActionInterval: 14,
+  },
+  "model 629": {
+    firearmFamily: "revolver", damage: 80, damageVariance: 0.30,
+    reloadSpeedTier: "normal", reloadType: "per_round", accuracy: 6, rpm: 150,
+    firingMechanisms: ["double_action"], recoilTier: "high", magazineSize: 6,
+    criticalChance: 0.08, staggerForce: "strong", staggerRate: 20, conditionActionInterval: 16,
+  },
+  "mossberg 500": {
+    firearmFamily: "shotgun", damage: 17, damageVariance: 0.15,
+    reloadSpeedTier: "slow", reloadType: "per_round", accuracy: 6, rpm: 70,
+    firingMechanisms: ["pump_action"], recoilTier: "high", magazineSize: 7,
+    criticalChance: 0.06, staggerForce: "aggressive", staggerRate: 20,
+    conditionActionInterval: 18, pelletCount: 8, pelletSpreadTier: "standard", range: 60,
+  },
+  "benelli m4": {
+    firearmFamily: "shotgun", damage: 18, damageVariance: 0.15,
+    reloadSpeedTier: "normal", reloadType: "per_round", accuracy: 7, rpm: 200,
+    firingMechanisms: ["semi_auto"], recoilTier: "high", magazineSize: 8,
+    criticalChance: 0.08, staggerForce: "aggressive", staggerRate: 20,
+    conditionActionInterval: 20, pelletCount: 8, pelletSpreadTier: "focused", range: 60,
+  },
+  uzi: {
+    firearmFamily: "smg", damage: 18, damageVariance: 0.30,
+    reloadSpeedTier: "normal", reloadType: "magazine", accuracy: 5, rpm: 600,
+    firingMechanisms: ["semi_auto", "automatic"], recoilTier: "high", magazineSize: 30,
+    criticalChance: 0.05, staggerForce: "weak", staggerRate: 4, conditionActionInterval: 33,
+  },
+  "h&k mp5": {
+    firearmFamily: "smg", damage: 20, damageVariance: 0.30,
+    reloadSpeedTier: "normal", reloadType: "magazine", accuracy: 8, rpm: 800,
+    firingMechanisms: ["semi_auto", "automatic"], recoilTier: "regular", magazineSize: 30,
+    criticalChance: 0.05, staggerForce: "weak", staggerRate: 4, conditionActionInterval: 38,
+  },
+  "kriss vector": {
+    firearmFamily: "smg", damage: 17, damageVariance: 0.40,
+    reloadSpeedTier: "normal", reloadType: "magazine", accuracy: 6, rpm: 1200,
+    firingMechanisms: ["semi_auto", "automatic"], recoilTier: "low", magazineSize: 40,
+    criticalChance: 0.03, staggerForce: "weak", staggerRate: 5, conditionActionInterval: 35,
+  },
+  m4a1: {
+    firearmFamily: "assault_rifle", damage: 30, damageVariance: 0.30,
+    reloadSpeedTier: "normal", reloadType: "magazine", accuracy: 5, rpm: 800,
+    firingMechanisms: ["semi_auto", "automatic"], recoilTier: "regular", magazineSize: 30,
+    criticalChance: 0.05, staggerForce: "regular", staggerRate: 5, conditionActionInterval: 45,
+  },
+  akm: {
+    firearmFamily: "assault_rifle", damage: 40, damageVariance: 0.20,
+    reloadSpeedTier: "normal", reloadType: "magazine", accuracy: 3, rpm: 600,
+    firingMechanisms: ["semi_auto", "automatic"], recoilTier: "high", magazineSize: 30,
+    criticalChance: 0.05, staggerForce: "regular", staggerRate: 5, conditionActionInterval: 45,
+  },
+  "winchester model 70": {
+    firearmFamily: "rifle", damage: 150, damageVariance: 0.30,
+    reloadSpeedTier: "slow", reloadType: "per_round", accuracy: 9, rpm: 24,
+    firingMechanisms: ["bolt_action"], recoilTier: "regular", magazineSize: 5,
+    criticalChance: 0.05, staggerForce: "strong", staggerRate: 20, conditionActionInterval: 15,
+  },
+  "springfield m1a": {
+    firearmFamily: "rifle", damage: 90, damageVariance: 0.20,
+    reloadSpeedTier: "slow", reloadType: "magazine", accuracy: 9, rpm: 180,
+    firingMechanisms: ["semi_auto"], recoilTier: "high", magazineSize: 20,
+    criticalChance: 0.05, staggerForce: "strong", staggerRate: 20, conditionActionInterval: 15,
+  },
+});
+
 const itemIdsByLabel = Object.freeze(Object.fromEntries(
   Object.values(ITEM_DATABASE).map((item) => [item.label, item.id])
+));
+
+const CRAFTING_RECIPE_DEFINITIONS = Object.freeze(Object.fromEntries(
+  Object.values(ITEM_DATABASE)
+    .filter((item) => item.recipeUnlock)
+    .map((item) => [item.recipeUnlock.recipeId, Object.freeze({
+      ...item.recipeUnlock,
+      sourceItemId: item.id,
+    })])
 ));
 
 for (const [itemId, databaseItem] of Object.entries(ITEM_DATABASE)) {
@@ -884,6 +1189,17 @@ for (const [itemId, databaseItem] of Object.entries(ITEM_DATABASE)) {
     ...gameplayItem,
     ...databaseItem,
     tags: gameplayItem.tags || [],
+  };
+}
+for (const [itemId, firearmDefinition] of Object.entries(FIREARM_RUNTIME_DEFINITIONS)) {
+  itemCatalog[itemId] = {
+    ...itemCatalog[itemId],
+    ...firearmDefinition,
+    weaponStats: "runtime_definition",
+    range: firearmDefinition.range || itemCatalog[itemId]?.range || DEFAULT_FIREARM_RANGE,
+    fireRate: 60 / firearmDefinition.rpm,
+    projectileSpeed: itemCatalog[itemId]?.projectileSpeed || DEFAULT_PROJECTILE_SPEED,
+    projectileRadius: itemCatalog[itemId]?.projectileRadius || DEFAULT_PROJECTILE_RADIUS,
   };
 }
 
@@ -900,6 +1216,9 @@ const REMOVED_ITEM_REPLACEMENTS = Object.freeze({
   "submachine gun ammo": ".45 acp",
   "submachine-gun ammo": ".45 acp",
   "assault rifle ammo": "5.56x45",
+  "submachine gun casing": "rifle casing",
+  "smg casing": "rifle casing",
+  "empty spray canister": "empty first aid spray",
 });
 
 function normalizeRemovedItemName(itemName) {
@@ -944,12 +1263,22 @@ function normalizeStashEntries(entries = []) {
   return Array.from(normalized, ([name, qty]) => ({ name, qty }));
 }
 
+function normalizeUnlockedRecipes(recipeIds = []) {
+  if (!Array.isArray(recipeIds)) return [];
+  return Array.from(new Set(
+    recipeIds.filter((recipeId) => typeof recipeId === "string" && CRAFTING_RECIPE_DEFINITIONS[recipeId])
+  ));
+}
+
 function makeCharacterLoadout({
   inventory = [],
   quickbar = Array(9).fill(null),
   activeQuickSlot = null,
   magazines = {},
   equipment = {},
+  weaponAttachments = {},
+  armorConditions = {},
+  armorDamageRemainders = {},
 } = {}) {
   const normalizedQuickbar = Array.isArray(quickbar)
     ? quickbar.slice(0, 9).map((itemName) => normalizeRemovedItemName(itemName))
@@ -970,6 +1299,14 @@ function makeCharacterLoadout({
     activeQuickSlot,
     magazines: makeDefaultMagazines(magazines),
     equipment: normalizedEquipment,
+    weaponAttachments: Object.fromEntries(
+      Object.entries(weaponAttachments || {}).map(([weaponName, slots]) => [
+        normalizeRemovedItemName(weaponName),
+        { ...(slots || {}) },
+      ])
+    ),
+    armorConditions: { ...(armorConditions || {}) },
+    armorDamageRemainders: { ...(armorDamageRemainders || {}) },
   };
 }
 
@@ -985,7 +1322,28 @@ function makeDefaultCharacterLoadouts() {
     }),
     male: makeCharacterLoadout(),
     alynne: makeCharacterLoadout(),
-    luis: makeCharacterLoadout(),
+    luis: makeCharacterLoadout({
+      inventory: [
+        "taurus 38",
+        "mossberg 500",
+        { name: "9mm", qty: 50 },
+        { name: "rt 85", qty: 30 },
+        { name: "12 gauge", qty: 20 },
+      ],
+      quickbar: [null, null, "taurus 38", "mossberg 500", null, null, null, null, null],
+      activeQuickSlot: 2,
+      magazines: {
+        "glock 17": 17,
+        "taurus 38": 5,
+        "mossberg 500": 7,
+      },
+      equipment: {
+        primary: "hammer",
+        sidearm: "glock 17",
+        armor: null,
+        backpack: "large backpack",
+      },
+    }),
   };
 }
 
@@ -996,6 +1354,12 @@ function normalizeCharacterLoadout(savedLoadout, fallbackLoadout) {
     activeQuickSlot: savedLoadout?.activeQuickSlot || fallbackLoadout.activeQuickSlot || null,
     magazines: { ...fallbackLoadout.magazines, ...(savedLoadout?.magazines || {}) },
     equipment: { ...fallbackLoadout.equipment, ...(savedLoadout?.equipment || {}) },
+    weaponAttachments: { ...fallbackLoadout.weaponAttachments, ...(savedLoadout?.weaponAttachments || {}) },
+    armorConditions: { ...fallbackLoadout.armorConditions, ...(savedLoadout?.armorConditions || {}) },
+    armorDamageRemainders: {
+      ...fallbackLoadout.armorDamageRemainders,
+      ...(savedLoadout?.armorDamageRemainders || {}),
+    },
   });
 }
 
@@ -1029,6 +1393,9 @@ function syncActiveCharacterLoadout() {
   state.activeQuickSlot = loadout.activeQuickSlot;
   state.magazines = loadout.magazines;
   state.equipment = loadout.equipment;
+  state.weaponAttachments = loadout.weaponAttachments;
+  state.armorConditions = loadout.armorConditions;
+  state.armorDamageRemainders = loadout.armorDamageRemainders;
 }
 
 function persistActiveCharacterLoadout() {
@@ -1098,7 +1465,7 @@ function makeInitialStash() {
 
 const state = {
   mode: "base",
-  character: "female",
+  character: "luis",
   health: 100,
   keys: 0,
   runSeed: Date.now() >>> 0,
@@ -1113,7 +1480,11 @@ const state = {
     armor: null,
     backpack: "small backpack",
   },
+  weaponAttachments: {},
+  armorConditions: {},
+  armorDamageRemainders: {},
   stash: makeInitialStash(),
+  unlockedRecipes: [],
   upgrades: {
     storage: 0,
     med: 0,
@@ -1374,6 +1745,42 @@ const texturePaths = {
 
 const itemTexturePaths = {
   spareParts: "./assets/items/spare_parts.png",
+  medical_herbs_v2: "./assets/items/medical_herbs_v2.png",
+  vitalis_v1: "./assets/items/vitalis_v1.png",
+  trauma_bag_v1: "./assets/items/trauma_bag_v1.png",
+  short_range_sight_v1: "./assets/items/short_range_sight_v1.png",
+  medium_range_sight_v2: "./assets/items/medium_range_sight_v2.png",
+  long_range_sight_v1: "./assets/items/long_range_sight_v1.png",
+  handgun_extended_magazine_v2: "./assets/items/handgun_extended_magazine_v2.png",
+  assault_rifle_extended_magazine_v2: "./assets/items/assault_rifle_extended_magazine_v2.png",
+  handgun_quick_reload_magazine_v1: "./assets/items/handgun_quick_reload_magazine_v1.png",
+  assault_rifle_quick_reload_magazine_v1: "./assets/items/assault_rifle_quick_reload_magazine_v1.png",
+  drum_magazine_v1: "./assets/items/drum_magazine_v1.png",
+  speed_loader_v2: "./assets/items/speed_loader_v2.png",
+  quick_reload_m1a_magazine_v2: "./assets/items/quick_reload_m1a_magazine_v2.png",
+  smg_extended_magazine_v2: "./assets/items/smg_extended_magazine_v2.png",
+  smg_quick_reload_magazine_v1: "./assets/items/smg_quick_reload_magazine_v1.png",
+  angled_grip_v2: "./assets/items/angled_grip_v2.png",
+  ergonomic_foregrip_v1: "./assets/items/ergonomic_foregrip_v1.png",
+  suppressor_v1: "./assets/items/suppressor_v1.png",
+  flash_hider_v1: "./assets/items/flash_hider_v1.png",
+  muzzle_brake_v1: "./assets/items/muzzle_brake_v1.png",
+  choke_v2: "./assets/items/choke_v2.png",
+  simple_buttstock_v1: "./assets/items/simple_buttstock_v1.png",
+  advanced_buttstock_v1: "./assets/items/advanced_buttstock_v1.png",
+  tactical_flashlight_v1: "./assets/items/tactical_flashlight_v1.png",
+  laser_sight_v2: "./assets/items/laser_sight_v2.png",
+  laser_flashlight_combo_v1: "./assets/items/laser_flashlight_combo_v1.png",
+  chrome_cylinder_v1: "./assets/items/chrome_cylinder_v1.png",
+  extended_barrel_v1: "./assets/items/extended_barrel_v1.png",
+  rubber_grip_v1: "./assets/items/rubber_grip_v1.png",
+  shell_carrier_v3: "./assets/items/shell_carrier_v3.png",
+  vertical_foregrip_v1: "./assets/items/vertical_foregrip_v1.png",
+  cheek_rest_v1: "./assets/items/cheek_rest_v1.png",
+  recoil_pad_v1: "./assets/items/recoil_pad_v1.png",
+  polished_bolt_v1: "./assets/items/polished_bolt_v1.png",
+  extended_m1a_magazine_v1: "./assets/items/extended_m1a_magazine_v1.png",
+  medical_recipe_v3: "./assets/items/medical_recipe_v3.png",
   gears: "./assets/items/gears.png",
   screws: "./assets/items/screws_box_v2.png",
   nails: "./assets/items/nails_box_v2.png",
@@ -1500,7 +1907,7 @@ const itemTexturePaths = {
   gunpowder: "./assets/items/gunpowder_v4.png",
   handgunCasing: "./assets/items/handgun_casing_v3.png",
   shellCasing: "./assets/items/shell_casing_v3.png",
-  submachineGunCasing: "./assets/items/submachine_gun_casing_v2.png",
+  rifleCasing: "./assets/items/submachine_gun_casing_v2.png",
   assaultRifleCasing: "./assets/items/assault_rifle_casing_v2.png",
   goldChain: "./assets/items/gold_chain_v2.png",
     silverNecklace: "./assets/items/silver_necklace_v2.png",
@@ -1637,6 +2044,17 @@ let activeLootContainer = null;
 let containerSearchTimers = [];
 let zombies = [];
 let deadZombies = [];
+let activeProjectiles = [];
+let lastProjectileDebug = null;
+let activeReload = null;
+let accumulatedRecoilDegrees = 0;
+let recoilRecoveryDelayTimer = 0;
+let aimSettleElapsed = 0;
+let playerIsMoving = false;
+let triggerHeld = false;
+let tacticalFlashlight = null;
+let tacticalFlashlightTarget = null;
+let laserAimDot = null;
 let exits = [];
 let doorNodes = [];
 let lockedDoors = [];
@@ -1656,6 +2074,8 @@ let isDebugPanelOpen = false;
 let debugAimMarker = null;
 let hoveredInventoryIndex = null;
 let activeInventoryDrag = null;
+let activeItemContextTarget = null;
+let activeModifiedWeaponName = null;
 let rng = createSeededRng(state.runSeed);
 let baseRoutine = {
   targetIndex: 0,
@@ -1670,7 +2090,11 @@ animate();
 
 window.addEventListener("resize", resize);
 window.addEventListener("keydown", (event) => {
-  if (debugItemSpawner?.contains(event.target) && event.code !== "Escape") return;
+  const debugSpawnerCapturesInput = (
+    isDebugItemSpawnerOpen()
+    && debugItemSpawnerPanel?.contains(event.target)
+  );
+  if (debugSpawnerCapturesInput && event.code !== "Escape") return;
   if (isMainMenuOpen()) {
     if (event.code === "Escape" || event.code === "Tab" || event.code.startsWith("Key")) event.preventDefault();
     return;
@@ -1723,6 +2147,7 @@ function suppressCanvasContextMenu(event) {
 }
 function resetAimingInput() {
   isAiming = false;
+  triggerHeld = false;
 }
 
 function getCharacterProfile(characterId = state.character) {
@@ -1773,7 +2198,10 @@ function createSavePayload() {
       activeQuickSlot: state.activeQuickSlot,
       magazines: state.magazines,
       equipment: state.equipment,
+      armorConditions: state.armorConditions,
+      armorDamageRemainders: state.armorDamageRemainders,
       stash: state.stash,
+      unlockedRecipes: state.unlockedRecipes,
       upgrades: state.upgrades,
     },
   };
@@ -1825,6 +2253,7 @@ function loadSavedGame() {
   state.characterLoadouts = normalizeCharacterLoadouts(saved.characterLoadouts, saved);
   syncActiveCharacterLoadout();
   state.stash = Array.isArray(saved.stash) ? normalizeStashEntries(saved.stash) : state.stash;
+  state.unlockedRecipes = normalizeUnlockedRecipes(saved.unlockedRecipes);
   state.upgrades = { ...state.upgrades, ...(saved.upgrades || {}) };
   state.activeLocation = null;
   playerAnimationClips = getCharacterProfile(state.character).animations;
@@ -1862,22 +2291,32 @@ window.addEventListener("click", (event) => {
   }
   setPointerFromEvent(event);
   if (state.mode === "base") handleBaseClick();
-  else attack();
+});
+window.addEventListener("mousedown", (event) => {
+  if (event.target !== canvas || isInventoryOpen()) return;
+  setPointerFromEvent(event);
+  if (event.button === 2 && state.mode === "mission") {
+    event.preventDefault();
+    isAiming = true;
+    aimSettleElapsed = 0;
+  }
+  if (event.button === 0 && state.mode === "mission") {
+    triggerHeld = true;
+    attack();
+  }
+});
+window.addEventListener("mouseup", (event) => {
+  if (event.button === 2) isAiming = false;
+  if (event.button === 0) triggerHeld = false;
 });
 window.addEventListener("pointerdown", (event) => {
   if (event.target !== canvas || isInventoryOpen()) return;
-  setPointerFromEvent(event);
   if (event.button === 0 && state.mode === "base" && basePanel.classList.contains("hidden")) {
     baseCameraDrag = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, moved: false };
     canvas.setPointerCapture?.(event.pointerId);
   }
-  if (event.button === 2 && state.mode === "mission") {
-    event.preventDefault();
-    isAiming = true;
-  }
 });
 window.addEventListener("pointerup", (event) => {
-  if (event.button === 2) isAiming = false;
   if (event.button === 0 && baseCameraDrag?.pointerId === event.pointerId) {
     suppressNextBaseClick = baseCameraDrag.moved;
     canvas.releasePointerCapture?.(event.pointerId);
@@ -1906,6 +2345,10 @@ closeBasePanelButton.addEventListener("click", closeBasePanel);
 closeInventoryButton.addEventListener("click", closeInventory);
 closeLootContainerButton.addEventListener("click", closeLootContainerWindow);
 returnBaseButton.addEventListener("click", returnToBase);
+closeRecipeUnlockButton.addEventListener("click", closeRecipeUnlockPopup);
+recipeUnlockModal.addEventListener("pointerdown", (event) => {
+  if (event.target === recipeUnlockModal) closeRecipeUnlockPopup();
+});
 mainMenuNewGameButton.addEventListener("click", startNewGameFromMainMenu);
 mainMenuLoadGameButton.addEventListener("click", loadGameFromMainMenu);
 mainMenuQuitGameButton.addEventListener("click", quitGameImmediately);
@@ -1913,6 +2356,23 @@ pauseLoadGameButton.addEventListener("click", loadGameFromPauseMenu);
 pauseSettingsButton.addEventListener("click", openSettingsMenu);
 pauseQuitGameButton.addEventListener("click", quitGameImmediately);
 closeSettingsButton.addEventListener("click", closeSettingsMenu);
+closeItemInspectButton.addEventListener("click", closeItemInspect);
+closeWeaponModifyButton.addEventListener("click", closeWeaponModify);
+itemContextMenu.addEventListener("pointerdown", (event) => event.stopPropagation());
+itemInspectOverlay.addEventListener("pointerdown", (event) => {
+  if (event.target === itemInspectOverlay) closeItemInspect();
+});
+weaponModifyOverlay.addEventListener("pointerdown", (event) => {
+  if (event.target === weaponModifyOverlay) closeWeaponModify();
+});
+window.addEventListener("pointerdown", (event) => {
+  if (event.button === 2 && event.target.closest?.(
+    "[data-source][data-index], [data-equipment-slot], [data-slot]"
+  )) return;
+  if (!itemContextMenu.classList.contains("hidden") && !event.target.closest("#itemContextMenu")) {
+    closeItemContextMenu();
+  }
+});
 resolutionSelect.addEventListener("change", () => {
   state.settings.resolution = resolutionSelect.value;
   saveSettings();
@@ -2048,9 +2508,13 @@ function createFallbackTextureCanvas() {
 
 function renderBaseHud() {
   updateCharacterUi();
-  ui.baseHealth.textContent = state.health;
+  ui.baseHealth.textContent = formatHealthValue(state.health);
   ui.basePack.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
   renderQuickbar();
+}
+
+function formatHealthValue(value) {
+  return Math.round((Number(value) || 0) * 10) / 10;
 }
 
 function buildBaseScene() {
@@ -6535,6 +6999,9 @@ function openBasePanel(action) {
 }
 
 function closeBasePanel() {
+  closeItemContextMenu();
+  closeItemInspect();
+  closeWeaponModify();
   basePanel.classList.add("hidden");
   basePanel.querySelector(".base-panel__body")?.removeAttribute("data-station");
 }
@@ -6651,6 +7118,7 @@ function wireItemBoxPanel() {
     target.addEventListener("dragover", (event) => event.preventDefault());
     target.addEventListener("drop", handleItemBoxDrop);
   }
+  wireItemContextMenus(basePanelContent);
 }
 
 async function handleItemBoxDrop(event) {
@@ -6714,14 +7182,15 @@ function moveInventoryItemToStash(payload) {
 function moveItemToEquipment(payload, slot) {
   if (payload.source !== "inventory") return false;
   const itemName = getInventoryEntryName(state.inventory[payload.index]);
-  const item = getItem(itemName);
-  if (!itemName || itemName !== payload.itemName || item.slot !== slot) {
+  if (!itemName || itemName !== payload.itemName || getItemEquipmentSlot(itemName) !== slot) {
     showPrompt("That item does not fit there.");
     return false;
   }
+  const previous = state.equipment[slot];
+  const projectedCount = state.inventory.length - 1 + (previous ? 1 : 0);
+  if (!canEquipBackpack(itemName, projectedCount)) return false;
   state.inventory.splice(payload.index, 1);
   cleanQuickbarAssignments();
-  const previous = state.equipment[slot];
   state.equipment[slot] = itemName;
   if (previous) addItemToInventory(previous) || addToStash(previous, 1);
   trimInventoryToCapacity();
@@ -6809,6 +7278,23 @@ function renderWorkbenchPanel() {
   wireUpgradeButtons();
 }
 
+function renderUnlockedStationCrafts(stationId) {
+  const unlocked = new Set(state.unlockedRecipes);
+  const recipes = Object.values(CRAFTING_RECIPE_DEFINITIONS)
+    .filter((recipe) => recipe.stationId === stationId && unlocked.has(recipe.recipeId));
+  if (!recipes.length) return `<p class="panel-copy">No recipes unlocked.</p>`;
+  return `
+    <div class="craft-list">
+      ${recipes.map((recipe) => `
+        <div class="craft-row">
+          <b>${recipe.craftLabel}</b>
+          <span>Recipe unlocked · ingredients to be defined</span>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
 function renderMedicalPanel() {
   basePanelTitle.textContent = "Medical Unit";
   basePanelContent.innerHTML = `
@@ -6818,12 +7304,16 @@ function renderMedicalPanel() {
         <div class="action-list">
           <button class="action-row" data-action="heal"><b>Patch Wounds</b><span>1 bandage</span></button>
           <button class="action-row" data-action="stabilize"><b>Stabilize Trauma</b><span>1 first aid kit</span></button>
-          <div class="action-row"><b>Current Health</b><span>${state.health}/100</span></div>
+          <div class="action-row"><b>Current Health</b><span>${formatHealthValue(state.health)}/100</span></div>
         </div>
       </section>
       <section class="panel-block">
         <h3>Upgrade</h3>
         ${renderUpgradeButton("med")}
+      </section>
+      <section class="panel-block">
+        <h3>Available Crafts</h3>
+        ${renderUnlockedStationCrafts("medical")}
       </section>
     </div>
   `;
@@ -7005,7 +7495,7 @@ function renderRestProfileEquipment(loadout) {
 
 function renderRestProfileInventory(loadout) {
   const capacity = getLoadoutInventoryCapacity(loadout);
-  return Array.from({ length: 10 }, (_, index) => {
+  return Array.from({ length: MAX_BACKPACK_INVENTORY_SLOTS }, (_, index) => {
     const entry = loadout.inventory[index];
     if (!entry) {
       const unavailable = index >= capacity;
@@ -7023,7 +7513,7 @@ function renderRestProfileInventory(loadout) {
 }
 
 function getLoadoutInventoryCapacity(loadout) {
-  return getItem(loadout.equipment.backpack).slots || 6;
+  return getBackpackInventoryCapacity(loadout.equipment.backpack);
 }
 
 function renderMapPanel() {
@@ -7208,6 +7698,7 @@ function showMainMenu() {
   pauseMenu.classList.add("hidden");
   settingsMenu.classList.add("hidden");
   runEnd.classList.add("hidden");
+  recipeUnlockModal.classList.add("hidden");
   syncBaseMusic();
 }
 
@@ -7217,13 +7708,14 @@ function isMainMenuOpen() {
 
 function resetGameStateForNewGame() {
   state.mode = "base";
-  state.character = "female";
+  state.character = "luis";
   state.health = 100;
   state.keys = 0;
   state.runSeed = Date.now() >>> 0;
   state.characterLoadouts = makeDefaultCharacterLoadouts();
   syncActiveCharacterLoadout();
   state.stash = makeInitialStash();
+  state.unlockedRecipes = [];
   state.upgrades = { storage: 0, med: 0, workbench: 0, intel: 0 };
   state.activeLocation = null;
   playerAnimationClips = getCharacterProfile(state.character).animations;
@@ -7309,6 +7801,22 @@ function loadGameFromMainMenu() {
 function handleEscapeKey() {
   keys.clear();
   if (isMainMenuOpen()) return;
+  if (!recipeUnlockModal.classList.contains("hidden")) {
+    closeRecipeUnlockPopup();
+    return;
+  }
+  if (!itemInspectOverlay.classList.contains("hidden")) {
+    closeItemInspect();
+    return;
+  }
+  if (!weaponModifyOverlay.classList.contains("hidden")) {
+    closeWeaponModify();
+    return;
+  }
+  if (!itemContextMenu.classList.contains("hidden")) {
+    closeItemContextMenu();
+    return;
+  }
   if (isDebugItemSpawnerOpen()) {
     closeDebugItemSpawner();
     return;
@@ -7362,7 +7870,11 @@ function isPaused() {
     isSettingsMenuOpen() ||
     !basePanel.classList.contains("hidden") ||
     !runEnd.classList.contains("hidden") ||
-    !quantityPrompt.classList.contains("hidden")
+    !recipeUnlockModal.classList.contains("hidden") ||
+    !quantityPrompt.classList.contains("hidden") ||
+    !itemInspectOverlay.classList.contains("hidden") ||
+    !weaponModifyOverlay.classList.contains("hidden") ||
+    !itemContextMenu.classList.contains("hidden")
   );
 }
 
@@ -7421,6 +7933,9 @@ function openLootContainerWindow(container) {
 }
 
 function closeLootContainerWindow() {
+  closeItemContextMenu();
+  closeItemInspect();
+  closeWeaponModify();
   clearContainerSearchTimers();
   lootContainerOverlay.classList.add("hidden");
   activeLootContainer = null;
@@ -7519,6 +8034,7 @@ function wireLootContainerWindow() {
       });
     });
   }
+  wireItemContextMenus(lootContainerOverlay);
 }
 
 async function handleLootContainerDrop(event) {
@@ -7607,13 +8123,14 @@ function moveInventoryItemToContainer(payload) {
 function moveContainerItemToEquipment(payload, slot) {
   if (payload.source !== "container" || !activeLootContainer) return false;
   const entry = activeLootContainer.userData.contents[payload.index];
-  const item = getItem(entry?.name);
-  if (!entry?.identified || entry.name !== payload.itemName || item.slot !== slot) {
+  if (!entry?.identified || entry.name !== payload.itemName || getItemEquipmentSlot(entry.name) !== slot) {
     lootContainerStatus.textContent = "That item does not fit there";
     return false;
   }
 
   const previous = state.equipment[slot];
+  const projectedCount = state.inventory.length + (previous ? 1 : 0);
+  if (!canEquipBackpack(entry.name, projectedCount)) return false;
   if (previous && getAvailableInventorySpaceForItem(previous) <= 0) {
     lootContainerStatus.textContent = "No room to swap equipped item";
     return false;
@@ -7664,6 +8181,7 @@ function restoreLoadedGameToBase() {
   closeLootContainerWindow();
   basePanel.classList.add("hidden");
   runEnd.classList.add("hidden");
+  recipeUnlockModal.classList.add("hidden");
   missionHud.classList.add("hidden");
   weaponHud.classList.add("hidden");
   baseHud.classList.remove("hidden");
@@ -7711,6 +8229,9 @@ function openInventory() {
 }
 
 function closeInventory() {
+  closeItemContextMenu();
+  closeItemInspect();
+  closeWeaponModify();
   inventoryOverlay.classList.add("hidden");
   hoveredInventoryIndex = null;
   renderQuickbar();
@@ -7718,7 +8239,7 @@ function closeInventory() {
 
 function renderInventory() {
   updateCharacterUi();
-  ui.inventoryHp.textContent = state.health;
+  ui.inventoryHp.textContent = formatHealthValue(state.health);
   ui.inventoryArmor.textContent = getArmorClass();
   ui.inventoryCapacity.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
   renderInventoryEquipmentSlots();
@@ -7739,7 +8260,8 @@ function renderInventory() {
     const entry = state.inventory[index];
     const itemName = getInventoryEntryName(entry);
     const qty = getInventoryEntryQty(entry);
-    const slot = document.createElement("div");
+    const slot = document.createElement(entry ? "button" : "div");
+    if (entry) slot.type = "button";
     slot.className = "inventory-slot";
     slot.dataset.dropTarget = "inventory";
     slot.dataset.index = index;
@@ -7759,6 +8281,19 @@ function renderInventory() {
     slot.draggable = true;
     slot.dataset.source = "inventory";
     slot.title = getItemLabel(itemName);
+    slot.addEventListener("contextmenu", (event) => {
+      openItemContextMenu(event, {
+        source: "inventory",
+        index: Number(slot.dataset.index),
+        itemName: getInventoryEntryName(state.inventory[Number(slot.dataset.index)]),
+      });
+    });
+    slot.addEventListener("pointerdown", (event) => {
+      if (event.button === 2) tryOpenItemContextMenuFromEvent(event);
+    });
+    slot.addEventListener("mousedown", (event) => {
+      if (event.button === 2) tryOpenItemContextMenuFromEvent(event);
+    });
     slot.innerHTML = `
       <div class="inventory-slot__icon-frame">
         <img class="inventory-slot__icon" src="${getItemIconPath(itemName)}" alt="" />
@@ -7769,6 +8304,7 @@ function renderInventory() {
     ui.inventorySlots.append(slot);
   }
   wireInventoryDragAndDrop();
+  wireItemContextMenus(inventoryOverlay);
   renderQuickbar();
 }
 
@@ -7787,6 +8323,9 @@ function renderInventoryEquipmentSlots() {
       </div>
     `;
     button.dataset.itemName = itemName || "";
+    button.oncontextmenu = itemName
+      ? (event) => openItemContextMenu(event, { source: "equipment", slot, itemName })
+      : null;
   }
 }
 
@@ -7822,7 +8361,7 @@ function wireInventoryDragAndDrop() {
       event.preventDefault();
       const valid = Boolean(
         activeInventoryDrag?.itemName &&
-        getItem(activeInventoryDrag.itemName).slot === target.dataset.slot
+        getItemEquipmentSlot(activeInventoryDrag.itemName) === target.dataset.slot
       );
       target.classList.toggle("equipment-slot--drop-valid", valid);
       target.classList.toggle("equipment-slot--drop-invalid", !valid);
@@ -7840,7 +8379,7 @@ function wireInventoryDragAndDrop() {
       const itemName = getInventoryEntryName(state.inventory[payload.index]);
       const targetSlot = target.dataset.slot;
       if (!itemName || itemName !== payload.itemName) return;
-      if (getItem(itemName).slot !== targetSlot) {
+      if (getItemEquipmentSlot(itemName) !== targetSlot) {
         showInventoryHint(`${getItemLabel(itemName)} does not fit the ${getEquipmentSlotLabel(targetSlot)} slot.`);
         return;
       }
@@ -7970,29 +8509,18 @@ function inventoryHasItem(itemName) {
 
 function useInventoryItem(index) {
   const itemName = getInventoryEntryName(state.inventory[index]);
-  const item = getItem(itemName);
-  if (!item.healHp) return;
-  const previousHealth = state.health;
-  state.health = Math.min(100, state.health + item.healHp);
-  state.inventory.splice(index, 1);
-  cleanQuickbarAssignments();
-  showInventoryHint(
-    state.health > previousHealth
-      ? `Used ${getItemLabel(itemName)} (+${state.health - previousHealth} HP)`
-      : `${getItemLabel(itemName)} used. Health already full.`
-  );
-  renderInventory();
-  renderBaseHud();
-  updateHud();
+  if (!itemName) return false;
+  return useContextItem({ source: "inventory", index, itemName });
 }
 
 function dropInventoryItem(index) {
   const entry = state.inventory[index];
   const itemName = getInventoryEntryName(entry);
+  const qty = getInventoryEntryQty(entry);
   if (!entry) return;
   state.inventory.splice(index, 1);
   cleanQuickbarAssignments();
-  if (state.mode === "mission") dropItemNearPlayer(itemName);
+  if (state.mode === "mission") dropItemNearPlayer(itemName, qty);
   else showInventoryHint(`${getItemLabel(itemName)} dropped.`);
   renderInventory();
   renderBaseHud();
@@ -8002,6 +8530,13 @@ function dropInventoryItem(index) {
 function dropEquippedItem(slot) {
   const itemName = state.equipment[slot];
   if (!itemName) return;
+  if (
+    slot === EQUIPMENT_SLOTS.BACKPACK
+    && state.inventory.length > BASE_POCKET_SLOTS
+  ) {
+    showInventoryHint("Empty the backpack before removing it.");
+    return;
+  }
   state.equipment[slot] = null;
   if (state.mode === "mission") dropItemNearPlayer(itemName);
   else showInventoryHint(`${getItemLabel(itemName)} dropped.`);
@@ -8014,16 +8549,17 @@ function dropEquippedItem(slot) {
 
 function equipInventoryItem(index) {
   const itemName = getInventoryEntryName(state.inventory[index]);
-  const item = getItem(itemName);
-  const slot = item.slot;
+  const slot = getItemEquipmentSlot(itemName);
   if (!slot) {
     showInventoryHint(`${getItemLabel(itemName)} cannot be equipped.`);
     return;
   }
 
+  const previous = state.equipment[slot];
+  const projectedCount = state.inventory.length - 1 + (previous ? 1 : 0);
+  if (!canEquipBackpack(itemName, projectedCount)) return;
   state.inventory.splice(index, 1);
   cleanQuickbarAssignments();
-  const previous = state.equipment[slot];
   state.equipment[slot] = itemName;
   if (previous) addItemToInventory(previous) || dropItemNearPlayer(previous);
   trimInventoryToCapacity();
@@ -8036,6 +8572,14 @@ function equipInventoryItem(index) {
 function unequipItem(slot) {
   const itemName = state.equipment[slot];
   if (!itemName) return;
+  if (
+    slot === EQUIPMENT_SLOTS.BACKPACK
+    && state.inventory.length + 1 > BASE_POCKET_SLOTS
+  ) {
+    showInventoryHint("Empty the backpack before unequipping it.");
+    renderInventory();
+    return;
+  }
   if (addItemToInventory(itemName)) {
     state.equipment[slot] = null;
   } else if (state.mode !== "mission") {
@@ -8103,11 +8647,12 @@ function getAvailableInventorySpaceForItem(itemName) {
 function trimInventoryToCapacity() {
   const capacity = getInventoryCapacity();
   while (state.inventory.length > capacity) {
-    dropItemNearPlayer(getInventoryEntryName(state.inventory.pop()));
+    const entry = state.inventory.pop();
+    dropItemNearPlayer(getInventoryEntryName(entry), getInventoryEntryQty(entry));
   }
 }
 
-function dropItemNearPlayer(itemName) {
+function dropItemNearPlayer(itemName, qty = 1) {
   if (!player || state.mode !== "mission") return false;
   let position = null;
   for (let attempt = 0; attempt < 20; attempt++) {
@@ -8119,7 +8664,7 @@ function dropItemNearPlayer(itemName) {
     }
   }
   if (!position) return false;
-  createLootNode(itemName, position);
+  createLootNode(itemName, position, qty);
   return true;
 }
 
@@ -8128,11 +8673,96 @@ function showInventoryHint(text) {
 }
 
 function getInventoryCapacity() {
-  return getItem(state.equipment.backpack).slots || 6;
+  return getBackpackInventoryCapacity(state.equipment.backpack);
+}
+
+function getBackpackInventoryCapacity(backpackName) {
+  if (!backpackName) return BASE_POCKET_SLOTS;
+  const backpack = getItem(backpackName);
+  const additionalSlots = Number(
+    backpack.additionalInventorySlots ?? backpack.additionalSlots ?? 0
+  );
+  return BASE_POCKET_SLOTS + Math.max(0, additionalSlots);
 }
 
 function getArmorClass() {
   return getItem(state.equipment.armor).armorClass || 1;
+}
+
+function getArmorConditionMaximum(itemName) {
+  return Math.max(0, Number(getItem(itemName).condition?.maximum) || 0);
+}
+
+function getArmorCondition(itemName = state.equipment.armor) {
+  if (!itemName) return 0;
+  const maximum = getArmorConditionMaximum(itemName);
+  if (!maximum) return 0;
+  const stored = Number(state.armorConditions[itemName]);
+  if (!Number.isFinite(stored)) {
+    state.armorConditions[itemName] = maximum;
+    return maximum;
+  }
+  return THREE.MathUtils.clamp(stored, 0, maximum);
+}
+
+function getEquippedArmorMovementMultiplier() {
+  const armor = getItem(state.equipment.armor);
+  return Number.isFinite(armor.movementSpeedMultiplier)
+    ? armor.movementSpeedMultiplier
+    : 1;
+}
+
+function recordEquippedArmorDamage(rawDamage) {
+  const itemName = state.equipment.armor;
+  const armor = getItem(itemName);
+  const conditionRules = armor.condition;
+  if (!itemName || !conditionRules || getArmorCondition(itemName) <= 0) return;
+  const interval = Math.max(1, Number(conditionRules.rawDamageAbsorbedPerLossInterval) || 20);
+  const lossPerInterval = Math.max(0, Number(conditionRules.conditionLossPerInterval) || 0);
+  const accumulated = Math.max(0, Number(state.armorDamageRemainders[itemName]) || 0)
+    + Math.max(0, rawDamage);
+  const completedIntervals = Math.floor(accumulated / interval);
+  state.armorDamageRemainders[itemName] = accumulated % interval;
+  if (completedIntervals <= 0 || lossPerInterval <= 0) return;
+  state.armorConditions[itemName] = Math.max(
+    0,
+    getArmorCondition(itemName) - completedIntervals * lossPerInterval
+  );
+}
+
+function applyPlayerDamage(rawDamage, { source = "all" } = {}) {
+  const normalizedRawDamage = Math.max(0, Number(rawDamage) || 0);
+  if (normalizedRawDamage <= 0) return 0;
+  const armorItemName = state.equipment.armor;
+  const armor = getItem(armorItemName);
+  const protection = armor.protectionStats;
+  const armorActive = Boolean(
+    armorItemName
+    && protection
+    && getArmorCondition(armorItemName) > 0
+    && (
+      protection.protectedDamageSources?.includes("all")
+      || protection.protectedDamageSources?.includes(source)
+    )
+  );
+  let appliedDamage = normalizedRawDamage;
+  if (armorActive) {
+    const negationChance = THREE.MathUtils.clamp(
+      Number(protection.completeDamageNegationChance) || 0,
+      0,
+      1
+    );
+    const fullyNegated = rng() < negationChance;
+    if (fullyNegated) {
+      appliedDamage = 0;
+    } else {
+      const mitigation = THREE.MathUtils.clamp(Number(protection.damageMitigation) || 0, 0, 1);
+      appliedDamage = Math.max(0, normalizedRawDamage * (1 - mitigation));
+    }
+    recordEquippedArmorDamage(normalizedRawDamage);
+  }
+  state.health = Math.max(0, state.health - appliedDamage);
+  return appliedDamage;
 }
 
 function getItem(itemName) {
@@ -8169,6 +8799,856 @@ function getItemIconPath(itemName) {
   return itemTexturePaths[textureKey] || itemTexturePaths.spareParts;
 }
 
+const FIREARM_MAGAZINE_SIZES = Object.freeze({
+  "glock 17": 17,
+  "beretta m9": 15,
+  m1911: 7,
+  "taurus 38": 5,
+  "model 629": 6,
+  "mossberg 500": 7,
+  "benelli m4": 8,
+  uzi: 30,
+  "h&k mp5": 30,
+  "kriss vector": 40,
+  m4a1: 30,
+  akm: 30,
+  "winchester model 70": 5,
+  "springfield m1a": 20,
+});
+
+const WEAPON_ATTACHMENT_SLOTS = Object.freeze([
+  { id: "sight", label: "Sight" },
+  { id: "magazine", label: "Magazine" },
+  { id: "muzzle", label: "Muzzle" },
+  { id: "buttstock", label: "Buttstock" },
+  { id: "tactical", label: "Tactical" },
+  { id: "cylinder", label: "Cylinder" },
+  { id: "barrel", label: "Barrel" },
+  { id: "grip", label: "Grip" },
+  { id: "shell_carrier", label: "Shell Carrier" },
+  { id: "foregrip", label: "Foregrip" },
+  { id: "cheek_rest", label: "Cheek Rest" },
+  { id: "recoil_pad", label: "Recoil Pad" },
+  { id: "bolt", label: "Bolt" },
+]);
+
+function getAttachmentCompatibility(weaponName, attachmentName) {
+  const weaponId = resolveItemId(weaponName);
+  const attachmentId = resolveItemId(attachmentName);
+  const weapon = getItem(weaponId);
+  const attachment = getItem(attachmentId);
+  if (weapon.weaponKind !== "firearm") return { compatible: false, reason: "Requires a firearm." };
+  if (!attachment.attachmentSlot) return { compatible: false, reason: "Not a firearm attachment." };
+
+  const compatibleWeapons = attachment.compatibleWeapons || [];
+  if (
+    attachment.compatibilityMode === "weapon_whitelist"
+    && !compatibleWeapons.includes(weaponId)
+  ) {
+    return { compatible: false, reason: `Not designed for ${getItemLabel(weaponId)}.` };
+  }
+  if (!attachment.overridesGlobalExclusion) {
+    if (
+      attachment.globalExcludedWeapons?.includes(weaponId)
+      || attachment.excludedWeapons?.includes(weaponId)
+    ) {
+      return { compatible: false, reason: `${getItemLabel(weaponId)} is excluded.` };
+    }
+    if (attachment.excludedWeaponFamilies?.includes(weapon.firearmFamily)) {
+      return { compatible: false, reason: `Not compatible with ${weapon.firearmFamily.replaceAll("_", " ")} weapons.` };
+    }
+  }
+  return { compatible: true, reason: "" };
+}
+
+function getInstalledWeaponAttachments(weaponName) {
+  const weaponId = resolveItemId(weaponName);
+  const configuration = state.weaponAttachments?.[weaponId] || {};
+  return Object.values(configuration)
+    .map(resolveItemId)
+    .filter((attachmentId) => getAttachmentCompatibility(weaponId, attachmentId).compatible);
+}
+
+function multiplyAttachmentEffect(current, value) {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return current;
+  return current * numericValue;
+}
+
+function getEffectiveFirearmStats(weaponName) {
+  const weaponId = resolveItemId(weaponName);
+  const base = getItem(weaponId);
+  if (base.weaponKind !== "firearm") return null;
+  const stats = {
+    ...base,
+    id: weaponId,
+    baseDamage: Number(base.damage) || 0,
+    baseAccuracy: Number(base.accuracy) || 5,
+    baseRpm: Number(base.rpm) || (base.fireRate ? 60 / base.fireRate : 60),
+    baseMagazineSize: getWeaponBaseMagazineSize(weaponId),
+    reloadTimeMultiplier: 1,
+    recoilSpreadMultiplier: 1,
+    aimSettleTimeMultiplier: 1,
+    walkingAimSpreadMultiplier: 1,
+    damageMultiplier: 1,
+    fireRateMultiplier: 1,
+    conditionLossRateMultiplier: 1,
+    gunshotDetectionRadiusMultiplier: 1,
+    muzzleFlashMultiplier: 1,
+    pelletSpreadMultiplier: 1,
+    accuracyRatingModifier: 0,
+    installedAttachments: getInstalledWeaponAttachments(weaponId),
+  };
+
+  for (const attachmentId of stats.installedAttachments) {
+    const attachment = getItem(attachmentId);
+    stats.accuracyRatingModifier += Number(attachment.accuracyRatingModifier) || 0;
+    for (const effectName of Object.keys(ATTACHMENT_EFFECT_LIMITS)) {
+      stats[effectName] = multiplyAttachmentEffect(
+        stats[effectName],
+        attachment[effectName]
+      );
+    }
+    const capacity = Number(attachment.magazineCapacityByWeapon?.[weaponId]);
+    if (Number.isFinite(capacity) && capacity > 0) stats.magazineSize = capacity;
+    if (attachment.reloadTypeOverride) stats.reloadType = attachment.reloadTypeOverride;
+    const spreadOverride = Number(attachment.pelletSpreadOverridesDegrees?.[weaponId]);
+    if (Number.isFinite(spreadOverride) && spreadOverride > 0) {
+      stats.pelletSpreadDegrees = spreadOverride;
+    }
+    stats.hasFlashlight ||= Boolean(attachment.illuminationRangeUnits);
+    stats.hasLaser ||= Boolean(attachment.aimReticleOverride === "red_dot");
+    stats.illuminationRangeUnits = Math.max(
+      Number(stats.illuminationRangeUnits) || 0,
+      Number(attachment.illuminationRangeUnits) || 0
+    );
+    stats.flashlightBeamAngleDegrees = Math.max(
+      Number(stats.flashlightBeamAngleDegrees) || 0,
+      Number(attachment.beamAngleDegrees) || 0
+    );
+    stats.playerDetectionRangeWhileActiveUnits = Math.max(
+      Number(stats.playerDetectionRangeWhileActiveUnits) || 0,
+      Number(attachment.playerDetectionRangeWhileActiveUnits) || 0
+    );
+    stats.zombieAttractionRangeWhileActiveUnits = Math.max(
+      Number(stats.zombieAttractionRangeWhileActiveUnits) || 0,
+      Number(attachment.zombieAttractionRangeWhileActiveUnits) || 0
+    );
+  }
+  for (const [effectName, [minimum, maximum]] of Object.entries(ATTACHMENT_EFFECT_LIMITS)) {
+    stats[effectName] = THREE.MathUtils.clamp(stats[effectName], minimum, maximum);
+  }
+
+  stats.accuracy = THREE.MathUtils.clamp(
+    stats.baseAccuracy + stats.accuracyRatingModifier,
+    1,
+    10
+  );
+  stats.damage = stats.baseDamage * stats.damageMultiplier;
+  stats.rpm = stats.baseRpm * stats.fireRateMultiplier;
+  stats.fireRate = 60 / Math.max(1, stats.rpm);
+  stats.magazineSize = Math.max(1, Number(stats.magazineSize) || stats.baseMagazineSize);
+  stats.range = (Number(base.range) || DEFAULT_FIREARM_RANGE) * (Number(stats.effectiveRangeMultiplier) || 1);
+  stats.gunshotDetectionRadius = DEFAULT_GUNSHOT_DETECTION_RADIUS * stats.gunshotDetectionRadiusMultiplier;
+  stats.pelletSpreadDegrees ||= (
+    SHOTGUN_SPREAD_DEGREES[stats.pelletSpreadTier] || 0
+  ) * stats.pelletSpreadMultiplier;
+  return stats;
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll("\"", "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function getItemEquipmentSlot(itemName) {
+  const item = getItem(itemName);
+  return item.slot || item.equipmentSlot || null;
+}
+
+function canEquipBackpack(itemName, projectedInventoryCount) {
+  if (getItemEquipmentSlot(itemName) !== EQUIPMENT_SLOTS.BACKPACK) return true;
+  const capacity = getBackpackInventoryCapacity(itemName);
+  if (projectedInventoryCount <= capacity) return true;
+  showItemActionFeedback(`Move items out of the pack before equipping ${getItemLabel(itemName)}.`);
+  return false;
+}
+
+function getWeaponBaseMagazineSize(itemName) {
+  const itemId = resolveItemId(itemName);
+  return getItem(itemId).magazineSize || FIREARM_MAGAZINE_SIZES[itemId] || 0;
+}
+
+function getWeaponMagazineSize(itemName) {
+  return getEffectiveFirearmStats(itemName)?.magazineSize || getWeaponBaseMagazineSize(itemName);
+}
+
+function isConsumableItem(itemName) {
+  const item = getItem(itemName);
+  return Boolean(item.use || item.healHp);
+}
+
+function getContextTargetEntry(target = activeItemContextTarget) {
+  if (!target?.itemName) return null;
+  if (target.source === "inventory") {
+    const entry = state.inventory[target.index];
+    return getInventoryEntryName(entry) === target.itemName ? entry : null;
+  }
+  if (target.source === "equipment") {
+    return state.equipment[target.slot] === target.itemName ? target.itemName : null;
+  }
+  if (target.source === "stash") {
+    const entry = state.stash[target.index];
+    return entry?.name === target.itemName ? entry : null;
+  }
+  if (target.source === "container") {
+    const entry = activeLootContainer?.userData.contents[target.index];
+    return entry?.identified && entry.name === target.itemName ? entry : null;
+  }
+  return null;
+}
+
+function getContextTargetQuantity(target = activeItemContextTarget) {
+  const entry = getContextTargetEntry(target);
+  if (!entry) return 0;
+  if (target.source === "stash" || target.source === "container") return entry.qty || 1;
+  return getInventoryEntryQty(entry) || 1;
+}
+
+function isItemBoxOpen() {
+  return !basePanel.classList.contains("hidden")
+    && basePanel.querySelector(".base-panel__body")?.dataset.station === "itemBox";
+}
+
+function canMoveContextTarget(target) {
+  if (isItemBoxOpen()) return target.source === "inventory" || target.source === "stash";
+  if (isLootContainerOpen()) return target.source === "inventory" || target.source === "container";
+  return false;
+}
+
+function getItemContextActions(target) {
+  const item = getItem(target.itemName);
+  const equipped = target.source === "equipment";
+  const firearm = item.weaponKind === "firearm";
+  const melee = item.weaponKind === "melee";
+  const equippable = Boolean(getItemEquipmentSlot(target.itemName));
+  const actions = [{ id: "inspect", label: "Inspect" }];
+
+  if (firearm) {
+    actions.push(
+      { id: "reload", label: "Reload" },
+      { id: "unload", label: "Unload" },
+      { id: "modify", label: "Modify" }
+    );
+    if (!equipped) actions.push({ id: "equip", label: "Equip" });
+  } else if (melee) {
+    actions.push({ id: "modify", label: "Modify" });
+    if (!equipped) actions.push({ id: "equip", label: "Equip" });
+  } else if (equippable && !equipped) {
+    actions.push({ id: "equip", label: "Equip" });
+  }
+
+  if (equipped) actions.push({ id: "unequip", label: "Unequip" });
+  if (isConsumableItem(target.itemName)) actions.push({ id: "use", label: "Use" });
+  if (canMoveContextTarget(target)) actions.push({ id: "move", label: "Move" });
+  if (state.mode === "mission") actions.push({ id: "drop", label: "Drop", danger: true });
+  actions.push({ id: "cancel", label: "Cancel" });
+  return actions;
+}
+
+function tryOpenItemContextMenuFromEvent(event) {
+  const element = event.target.closest?.("[data-source][data-index], [data-equipment-slot], [data-slot]");
+  if (!element || element === canvas) return false;
+  const equipmentSlot = element.dataset.equipmentSlot || element.dataset.slot;
+  if (equipmentSlot) {
+    const itemName = state.equipment[equipmentSlot];
+    if (!itemName) return false;
+    openItemContextMenu(event, { source: "equipment", slot: equipmentSlot, itemName });
+    return true;
+  }
+  const source = element.dataset.source;
+  const index = Number(element.dataset.index);
+  const itemName = source === "inventory"
+    ? getInventoryEntryName(state.inventory[index])
+    : source === "stash"
+      ? state.stash[index]?.name
+      : activeLootContainer?.userData.contents[index]?.name;
+  if (!itemName) return false;
+  openItemContextMenu(event, { source, index, itemName });
+  return true;
+}
+
+function openItemContextMenu(event, target) {
+  if (!getContextTargetEntry(target)) return;
+  event.preventDefault();
+  event.stopPropagation();
+  activeItemContextTarget = { ...target };
+  itemContextMenu.dataset.target = JSON.stringify(activeItemContextTarget);
+  itemContextIcon.src = getItemIconPath(target.itemName);
+  itemContextName.textContent = getItemLabel(target.itemName);
+  itemContextActions.innerHTML = getItemContextActions(target).map((action) => `
+    <button
+      class="${action.danger ? "item-context-menu__danger" : ""}"
+      type="button"
+      role="menuitem"
+      data-item-action="${action.id}"
+    >${action.label}</button>
+  `).join("");
+  for (const button of itemContextActions.querySelectorAll("[data-item-action]")) {
+    button.addEventListener("pointerdown", (pointerEvent) => {
+      pointerEvent.preventDefault();
+      pointerEvent.stopPropagation();
+      button.dataset.pointerHandled = "true";
+      handleItemContextAction(button.dataset.itemAction);
+    });
+    button.addEventListener("click", () => {
+      if (button.dataset.pointerHandled) {
+        delete button.dataset.pointerHandled;
+        return;
+      }
+      handleItemContextAction(button.dataset.itemAction);
+    });
+  }
+
+  itemContextMenu.classList.remove("hidden");
+  itemContextMenu.style.left = "0px";
+  itemContextMenu.style.top = "0px";
+  const appRect = document.querySelector("#app").getBoundingClientRect();
+  const menuRect = itemContextMenu.getBoundingClientRect();
+  const scale = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--game-scale")) || 1;
+  const localX = (event.clientX - appRect.left) / scale;
+  const localY = (event.clientY - appRect.top) / scale;
+  itemContextMenu.style.left = `${THREE.MathUtils.clamp(localX, 8, Math.max(8, canvas.clientWidth - menuRect.width - 8))}px`;
+  itemContextMenu.style.top = `${THREE.MathUtils.clamp(localY, 8, Math.max(8, canvas.clientHeight - menuRect.height - 8))}px`;
+  itemContextActions.querySelector("button")?.focus();
+}
+
+function closeItemContextMenu() {
+  itemContextMenu.classList.add("hidden");
+  activeItemContextTarget = null;
+}
+
+function wireItemContextMenus(root) {
+  for (const element of root.querySelectorAll("[data-source][data-index]")) {
+    const openMenu = (event) => {
+      const source = element.dataset.source;
+      const index = Number(element.dataset.index);
+      const itemName = source === "inventory"
+        ? getInventoryEntryName(state.inventory[index])
+        : source === "stash"
+          ? state.stash[index]?.name
+          : activeLootContainer?.userData.contents[index]?.name;
+      if (itemName) openItemContextMenu(event, { source, index, itemName });
+    };
+    element.oncontextmenu = openMenu;
+    element.onpointerdown = (event) => {
+      if (event.button === 2) openMenu(event);
+    };
+    element.onmousedown = (event) => {
+      if (event.button === 2) openMenu(event);
+    };
+  }
+  for (const element of root.querySelectorAll("[data-equipment-slot], [data-slot]")) {
+    const openMenu = (event) => {
+      const slot = element.dataset.equipmentSlot || element.dataset.slot;
+      const itemName = state.equipment[slot];
+      if (itemName) openItemContextMenu(event, { source: "equipment", slot, itemName });
+    };
+    element.oncontextmenu = openMenu;
+    element.onpointerdown = (event) => {
+      if (event.button === 2) openMenu(event);
+    };
+    element.onmousedown = (event) => {
+      if (event.button === 2) openMenu(event);
+    };
+  }
+}
+
+async function handleItemContextAction(action) {
+  let target = activeItemContextTarget ? { ...activeItemContextTarget } : null;
+  if (!target && itemContextMenu.dataset.target) {
+    try {
+      target = JSON.parse(itemContextMenu.dataset.target);
+    } catch {
+      target = null;
+    }
+  }
+  if (action === "cancel" || !target) {
+    closeItemContextMenu();
+    return;
+  }
+  if (!getContextTargetEntry(target)) {
+    closeItemContextMenu();
+    return;
+  }
+  closeItemContextMenu();
+
+  if (action === "inspect") openItemInspect(target.itemName);
+  else if (action === "modify") openWeaponModify(target.itemName);
+  else if (action === "equip") equipContextItem(target);
+  else if (action === "unequip") unequipItem(target.slot);
+  else if (action === "reload") reloadSelectedFirearm(target.itemName);
+  else if (action === "unload") unloadSelectedFirearm(target.itemName);
+  else if (action === "use") useContextItem(target);
+  else if (action === "move") await moveContextItem(target);
+  else if (action === "drop") dropContextItem(target);
+}
+
+function getInspectStats(itemName) {
+  const item = getItem(itemName);
+  const stats = [];
+  if (item.rarity) stats.push(["Rarity", item.rarity]);
+  if (item.weaponKind) stats.push(["Type", item.weaponKind === "firearm" ? "Firearm" : "Melee weapon"]);
+  if (item.hands) stats.push(["Handling", `${item.hands}-handed`]);
+  if (item.ammoType && item.weaponKind === "firearm") stats.push(["Ammunition", getItemLabel(item.ammoType)]);
+  if (item.weaponKind === "firearm") {
+    const effective = getEffectiveFirearmStats(itemName);
+    const capacity = getWeaponMagazineSize(itemName);
+    if (capacity) stats.push(["Magazine", `${getMagazineAmmo(itemName)} / ${capacity}`]);
+    stats.push(["Accuracy", `${effective.accuracy.toFixed(1)} / 10`]);
+    stats.push(["Fire rate", `${Math.round(effective.rpm)} RPM`]);
+    stats.push(["Reload", `${effective.reloadSpeedTier} / ${effective.reloadType.replace("_", " ")}`]);
+    stats.push(["Recoil", effective.recoilTier]);
+    if (effective.installedAttachments.length) {
+      stats.push(["Attachments", effective.installedAttachments.map(getItemLabel).join(", ")]);
+    }
+  }
+  if (item.damage) {
+    const effectiveDamage = item.weaponKind === "firearm"
+      ? getEffectiveFirearmStats(itemName).damage
+      : item.damage;
+    stats.push(["Damage", Number(effectiveDamage.toFixed(2))]);
+  }
+  if (item.range) stats.push(["Range", item.range]);
+  if (item.reach) stats.push(["Reach", item.reach]);
+  if (item.armorClass) {
+    stats.push(["Armor class", item.armorClass]);
+    stats.push(["Condition", `${getArmorCondition(itemName)} / ${getArmorConditionMaximum(itemName)}`]);
+    stats.push(["Damage mitigation", `${Math.round((item.protectionStats?.damageMitigation || 0) * 100)}%`]);
+    stats.push([
+      "Damage negation",
+      `${Math.round((item.protectionStats?.completeDamageNegationChance || 0) * 100)}%`,
+    ]);
+    stats.push([
+      "Bite negation",
+      `${Math.round((item.protectionStats?.failedGrabBiteNegationChance || 0) * 100)}%`,
+    ]);
+  }
+  if (item.totalInventorySlots) {
+    stats.push(["Inventory capacity", `${item.totalInventorySlots} slots`]);
+    stats.push(["Backpack bonus", `+${item.additionalInventorySlots} slots`]);
+  }
+  if (item.attachmentSlot) stats.push(["Attachment slot", item.attachmentSlot]);
+  for (const [effect, value] of Object.entries(item.use?.effects || {})) {
+    const label = effect.replace(/([A-Z])/g, " $1").replace(/^./, (letter) => letter.toUpperCase());
+    stats.push([label, value === true ? "Yes" : value === "full" ? "Full" : value]);
+  }
+  return stats;
+}
+
+function openItemInspect(itemName) {
+  const item = getItem(itemName);
+  itemInspectName.textContent = getItemLabel(itemName);
+  itemInspectIcon.src = getItemIconPath(itemName);
+  itemInspectDescription.textContent = item.description || "No field notes are available for this item.";
+  itemInspectStats.innerHTML = getInspectStats(itemName).map(([label, value]) => `
+    <div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>
+  `).join("");
+  itemInspectOverlay.classList.remove("hidden");
+  closeItemInspectButton.focus();
+}
+
+function closeItemInspect() {
+  itemInspectOverlay.classList.add("hidden");
+}
+
+function getWeaponAttachmentConfiguration(itemName) {
+  const weaponId = resolveItemId(itemName);
+  if (!state.weaponAttachments[weaponId]) state.weaponAttachments[weaponId] = {};
+  return state.weaponAttachments[weaponId];
+}
+
+function getApplicableWeaponAttachmentSlots(weaponName) {
+  return WEAPON_ATTACHMENT_SLOTS.filter((slot) => Object.values(ITEM_DATABASE).some((item) => (
+    item.attachmentSlot === slot.id
+    && getAttachmentCompatibility(weaponName, item.id).compatible
+  )));
+}
+
+function getAttachmentEffectSummary(attachmentName, weaponName) {
+  const attachment = getItem(attachmentName);
+  const effects = [];
+  if (attachment.accuracyRatingModifier) {
+    effects.push(`${attachment.accuracyRatingModifier > 0 ? "+" : ""}${attachment.accuracyRatingModifier} accuracy`);
+  }
+  if (attachment.magazineCapacityByWeapon?.[resolveItemId(weaponName)]) {
+    effects.push(`${attachment.magazineCapacityByWeapon[resolveItemId(weaponName)]} rounds`);
+  }
+  if (attachment.reloadTypeOverride) effects.push(`${attachment.reloadTypeOverride.replace("_", " ")} reload`);
+  if (attachment.reloadTimeMultiplier && attachment.reloadTimeMultiplier !== 1) {
+    effects.push(`${Math.round((attachment.reloadTimeMultiplier - 1) * 100)}% reload time`);
+  }
+  if (attachment.recoilSpreadMultiplier && attachment.recoilSpreadMultiplier !== 1) {
+    effects.push(`${Math.round((attachment.recoilSpreadMultiplier - 1) * 100)}% recoil spread`);
+  }
+  if (attachment.aimSettleTimeMultiplier && attachment.aimSettleTimeMultiplier !== 1) {
+    effects.push(`${Math.round((attachment.aimSettleTimeMultiplier - 1) * 100)}% aim-settle time`);
+  }
+  if (attachment.walkingAimSpreadMultiplier && attachment.walkingAimSpreadMultiplier !== 1) {
+    effects.push(`${Math.round((attachment.walkingAimSpreadMultiplier - 1) * 100)}% walking spread`);
+  }
+  if (attachment.damageMultiplier && attachment.damageMultiplier !== 1) {
+    effects.push(`${Math.round((attachment.damageMultiplier - 1) * 100)}% damage`);
+  }
+  if (attachment.gunshotDetectionRadiusMultiplier && attachment.gunshotDetectionRadiusMultiplier !== 1) {
+    effects.push(`${Math.round((attachment.gunshotDetectionRadiusMultiplier - 1) * 100)}% gunshot radius`);
+  }
+  if (attachment.illuminationRangeUnits) effects.push(`${attachment.illuminationRangeUnits}-unit light`);
+  if (attachment.aimReticleOverride === "red_dot") effects.push("laser aiming dot");
+  if (attachment.pelletSpreadOverridesDegrees?.[resolveItemId(weaponName)]) {
+    effects.push(`${attachment.pelletSpreadOverridesDegrees[resolveItemId(weaponName)]}° pellet spread`);
+  }
+  return effects.join(" · ") || "No direct combat modifier";
+}
+
+function returnExcessMagazineAmmo(weaponName, newCapacity) {
+  const current = getMagazineAmmo(weaponName);
+  const excess = Math.max(0, current - newCapacity);
+  if (!excess) return;
+  const ammoType = getItem(weaponName).ammoType;
+  state.magazines[weaponName] = newCapacity;
+  if (state.mode === "mission") {
+    const returned = addInventoryQuantity(ammoType, excess);
+    const overflow = excess - returned;
+    if (overflow > 0) dropItemNearPlayer(ammoType, overflow);
+    showItemActionFeedback(
+      overflow > 0
+        ? `${excess} excess rounds removed; ${overflow} dropped because the inventory was full.`
+        : `${excess} excess rounds returned to inventory.`
+    );
+  } else {
+    addToStash(ammoType, excess);
+    showItemActionFeedback(`${excess} excess rounds returned to the Item Box.`);
+  }
+}
+
+function openWeaponModify(itemName) {
+  activeModifiedWeaponName = resolveItemId(itemName);
+  weaponModifyName.textContent = `Modify ${getItemLabel(itemName)}`;
+  renderWeaponModify();
+  weaponModifyOverlay.classList.remove("hidden");
+  closeWeaponModifyButton.focus();
+}
+
+function closeWeaponModify() {
+  weaponModifyOverlay.classList.add("hidden");
+  activeModifiedWeaponName = null;
+}
+
+function renderWeaponModify() {
+  const weaponName = activeModifiedWeaponName;
+  if (!weaponName) return;
+  const weapon = getItem(weaponName);
+  if (weapon.weaponKind !== "firearm") {
+    weaponModifyContent.innerHTML = `
+      <div class="weapon-modify-empty">
+        <strong>No compatible modification slots</strong>
+        <p>Melee modification components are not defined in the current item data.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const configuration = getWeaponAttachmentConfiguration(weaponName);
+  const effectiveStats = getEffectiveFirearmStats(weaponName);
+  const applicableSlots = getApplicableWeaponAttachmentSlots(weaponName);
+  const availableAttachments = state.inventory
+    .map((entry, index) => ({ itemName: getInventoryEntryName(entry), index }))
+    .filter(({ itemName }) => getItem(itemName).attachmentSlot);
+  weaponModifyContent.innerHTML = `
+    <p class="weapon-modify-note">Attachments are survivor-specific and shared by duplicate copies of this weapon model.</p>
+    <dl class="weapon-modify-summary">
+      <div><dt>Damage</dt><dd>${effectiveStats.damage.toFixed(1)}</dd></div>
+      <div><dt>Accuracy</dt><dd>${effectiveStats.accuracy.toFixed(1)} / 10</dd></div>
+      <div><dt>Fire rate</dt><dd>${Math.round(effectiveStats.rpm)} RPM</dd></div>
+      <div><dt>Capacity</dt><dd>${effectiveStats.magazineSize}</dd></div>
+      <div><dt>Reload time</dt><dd>${Math.round(effectiveStats.reloadTimeMultiplier * 100)}%</dd></div>
+      <div><dt>Recoil spread</dt><dd>${Math.round(effectiveStats.recoilSpreadMultiplier * 100)}%</dd></div>
+    </dl>
+    <div class="weapon-modify-grid">
+      ${applicableSlots.map((slot) => {
+        const installed = configuration[slot.id];
+        return `
+          <section class="weapon-modify-slot">
+            <span>${slot.label}</span>
+            <div>
+              ${installed ? `<img src="${getItemIconPath(installed)}" alt="" />` : ""}
+              <strong>${installed ? getItemLabel(installed) : "Empty"}</strong>
+            </div>
+            ${installed ? `<button type="button" data-remove-attachment="${slot.id}">Remove</button>` : ""}
+          </section>
+        `;
+      }).join("")}
+    </div>
+    <section class="weapon-modify-inventory">
+      <h3>Available attachments</h3>
+      <div>
+        ${availableAttachments.length ? availableAttachments.map(({ itemName, index }) => {
+          const compatibility = getAttachmentCompatibility(weaponName, itemName);
+          return `
+          <button type="button" data-install-attachment="${index}" ${compatibility.compatible ? "" : "disabled"}>
+            <img src="${getItemIconPath(itemName)}" alt="" />
+            <span>${getItemLabel(itemName)}</span>
+            <small>${compatibility.compatible
+              ? `${getItem(itemName).attachmentSlot} · ${getAttachmentEffectSummary(itemName, weaponName)}`
+              : compatibility.reason}</small>
+          </button>
+        `;
+        }).join("") : "<p>No weapon attachments in the active survivor's inventory.</p>"}
+      </div>
+    </section>
+  `;
+  for (const button of weaponModifyContent.querySelectorAll("[data-install-attachment]")) {
+    button.addEventListener("click", () => installWeaponAttachment(Number(button.dataset.installAttachment)));
+  }
+  for (const button of weaponModifyContent.querySelectorAll("[data-remove-attachment]")) {
+    button.addEventListener("click", () => removeWeaponAttachment(button.dataset.removeAttachment));
+  }
+}
+
+function installWeaponAttachment(inventoryIndex) {
+  const entry = state.inventory[inventoryIndex];
+  const attachmentName = getInventoryEntryName(entry);
+  const attachment = getItem(attachmentName);
+  if (!activeModifiedWeaponName || !entry || !attachment.attachmentSlot) return;
+  const compatibility = getAttachmentCompatibility(activeModifiedWeaponName, attachmentName);
+  if (!compatibility.compatible) {
+    showItemActionFeedback(compatibility.reason);
+    return;
+  }
+  const previousCapacity = getWeaponMagazineSize(activeModifiedWeaponName);
+  const configuration = getWeaponAttachmentConfiguration(activeModifiedWeaponName);
+  const previous = configuration[attachment.attachmentSlot];
+  state.inventory.splice(inventoryIndex, 1);
+  configuration[attachment.attachmentSlot] = attachmentName;
+  if (previous) addInventoryQuantity(previous, 1);
+  const newCapacity = getWeaponMagazineSize(activeModifiedWeaponName);
+  if (newCapacity < previousCapacity) returnExcessMagazineAmmo(activeModifiedWeaponName, newCapacity);
+  showItemActionFeedback(`Installed ${getItemLabel(attachmentName)} on ${getItemLabel(activeModifiedWeaponName)}.`);
+  cleanQuickbarAssignments();
+  refreshItemSurfaces();
+  renderWeaponModify();
+}
+
+function removeWeaponAttachment(slot) {
+  if (!activeModifiedWeaponName) return;
+  const configuration = getWeaponAttachmentConfiguration(activeModifiedWeaponName);
+  const attachmentName = configuration[slot];
+  if (!attachmentName) return;
+  if (getAvailableInventorySpaceForItem(attachmentName) <= 0) {
+    showItemActionFeedback("No inventory space available for that attachment.");
+    return;
+  }
+  if (addInventoryQuantity(attachmentName, 1) !== 1) return;
+  const previousCapacity = getWeaponMagazineSize(activeModifiedWeaponName);
+  delete configuration[slot];
+  const newCapacity = getWeaponMagazineSize(activeModifiedWeaponName);
+  if (newCapacity < previousCapacity) returnExcessMagazineAmmo(activeModifiedWeaponName, newCapacity);
+  showItemActionFeedback(`Removed ${getItemLabel(attachmentName)} from ${getItemLabel(activeModifiedWeaponName)}.`);
+  refreshItemSurfaces();
+  renderWeaponModify();
+}
+
+function equipContextItem(target) {
+  const slot = getItemEquipmentSlot(target.itemName);
+  if (!slot) {
+    showItemActionFeedback(`${getItemLabel(target.itemName)} cannot be equipped.`);
+    return false;
+  }
+  if (target.source === "inventory") {
+    equipInventoryItem(target.index);
+    return true;
+  }
+  if (target.source === "container") {
+    const changed = moveContainerItemToEquipment(target, slot);
+    if (changed) refreshItemSurfaces();
+    return changed;
+  }
+  if (target.source !== "stash") return false;
+  const stack = state.stash[target.index];
+  if (stack?.name !== target.itemName) return false;
+  const previous = state.equipment[slot];
+  if (!canEquipBackpack(target.itemName, state.inventory.length)) return false;
+  stack.qty -= 1;
+  if (stack.qty <= 0) state.stash.splice(target.index, 1);
+  state.equipment[slot] = target.itemName;
+  if (previous) addToStash(previous, 1);
+  trimInventoryToCapacity();
+  normalizeQuickbarSelection();
+  refreshItemSurfaces();
+  return true;
+}
+
+function reloadSelectedFirearm(itemName) {
+  const weapon = getEffectiveFirearmStats(itemName);
+  const capacity = getWeaponMagazineSize(itemName);
+  if (!weapon || !capacity || !weapon.ammoType) {
+    showItemActionFeedback("Reload data is not available for this firearm.");
+    return false;
+  }
+  if (state.mode === "mission") {
+    if (getQuickbarItem() !== resolveItemId(itemName)) {
+      showItemActionFeedback("Hold this firearm before reloading it during a mission.");
+      return false;
+    }
+    closeInventory();
+    return beginActiveReload(itemName);
+  }
+  const current = getMagazineAmmo(itemName);
+  const needed = capacity - current;
+  if (needed <= 0) {
+    showItemActionFeedback(`${getItemLabel(itemName)} is already fully loaded.`);
+    return false;
+  }
+  const available = getInventoryAmmoCount(weapon.ammoType);
+  if (available <= 0) {
+    showItemActionFeedback(`No ${getItemLabel(weapon.ammoType)} in the active survivor's inventory.`);
+    return false;
+  }
+  const loaded = consumeInventoryAmmo(weapon.ammoType, Math.min(needed, available));
+  state.magazines[itemName] = current + loaded;
+  showItemActionFeedback(`Reloaded ${getItemLabel(itemName)} with ${loaded} ${getItemLabel(weapon.ammoType)}.`);
+  refreshItemSurfaces();
+  return true;
+}
+
+function unloadSelectedFirearm(itemName) {
+  const weapon = getItem(itemName);
+  const loaded = getMagazineAmmo(itemName);
+  if (weapon.weaponKind !== "firearm" || !weapon.ammoType) {
+    showItemActionFeedback("Unload data is not available for this firearm.");
+    return false;
+  }
+  if (loaded <= 0) {
+    showItemActionFeedback(`${getItemLabel(itemName)} is already empty.`);
+    return false;
+  }
+  if (getAvailableInventorySpaceForItem(weapon.ammoType) < loaded) {
+    showItemActionFeedback("Not enough inventory space to unload this firearm.");
+    return false;
+  }
+  const added = addInventoryQuantity(weapon.ammoType, loaded);
+  if (added !== loaded) return false;
+  state.magazines[itemName] = 0;
+  showItemActionFeedback(`Unloaded ${loaded} ${getItemLabel(weapon.ammoType)}.`);
+  refreshItemSurfaces();
+  return true;
+}
+
+function removeOneContextItem(target) {
+  const entry = getContextTargetEntry(target);
+  if (!entry) return false;
+  if (target.source === "inventory") {
+    const qty = getInventoryEntryQty(entry);
+    if (typeof entry !== "string" && qty > 1) entry.qty -= 1;
+    else state.inventory.splice(target.index, 1);
+    cleanQuickbarAssignments();
+    return true;
+  }
+  if (target.source === "stash" || target.source === "container") {
+    entry.qty -= 1;
+    if (entry.qty <= 0) {
+      const list = target.source === "stash" ? state.stash : activeLootContainer.userData.contents;
+      list.splice(target.index, 1);
+    }
+    return true;
+  }
+  return false;
+}
+
+function useContextItem(target) {
+  const item = getItem(target.itemName);
+  const healthEffect = item.healHp ?? item.use?.effects?.health;
+  if (healthEffect === undefined) {
+    showItemActionFeedback("This consumable's survival effect is not active in the current build.");
+    return false;
+  }
+  const previousHealth = state.health;
+  state.health = healthEffect === "full"
+    ? 100
+    : Math.min(100, state.health + Math.max(0, Number(healthEffect) || 0));
+  if (!removeOneContextItem(target)) return false;
+  showItemActionFeedback(
+    state.health > previousHealth
+      ? `Used ${getItemLabel(target.itemName)} (+${formatHealthValue(state.health - previousHealth)} HP).`
+      : `Used ${getItemLabel(target.itemName)}. Health was already full.`
+  );
+  refreshItemSurfaces();
+  return true;
+}
+
+async function moveContextItem(target) {
+  let changed = false;
+  if (isItemBoxOpen()) {
+    changed = target.source === "inventory"
+      ? moveInventoryItemToStash(target)
+      : await moveStashItemToInventory(target);
+  } else if (isLootContainerOpen()) {
+    changed = target.source === "inventory"
+      ? moveInventoryItemToContainer(target)
+      : await moveContainerItemToInventory(target);
+  }
+  if (changed) refreshItemSurfaces();
+  return changed;
+}
+
+function removeContextTargetStack(target) {
+  const entry = getContextTargetEntry(target);
+  if (!entry) return 0;
+  const qty = getContextTargetQuantity(target);
+  if (target.source === "inventory") {
+    state.inventory.splice(target.index, 1);
+    cleanQuickbarAssignments();
+  } else if (target.source === "equipment") {
+    state.equipment[target.slot] = null;
+  } else if (target.source === "container") {
+    activeLootContainer.userData.contents.splice(target.index, 1);
+  } else {
+    return 0;
+  }
+  return qty;
+}
+
+function dropContextItem(target) {
+  if (state.mode !== "mission") return false;
+  const qty = getContextTargetQuantity(target);
+  if (!qty || !dropItemNearPlayer(target.itemName, qty)) return false;
+  removeContextTargetStack(target);
+  trimInventoryToCapacity();
+  normalizeQuickbarSelection();
+  showItemActionFeedback(`Dropped ${qty > 1 ? `${qty} × ` : ""}${getItemLabel(target.itemName)}.`);
+  refreshItemSurfaces();
+  return true;
+}
+
+function showItemActionFeedback(text) {
+  if (isLootContainerOpen()) lootContainerStatus.textContent = text;
+  else if (state.mode === "mission") showPlayerNotice(text, 2.4);
+  else showPrompt(text);
+}
+
+function refreshItemSurfaces() {
+  if (isInventoryOpen()) renderInventory();
+  if (isItemBoxOpen()) renderItemBoxPanel();
+  if (isLootContainerOpen()) renderLootContainerWindow();
+  renderBaseHud();
+  updateHud();
+}
+
 function renderQuickbar() {
   if (!ui.quickbar) return;
   const shouldShow = (state.mode === "mission" && !isLootContainerOpen()) || isInventoryOpen();
@@ -8176,17 +9656,29 @@ function renderQuickbar() {
   ui.quickbar.classList.toggle("quickbar--inventory", isInventoryOpen());
   ui.quickbar.innerHTML = Array.from({ length: 9 }, (_, index) => renderQuickbarCell(index + 1)).join("");
   for (const cell of ui.quickbar.querySelectorAll("[data-quick-slot]")) {
+    const slot = Number(cell.dataset.quickSlot);
     cell.addEventListener("dragover", (event) => {
-      if (Number(cell.dataset.quickSlot) > 2) event.preventDefault();
+      if (slot > 2) event.preventDefault();
     });
     cell.addEventListener("drop", (event) => {
       event.preventDefault();
       const raw = event.dataTransfer.getData("text/plain");
       if (!raw) return;
-      assignItemToQuickbar(JSON.parse(raw), Number(cell.dataset.quickSlot));
+      assignItemToQuickbar(JSON.parse(raw), slot);
       renderQuickbar();
     });
-    cell.addEventListener("click", () => selectQuickSlot(Number(cell.dataset.quickSlot)));
+    cell.addEventListener("click", () => selectQuickSlot(slot));
+    cell.addEventListener("contextmenu", (event) => {
+      const itemName = getQuickbarItem(slot);
+      if (!itemName) return;
+      if (slot <= 2) {
+        const equipmentSlot = slot === 1 ? EQUIPMENT_SLOTS.PRIMARY : EQUIPMENT_SLOTS.SIDEARM;
+        openItemContextMenu(event, { source: "equipment", slot: equipmentSlot, itemName });
+        return;
+      }
+      const index = state.inventory.findIndex((entry) => getInventoryEntryName(entry) === itemName);
+      if (index >= 0) openItemContextMenu(event, { source: "inventory", index, itemName });
+    });
   }
 }
 
@@ -8239,6 +9731,7 @@ function selectQuickSlot(slot) {
     useQuickbarItem(itemName, slot);
     return;
   }
+  if (activeReload && getQuickbarItem() !== itemName) cancelActiveReload("Reload interrupted.");
   state.activeQuickSlot = slot;
   showPrompt(`Holding ${getItemLabel(itemName)}`);
   renderQuickbar();
@@ -8247,13 +9740,12 @@ function selectQuickSlot(slot) {
 
 function useQuickbarItem(itemName, slot) {
   const index = state.inventory.findIndex((entry) => getInventoryEntryName(entry) === itemName);
-  const item = getItem(itemName);
   if (index < 0) {
     state.quickbar[slot - 1] = null;
     renderQuickbar();
     return;
   }
-  if (item.healHp) {
+  if (isConsumableItem(itemName)) {
     useInventoryItem(index);
     if (!inventoryHasItem(itemName)) state.quickbar[slot - 1] = null;
     renderQuickbar();
@@ -8274,8 +9766,8 @@ function cleanQuickbarAssignments() {
 }
 
 function isWeaponItem(itemName) {
-  const item = getItem(itemName);
-  return item.slot === EQUIPMENT_SLOTS.PRIMARY || item.slot === EQUIPMENT_SLOTS.SIDEARM;
+  const slot = getItemEquipmentSlot(itemName);
+  return slot === EQUIPMENT_SLOTS.PRIMARY || slot === EQUIPMENT_SLOTS.SIDEARM;
 }
 
 function isRangedWeapon(itemName) {
@@ -8294,6 +9786,7 @@ function getAttackActionState(itemName) {
 }
 
 function startMission(location) {
+  closeDebugItemSpawner();
   state.mode = "mission";
   cameraConfig.view = getDefaultCameraView();
   applyCameraProjection();
@@ -8306,7 +9799,6 @@ function startMission(location) {
   isAiming = false;
   attackCooldownTimer = 0;
   playerAction = createDefaultPlayerActionState();
-  state.activeQuickSlot = null;
   resetEquippedWeaponMagazines();
   playerFacingDirection = lastAimDirection;
   runMoveDirection.copy(getDirectionVectorFromName(playerFacingDirection));
@@ -8323,9 +9815,9 @@ function resetEquippedWeaponMagazines() {
   for (const slot of [EQUIPMENT_SLOTS.PRIMARY, EQUIPMENT_SLOTS.SIDEARM]) {
     const weaponName = state.equipment[slot];
     if (!weaponName) continue;
-    const weapon = itemCatalog[weaponName];
-    if (weapon?.magazineSize !== undefined) {
-      state.magazines[weaponName] = weapon.magazineSize;
+    const capacity = getWeaponMagazineSize(weaponName);
+    if (capacity > 0) {
+      state.magazines[weaponName] = capacity;
     }
   }
 }
@@ -8359,17 +9851,22 @@ function buildMission(location) {
   addHousePlaceholderFurniture(layout);
   addPlayer(size, layout.spawn);
   addExits(layout);
-  if (layout.handcrafted) addHouseLootContainers(location, layout);
+  if (layout.combatTest) addCombatTestVariantMarkers(layout);
+  else if (layout.handcrafted) addHouseLootContainers(location, layout);
   else addTestLootContainer(location, layout);
   addMissionKeys(layout);
-  if (layout.handcrafted) addHouseLooseLoot(location, layout);
-  else addLoot(location);
-  addZombies(location);
+  if (!layout.combatTest) {
+    if (layout.handcrafted) addHouseLooseLoot(location, layout);
+    else addLoot(location);
+  }
+  addZombies(location, layout);
   addRoomFog(layout.rooms);
   updateFogOfWar();
 
   ui.missionName.textContent = location.name;
-  ui.missionMeta.textContent = `${location.stars} star threat / ${location.loot.join(", ")}`;
+  ui.missionMeta.textContent = layout.combatTest
+    ? "Blue: Decomposed · Green: Fresh · Yellow: Tough · Red: Special"
+    : `${location.stars} star threat / ${location.loot.join(", ")}`;
 }
 
 function clearScene() {
@@ -8391,6 +9888,17 @@ function clearScene() {
   lootContainers = [];
   zombies = [];
   deadZombies = [];
+  activeProjectiles = [];
+  lastProjectileDebug = null;
+  activeReload = null;
+  setReloadProgressVisible(false);
+  accumulatedRecoilDegrees = 0;
+  recoilRecoveryDelayTimer = 0;
+  aimSettleElapsed = 0;
+  triggerHeld = false;
+  tacticalFlashlight = null;
+  tacticalFlashlightTarget = null;
+  laserAimDot = null;
   exits = [];
   doorNodes = [];
   lockedDoors = [];
@@ -8417,6 +9925,7 @@ function addGrid(size) {
 
 function createMissionLayout(location) {
   if (location.id === "house") return createHouseMissionLayout();
+  if (location.id === "combat_test") return createCombatTestMissionLayout();
   for (let attempt = 0; attempt < 12; attempt++) {
     const layout = buildMissionLayoutAttempt(location);
     if (validateMissionLayout(layout)) return layout;
@@ -8999,6 +10508,98 @@ function getSpriteSheetClipInfo(name, clip) {
   };
 }
 
+function createCombatTestMissionLayout() {
+  const center = {
+    id: 0,
+    key: "combat_test_center",
+    label: "Open Combat Room",
+    gx: 0,
+    gz: 0,
+    x: 0,
+    z: 0,
+    halfW: 10,
+    halfH: 8,
+    depth: 0,
+    doors: [],
+  };
+  const roomDefinitions = [
+    { key: "decomposed_room", label: "Decomposed Infected Room", x: 0, z: -14, halfW: 6, halfH: 6, side: "north", variantId: "decomposed_infected", markerColor: "#2f7df6" },
+    { key: "fresh_room", label: "Fresh Infected Room", x: 16, z: 0, halfW: 6, halfH: 6, side: "east", variantId: "fresh_infected", markerColor: "#3bb85f" },
+    { key: "tough_room", label: "Tough Infected Room", x: 0, z: 14, halfW: 6, halfH: 6, side: "south", variantId: "tough_infected", markerColor: "#e6c735" },
+    { key: "special_room", label: "Special Infected Room", x: -16, z: 0, halfW: 6, halfH: 6, side: "west", variantId: "special_infected", markerColor: "#d94a4a" },
+  ];
+  const rooms = [center, ...roomDefinitions.map((definition, index) => ({
+    id: index + 1,
+    ...definition,
+    gx: definition.x,
+    gz: definition.z,
+    depth: 1,
+    doors: [],
+  }))];
+  const edges = roomDefinitions.map((definition, index) => {
+    const room = rooms[index + 1];
+    const opposite = definition.side === "north" ? "south"
+      : definition.side === "south" ? "north"
+        : definition.side === "east" ? "west" : "east";
+    const edge = {
+      from: center,
+      to: room,
+      side: definition.side,
+      opposite,
+      locked: false,
+      keyRoom: null,
+      doorWidth: 2.35,
+      combatTest: true,
+      variantId: definition.variantId,
+      markerColor: definition.markerColor,
+    };
+    center.doors.push({ side: definition.side, edge });
+    room.doors.push({ side: opposite, edge });
+    return edge;
+  });
+  const bounds = {
+    minX: -22,
+    maxX: 22,
+    minZ: -20,
+    maxZ: 20,
+  };
+  const spawn = new THREE.Vector3(0, 1.2, 0);
+  return {
+    rooms,
+    edges,
+    bounds,
+    spawn,
+    combatTest: true,
+    testZombies: roomDefinitions.map((definition, index) => ({
+      roomId: index + 1,
+      variantId: definition.variantId,
+      markerColor: definition.markerColor,
+      spawn: { x: definition.x, z: definition.z },
+    })),
+  };
+}
+
+function addCombatTestVariantMarkers(layout) {
+  const center = layout.rooms[0];
+  const markerOffset = 1.25;
+  for (const edge of layout.edges.filter((candidate) => candidate.combatTest)) {
+    const markerPosition = new THREE.Vector3(center.x, 0.045, center.z);
+    if (edge.side === "north") markerPosition.z -= center.halfH - markerOffset;
+    if (edge.side === "south") markerPosition.z += center.halfH - markerOffset;
+    if (edge.side === "east") markerPosition.x += center.halfW - markerOffset;
+    if (edge.side === "west") markerPosition.x -= center.halfW - markerOffset;
+    const marker = new THREE.Mesh(
+      new THREE.CircleGeometry(0.48, 20),
+      new THREE.MeshBasicMaterial({ color: edge.markerColor, transparent: true, opacity: 0.94, depthWrite: false })
+    );
+    marker.rotation.x = -Math.PI / 2;
+    marker.position.copy(markerPosition);
+    marker.userData.combatTestVariantId = edge.variantId;
+    marker.userData.combatTestMarker = true;
+    scene.add(marker);
+  }
+}
+
 function createHouseMissionLayout() {
   const template = pick(HOUSE_MISSION_TEMPLATES);
   const roomSpan = 7;
@@ -9318,7 +10919,7 @@ function getRandomPointInRoom(room, inset = 0.9, y = 0.24) {
   );
 }
 
-function createLootNode(itemName, position) {
+function createLootNode(itemName, position, qty = 1) {
   const isKey = itemName === "Key";
   const item = isKey ? { texture: "key" } : getItem(itemName);
   const node = new THREE.Sprite(
@@ -9335,6 +10936,7 @@ function createLootNode(itemName, position) {
   node.scale.set(isKey ? 0.62 : getLootScale(itemName), isKey ? 0.62 : getLootScale(itemName), 1);
   node.castShadow = true;
   node.userData.item = itemName;
+  node.userData.qty = Math.max(1, Math.floor(qty));
   scene.add(node);
   lootNodes.push(node);
   return node;
@@ -9354,38 +10956,58 @@ function getItemTexture(item) {
 }
 
 function getLootScale(itemName) {
-  const item = getItem(itemName);
-  if (item.slot === EQUIPMENT_SLOTS.PRIMARY) return 0.95;
-  if (item.slot === EQUIPMENT_SLOTS.ARMOR || item.slot === EQUIPMENT_SLOTS.BACKPACK) return 1.05;
+  const slot = getItemEquipmentSlot(itemName);
+  if (slot === EQUIPMENT_SLOTS.PRIMARY) return 0.95;
+  if (slot === EQUIPMENT_SLOTS.ARMOR || slot === EQUIPMENT_SLOTS.BACKPACK) return 1.05;
   return 0.78;
 }
 
 function getLootColor(itemName) {
-  const slot = getItem(itemName).slot;
+  const slot = getItemEquipmentSlot(itemName);
   if (slot === EQUIPMENT_SLOTS.PRIMARY || slot === EQUIPMENT_SLOTS.SIDEARM) return "#b76f43";
   if (slot === EQUIPMENT_SLOTS.ARMOR) return "#9aa1a6";
   if (slot === EQUIPMENT_SLOTS.BACKPACK) return "#d0a63f";
   return "#d9b15f";
 }
 
-function addZombies(location) {
-  const count = 3 + location.stars * 4;
+function pickZombieVariant() {
+  const totalWeight = ZOMBIE_VARIANTS.reduce((total, variant) => total + variant.spawnWeight, 0);
+  let roll = random() * totalWeight;
+  for (const variant of ZOMBIE_VARIANTS) {
+    roll -= variant.spawnWeight;
+    if (roll < 0) return variant;
+  }
+  return ZOMBIE_VARIANTS[0];
+}
+
+function addZombies(location, layout = null) {
+  const debugZombies = layout?.combatTest ? layout.testZombies : null;
+  const count = debugZombies?.length || (3 + location.stars * 4);
   for (let i = 0; i < count; i++) {
-    const spawnRooms = missionRooms.filter((room) => room.id !== 0);
-    const room = pick(spawnRooms.length ? spawnRooms : missionRooms);
-    const enemyType = pick(enemyTypes);
+    const debugDefinition = debugZombies?.[i] || null;
+    const spawnRooms = missionRooms.filter((candidate) => candidate.id !== 0);
+    const room = debugDefinition
+      ? missionRooms.find((candidate) => candidate.id === debugDefinition.roomId) || missionRooms[0]
+      : pick(spawnRooms.length ? spawnRooms : missionRooms);
+    const zombieVariant = debugDefinition
+      ? ZOMBIE_VARIANTS.find((variant) => variant.id === debugDefinition.variantId) || ZOMBIE_VARIANTS[0]
+      : pickZombieVariant();
+    const enemyType = enemyTypes.find((type) => type.id === zombieVariant.visualTypeId) || enemyTypes[0];
     const animator = createSpriteSheetAnimator(enemyType.animations);
     const material = new THREE.SpriteMaterial({
       map: animator.texture,
+      color: zombieVariant.tint,
       transparent: true,
       alphaTest: 0.45,
       depthWrite: true,
       depthTest: true,
     });
     const zombie = new THREE.Sprite(material);
-    let spawnPoint = getRandomPointInRoom(room, 1.0, 1.05);
+    let spawnPoint = debugDefinition?.spawn
+      ? new THREE.Vector3(debugDefinition.spawn.x, 1.05, debugDefinition.spawn.z)
+      : getRandomPointInRoom(room, 1.0, 1.05);
     for (let attempt = 0; attempt < 20; attempt++) {
-      const candidate = getRandomPointInRoom(room, 1.0, 1.05);
+      const candidate = getRandomPointInRoom(room, debugDefinition ? 1.35 : 1.0, 1.05);
       if (!hitsCollider(candidate, 0.58) && !isInsideExtractionZone(candidate, 1.2)) {
         spawnPoint = candidate;
         break;
@@ -9393,17 +11015,28 @@ function addZombies(location) {
     }
     zombie.position.copy(spawnPoint);
     zombie.scale.set(2.5, 2.5, 1);
+    const maxHealth = Math.round(ZOMBIE_BASE_HP * zombieVariant.maxHpMultiplier);
     zombie.userData = {
-      health: 35 + location.stars * 10,
+      health: maxHealth,
+      maxHealth,
+      damageResistance: zombieVariant.damageResistance,
       speed: 1.1 + location.stars * 0.08,
       attackTimer: 0,
       aiTickTimer: randomFloat(0, 0.25),
       chaseDirection: new THREE.Vector3(),
       hasSpottedPlayer: false,
+      staggerMeter: 0,
+      staggerTimer: 0,
+      staggerDecayDelay: 0,
       vocalTimer: 0,
       vocalAudio: null,
       enemyTypeId: enemyType.id,
       enemyTypeName: enemyType.name,
+      zombieVariantId: zombieVariant.id,
+      zombieVariantName: zombieVariant.name,
+      debugRoomId: debugDefinition?.roomId || null,
+      debugMarkerColor: debugDefinition?.markerColor || null,
+      baseColor: zombieVariant.tint,
       animator,
       facing: "south",
       radius: 0.5,
@@ -9415,6 +11048,13 @@ function addZombies(location) {
 }
 
 function addExits(layout = null) {
+  if (layout?.combatTest) {
+    const exit = createExtractionGrid();
+    exit.position.set(layout.spawn.x + 6.8, 0.06, layout.spawn.z + 5.0);
+    scene.add(exit);
+    exits.push(exit);
+    return;
+  }
   if (layout?.handcrafted) {
     const exit = createExtractionGrid();
     exit.position.set(layout.spawn.x, 0.06, layout.spawn.z);
@@ -9563,8 +11203,12 @@ function animate() {
       updateBase(dt);
     } else if (state.mode === "mission") {
       updatePlayer(dt);
+      updateFirearmHandling(dt);
+      updateActiveReload(dt);
+      updateTacticalAttachments();
       updatePlayerNotice(dt);
       updateOpeningDoors(dt);
+      updateProjectiles(dt);
       if (!isPlayerInTerminalAction()) {
         updateZombies(dt);
         updateDeadZombies(dt);
@@ -9593,6 +11237,11 @@ function updatePlayer(dt) {
   const heldItem = getQuickbarItem();
   const isMoving = movement.lengthSq() > 0;
   const isRunning = isMoving && (keys.has("ShiftLeft") || keys.has("ShiftRight"));
+  playerIsMoving = isMoving;
+  if (isRunning && isAiming) {
+    isAiming = false;
+    triggerHeld = false;
+  }
 
   if (isPlayerActionMovementLocked()) {
     playerFacingDirection = playerAction.facing || facing;
@@ -9624,7 +11273,8 @@ function updatePlayer(dt) {
   const backpedalMultiplier = !isRunning && movementDotFacing < -0.35 ? 0.54 : 1;
   const walkSpeed = 3.9;
   const runSpeed = walkSpeed * 1.25;
-  const speed = (isRunning ? runSpeed : walkSpeed) * backpedalMultiplier;
+  const armorMovementMultiplier = getEquippedArmorMovementMultiplier();
+  const speed = (isRunning ? runSpeed : walkSpeed) * backpedalMultiplier * armorMovementMultiplier;
   const animationFacing = isAiming ? facing : isRunning ? getDirectionName(direction) : facing;
   const stateName = getLocomotionActionState({ isMoving, isRunning, isAiming, heldItem });
   playerFacingDirection = animationFacing;
@@ -9815,8 +11465,23 @@ function getDebugSnapshot() {
   const activeClipInfo = playerAnimator?.getActiveClipInfo() || null;
   const expectedClipInfo = expectedClip ? playerAnimator?.getClipInfo(expectedClip) || null : null;
   const mapSource = map?.source?.data?.currentSrc || map?.image?.currentSrc || map?.image?.src || map?.userData?.sourcePath || null;
+  const effectiveFirearm = heldItem && isRangedWeapon(heldItem)
+    ? getEffectiveFirearmStats(heldItem)
+    : null;
+  const collisionProbe = player ? {
+    current: hitsCollider(player.position, player.userData.radius),
+    north: hitsCollider(player.position.clone().add(new THREE.Vector3(0, 0, -0.1)), player.userData.radius),
+    east: hitsCollider(player.position.clone().add(new THREE.Vector3(0.1, 0, 0)), player.userData.radius),
+    south: hitsCollider(player.position.clone().add(new THREE.Vector3(0, 0, 0.1)), player.userData.radius),
+    west: hitsCollider(player.position.clone().add(new THREE.Vector3(-0.1, 0, 0)), player.userData.radius),
+  } : null;
   return {
     mode: state.mode,
+    playerPosition: player ? {
+      x: Number(player.position.x.toFixed(3)),
+      z: Number(player.position.z.toFixed(3)),
+    } : null,
+    collisionProbe,
     isAiming,
     activeQuickSlot: state.activeQuickSlot,
     heldItem,
@@ -9838,6 +11503,22 @@ function getDebugSnapshot() {
     textureOffsetX: map?.offset?.x,
     textureRepeatX: map?.repeat?.x,
     playerVisible: player?.visible,
+    ballistics: {
+      activeProjectiles: activeProjectiles.length,
+      lastProjectile: lastProjectileDebug,
+      accumulatedRecoilDegrees: Number(accumulatedRecoilDegrees.toFixed(3)),
+      effectiveFirearm: effectiveFirearm ? {
+        damage: effectiveFirearm.damage,
+        accuracy: effectiveFirearm.accuracy,
+        rpm: effectiveFirearm.rpm,
+        magazineSize: effectiveFirearm.magazineSize,
+        reloadType: effectiveFirearm.reloadType,
+        reloadTimeMultiplier: effectiveFirearm.reloadTimeMultiplier,
+        gunshotDetectionRadius: effectiveFirearm.gunshotDetectionRadius,
+        installedAttachments: effectiveFirearm.installedAttachments,
+      } : null,
+      activeReload,
+    },
   };
 }
 
@@ -9951,7 +11632,25 @@ function updateZombies(dt) {
     let movedDistance = 0;
     zombie.userData.attackTimer -= dt;
     zombie.userData.aiTickTimer -= dt;
+    zombie.userData.staggerTimer = Math.max(0, (zombie.userData.staggerTimer || 0) - dt);
+    zombie.userData.staggerDecayDelay = Math.max(0, (zombie.userData.staggerDecayDelay || 0) - dt);
+    if (zombie.userData.staggerDecayDelay <= 0 && zombie.userData.staggerMeter > 0) {
+      zombie.userData.staggerMeter = Math.max(0, zombie.userData.staggerMeter - 2 * dt);
+    }
     if (!zombie.userData.hasSpottedPlayer && distance < 10 && hasLineOfSight(zombie.position, player.position)) {
+      zombie.userData.hasSpottedPlayer = true;
+      zombie.userData.vocalTimer = 0;
+    }
+    const tacticalStats = getActiveTacticalStats();
+    if (
+      !zombie.userData.hasSpottedPlayer
+      && tacticalStats?.hasFlashlight
+      && isPointInsideTacticalCone(
+        zombie.position,
+        tacticalStats.zombieAttractionRangeWhileActiveUnits,
+        tacticalStats.flashlightBeamAngleDegrees || 45
+      )
+    ) {
       zombie.userData.hasSpottedPlayer = true;
       zombie.userData.vocalTimer = 0;
     }
@@ -9962,7 +11661,11 @@ function updateZombies(dt) {
         zombie.userData.vocalTimer = 4 + Math.random() * 5;
       }
     }
-    if (distance < 10) {
+    if (zombie.userData.staggerTimer > 0) {
+      updateZombieAnimation(zombie, dt, 0);
+      continue;
+    }
+    if (zombie.userData.hasSpottedPlayer) {
       if (zombie.userData.aiTickTimer <= 0) {
         zombie.userData.aiTickTimer = randomFloat(0.2, 0.32);
         zombie.userData.chaseDirection.copy(toPlayer.normalize());
@@ -9977,7 +11680,7 @@ function updateZombies(dt) {
     updateZombieAnimation(zombie, dt, movedDistance);
     if (distance < 1.1 && zombie.userData.attackTimer <= 0) {
       zombie.userData.attackTimer = 1.1;
-      state.health = Math.max(0, state.health - 8);
+      applyPlayerDamage(8, { source: "zombie_attack" });
       if (state.health <= 0) {
         endRun(false);
         break;
@@ -10073,6 +11776,7 @@ function isRoomVisible(room) {
 
 function isPointVisibleFromPlayer(point) {
   if (!player) return true;
+  if (isPointIlluminatedByActiveFlashlight(point)) return true;
   const toPoint = point.clone().sub(player.position).setY(0);
   const distance = toPoint.length();
   const sameRoom = getRoomAtPosition(point) === getRoomAtPosition(player.position);
@@ -10243,8 +11947,11 @@ function completePickupInteraction(target) {
   if (!lootNodes.includes(target)) return;
   if (target.userData.item === "Key") {
     state.keys += 1;
-  } else if (addItemToInventory(target.userData.item, getItem(target.userData.item).ammoQty || 1)) {
-    const qty = getItem(target.userData.item).ammoQty || 1;
+  } else if (addItemToInventory(
+    target.userData.item,
+    target.userData.qty || getItem(target.userData.item).ammoQty || 1
+  )) {
+    const qty = target.userData.qty || getItem(target.userData.item).ammoQty || 1;
     showPrompt(`Picked up ${qty > 1 ? `${qty}x ` : ""}${getItemLabel(target.userData.item)}`);
   } else {
     showPrompt("Inventory full. Item left on the floor.");
@@ -10273,16 +11980,410 @@ function completeDoorInteraction(target) {
   updateHud();
 }
 
+function getAccuracyDeviationDegrees(accuracyRating) {
+  const rating = THREE.MathUtils.clamp(Number(accuracyRating) || 5, 1, 10);
+  const lowerRating = Math.floor(rating);
+  const upperRating = Math.ceil(rating);
+  const lowerDeviation = FIREARM_ACCURACY_DEVIATION_DEGREES[lowerRating];
+  const upperDeviation = FIREARM_ACCURACY_DEVIATION_DEGREES[upperRating];
+  return THREE.MathUtils.lerp(lowerDeviation, upperDeviation, rating - lowerRating);
+}
+
+function getAimTargetDistance() {
+  if (!floorPlane || !player) return DEFAULT_FIREARM_RANGE;
+  raycaster.setFromCamera(pointer, camera);
+  const hit = raycaster.intersectObject(floorPlane)[0];
+  return hit ? hit.point.distanceTo(player.position) : DEFAULT_FIREARM_RANGE;
+}
+
+function getCurrentAccuracyDeviationDegrees(weaponStats) {
+  let accuracyRating = weaponStats.accuracy;
+  const targetDistance = getAimTargetDistance();
+  for (const attachmentId of weaponStats.installedAttachments) {
+    const attachment = getItem(attachmentId);
+    if (
+      attachment.distanceBehavior === "close_range_penalty"
+      && targetDistance <= (Number(attachment.closeRangeThresholdUnits) || 0)
+    ) {
+      accuracyRating += Number(attachment.closeRangeAccuracyRatingModifier) || 0;
+    }
+  }
+  accuracyRating = THREE.MathUtils.clamp(accuracyRating, 1, 10);
+  const baseDeviation = getAccuracyDeviationDegrees(accuracyRating);
+  const settleDuration = DEFAULT_AIM_SETTLE_DURATION * weaponStats.aimSettleTimeMultiplier;
+  const settleProgress = THREE.MathUtils.clamp(aimSettleElapsed / Math.max(0.01, settleDuration), 0, 1);
+  const settleMultiplier = THREE.MathUtils.lerp(INITIAL_AIM_SPREAD_MULTIPLIER, 1, settleProgress);
+  const movementMultiplier = playerIsMoving
+    ? WALKING_AIM_SPREAD_MULTIPLIER * weaponStats.walkingAimSpreadMultiplier
+    : 1;
+  return {
+    accuracyRating,
+    baseDeviation,
+    settleMultiplier,
+    movementMultiplier,
+    maximumDeviationDegrees: baseDeviation * settleMultiplier * movementMultiplier + accumulatedRecoilDegrees,
+  };
+}
+
+function updateFirearmHandling(dt) {
+  if (isAiming) aimSettleElapsed += dt;
+  else aimSettleElapsed = 0;
+  recoilRecoveryDelayTimer = Math.max(0, recoilRecoveryDelayTimer - dt);
+  const heldItem = getQuickbarItem();
+  const stats = heldItem ? getEffectiveFirearmStats(heldItem) : null;
+  if (stats && recoilRecoveryDelayTimer <= 0 && accumulatedRecoilDegrees > 0) {
+    const recovery = FIREARM_RECOIL_TIERS[stats.recoilTier]?.recoveryPerSecond || 3.75;
+    accumulatedRecoilDegrees = Math.max(0, accumulatedRecoilDegrees - recovery * dt);
+  }
+  if (
+    triggerHeld
+    && isAiming
+    && stats?.firingMechanisms?.includes("automatic")
+    && !activeReload
+  ) {
+    attack();
+  }
+}
+
+function getActiveTacticalStats() {
+  if (state.mode !== "mission") return null;
+  const heldItem = getQuickbarItem();
+  return heldItem ? getEffectiveFirearmStats(heldItem) : null;
+}
+
+function isPointInsideTacticalCone(point, range, fullAngleDegrees) {
+  if (!player || !range || !fullAngleDegrees) return false;
+  const toPoint = point.clone().sub(player.position).setY(0);
+  const distance = toPoint.length();
+  if (distance > range || distance <= 0.001) return distance <= range;
+  const direction = getMouseDirectionVector();
+  const minimumDot = Math.cos(THREE.MathUtils.degToRad(fullAngleDegrees / 2));
+  return direction.dot(toPoint.normalize()) >= minimumDot && hasLineOfSight(player.position, point);
+}
+
+function isPointIlluminatedByActiveFlashlight(point) {
+  const stats = getActiveTacticalStats();
+  return Boolean(
+    stats?.hasFlashlight
+    && isPointInsideTacticalCone(
+      point,
+      stats.playerDetectionRangeWhileActiveUnits || stats.illuminationRangeUnits,
+      stats.flashlightBeamAngleDegrees || 45
+    )
+  );
+}
+
+function getTacticalAimDistance(weaponStats, direction) {
+  const maximumDistance = Math.min(getAimTargetDistance(), weaponStats.range);
+  const start = player.position.clone().setY(PROJECTILE_HEIGHT);
+  const end = start.clone().add(direction.clone().multiplyScalar(maximumDistance));
+  const midpoint = start.clone().lerp(end, 0.5);
+  let nearestFraction = 1;
+  for (const collider of getNearbyColliders(midpoint, maximumDistance * 0.5 + 0.02)) {
+    const fraction = getSegmentAabbHitFraction(start, end, getColliderBounds(collider), 0.02);
+    if (fraction !== null) nearestFraction = Math.min(nearestFraction, fraction);
+  }
+  return maximumDistance * nearestFraction;
+}
+
+function updateTacticalAttachments() {
+  if (!player || state.mode !== "mission") return;
+  const stats = getActiveTacticalStats();
+  const direction = getMouseDirectionVector();
+  if (!tacticalFlashlight) {
+    tacticalFlashlight = new THREE.SpotLight("#fff0c2", 8, 12, THREE.MathUtils.degToRad(22.5), 0.35, 1.4);
+    tacticalFlashlight.position.set(0, 2, 0);
+    tacticalFlashlightTarget = new THREE.Object3D();
+    scene.add(tacticalFlashlight, tacticalFlashlightTarget);
+    tacticalFlashlight.target = tacticalFlashlightTarget;
+  }
+  tacticalFlashlight.visible = Boolean(stats?.hasFlashlight);
+  if (tacticalFlashlight.visible) {
+    tacticalFlashlight.distance = stats.illuminationRangeUnits || 12;
+    tacticalFlashlight.angle = THREE.MathUtils.degToRad((stats.flashlightBeamAngleDegrees || 45) / 2);
+    tacticalFlashlight.position.copy(player.position).setY(1.8);
+    tacticalFlashlightTarget.position.copy(player.position)
+      .add(direction.clone().multiplyScalar(stats.illuminationRangeUnits || 12))
+      .setY(0.2);
+  }
+  if (!laserAimDot) {
+    laserAimDot = new THREE.Mesh(
+      new THREE.SphereGeometry(0.07, 8, 8),
+      new THREE.MeshBasicMaterial({ color: "#ff2525", depthTest: false })
+    );
+    laserAimDot.renderOrder = 30;
+    scene.add(laserAimDot);
+  }
+  laserAimDot.visible = Boolean(stats?.hasLaser && isAiming);
+  if (laserAimDot.visible) {
+    laserAimDot.position.copy(player.position)
+      .add(direction.clone().multiplyScalar(getTacticalAimDistance(stats, direction)))
+      .setY(0.11);
+  }
+}
+
+function rotateGroundDirection(direction, radians) {
+  const cosine = Math.cos(radians);
+  const sine = Math.sin(radians);
+  return new THREE.Vector3(
+    direction.x * cosine - direction.z * sine,
+    0,
+    direction.x * sine + direction.z * cosine
+  ).normalize();
+}
+
+function spawnFirearmProjectile(weaponName, weapon, aimDirection, options = {}) {
+  const accuracy = options.accuracy || getCurrentAccuracyDeviationDegrees(weapon);
+  const accuracyRating = accuracy.accuracyRating;
+  const maximumDeviationDegrees = options.maximumDeviationDegrees ?? accuracy.maximumDeviationDegrees;
+  const deviationDegrees = options.deviationDegrees
+    ?? (random() + random() - 1) * maximumDeviationDegrees;
+  const direction = rotateGroundDirection(aimDirection, THREE.MathUtils.degToRad(deviationDegrees));
+  const origin = player.position.clone()
+    .add(direction.clone().multiplyScalar(0.45));
+  origin.y = PROJECTILE_HEIGHT;
+
+  const mesh = new THREE.Mesh(PROJECTILE_GEOMETRY, PROJECTILE_MATERIAL);
+  mesh.position.copy(origin);
+  mesh.rotation.y = Math.atan2(direction.x, direction.z);
+  mesh.renderOrder = 8;
+  scene.add(mesh);
+
+  const maximumDistance = weapon.range || DEFAULT_FIREARM_RANGE;
+  const projectile = {
+    mesh,
+    weaponName,
+    direction,
+    speed: weapon.projectileSpeed || DEFAULT_PROJECTILE_SPEED,
+    radius: weapon.projectileRadius || DEFAULT_PROJECTILE_RADIUS,
+    damage: options.damage ?? weapon.damage ?? 45,
+    critical: Boolean(options.critical),
+    staggerRate: Number(options.staggerRate ?? weapon.staggerRate) || 0,
+    staggerForce: options.staggerForce || weapon.staggerForce || "weak",
+    pelletCount: Number(options.pelletCount) || 1,
+    pointBlankCriticalTarget: options.pointBlankCriticalTarget || null,
+    remainingDistance: maximumDistance,
+    traveledDistance: 0,
+    accuracyRating,
+    maximumDeviationDegrees,
+    deviationDegrees,
+    maximumDistance,
+    attachmentIds: weapon.installedAttachments || [],
+  };
+  activeProjectiles.push(projectile);
+  lastProjectileDebug = {
+    weapon: weaponName,
+    accuracyRating,
+    maximumDeviationDegrees: Number(maximumDeviationDegrees.toFixed(3)),
+    deviationDegrees: Number(deviationDegrees.toFixed(3)),
+    speed: projectile.speed,
+    maximumDistance,
+    outcome: "traveling",
+  };
+}
+
+function getSegmentAabbHitFraction(start, end, box, padding) {
+  let minimumFraction = 0;
+  let maximumFraction = 1;
+
+  for (const axis of ["x", "z"]) {
+    const delta = end[axis] - start[axis];
+    const minimum = box.min[axis] - padding;
+    const maximum = box.max[axis] + padding;
+    if (Math.abs(delta) < 0.000001) {
+      if (start[axis] < minimum || start[axis] > maximum) return null;
+      continue;
+    }
+    let nearFraction = (minimum - start[axis]) / delta;
+    let farFraction = (maximum - start[axis]) / delta;
+    if (nearFraction > farFraction) [nearFraction, farFraction] = [farFraction, nearFraction];
+    minimumFraction = Math.max(minimumFraction, nearFraction);
+    maximumFraction = Math.min(maximumFraction, farFraction);
+    if (minimumFraction > maximumFraction) return null;
+  }
+
+  return minimumFraction >= 0 && minimumFraction <= 1 ? minimumFraction : null;
+}
+
+function getSegmentCircleHitFraction(start, end, center, radius) {
+  const segmentX = end.x - start.x;
+  const segmentZ = end.z - start.z;
+  const offsetX = start.x - center.x;
+  const offsetZ = start.z - center.z;
+  const a = segmentX * segmentX + segmentZ * segmentZ;
+  if (a <= 0.000001) return null;
+  const c = offsetX * offsetX + offsetZ * offsetZ - radius * radius;
+  if (c <= 0) return 0;
+  const b = 2 * (offsetX * segmentX + offsetZ * segmentZ);
+  const discriminant = b * b - 4 * a * c;
+  if (discriminant < 0) return null;
+  const fraction = (-b - Math.sqrt(discriminant)) / (2 * a);
+  return fraction >= 0 && fraction <= 1 ? fraction : null;
+}
+
+function applyProjectileDamage(zombie, projectile) {
+  const damageResistance = Number.isFinite(zombie.userData.damageResistance)
+    ? zombie.userData.damageResistance
+    : 0;
+  const pointBlankCritical = (
+    projectile.pointBlankCriticalTarget === zombie
+    && projectile.traveledDistance <= 1.25
+  );
+  const critical = Boolean(projectile.critical || pointBlankCritical);
+  const appliedDamage = critical
+    ? zombie.userData.health
+    : Math.max(0, projectile.damage * (1 - damageResistance));
+  zombie.userData.health = critical ? 0 : zombie.userData.health - appliedDamage;
+  zombie.userData.lastRawDamage = projectile.damage;
+  zombie.userData.lastAppliedDamage = appliedDamage;
+  zombie.userData.lastCritical = critical;
+  zombie.material.color.set("#c94d46");
+  window.setTimeout(() => {
+    if (!zombie.userData.dead) zombie.material?.color.set(zombie.userData.baseColor || "#ffffff");
+  }, 90);
+  const lethal = zombie.userData.health <= 0;
+  playZombieDamageSound(lethal);
+  if (lethal) {
+    killZombie(zombie);
+    return;
+  }
+  const staggerAdded = (Number(projectile.staggerRate) || 0) / Math.max(1, projectile.pelletCount || 1);
+  zombie.userData.staggerMeter = Math.min(20, (zombie.userData.staggerMeter || 0) + staggerAdded);
+  zombie.userData.staggerDecayDelay = 2;
+  if (zombie.userData.staggerMeter >= 20) {
+    const reaction = STAGGER_FORCE_REACTIONS[projectile.staggerForce] || STAGGER_FORCE_REACTIONS.weak;
+    zombie.userData.staggerMeter = 0;
+    zombie.userData.staggerTimer = reaction.interruption;
+    moveWithSlide(
+      zombie,
+      projectile.direction.clone().multiplyScalar(reaction.knockback),
+      zombie.userData.radius
+    );
+  }
+}
+
+function removeProjectile(index, outcome, projectile) {
+  scene.remove(projectile.mesh);
+  activeProjectiles.splice(index, 1);
+  lastProjectileDebug = {
+    weapon: projectile.weaponName,
+    accuracyRating: projectile.accuracyRating,
+    maximumDeviationDegrees: Number(projectile.maximumDeviationDegrees.toFixed(3)),
+    deviationDegrees: Number(projectile.deviationDegrees.toFixed(3)),
+    speed: projectile.speed,
+    maximumDistance: projectile.maximumDistance,
+    outcome,
+    traveledDistance: Number(projectile.traveledDistance.toFixed(3)),
+  };
+}
+
+function updateProjectiles(dt) {
+  for (let index = activeProjectiles.length - 1; index >= 0; index--) {
+    const projectile = activeProjectiles[index];
+    const travelDistance = Math.min(projectile.speed * dt, projectile.remainingDistance);
+    const start = projectile.mesh.position.clone();
+    const end = start.clone().add(projectile.direction.clone().multiplyScalar(travelDistance));
+    const midpoint = start.clone().lerp(end, 0.5);
+    let nearestFraction = 1.000001;
+    let hitZombie = null;
+    let hitWall = false;
+
+    for (const collider of getNearbyColliders(midpoint, travelDistance * 0.5 + projectile.radius)) {
+      const fraction = getSegmentAabbHitFraction(
+        start,
+        end,
+        getColliderBounds(collider),
+        projectile.radius
+      );
+      if (fraction !== null && fraction < nearestFraction) {
+        nearestFraction = fraction;
+        hitZombie = null;
+        hitWall = true;
+      }
+    }
+
+    for (const zombie of zombies) {
+      const hitRadius = (zombie.userData.radius || 0.5) + projectile.radius;
+      const fraction = getSegmentCircleHitFraction(start, end, zombie.position, hitRadius);
+      if (fraction !== null && fraction < nearestFraction) {
+        nearestFraction = fraction;
+        hitZombie = zombie;
+        hitWall = false;
+      }
+    }
+
+    projectile.mesh.position.lerpVectors(start, end, nearestFraction);
+    const traveledThisFrame = travelDistance * nearestFraction;
+    projectile.traveledDistance += traveledThisFrame;
+    projectile.remainingDistance -= traveledThisFrame;
+
+    if (hitZombie) {
+      applyProjectileDamage(hitZombie, projectile);
+      removeProjectile(index, hitZombie.userData.dead ? "lethal_hit" : "zombie_hit", projectile);
+      updateHud();
+      continue;
+    }
+    if (hitWall) {
+      removeProjectile(index, "blocked_by_geometry", projectile);
+      continue;
+    }
+    if (projectile.remainingDistance <= 0.0001) {
+      removeProjectile(index, "maximum_distance", projectile);
+    }
+  }
+}
+
+function rollCenteredDamage(baseDamage, variance) {
+  return baseDamage * (1 + (random() - 0.5) * Math.max(0, Number(variance) || 0));
+}
+
+function getPointBlankShotgunTarget(aimDirection) {
+  let bestTarget = null;
+  let bestDot = 0.9;
+  for (const zombie of zombies) {
+    const toZombie = zombie.position.clone().sub(player.position).setY(0);
+    const distance = toZombie.length();
+    if (distance > 1.25 || distance <= 0.001) continue;
+    const dot = aimDirection.dot(toZombie.normalize());
+    if (dot > bestDot && hasLineOfSight(player.position, zombie.position)) {
+      bestTarget = zombie;
+      bestDot = dot;
+    }
+  }
+  return bestTarget;
+}
+
+function alertZombiesFromGunshot(radius) {
+  for (const zombie of zombies) {
+    if (zombie.position.distanceTo(player.position) > radius) continue;
+    zombie.userData.hasSpottedPlayer = true;
+    zombie.userData.vocalTimer = 0;
+  }
+}
+
+function showMuzzleFlash(weaponStats, direction) {
+  const intensityMultiplier = weaponStats.muzzleFlashMultiplier || 1;
+  if (intensityMultiplier <= 0) return;
+  const flash = new THREE.PointLight("#ffb45d", 5 * intensityMultiplier, 3.2, 2);
+  flash.position.copy(player.position)
+    .add(direction.clone().multiplyScalar(0.55))
+    .setY(1.15);
+  scene.add(flash);
+  window.setTimeout(() => scene.remove(flash), 45);
+}
+
 function attack() {
   if (state.mode !== "mission" || !isAiming) return;
-  if (isPlayerActionMovementLocked() || attackCooldownTimer > 0) return;
+  if (isPlayerInTerminalAction() || attackCooldownTimer > 0) return;
   const heldItem = getQuickbarItem();
   if (!heldItem || !isWeaponItem(heldItem)) {
     showPrompt("Press 1 or 2 to ready a weapon.");
     return;
   }
   const ranged = isRangedWeapon(heldItem);
-  const heldData = getItem(heldItem);
+  const heldData = ranged ? getEffectiveFirearmStats(heldItem) : getItem(heldItem);
+  if (ranged && activeReload) cancelActiveReload("Reload interrupted.");
+  if (!ranged && isPlayerActionMovementLocked()) return;
   if (ranged && getMagazineAmmo(heldItem) <= 0) {
     showPrompt(`Magazine empty. Press R to reload ${getItemLabel(heldItem)}.`);
     return;
@@ -10295,13 +12396,59 @@ function attack() {
     duration: Math.min(0.9, Math.max(0.18, actionDuration * 0.82)),
   });
   if (ranged) state.magazines[heldItem] = getMagazineAmmo(heldItem) - 1;
-  raycaster.setFromCamera(pointer, camera);
-  const hit = raycaster.intersectObject(floorPlane)[0];
-  const target = hit ? hit.point : player.position.clone().add(new THREE.Vector3(1, 0, 0));
-  const direction = target.sub(player.position).setY(0).normalize();
+  const direction = getMouseDirectionVector();
   const attackRange = heldData.range || heldData.reach || (ranged ? 9 : 2.1);
   const attackDot = ranged ? 0.86 : 0.66;
   const damage = heldData.damage || (ranged ? 45 : 35);
+
+  if (ranged) {
+    const accuracy = getCurrentAccuracyDeviationDegrees(heldData);
+    const recoil = FIREARM_RECOIL_TIERS[heldData.recoilTier] || FIREARM_RECOIL_TIERS.regular;
+    accumulatedRecoilDegrees = Math.min(
+      MAXIMUM_ACCUMULATED_RECOIL,
+      accumulatedRecoilDegrees + recoil.spreadPerShot * heldData.recoilSpreadMultiplier
+    );
+    recoilRecoveryDelayTimer = RECOIL_RECOVERY_DELAY;
+    alertZombiesFromGunshot(heldData.gunshotDetectionRadius);
+    showMuzzleFlash(heldData, direction);
+
+    if (heldData.pelletCount > 1) {
+      const pointBlankTarget = getPointBlankShotgunTarget(direction);
+      const blastDirection = pointBlankTarget
+        ? pointBlankTarget.position.clone().sub(player.position).setY(0).normalize()
+        : rotateGroundDirection(
+          direction,
+          THREE.MathUtils.degToRad((random() + random() - 1) * accuracy.maximumDeviationDegrees)
+        );
+      const sharedDamage = pointBlankTarget
+        ? heldData.damage
+        : rollCenteredDamage(heldData.damage, heldData.damageVariance);
+      for (let pelletIndex = 0; pelletIndex < heldData.pelletCount; pelletIndex++) {
+        const pelletDeviation = pointBlankTarget || pelletIndex === 0
+          ? 0
+          : (random() + random() - 1) * (heldData.pelletSpreadDegrees / 2);
+        spawnFirearmProjectile(heldItem, heldData, blastDirection, {
+          accuracy,
+          maximumDeviationDegrees: 0,
+          deviationDegrees: pelletDeviation,
+          damage: sharedDamage,
+          critical: pointBlankTarget ? false : random() < heldData.criticalChance,
+          staggerRate: heldData.staggerRate,
+          staggerForce: heldData.staggerForce,
+          pelletCount: heldData.pelletCount,
+          pointBlankCriticalTarget: pointBlankTarget,
+        });
+      }
+    } else {
+      spawnFirearmProjectile(heldItem, heldData, direction, {
+        accuracy,
+        damage: rollCenteredDamage(heldData.damage, heldData.damageVariance),
+        critical: random() < heldData.criticalChance,
+      });
+    }
+    updateHud();
+    return;
+  }
 
   let best = null;
   let bestDot = attackDot;
@@ -10316,22 +12463,119 @@ function attack() {
   }
 
   if (!best) return;
-  best.userData.health -= damage;
-  best.material.color.set("#c94d46");
-  window.setTimeout(() => {
-    if (!best.userData.dead) best.material?.color.set("#ffffff");
-  }, 90);
-  const lethal = best.userData.health <= 0;
-  playZombieDamageSound(lethal);
-  if (lethal) {
-    killZombie(best);
-  }
+  applyProjectileDamage(best, { damage });
   updateHud();
 }
 
 function getMagazineAmmo(weaponName) {
   if (!state.magazines[weaponName]) state.magazines[weaponName] = 0;
   return state.magazines[weaponName];
+}
+
+function setReloadProgressVisible(visible) {
+  reloadProgress?.classList.toggle("hidden", !visible);
+}
+
+function cancelActiveReload(message = "") {
+  if (!activeReload) return;
+  activeReload = null;
+  setReloadProgressVisible(false);
+  if (message) showPlayerNotice(message, 1.2);
+}
+
+function beginActiveReload(weaponName) {
+  const weaponId = resolveItemId(weaponName);
+  const weapon = getEffectiveFirearmStats(weaponId);
+  if (!weapon) return false;
+  const current = getMagazineAmmo(weaponId);
+  if (current >= weapon.magazineSize) {
+    showPrompt(`${getItemLabel(weaponId)} magazine is already full.`);
+    return false;
+  }
+  if (getInventoryAmmoCount(weapon.ammoType) <= 0) {
+    showPrompt(`No ${getItemLabel(weapon.ammoType)} in inventory.`);
+    return false;
+  }
+  const reloadType = weapon.reloadType || "magazine";
+  const tierTimings = FIREARM_RELOAD_TIMINGS[weapon.reloadSpeedTier] || FIREARM_RELOAD_TIMINGS.normal;
+  activeReload = {
+    weaponId,
+    reloadType,
+    elapsed: 0,
+    duration: tierTimings[reloadType] * weapon.reloadTimeMultiplier,
+    capacity: weapon.magazineSize,
+  };
+  setReloadProgressVisible(true);
+  updateReloadProgressUi();
+  showPlayerNotice(`Reloading ${getItemLabel(weaponId)}…`, 1);
+  return true;
+}
+
+function updateReloadProgressUi() {
+  if (!activeReload || !player || !reloadProgress) {
+    setReloadProgressVisible(false);
+    return;
+  }
+  const progress = THREE.MathUtils.clamp(
+    activeReload.elapsed / Math.max(0.01, activeReload.duration),
+    0,
+    1
+  );
+  reloadProgress.style.setProperty("--reload-progress", progress.toFixed(4));
+  reloadProgressText.textContent = activeReload.reloadType === "per_round"
+    ? `${getMagazineAmmo(activeReload.weaponId)} / ${activeReload.capacity}`
+    : "Reloading";
+  const projected = player.position.clone().add(new THREE.Vector3(0, 2.4, 0)).project(camera);
+  const rect = canvas.getBoundingClientRect();
+  reloadProgress.style.left = `${rect.left + (projected.x * 0.5 + 0.5) * rect.width}px`;
+  reloadProgress.style.top = `${rect.top + (-projected.y * 0.5 + 0.5) * rect.height}px`;
+}
+
+function updateActiveReload(dt) {
+  if (!activeReload) return;
+  if (getQuickbarItem() !== activeReload.weaponId) {
+    cancelActiveReload("Reload interrupted.");
+    return;
+  }
+  activeReload.elapsed += dt;
+  if (activeReload.elapsed < activeReload.duration) {
+    updateReloadProgressUi();
+    return;
+  }
+
+  const weapon = getEffectiveFirearmStats(activeReload.weaponId);
+  if (!weapon) {
+    cancelActiveReload();
+    return;
+  }
+  if (activeReload.reloadType === "magazine") {
+    const current = getMagazineAmmo(activeReload.weaponId);
+    const available = getInventoryAmmoCount(weapon.ammoType);
+    const loaded = consumeInventoryAmmo(weapon.ammoType, Math.min(activeReload.capacity - current, available));
+    state.magazines[activeReload.weaponId] = current + loaded;
+    showPlayerNotice(`Reloaded ${loaded} ${getItemLabel(weapon.ammoType)}.`, 1.3);
+    cancelActiveReload();
+    renderInventoryIfOpen();
+    updateHud();
+    return;
+  }
+
+  const loaded = consumeInventoryAmmo(weapon.ammoType, 1);
+  if (loaded > 0) state.magazines[activeReload.weaponId] = getMagazineAmmo(activeReload.weaponId) + loaded;
+  const complete = (
+    loaded <= 0
+    || getMagazineAmmo(activeReload.weaponId) >= activeReload.capacity
+    || getInventoryAmmoCount(weapon.ammoType) <= 0
+  );
+  if (complete) {
+    showPlayerNotice(`${getItemLabel(activeReload.weaponId)} reload complete.`, 1.3);
+    cancelActiveReload();
+  } else {
+    activeReload.elapsed -= activeReload.duration;
+    updateReloadProgressUi();
+  }
+  renderInventoryIfOpen();
+  updateHud();
 }
 
 function reloadHeldWeapon() {
@@ -10341,23 +12585,11 @@ function reloadHeldWeapon() {
     showPrompt("Hold a ranged weapon before reloading.");
     return;
   }
-  const weapon = getItem(heldItem);
-  const current = getMagazineAmmo(heldItem);
-  const needed = weapon.magazineSize - current;
-  if (needed <= 0) {
-    showPrompt(`${getItemLabel(heldItem)} magazine is already full.`);
+  if (activeReload) {
+    cancelActiveReload("Reload interrupted.");
     return;
   }
-  const available = getInventoryAmmoCount(weapon.ammoType);
-  if (available <= 0) {
-    showPrompt(`No ${getItemLabel(weapon.ammoType)} in inventory.`);
-    return;
-  }
-  const loaded = consumeInventoryAmmo(weapon.ammoType, Math.min(needed, available));
-  state.magazines[heldItem] = current + loaded;
-  showPrompt(`Reloaded ${loaded} ${getItemLabel(weapon.ammoType)}.`);
-  renderInventoryIfOpen();
-  updateHud();
+  beginActiveReload(heldItem);
 }
 
 function endRun(extracted) {
@@ -10386,10 +12618,55 @@ function finishRun(extracted) {
   runEnd.classList.remove("hidden");
 }
 
+function consumeReturnedRecipeItems() {
+  const unlocked = new Set(state.unlockedRecipes);
+  const newlyUnlocked = [];
+  const retainedInventory = [];
+  let consumedAny = false;
+
+  for (const entry of state.inventory) {
+    const itemName = getInventoryEntryName(entry);
+    const itemId = resolveItemId(itemName);
+    const recipeUnlock = ITEM_DATABASE[itemId]?.recipeUnlock;
+    if (!recipeUnlock) {
+      retainedInventory.push(entry);
+      continue;
+    }
+
+    consumedAny = true;
+    if (!unlocked.has(recipeUnlock.recipeId)) {
+      unlocked.add(recipeUnlock.recipeId);
+      newlyUnlocked.push(recipeUnlock);
+    }
+  }
+
+  if (consumedAny) {
+    state.inventory.splice(0, state.inventory.length, ...retainedInventory);
+    state.unlockedRecipes = Array.from(unlocked);
+    cleanQuickbarAssignments();
+    renderQuickbar();
+  }
+  return newlyUnlocked;
+}
+
+function showRecipeUnlockPopup(unlockedRecipes) {
+  if (!unlockedRecipes.length) return;
+  recipeUnlockText.textContent = unlockedRecipes
+    .map((recipe) => `${recipe.craftLabel} is now available at the ${recipe.stationLabel}.`)
+    .join("\n");
+  recipeUnlockModal.classList.remove("hidden");
+}
+
+function closeRecipeUnlockPopup() {
+  recipeUnlockModal.classList.add("hidden");
+}
+
 function returnToBase() {
   state.mode = "base";
+  const newlyUnlockedRecipes = consumeReturnedRecipeItems();
   state.health = Math.max(state.health, 45);
   attackCooldownTimer = 0;
+  cancelActiveReload();
   playerAction = createDefaultPlayerActionState();
   isAiming = false;
   promptEl.classList.add("hidden");
@@ -10400,6 +12677,7 @@ function returnToBase() {
   closeBasePanel();
   buildBaseScene();
   renderBaseHud();
+  showRecipeUnlockPopup(newlyUnlockedRecipes);
 }
 
 function addToStash(name, qty) {
@@ -10473,7 +12751,7 @@ function closeDebugItemSpawner() {
 }
 
 function updateHud() {
-  ui.hudHealth.textContent = state.health;
+  ui.hudHealth.textContent = formatHealthValue(state.health);
   ui.hudHealthFill.style.width = `${THREE.MathUtils.clamp(state.health, 0, 100)}%`;
   ui.hudPack.textContent = `${state.inventory.length}/${getInventoryCapacity()}`;
   ui.hudKeys.textContent = state.keys;
@@ -10499,7 +12777,8 @@ function updateHeldWeaponHud() {
   ui.weaponHudIcon.src = getItemIconPath(heldItem);
   ui.weaponHudName.textContent = getItemLabel(heldItem);
   if (isRangedWeapon(heldItem)) {
-    ui.weaponHudAmmo.textContent = `${getMagazineAmmo(heldItem)} / ${item.magazineSize} | ${getInventoryAmmoCount(item.ammoType)} ${getItemLabel(item.ammoType)}`;
+    const effectiveStats = getEffectiveFirearmStats(heldItem);
+    ui.weaponHudAmmo.textContent = `${getMagazineAmmo(heldItem)} / ${effectiveStats.magazineSize} | ${getInventoryAmmoCount(effectiveStats.ammoType)} ${getItemLabel(effectiveStats.ammoType)}`;
   } else if (isWeaponItem(heldItem)) {
     ui.weaponHudAmmo.textContent = `Melee | ${item.damage || 0} dmg`;
   } else {
@@ -10510,6 +12789,7 @@ function updateHeldWeaponHud() {
 function showPrompt(text) {
   if (state.mode === "mission") {
     promptEl.classList.add("hidden");
+    showPlayerNotice(text);
     return;
   }
   promptEl.textContent = text;
@@ -10572,7 +12852,10 @@ function rebuildColliderGrid() {
 }
 
 function getColliderBounds(collider) {
-  if (!colliderBounds.has(collider)) colliderBounds.set(collider, new THREE.Box3().setFromObject(collider));
+  if (!colliderBounds.has(collider)) {
+    collider.updateWorldMatrix(true, false);
+    colliderBounds.set(collider, new THREE.Box3().setFromObject(collider));
+  }
   return colliderBounds.get(collider);
 }
 

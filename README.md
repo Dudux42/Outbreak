@@ -22,15 +22,16 @@ Death ends the current run and forfeits carried mission loot. The larger permade
 - Four playable survivors: Ava Belmont, Peter Ashfield, Alynne, and Luis.
 - Per-survivor inventory, equipment, magazines, and quickbar state.
 - Inventory, item box, loot-container search, drag-and-drop transfer, equipment, and quickbar UI.
-- Six selectable mission locations gated by Intel Center level.
+- Seven selectable mission locations gated by Intel Center level, including the Combat Test Range debug mission.
 - Four handcrafted house templates plus procedural room-graph generation for other locations.
 - Visible animated doors, locked doors, accessible key placement, exterior spawning, and map bounds.
 - Eight-direction locomotion, aiming, pickup animation, action-state fallbacks, and debug diagnostics.
 - Left-center debug item spawner for adding any canonical item to the Item Box.
-- Firearm and melee combat, ammunition, reloads, zombie AI, zombie variants, and persistent corpses.
+- Firearm and melee combat, ammunition, reloads, zombie AI, four HP/resistance zombie variants, and persistent corpses.
 - Multiple extraction points, success/failure flow, local save data, audio settings, and resolution settings.
 - Generated environment textures and native Three.js prop meshes, including the wooden supply crate.
 - An expanding item database with tags, aliases, runtime stats, item metadata, and approved inventory icon rules.
+- Persistent recipe unlocks: carried recipe items are consumed on a successful safehouse return and reveal their craft at the assigned station.
 
 See [Current Build](docs/CURRENT_BUILD.md) for the implemented, partial, and planned matrix.
 
@@ -75,6 +76,7 @@ There is no automated test suite yet. `npm run build` plus focused browser verif
 | `2` | Select equipped sidearm |
 | `3` to `9` | Select custom quickbar slots |
 | Hover inventory item + `3` to `9` | Bind item to a quickbar slot |
+| Right-click an item | Open its context menu for inspection and available actions |
 | `Y` | Toggle animation/debug panel |
 | `Escape` | Close the active panel or open the pause menu |
 | Mouse wheel | Zoom camera |
@@ -86,8 +88,11 @@ There is no automated test suite yet. `npm run build` plus focused browser verif
 - [Project Master Handoff](docs/PROJECT_MASTER_HANDOFF.md)
 - [Architecture](Architecture.md)
 - [Game Design](docs/GAME_DESIGN.md)
+- [City Canon and Map Foundation](docs/CITY_CANON.md)
 - [Current Build](docs/CURRENT_BUILD.md)
 - [Gameplay Systems](docs/GAMEPLAY_SYSTEMS.md)
+- [Item Database Reference](docs/ITEM_DATABASE.md)
+- [Combat System Specification](docs/COMBAT_SYSTEM.md)
 - [Data and Asset Pipeline](docs/DATA_AND_ASSETS.md)
 - [Character Art Direction](docs/ART_DIRECTION.md)
 - [Handoff Guide](docs/HANDOFF.md)

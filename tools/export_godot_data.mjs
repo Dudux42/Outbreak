@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { ITEM_DATABASE } from "../src/data/itemDatabase.js";
 
 const root = process.cwd();
 const sourcePath = path.join(root, "src", "main.js");
@@ -45,6 +46,12 @@ function extractConst(name) {
     if (depth === 0) return source.slice(valueStart, index + 1);
   }
   throw new Error(`Could not parse ${name}`);
+}
+
+function extractNumberConst(name) {
+  const match = source.match(new RegExp(`const ${name} = (\\d+(?:\\.\\d+)?);`));
+  if (!match) throw new Error(`Could not find numeric const ${name}`);
+  return Number(match[1]);
 }
 
 function evaluateExpression(expression) {
@@ -97,14 +104,39 @@ function readImageSize(filePath) {
 }
 
 const locations = evaluateExpression(extractConst("locations"));
-const itemCatalog = evaluateExpression(extractConst("itemCatalog"));
+const baseItemCatalog = evaluateExpression(extractConst("itemCatalog"));
+const firearmRuntimeDefinitions = evaluateExpression(extractConst("FIREARM_RUNTIME_DEFINITIONS"));
+const itemCatalog = {};
+for (const [itemId, databaseItem] of Object.entries(ITEM_DATABASE)) {
+  const gameplayItem = baseItemCatalog[itemId] || {};
+  itemCatalog[itemId] = {
+    texture: "spareParts",
+    tags: [],
+    ...gameplayItem,
+    ...databaseItem,
+    tags: gameplayItem.tags || [],
+  };
+}
+for (const [itemId, firearmDefinition] of Object.entries(firearmRuntimeDefinitions)) {
+  itemCatalog[itemId] = {
+    ...itemCatalog[itemId],
+    ...firearmDefinition,
+    weaponStats: "runtime_definition",
+    range: firearmDefinition.range || itemCatalog[itemId]?.range || 9,
+    fireRate: 60 / firearmDefinition.rpm,
+    projectileSpeed: itemCatalog[itemId]?.projectileSpeed || 60,
+    projectileRadius: itemCatalog[itemId]?.projectileRadius || 0.04,
+  };
+}
 const upgradeData = evaluateExpression(extractConst("upgradeData"));
 const texturePaths = evaluateExpression(extractConst("texturePaths"));
 const itemTexturePaths = evaluateExpression(extractConst("itemTexturePaths"));
 const characterDatabase = evaluateExpression(extractConst("characterDatabase"));
 const playerAnimationClips = evaluateExpression(extractConst("femalePlayerAnimationClips"));
+const zombieBaseHp = extractNumberConst("ZOMBIE_BASE_HP");
+const zombieVariants = evaluateExpression(extractConst("ZOMBIE_VARIANTS"));
 const zombieAnimationClips = {};
-const enemyTypes = [
+const enemyVisualTypes = [
   { id: "civilian_zombie", name: "Civilian Zombie", prefix: "zombie", frames: { idle: 1, walk: 9, death: 13 } },
   { id: "dark_civilian_zombie", name: "Dark Civilian Zombie", prefix: "zombie_dark", frames: { idle: 1, walk: 1, death: 1 } },
 ];
@@ -118,7 +150,7 @@ for (const direction of DIRECTIONS) {
     frames: 8,
     frameDuration: 0.12,
   };
-  for (const enemyType of enemyTypes) {
+  for (const enemyType of enemyVisualTypes) {
     zombieAnimationClips[`${enemyType.id}_idle_${direction}`] = {
       src: `./assets/${enemyType.prefix}_idle_${direction}_sheet.png`,
       frames: enemyType.frames.idle,
@@ -206,12 +238,22 @@ writeJson("zombie_animations.json", Object.fromEntries(
     },
   ])
 ));
-writeJson("enemy_types.json", enemyTypes.map((enemyType) => ({
-  id: enemyType.id,
-  name: enemyType.name,
-  animation_prefix: enemyType.prefix,
-  stats_profile: "standard_zombie",
-})));
+writeJson("enemy_types.json", zombieVariants.map((variant) => {
+  const visualType = enemyVisualTypes.find((enemyType) => enemyType.id === variant.visualTypeId);
+  return {
+    id: variant.id,
+    name: variant.name,
+    enemy_family: "zombie",
+    visual_type_id: variant.visualTypeId,
+    animation_prefix: visualType?.prefix || "zombie",
+    base_hp: zombieBaseHp,
+    max_hp_multiplier: variant.maxHpMultiplier,
+    max_hp: Math.round(zombieBaseHp * variant.maxHpMultiplier),
+    damage_resistance: variant.damageResistance,
+    spawn_weight: variant.spawnWeight,
+    tint: variant.tint,
+  };
+}));
 writeJson("textures.json", Object.fromEntries(Object.entries(texturePaths).map(([key, value]) => [key, normalizeAssetPath(value)])));
 writeJson("item_textures.json", Object.fromEntries(Object.entries(itemTexturePaths).map(([key, value]) => [key, normalizeAssetPath(value)])));
 writeJson("asset_manifest.json", assetManifest);

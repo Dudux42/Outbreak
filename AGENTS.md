@@ -138,3 +138,16 @@ Update documentation in the same change when any of these contracts change:
 - Before committing, inspect `git diff --check`, staged files, and the final build result.
 - UI and visual changes should include a screenshot or short clip in pull requests when possible.
 - Mention known limitations and temporary fallbacks explicitly.
+
+## Project Command Shortcuts
+
+Treat the following exact user messages as project-specific commands:
+
+- `+run`: Start the Vite development server for this repository on `127.0.0.1`. Reuse an existing healthy project server rather than starting a duplicate, and report the URL.
+- `+close`: Stop only the development server process associated with this repository. Resolve and verify its process and port before terminating it.
+- `+commit1`: Verify the current build, update generated Godot data and documentation when required, stage only intended repository files, exclude `output/` and other local/generated exclusions, commit on `main`, and push to `origin/main`.
+- `+commit2`: Perform the same verification and scoped commit workflow on the secondary branch named `secondary`, then push to `origin/secondary`. If the branch does not yet exist, create it from the current verified project state.
+- `+download1`: Fetch and update the local checkout to the latest `origin/main` build using a safe fast-forward workflow. Never overwrite uncommitted local changes; stop and report any conflict or divergence.
+- `+download2`: Fetch and update the local checkout to the latest `origin/secondary` build using a safe fast-forward workflow. Never overwrite uncommitted local changes; stop and report any conflict, divergence, or missing remote branch.
+
+These shortcuts authorize only the action described. They do not authorize destructive cleanup, overwriting local work, committing `output/`, or bypassing build and repository safety checks.

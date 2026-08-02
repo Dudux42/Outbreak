@@ -137,5 +137,18 @@
     "mapX": 78,
     "mapY": 27,
     "intelRequired": 3
+  },
+  {
+    "id": "combat_test",
+    "name": "Combat Test Range",
+    "category": "debug",
+    "mapShape": "wide",
+    "stars": 1,
+    "lootType": "Controlled combat test area",
+    "loot": [],
+    "rooms": 5,
+    "mapX": 50,
+    "mapY": 12,
+    "intelRequired": 0
   }
 ]

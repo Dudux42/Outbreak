@@ -103,27 +103,31 @@ health
 keys
 runSeed
 characterLoadouts
-inventory / quickbar / activeQuickSlot / magazines / equipment
+inventory / quickbar / activeQuickSlot / magazines / equipment / weaponAttachments
 stash
 upgrades
 settings
 activeLocation
 ```
 
-Each playable character has an independent loadout. `syncActiveCharacterLoadout()` points the top-level inventory/equipment properties at the active character's loadout. Code that replaces those arrays or objects must preserve this relationship.
+Each playable character has an independent loadout. `syncActiveCharacterLoadout()` points the top-level inventory, equipment, magazine, quickbar, and weapon-attachment properties at the active character's loadout. Code that replaces those arrays or objects must preserve this relationship. Weapon attachments are currently keyed by weapon model rather than unique item instance.
 
-Transient world state is held in module-level variables such as `player`, `zombies`, `deadZombies`, `lootNodes`, `lootContainers`, `colliders`, `doorNodes`, `missionRooms`, and UI interaction flags. `clearScene()` resets these collections between base and mission scenes.
+Transient world state is held in module-level variables such as `player`, `zombies`, `deadZombies`, `lootNodes`, `lootContainers`, `colliders`, `doorNodes`, `missionRooms`, active ballistic projectiles, reload progress, recoil accumulation, tactical-light meshes, and UI interaction flags. `clearScene()` resets these collections between base and mission scenes.
+
+Firearm definitions remain immutable base data. `getEffectiveFirearmStats()` is the single runtime composition boundary for installed attachments. Combat, reload, capacity displays, inspection, tactical visibility, and the modification UI consume that result instead of mutating the base record or reimplementing attachment arithmetic.
 
 ## Frame Loop
 
 `animate()` clamps delta time with `MAX_FRAME_DT` and coordinates the update order. Major mission updates include:
 
 1. Player input, sliding collision, facing, and action state.
-2. Door animations and timed player actions.
-3. Zombie AI and directional animation.
-4. Persistent corpse animation completion.
-5. Interaction discovery and world-space UI.
-6. Camera, fog of war, notices, HUD, and render.
+2. Aim settling, recoil recovery, automatic-fire input, active reload timers, and tactical attachment positioning.
+3. Door animations and timed player actions.
+4. Ballistic projectile travel and swept wall/zombie collision.
+5. Zombie detection, flashlight attraction, stagger state, AI, and directional animation.
+6. Persistent corpse animation completion.
+7. Interaction discovery and world-space UI.
+8. Camera, flashlight-aware fog of war, notices, HUD, and render.
 
 Keep update functions deterministic with respect to the supplied `dt` where practical. Avoid creating textures, materials, or large arrays inside per-frame paths.
 
@@ -187,6 +191,8 @@ During startup, database entries are merged into `itemCatalog`. This means a fie
 
 `itemTexturePaths` maps runtime texture keys to icon files. After item or texture changes, regenerate the Godot JSON exports.
 
+`docs/ITEM_DATABASE.md` is the human-readable roster of all canonical items and records which item systems are implemented, data-only, or explicitly deferred. It must be updated when the roster or an item-system boundary changes.
+
 ## Persistence
 
 Two browser keys are used:
@@ -194,7 +200,7 @@ Two browser keys are used:
 - `outbreak.save.v1`: game save payload.
 - `outbreak.settings.v1`: resolution and volume settings.
 
-The versioned save payload includes survivor selection, health, run seed, all character loadouts, stash, keys, and station upgrades. Missions themselves are not resumed; loading returns to the base.
+The versioned save payload is currently version 3 and includes survivor selection, health, run seed, all character loadouts, per-survivor armor condition/degradation maps, stash, keys, station upgrades, and permanent recipe unlock IDs. Missions themselves are not resumed; loading returns to the base. Missing `unlockedRecipes` data from older saves defaults to an empty list.
 
 When persistent fields change:
 

@@ -1,6 +1,6 @@
 # Outbreak Project Master Handoff
 
-> Comprehensive project snapshot audited against the browser runtime and repository documentation on 2026-07-25.
+> Comprehensive project snapshot audited against the browser runtime and repository documentation on 2026-08-02.
 
 This is the single starting point for future agents and contributors. It consolidates the product definition, implemented behavior, architecture, data contracts, content pipelines, art rules, testing expectations, migration status, known risks, and current work boundary. It is intentionally detailed.
 
@@ -16,9 +16,10 @@ Use information in this order:
 4. `docs/CURRENT_BUILD.md` is the concise implemented/partial/planned status.
 5. `Architecture.md` defines runtime ownership and state flow.
 6. `docs/GAMEPLAY_SYSTEMS.md` defines system behavior.
-7. `docs/DATA_AND_ASSETS.md`, `ITEM_ICON_STYLE_GUIDE.md`, and the character art-direction documents define content pipelines.
-8. `docs/GAME_DESIGN.md` defines the intended product and roadmap.
-9. `godot_migration/` defines migration preparation, not the active game.
+7. `docs/ITEM_DATABASE.md` lists every canonical item and the item-system implementation boundary.
+8. `docs/DATA_AND_ASSETS.md`, `ITEM_ICON_STYLE_GUIDE.md`, and the character art-direction documents define content pipelines.
+9. `docs/GAME_DESIGN.md` defines the intended product and roadmap.
+10. `godot_migration/` defines migration preparation, not the active game.
 
 If documentation and code disagree, reproduce the current behavior, fix the documentation in the same change, and note the discrepancy. Never describe roadmap content as implemented.
 
@@ -37,12 +38,12 @@ The browser build is the only playable source of truth. The Godot directory cont
 | Browser menu, settings, safehouse, missions, pause, and inventory | Implemented |
 | Playable survivors | Ava Belmont, Peter Ashfield, Alynne, Luis |
 | Future survivor art identities | Lara, Jasper, Bianca, Rachel, Davis have approved SOUTH reference sprites but are not playable |
-| Playable mission locations | 6 |
+| Playable mission locations | 7 (including Combat Test Range) |
 | Handcrafted house layouts | 4 |
-| Item database | 193 canonical records plus 45 aliases |
+| Item database | 245 canonical records plus 40 aliases |
 | Independent survivor loadouts | Implemented |
 | Firearm, melee, zombie, door, loot, extraction, and corpse loops | Implemented prototype systems |
-| Save/load | Local browser save, version 1; loading always returns to the safehouse |
+| Save/load | Local browser save, version 3; loading always returns to the safehouse |
 | Hunger, thirst, stamina, infection, injuries, traits, permadeath | Planned or data-only |
 | Full crafting and meaningful station bonuses | Mostly planned or presentation-only |
 | Automated tests | Not present |
@@ -88,7 +89,8 @@ The prototype supports survivor damage and death during a mission. It does not i
 - Safehouse navigation, panning, station interaction, and autonomous survivor presentation.
 - Four playable survivor profiles and independent persistent loadouts.
 - Inventory, stash, equipment, backpack capacity, magazines, and quickbar.
-- Six selectable mission locations with Intel gating.
+- Four body-armor tiers with mitigation, complete-hit negation, condition degradation, and movement penalties.
+- Seven selectable mission locations with Intel gating, including the Combat Test Range debug mission.
 - Four handcrafted house templates and procedural non-house room graphs.
 - Exterior mission spawn, outer bounds, doors, locked doors, earlier-accessible keys, loot, containers, zombies, and extraction.
 - Aiming, melee, firearms, ammunition, reload, range, wall checks, damage, death, and corpse persistence.
@@ -102,9 +104,10 @@ The prototype supports survivor damage and death during a mission. It does not i
 - Safehouse upgrades consume resources and expose bonus descriptions, but many advertised bonuses do not yet change gameplay.
 - The Workbench, Medical Unit, Command Center, Kitchen/Bathroom, and other station concepts are present at different levels of visual and interactive completeness.
 - Item metadata is extensive, but fields such as hunger, thirst, stamina buffs, returned containers, crafting roles, station uses, trade value, and spawn exclusions are not automatically functional.
+- [`ITEM_DATABASE.md`](ITEM_DATABASE.md) is the complete human-readable roster of all canonical items and the authoritative summary of which item systems are implemented, data-only, or explicitly planned.
 - Some action states use fallback animation clips when a character lacks a dedicated animation.
 - The second zombie type exists but has placeholder one-frame animation coverage for several actions.
-- Fifteen additional map survey sites exist as map/presentation data; they are not the six playable mission definitions.
+- Fifteen additional map survey sites exist as map/presentation data; they are not the seven playable mission definitions.
 - Future survivor portraits, art direction, SOUTH references, and bobbleheads are content preparation, not playable characters.
 - Mobile-responsive UI rules exist, but full touch-first gameplay controls are not a complete production system.
 
@@ -115,6 +118,8 @@ The prototype supports survivor damage and death during a mission. It does not i
 - Traits, stats, survivor abilities, relationship systems, and meaningful survivor specialties.
 - Permadeath and long-term roster consequences.
 - Full crafting, repairs, recipes, weapon modification, explosives, and station-dependent production.
+- Dedicated item spawning architecture covering location/container pools, weights, rarity, exclusions, and seeded placement.
+- Named map- and room-specific keys designed as meaningful exploration rewards rather than generic blockers.
 - Safehouse clearing, construction, power, defense, attacks, expansion, and automated survivor assignments.
 - More bespoke locations, multi-floor spaces, authored puzzles, environmental storytelling, and complex objectives.
 - Broader enemy types and behaviors.
@@ -158,7 +163,7 @@ The safehouse is a navigable Three.js scene and the persistent hub. Survivors ap
 | Map / Map Table | Location selection and mission launch. |
 | Intel Center | Save interaction, Intel progression, and location unlock framing. |
 | Workbench | Upgrade/resource UI and planned crafting/repair framing. |
-| Medical Unit | Upgrade/resource UI and planned treatment framing. |
+| Medical Unit | Upgrade/resource UI, treatment framing, and unlocked medical-craft listing. |
 | Command Center | Hub/presentation role for future survivor and mission management. |
 | Kitchen/Bathroom | Environmental safehouse systems with deeper survival functions planned. |
 
@@ -247,11 +252,14 @@ For new art:
 
 ### 8.1 Inventory contracts
 
-- Default and small-backpack carried capacity is 6 slots.
-- Medium backpack capacity is 8 slots.
-- Large backpack capacity is 10 slots.
+- Survivors have 4 innate pocket slots without a backpack.
+- Small Backpack adds 6 slots for 10 total.
+- Medium Backpack adds 8 slots for 12 total.
+- Large Backpack adds 12 slots for 16 total.
 - Equipped items are removed from carried inventory slots.
-- Unequipping returns an item to inventory when space exists.
+- Backpacks can be swapped in the safehouse or during missions only when the replacement can hold the projected inventory.
+- Removing a backpack without a replacement is blocked until carried items, including the unequipped backpack when retained, fit within the four pocket slots.
+- Unequipping other equipment returns the item to inventory when space exists.
 - Unequipping with a full inventory drops the item into the world rather than destroying it.
 - Inventory pauses gameplay.
 - Stack quantities, drag/drop, stash transfer, equip state, and quickbar references share state and must be tested together.
@@ -267,10 +275,15 @@ Two item layers are active:
 
 The layers are merged. Database values can override runtime values where the merge permits. Adding a database field does not make a system functional. Gameplay behavior must be implemented and verified in the runtime layer.
 
-The audited database contains 193 canonical item records, 45 aliases, and 15 loot tags. The current expansion replaces broad firearm and ammunition labels with named canonical entries and retains compatibility aliases:
+The audited database contains 245 canonical item records, 40 aliases, and 17 loot tags. The current expansion includes named firearm and ammunition families, healing-item metadata, recipe unlock items, and functional firearm-attachment definitions while retaining intentional compatibility aliases:
+
+The complete category-by-category roster is maintained in [`ITEM_DATABASE.md`](ITEM_DATABASE.md); do not duplicate or manually reconstruct that list elsewhere.
 
 - Firearms: Glock 17, Beretta M9, M1911, Taurus 38, Model 629, Mossberg 500, Benelli M4, Uzi, H&K MP5, Kriss Vector, M4A1, AKM, Winchester Model 70, and Springfield M1A.
 - Ammunition: 9mm, .45 ACP, RT 85, .44 Magnum, 20 Gauge, 12 Gauge, 5.56x45, 7.62x39, .308, and 7.62x51.
+- HP-restoring medical items: Medical Herbs, First Aid Spray, Vitalis, Trauma Bag, and Surgical Treatment Kit. Their healing values and charge counts are authoritative data, and First Aid Spray becomes Empty First-Aid Spray when depleted. Charge persistence, multi-use runtime behavior, depleted-item conversion, and selected-condition treatment remain planned.
+- Recipe progression: returning successfully with a recipe item consumes it, persists the linked craft unlock, and displays a station-specific notification. Ten medical recipe items now unlock their corresponding Medical Unit crafts; actual ingredient and production rules remain undefined.
+- Firearm attachments: three sights; handgun, assault-rifle, M1A, and SMG magazine upgrades; one drum magazine; dedicated revolver attachments; three universal muzzle devices and one shotgun-exclusive Choke; two buttstocks; three tactical modules; shotgun support parts; rifle cheek, recoil, and bolt parts; and three foregrips. Compatibility, bounded modifier composition, capacity/reload changes, tactical lights, lasers, and combat effects are implemented; rarity placement and equipped-model visuals remain planned.
 - Retired generic Handgun, Shotgun, Submachine Gun, and Assault Rifle items and their old ammunition labels are not live aliases or catalog entries. Older saves convert those names to their canonical replacements during load. Rifle and Rifle Ammo remain intentional compatibility aliases for Winchester Model 70 and .308.
 
 ### 8.3 Current collectible icon boundary
@@ -290,7 +303,7 @@ The runtime collectible mapping currently includes the survivor bobblehead set t
 | Cookbook | `assets/items/cookbook_v1.png` |
 | Sci-Fi VHS | `assets/items/sci_fi_vhs_v1.png` |
 
-`gaming_magazine_v2.png` is the current Gaming Magazine candidate and remains unattached pending approval. Earlier versions and rejected candidates remain source/history assets and must not be silently mapped.
+Approved `gaming_magazine_v3.png` is attached in the runtime texture mapping. Earlier versions and rejected candidates remain source/history assets and must not be silently mapped.
 
 ### 8.4 Icon rules
 
@@ -321,13 +334,15 @@ The approved Ava bobblehead, `assets/items/ava_bobblehead_v2.png`, is the style 
 | Freight Warehouse | Hardware | 3 | 12 | 1 | Tools, batteries, storage gear |
 | Police Station | Police | 4 | 13 | 2 | Weapons, ammunition, armor, communications |
 | Riverside Clinic | Medical | 5 | 15 | 3 | Rare medicine and trauma supplies |
+| Combat Test Range | Debug | 1 | 5 | 0 | Controlled weapon and zombie-variant testing |
 
-Fifteen additional named survey sites appear in map data for future location identity and presentation. They do not currently replace the six playable mission definitions.
+Fifteen additional named survey sites appear in map data for future location identity and presentation. They do not currently replace the seven playable mission definitions.
 
 ### 9.2 Layout sources
 
 - Abandoned House uses one of four handcrafted graphs from `src/data/houseMissionTemplates.js`.
 - Other locations use procedural room-graph generation in `src/main.js`.
+- Combat Test Range is an explicit debug exception: Luis spawns in the large central room so every marked door is immediately available for controlled testing; its exit is placed nearby.
 - Templates carry grid positions, explicit connections, entrance data, furniture placements, and container/loose-loot sockets.
 
 ### 9.3 Non-negotiable generation invariants
@@ -352,16 +367,23 @@ Doors are visible animated objects. Their open/closed state affects movement and
 
 Loot can appear loose or inside searchable containers. Container searches have a delay; discovered contents appear over time rather than all at once. Loot pools use item names/aliases and location identity. Canonicalization changes must preserve old mission strings or migrate them deliberately.
 
+The current loot tables are a legacy prototype, not the final spawn design. A dedicated spawning-system agent will later own container classes, location pools, rarity and quantity weights, exclusions, seeded placement, and validation. Item metadata must not be presented as final spawn behavior until that architecture is implemented.
+
 ### 9.6 Extraction
 
 Extraction is the mission success condition. Extraction transfers the run back to the safehouse and retains the intended persistent state and loot. It must remain reachable without violating collision or door constraints.
 
 ## 10. Combat, Zombies, and Corpses
 
+The complete approved combat specification, including all weapon values and the boundary between implemented and planned behavior, is maintained in [`COMBAT_SYSTEM.md`](COMBAT_SYSTEM.md). This section remains the concise project-level summary.
+
 ### 10.1 Player combat
 
 - The player must aim for weapon combat.
-- Firearms define weapon class, damage, range, rate of fire, ammunition type, magazine size, and reload behavior.
+- Firearms consume the approved roster's damage, centered variance, RPM/mechanism, accuracy, recoil, ammunition, capacity, reload, critical, stagger, and shotgun fields.
+- Firearm shots use visible travel-time projectiles with live aim-settle, movement, recoil, and attachment deviation plus continuous swept collision. Damage requires physical contact with a living zombie hit circle, and walls stop projectiles before targets behind them.
+- Reloads use magazine or per-round timers with above-player progress and interruption.
+- Installed attachments are validated against the firearm and composed through one bounded effective-stat pipeline. Tactical lights reveal 12 units but attract zombies only inside 8 units; lasers do not alert zombies.
 - Firing checks loaded ammunition and wall blocking.
 - Melee weapons define damage, reach, attack speed/action duration, hand requirements, and knockback.
 - The action-state controller handles movement locks, priority, duration, interruption, and terminal states.
@@ -369,6 +391,10 @@ Extraction is the mission success condition. Extraction transfers the run back t
 
 ### 10.2 Zombie behavior
 
+- Regular zombies use 128 base HP and one of four seeded combat profiles: Decomposed Infected at 112 HP and -10% resistance, Fresh Infected at 128 HP and 0% resistance, Tough Infected at 144 HP and 20% resistance, or Special Infected at 160 HP and 35% resistance.
+- At the Glock 17's 24 reference damage, those profiles take 5, 6, 8, and 11 body hits respectively.
+- Resistance currently modifies every incoming damage source equally. Damage-type-specific resistance is not implemented.
+- The initial fixed spawn weights are 26% Decomposed, 54% Fresh, 15% Tough, and 5% Special. Mission threat stars still change quantity and speed but no longer change zombie HP.
 - Zombies detect the player using range and line-of-sight conditions.
 - Detected zombies pursue the player.
 - Movement uses simple collision sliding against world geometry.
@@ -377,7 +403,7 @@ Extraction is the mission success condition. Extraction transfers the run back t
 - The death animation resolves directionally.
 - The final dead sprite remains as a corpse in the world.
 
-Current enemy records are Civilian Zombie and Dark Civilian Zombie. The dark variant has limited placeholder animation coverage and should not be mistaken for a fully distinct production enemy.
+Civilian Zombie and Dark Civilian Zombie remain visual animation profiles rather than combat-stat profiles. Fresh and Tough use the civilian profile; Decomposed and Special use the dark profile with temporary distinguishing tints. The dark profile has limited placeholder animation coverage and should not be mistaken for final production art.
 
 ## 11. State and Save Contracts
 
@@ -406,7 +432,7 @@ The active survivor's top-level inventory/equipment references and `characterLoa
 ### 11.3 Save storage
 
 - Save key: `outbreak.save.v1`
-- Save version: `1`
+- Save version: `3`
 - Settings key: `outbreak.settings.v1`
 - Storage: browser `localStorage`
 - Loading always returns to the safehouse.
@@ -613,7 +639,7 @@ The browser build remains the behavioral reference until the Godot implementatio
 - The Dark Civilian Zombie has placeholder animation depth.
 - Safehouse upgrade descriptions can overstate actual effects.
 - No automated tests protect inventory, save, generation, combat, or UI behavior.
-- Save version 1 has compatibility requirements but no formal migration framework.
+- Save version 3 has compatibility requirements but no formal migration framework.
 - Generated Godot data can drift if the exporter is not run.
 - Documentation can become repetitive; use this file for the stable consolidated snapshot and specialized files for detailed histories and approval logs.
 
@@ -652,9 +678,9 @@ As of this snapshot:
 
 - The current work expands the canonical item and alias database, including named firearms and ammunition.
 - It attaches approved collectible icons from Dog Statue through Sci-Fi VHS.
-- `gaming_magazine_v2.png` is present as an unapproved, unattached candidate.
+- `gaming_magazine_v3.png` is the approved, attached Gaming Magazine icon; v1 and v2 remain superseded historical candidates.
 - The item/texture changes require a refreshed Godot export before release.
-- The broad product remains a playable browser prototype with four survivors and six missions.
+- The broad product remains a playable browser prototype with four survivors and seven missions, including a controlled combat test range.
 - The next safe content step is to continue the approval-gated canonical item-icon sequence, attach only approved art, and keep metadata functionality clearly separated from data entry.
 - The next major engineering need is regression coverage and careful modularization, beginning with boundaries that already have clear data modules rather than a broad rewrite of `src/main.js`.
 
@@ -665,6 +691,7 @@ As of this snapshot:
 - `Architecture.md`: state, runtime ownership, frame loop, and data flow.
 - `docs/GAME_DESIGN.md`: intended product and roadmap.
 - `docs/GAMEPLAY_SYSTEMS.md`: current system contracts.
+- `docs/COMBAT_SYSTEM.md`: authoritative enemy durability, weapon, ballistics, stagger, condition, and combat-balance specification.
 - `docs/DATA_AND_ASSETS.md`: content records, approval history, and asset/export pipelines.
 - `docs/ART_DIRECTION.md`: shared survivor sprite rules.
 - `docs/AVA_ART_DIRECTION.md`
@@ -682,4 +709,5 @@ As of this snapshot:
 - `godot_migration/README.md`: migration package overview.
 - `godot_migration/GODOT_MIGRATION_PLAN.md`: staged migration strategy.
 - `godot_migration/GODOT_SCENE_BLUEPRINT.md`: proposed native scene structure.
+- `godot_migration/COMBAT_MIGRATION.md`: approved combat rules mapped to Godot data, components, scenes, persistence boundaries, and verification.
 - `godot_migration/PLAYER_8_DIRECTION_SETUP.md`: player-scene setup notes.

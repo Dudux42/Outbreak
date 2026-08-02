@@ -88,6 +88,7 @@ Required mission rules:
 - Make the full room graph traversable.
 - Place locked-door keys somewhere accessible before the lock.
 - Never place a key inside the room it unlocks when that would create a soft lock.
+- Treat keys as discoveries with meaningful payoff. Prefer optional reward rooms, shortcuts, caches, story spaces, or strategic advantages over generic mandatory progress gates.
 - Support unlocked, locked, open, and closed visible doors.
 - Provide the entry point as an extraction option.
 - Generate one or two additional extraction points far from entry when layout permits.
@@ -167,7 +168,7 @@ Equipment slots:
 - Armor
 - Backpack
 
-The base backpack provides six carried slots. Medium and large backpacks increase capacity to eight and ten. Equipped items do not occupy carried slots. Unequipping into a full inventory drops the item into the world where applicable.
+Every survivor has four pocket slots without a backpack. Small, Medium, and Large Backpacks add 6, 8, and 12 slots for totals of 10, 12, and 16. Equipped items do not occupy carried slots. Backpacks can be swapped during missions or in the safehouse only when the replacement has enough capacity; removing one without replacement requires the remaining load to fit in the four pocket slots.
 
 Items can carry category tags and weapon subtypes:
 
@@ -182,6 +183,8 @@ Items can carry category tags and weapon subtypes:
 - Key
 
 The broader database also tracks loot-domain tags for food/drink, medical, hardware, technical, collectibles, weapons, ammunition, backpacks, armor, and special items.
+
+The complete canonical roster and its implemented/planned boundary are maintained in [`ITEM_DATABASE.md`](ITEM_DATABASE.md). Crafting recipes, final spawning architecture, and map-specific keys are intentionally separate future passes.
 
 ## Visual Direction
 

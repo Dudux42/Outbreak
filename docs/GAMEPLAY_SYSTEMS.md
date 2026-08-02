@@ -15,7 +15,7 @@ Station panels:
 - Item Box: stash and loadout transfer, storage upgrade.
 - New-game Item Boxes begin with one of every catalog item except mission keys; pre-stocked item quantities are preserved rather than duplicated.
 - Workbench: craft presentation and upgrade.
-- Medical Unit: healing actions and upgrade.
+- Medical Unit: healing actions, upgrade, and display of unlocked medical crafts.
 - Intel Center: bonuses, upgrade, and no-cost save.
 - Command Center: base progression presentation.
 - Map: destination selection and Intel gating.
@@ -30,13 +30,14 @@ Each active character owns:
 - Nine quickbar entries.
 - Active quickbar slot.
 - Weapon magazine counts.
+- Weapon attachment configurations keyed by weapon model.
 - Primary, sidearm, armor, and backpack equipment.
 
 Switching survivors persists the outgoing loadout and synchronizes the incoming one. A new character system must not collapse these into one shared inventory.
 
 ## Inventory
 
-Default carried capacity is six slots. Medium and large backpacks provide eight and ten.
+Survivors have four innate pocket slots. Small, Medium, and Large Backpacks respectively add 6, 8, and 12 slots, producing total carried capacities of 10, 12, and 16.
 
 Rules:
 
@@ -48,6 +49,24 @@ Rules:
 - Inventory opens with `Tab` and pauses the mission.
 - Quickbar bindings for slots `3` to `9` are created by hovering an inventory item and pressing the number.
 - Quickbar assignments are cleaned when their item is no longer carried.
+
+### Item Context Menu
+
+Right-clicking an item in inventory, equipment, the quickbar, the Item Box, or an open loot container opens a shared source-aware action menu.
+
+- Every item supports Inspect and Cancel.
+- Drop is available only during missions.
+- Firearms support Reload, Unload, Modify, and Equip when carried.
+- Melee weapons support Modify and Equip when carried.
+- Armor and backpacks support Equip when carried.
+- Equipped items support Unequip in addition to their applicable weapon actions.
+- Backpacks can be changed in the safehouse or during missions. A smaller replacement is rejected when the projected inventory exceeds its capacity, and removing a backpack without replacement requires the remaining load to fit in the four pocket slots.
+- Body armor mitigates all currently routed player damage, can negate a complete hit, loses 5 condition per 20 cumulative raw damage absorbed, and stops protecting at zero condition. Tier movement penalties apply while equipped.
+- Armor condition and partial degradation progress persist per survivor and armor model. Duplicate copies of the same model currently share that state.
+- Consumables expose Use. Health effects work where health metadata is connected; survival effects such as hunger and thirst remain unavailable and do not consume the item.
+- Move transfers between the active survivor and whichever Item Box or loot container is open.
+
+Inspect and Modify open above the current window. Firearm attachments install from the active survivor's carried inventory. Attachment assignments persist with that survivor but are keyed by weapon model, so duplicate copies of one model currently share a configuration. Compatible installed attachments modify the effective firearm statistics consumed by combat, reload, inspection, and tactical-visibility systems.
 
 ## Loot Containers
 
@@ -111,16 +130,26 @@ Locked doors:
 
 Key placement follows room depth. A key room must be earlier than the locked destination.
 
+The current runtime uses one generic mission-bound Key. The final planned system will define named keys per map, room, and door. Those keys should lead to meaningful optional rewards, shortcuts, caches, discoveries, or strategically valuable spaces whenever possible instead of existing only as mandatory progress gates. Exact key ownership belongs to each map/room design pass.
+
 ## Combat
 
 Combat requires aiming and a selected weapon.
 
+The detailed, authoritative design for damage, weapon parameters, firearm ballistics, critical hits, stagger, condition, armor condition, and the approved weapon roster is in [`COMBAT_SYSTEM.md`](COMBAT_SYSTEM.md). This section describes only the current broad runtime contract.
+
 Firearms:
 
 - Require magazine ammunition.
-- Use weapon range, damage, rate, and optional shotgun spread/pellets.
-- Reload with `R` from matching reserve-ammo inventory.
+- Use the approved roster's damage, centered variance, RPM, mechanism, accuracy, recoil, reload, capacity, critical, stagger, and shotgun fields.
+- Create visible travel-time projectiles. The cursor supplies intended direction; aim settling, movement, recoil, and installed attachments supply center-biased angular deviation; continuous swept collision resolves the first wall or living-zombie hit.
+- Damage applies only on projectile contact. Critical hits immediately kill regular-zombie variants.
+- Reload with `R` from matching reserve-ammo inventory. Magazine reloads transfer at completion; per-round reloads transfer after every completed cycle. Firing or changing weapons interrupts the reload.
+- Display reload progress above the player.
+- Apply installed attachment compatibility and effective-stat modifiers at use time.
+- Tactical lights reveal a 12-unit, 45-degree cone and attract zombies only inside 8 units. Lasers display a red aiming dot and do not alert zombies.
 - Use line/wall checks to avoid shooting through blockers.
+- The four-weapon slice remains the first focused balance target even though the complete firearm roster is now data-connected.
 
 Melee:
 
@@ -128,11 +157,24 @@ Melee:
 - Selects one-handed or two-handed action state.
 - Must respect walls and target distance.
 
-Current numbers are prototype tuning, not final balance.
+The complete firearm roster is runtime-connected, but weapon values remain subject to individual testing. Final non-shotgun ranges, penetration, gravity/drop, caliber-specific projectile speeds, condition, repair, and mechanism-animation polish remain deferred.
 
 ## Zombies
 
-Enemy type is selected from `enemyTypes` at spawn. Current types share gameplay behavior and differ mainly in visual animation sets.
+Every regular zombie starts from a base value of 128 HP. A seeded weighted roll selects one of four gameplay variants at spawn:
+
+| Variant | Max HP | Resistance | Spawn weight | Glock 17 shots at 24 damage |
+| --- | ---: | ---: | ---: | ---: |
+| Decomposed Infected | 112 | -10% | 26 | 5 |
+| Fresh Infected | 128 | 0% | 54 | 6 |
+| Tough Infected | 144 | 20% | 15 | 8 |
+| Special Infected | 160 | 35% | 5 | 11 |
+
+Resistance is currently a global damage modifier: `applied damage = raw damage × (1 - resistance)`. It affects firearm and melee damage equally. Negative resistance represents vulnerability, so Decomposed Infected take 10% additional damage. Damage-type-specific ballistic, impact, and cutting resistance is not implemented yet.
+
+Mission threat stars no longer increase zombie HP directly. They continue to affect zombie quantity and movement speed. Variant weights are currently fixed across locations and use the seeded mission random source.
+
+`enemyTypes` still selects the visual animation profile. Fresh and Tough variants use the full Civilian Zombie sheets; Decomposed and Special variants use the Dark Civilian Zombie profile. Restrained color tints help distinguish the variants until dedicated production art exists.
 
 Zombie flow:
 
@@ -173,6 +215,8 @@ Opening a door changes its `blocksSight` status. New large props should explicit
 
 The player can extract through an exit interaction. Successful extraction triggers victory state and transfers run inventory to the safehouse flow. Failure/death uses the run-end flow and does not grant the same success outcome.
 
+On a successful return, carried items with recipe-unlock metadata are removed automatically. Newly learned recipe IDs are stored permanently, a modal identifies the craft and its assigned station, and that station begins listing the craft. Duplicate recipe items are consumed without duplicating the unlock. Crafting ingredients and production actions remain outside this initial recipe-unlock layer.
+
 The current implementation is a prototype of the intended high-loss extraction design. Verify actual inventory transfer behavior before changing loss rules.
 
 ## Safehouse Upgrades
@@ -193,6 +237,7 @@ Use the left-center `Debug Items` control during gameplay to select any canonica
 
 Press `Y` during gameplay to inspect:
 
+- Player world position and immediate collision probes.
 - Reported action state.
 - Expected state and clip.
 - Active animation clip.

@@ -34,8 +34,11 @@ Use `data/items.json` as the source of truth. Create Godot resources or dictiona
 - Equipment slots
 - Ammo stack rules
 - Weapon stats
+- Firearm attachment definitions, compatibility, slots, and modifiers
 - Healing items
 - Backpack capacity
+
+For the canonical roster and item-system status, use [`../docs/ITEM_DATABASE.md`](../docs/ITEM_DATABASE.md). For weapon identity and currently exported fields, use `data/items.json`. For approved combat values that are not yet exported, use [`../docs/COMBAT_SYSTEM.md`](../docs/COMBAT_SYSTEM.md) and the Godot mapping in [`COMBAT_MIGRATION.md`](COMBAT_MIGRATION.md). Do not treat incomplete item records as fully tuned weapons, recipes, spawn definitions, or key designs.
 
 Then build:
 
@@ -43,6 +46,7 @@ Then build:
 - `EquipmentComponent.gd`
 - `QuickbarComponent.gd`
 - `WeaponComponent.gd`
+- `EffectiveFirearmStatsResolver.gd`
 
 ## Phase 4 - Safehouse
 
@@ -73,10 +77,23 @@ Build combat after movement and inventory are stable:
 
 - Aiming stance
 - Held weapon selection
-- Melee reach and wall checks
-- Ranged ammo and reloads
+- Centered damage variance, resistance, and critical hits
+- Melee windup, active, and recovery phases
+- Melee reach tiers and wall checks
+- Ranged ammunition, RPM, firing mechanisms, accuracy, recoil, and reloads
+- Visible travel-time projectiles with continuous swept wall/enemy collision and contact-only damage
+- Attachment compatibility, bounded effective-stat composition, magazine reconciliation, tactical lights, and laser dots
+- Magazine and per-round reload state machines
+- Shotgun pellet spread, per-pellet criticals, and guaranteed point-blank behavior
+- The 20-point stagger meter, decay, force reactions, and knockback collision
+- Fine, Worn, Damaged, and Broken weapon condition
+- Condition degradation, penalties, feedback, and eventual item-instance persistence
 - Zombie chase/attack behavior
 - Line-of-sight and fog of war
+
+Follow [`COMBAT_MIGRATION.md`](COMBAT_MIGRATION.md). Implement Hammer, Glock 17, Taurus 38, and Mossberg 500 as the first vertical slice. Validate that slice against all four regular-zombie variants before migrating the remaining weapon roster.
+
+The complete combat model is approved design, not a completed Godot implementation. Per-instance condition saves, armor tuning, repairs, final non-shotgun ranges, penetration, attachment rarity/spawn balance, and full-roster balance validation remain deferred.
 
 ## Phase 7 - UI
 
@@ -95,6 +112,7 @@ The browser UI should be treated as a layout reference, not something to port di
 
 - Pixel art assets
 - Item list and weapon stats
+- Approved zombie durability and combat specification
 - Loot/location definitions
 - Safehouse station concept
 - Top-down suspense camera direction

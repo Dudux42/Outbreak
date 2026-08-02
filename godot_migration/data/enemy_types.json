@@ -1,14 +1,54 @@
 [
   {
-    "id": "civilian_zombie",
-    "name": "Civilian Zombie",
+    "id": "fresh_infected",
+    "name": "Fresh Infected",
+    "enemy_family": "zombie",
+    "visual_type_id": "civilian_zombie",
     "animation_prefix": "zombie",
-    "stats_profile": "standard_zombie"
+    "base_hp": 128,
+    "max_hp_multiplier": 1,
+    "max_hp": 128,
+    "damage_resistance": 0,
+    "spawn_weight": 54,
+    "tint": "#ffffff"
   },
   {
-    "id": "dark_civilian_zombie",
-    "name": "Dark Civilian Zombie",
+    "id": "decomposed_infected",
+    "name": "Decomposed Infected",
+    "enemy_family": "zombie",
+    "visual_type_id": "dark_civilian_zombie",
     "animation_prefix": "zombie_dark",
-    "stats_profile": "standard_zombie"
+    "base_hp": 128,
+    "max_hp_multiplier": 0.875,
+    "max_hp": 112,
+    "damage_resistance": -0.1,
+    "spawn_weight": 26,
+    "tint": "#b8ad94"
+  },
+  {
+    "id": "tough_infected",
+    "name": "Tough Infected",
+    "enemy_family": "zombie",
+    "visual_type_id": "civilian_zombie",
+    "animation_prefix": "zombie",
+    "base_hp": 128,
+    "max_hp_multiplier": 1.125,
+    "max_hp": 144,
+    "damage_resistance": 0.2,
+    "spawn_weight": 15,
+    "tint": "#aebdba"
+  },
+  {
+    "id": "special_infected",
+    "name": "Special Infected",
+    "enemy_family": "zombie",
+    "visual_type_id": "dark_civilian_zombie",
+    "animation_prefix": "zombie_dark",
+    "base_hp": 128,
+    "max_hp_multiplier": 1.25,
+    "max_hp": 160,
+    "damage_resistance": 0.35,
+    "spawn_weight": 5,
+    "tint": "#ca989d"
   }
 ]
