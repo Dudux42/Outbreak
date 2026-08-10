@@ -11,19 +11,20 @@ This directory is the project handoff layer. It records what the game is intende
 5. [`CITY_CANON.md`](CITY_CANON.md) - authoritative city identity, geography, layout, infrastructure, landmarks, and map constraints.
 6. [`GAMEPLAY_SYSTEMS.md`](GAMEPLAY_SYSTEMS.md) - behavioral contracts for the safehouse, inventory, missions, combat, AI, and saves.
 7. [`ITEM_DATABASE.md`](ITEM_DATABASE.md) - complete canonical item roster, approved item-system values, and implemented/planned boundaries.
-8. [`COMBAT_SYSTEM.md`](COMBAT_SYSTEM.md) - authoritative enemy durability, weapons, ballistics, stagger, condition, and combat-balance specification.
-9. [`DATA_AND_ASSETS.md`](DATA_AND_ASSETS.md) - item data, icons, sprites, textures, audio, templates, and export tools.
-10. [`ART_DIRECTION.md`](ART_DIRECTION.md) - shared character sprite identity, direction, pixel-art, and approval rules.
-11. [`AVA_ART_DIRECTION.md`](AVA_ART_DIRECTION.md) - Ava Belmont's locked identity, approved sprite baseline, and character-specific review rules.
-12. [`ALYNNE_ART_DIRECTION.md`](ALYNNE_ART_DIRECTION.md) - Alynne's locked identity, approved sprite baseline, and character-specific review rules.
-13. [`PETER_ART_DIRECTION.md`](PETER_ART_DIRECTION.md) - Peter Ashfield's locked identity, wardrobe, and approval-gated sprite baseline.
-14. [`LUIS_ART_DIRECTION.md`](LUIS_ART_DIRECTION.md) - Luis's locked identity, wardrobe, and approved SOUTH sprite baseline.
-15. [`LARA_ART_DIRECTION.md`](LARA_ART_DIRECTION.md) - Lara's locked identity, black outfit, equipment continuity, and approved SOUTH sprite baseline.
-16. [`JASPER_ART_DIRECTION.md`](JASPER_ART_DIRECTION.md) - Jasper's locked identity, revised wardrobe, wristwatch continuity, and approved SOUTH sprite baseline.
-17. [`BIANCA_ART_DIRECTION.md`](BIANCA_ART_DIRECTION.md) - Bianca's locked identity, red evening dress, right-thigh slit continuity, heels, and approved SOUTH sprite baseline.
-18. [`RACHEL_ART_DIRECTION.md`](RACHEL_ART_DIRECTION.md) - Rachel's locked identity, blue tank top, white skirt and sandals, right-wrist bracelet continuity, and approved SOUTH sprite baseline.
-19. [`DAVIS_ART_DIRECTION.md`](DAVIS_ART_DIRECTION.md) - Davis's locked identity, firefighter uniform, directional detail continuity, and approved SOUTH sprite baseline.
-20. [`HANDOFF.md`](HANDOFF.md) - practical start/finish checklist for future work.
+8. [`RECIPES.md`](RECIPES.md) - authoritative crafting ingredients, tools, station levels, repairs, weapon descriptions, and suggested crafted-weapon identities.
+9. [`COMBAT_SYSTEM.md`](COMBAT_SYSTEM.md) - authoritative enemy durability, weapons, ballistics, stagger, condition, and combat-balance specification.
+10. [`DATA_AND_ASSETS.md`](DATA_AND_ASSETS.md) - item data, icons, sprites, textures, audio, templates, and export tools.
+11. [`ART_DIRECTION.md`](ART_DIRECTION.md) - shared character sprite identity, direction, pixel-art, and approval rules.
+12. [`AVA_ART_DIRECTION.md`](AVA_ART_DIRECTION.md) - Ava Belmont's locked identity, approved sprite baseline, and character-specific review rules.
+13. [`ALYNNE_ART_DIRECTION.md`](ALYNNE_ART_DIRECTION.md) - Alynne's locked identity, approved sprite baseline, and character-specific review rules.
+14. [`PETER_ART_DIRECTION.md`](PETER_ART_DIRECTION.md) - Peter Ashfield's locked identity, wardrobe, and approval-gated sprite baseline.
+15. [`LUIS_ART_DIRECTION.md`](LUIS_ART_DIRECTION.md) - Luis's locked identity, wardrobe, and approved SOUTH sprite baseline.
+16. [`LARA_ART_DIRECTION.md`](LARA_ART_DIRECTION.md) - Lara's locked identity, black outfit, equipment continuity, and approved SOUTH sprite baseline.
+17. [`JASPER_ART_DIRECTION.md`](JASPER_ART_DIRECTION.md) - Jasper's locked identity, revised wardrobe, wristwatch continuity, and approved SOUTH sprite baseline.
+18. [`BIANCA_ART_DIRECTION.md`](BIANCA_ART_DIRECTION.md) - Bianca's locked identity, red evening dress, right-thigh slit continuity, heels, and approved SOUTH sprite baseline.
+19. [`RACHEL_ART_DIRECTION.md`](RACHEL_ART_DIRECTION.md) - Rachel's locked identity, blue tank top, white skirt and sandals, right-wrist bracelet continuity, and approved SOUTH sprite baseline.
+20. [`DAVIS_ART_DIRECTION.md`](DAVIS_ART_DIRECTION.md) - Davis's locked identity, firefighter uniform, directional detail continuity, and approved SOUTH sprite baseline.
+21. [`HANDOFF.md`](HANDOFF.md) - practical start/finish checklist for future work.
 
 ## Design and Direction
 
@@ -31,6 +32,7 @@ This directory is the project handoff layer. It records what the game is intende
 - [`CITY_CANON.md`](CITY_CANON.md) - authoritative fictional-city canon and map-design constraints.
 - [`CURRENT_BUILD.md`](CURRENT_BUILD.md) - authoritative reality check against that design.
 - [`ITEM_DATABASE.md`](ITEM_DATABASE.md) - complete item roster and the boundary between recorded metadata and working behavior.
+- [`RECIPES.md`](RECIPES.md) - approved crafting specification and crafted-weapon design targets.
 - [`COMBAT_SYSTEM.md`](COMBAT_SYSTEM.md) - approved combat formulas, tier tables, enemy profiles, complete weapon roster, and implementation boundary.
 
 ## Development Rules

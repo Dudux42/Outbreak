@@ -1297,7 +1297,7 @@
   },
   "herbal poultice": {
     "id": "herbal poultice",
-    "texture": "spareParts",
+    "texture": "herbal_poultice_v5",
     "tags": [
       "Aid"
     ],
@@ -1323,11 +1323,11 @@
     "tradeValue": null,
     "scrappable": false,
     "containerEligible": true,
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/herbal_poultice_v5.png"
   },
   "tourniquet": {
     "id": "tourniquet",
-    "texture": "spareParts",
+    "texture": "tourniquet_v1",
     "tags": [
       "Aid"
     ],
@@ -1353,11 +1353,11 @@
     "tradeValue": null,
     "scrappable": false,
     "containerEligible": true,
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/tourniquet_v1.png"
   },
   "surgical treatment kit": {
     "id": "surgical treatment kit",
-    "texture": "spareParts",
+    "texture": "surgical_treatment_kit_v1",
     "tags": [
       "Aid"
     ],
@@ -1408,7 +1408,7 @@
     "tradeValue": null,
     "scrappable": false,
     "containerEligible": true,
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/surgical_treatment_kit_v1.png"
   },
   "Gears": {
     "id": "Gears",
@@ -2728,6 +2728,102 @@
     "scrappable": false,
     "containerEligible": true,
     "icon": "res://assets/items/wifi_camera_v2.png"
+  },
+  "saw": {
+    "id": "saw",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "label": "Saw",
+    "lootTags": [
+      "base_hardware"
+    ],
+    "description": "A sturdy hand saw. Still useful when the power grid is not.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "craftingIngredient": true,
+    "craftingRole": "reusable_tool",
+    "consumedByCrafting": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "stationUses": "to_be_defined",
+    "recipes": "to_be_defined",
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "welding torch": {
+    "id": "welding torch",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "label": "Welding Torch",
+    "lootTags": [
+      "base_hardware"
+    ],
+    "description": "A portable welding torch for joining metal and starting questionable ideas.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "craftingIngredient": true,
+    "craftingRole": "reusable_tool",
+    "consumedByCrafting": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "stationUses": "to_be_defined",
+    "recipes": "to_be_defined",
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "metal chain": {
+    "id": "metal chain",
+    "texture": "spareParts",
+    "tags": [
+      "Base Resource"
+    ],
+    "label": "Metal Chain",
+    "lootTags": [
+      "base_hardware"
+    ],
+    "description": "A length of heavy metal chain. Strong links for stronger ideas.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "craftingIngredient": true,
+    "craftingRole": "consumable_ingredient",
+    "consumedByCrafting": true,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "stationUses": "to_be_defined",
+    "recipes": "to_be_defined",
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
   },
   "RAM": {
     "id": "RAM",
@@ -4415,7 +4511,7 @@
   },
   "empty first aid spray": {
     "id": "empty first aid spray",
-    "texture": "spareParts",
+    "texture": "empty_first_aid_spray_v1",
     "tags": [
       "Base Medical"
     ],
@@ -4446,11 +4542,11 @@
     "tradeValue": null,
     "scrappable": false,
     "containerEligible": true,
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/empty_first_aid_spray_v1.png"
   },
   "goldenrod flowers": {
     "id": "goldenrod flowers",
-    "texture": "spareParts",
+    "texture": "goldenrod_flowers_v1",
     "tags": [
       "Base Medical"
     ],
@@ -4479,11 +4575,11 @@
     "tradeValue": null,
     "scrappable": false,
     "containerEligible": true,
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/goldenrod_flowers_v1.png"
   },
   "broadleaf plantain leaves": {
     "id": "broadleaf plantain leaves",
-    "texture": "spareParts",
+    "texture": "broadleaf_plantain_leaves_v2",
     "tags": [
       "Base Medical"
     ],
@@ -4512,11 +4608,11 @@
     "tradeValue": null,
     "scrappable": false,
     "containerEligible": true,
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/broadleaf_plantain_leaves_v2.png"
   },
   "empty auto injector": {
     "id": "empty auto injector",
-    "texture": "spareParts",
+    "texture": "empty_auto_injector_v1",
     "tags": [
       "Base Medical"
     ],
@@ -4545,7 +4641,7 @@
     "tradeValue": null,
     "scrappable": false,
     "containerEligible": true,
-    "icon": "res://assets/items/spare_parts.png"
+    "icon": "res://assets/items/empty_auto_injector_v1.png"
   },
   "compass": {
     "id": "compass",
@@ -6498,6 +6594,2216 @@
     "scrappable": false,
     "containerEligible": true,
     "icon": "res://assets/items/kitchen_knife_v2.png"
+  },
+  "nailbiter": {
+    "id": "nailbiter",
+    "texture": "nailbiter_v1",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Nailbiter",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "The name is a warning. The nails are the explanation.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/nailbiter_v1.png"
+  },
+  "bad intentions": {
+    "id": "bad intentions",
+    "texture": "bad_intentions_v2",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Bad Intentions",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "Whatever this used to be, someone rebuilt it with Bad Intentions.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/bad_intentions_v2.png"
+  },
+  "bat-tery assault": {
+    "id": "bat-tery assault",
+    "texture": "battery_assault_v1",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Bat-tery Assault",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "A charged-up answer to close-range problems. Batteries were included.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/battery_assault_v1.png"
+  },
+  "hammer time": {
+    "id": "hammer time",
+    "texture": "hammer_time_v1",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Hammer Time",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "A hard-hitting reminder that every problem eventually becomes a nail.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/hammer_time_v1.png"
+  },
+  "gear head": {
+    "id": "gear head",
+    "texture": "gear_head_v1",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Gear Head",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "A mechanical masterpiece made for rearranging more than machinery.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/gear_head_v1.png"
+  },
+  "open invitation": {
+    "id": "open invitation",
+    "texture": "open_invitation_v5",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Open Invitation",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "The door was locked. This is the less polite way to knock.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/open_invitation_v5.png"
+  },
+  "pry and prejudice": {
+    "id": "pry and prejudice",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Pry and Prejudice",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "First impressions matter. This one leaves a lasting mark.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "axe-ident": {
+    "id": "axe-ident",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Axe-ident",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "There are no accidents. Only poorly aimed Axe-idents.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "split decision": {
+    "id": "split decision",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Split Decision",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "For those difficult choices best settled with a clean split.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "kindness": {
+    "id": "kindness",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Kindness",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "A little Kindness goes a long way. Usually straight through.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "little problem": {
+    "id": "little problem",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Little Problem",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "A compact solution for problems that refuse to stay little.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "chop-chop": {
+    "id": "chop-chop",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Chop-Chop",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "No time to waste. Chop-Chop.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "minor adjustment": {
+    "id": "minor adjustment",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Minor Adjustment",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "For situations that need one small, forceful correction.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "gentle reminder": {
+    "id": "gentle reminder",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Gentle Reminder",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "A Gentle Reminder that personal space still matters.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "oni giri": {
+    "id": "oni giri",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Oni Giri",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "A slice of bad fortune, served cold.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "raiden": {
+    "id": "raiden",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Raiden",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "Thunder never asks permission before it strikes.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "cerberus": {
+    "id": "cerberus",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Cerberus",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "Three times the bite. None of the barking.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "point taken": {
+    "id": "point taken",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Point Taken",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "Some arguments only need one sharp counterpoint.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "no offense": {
+    "id": "no offense",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "No Offense",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "No Offense intended. Plenty delivered.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "exit wound": {
+    "id": "exit wound",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Exit Wound",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "The entrance is optional. The Exit Wound is not.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "second helping": {
+    "id": "second helping",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Second Helping",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "Because the first serving was clearly not enough.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "under pressure": {
+    "id": "under pressure",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Under Pressure",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "Built to perform when everything else is coming apart.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "pipe dream": {
+    "id": "pipe dream",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Pipe Dream",
+    "weaponKind": "melee",
+    "lootTags": [
+      "melee_weapon"
+    ],
+    "description": "A plumber's nightmare and a survivor's dream.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "last light": {
+    "id": "last light",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Last Light",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "When the Last Light goes out, make sure you are not alone in the dark.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "quiet hours": {
+    "id": "quiet hours",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Quiet Hours",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Quiet Hours are strictly enforced.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "broken promise": {
+    "id": "broken promise",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Broken Promise",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Someone promised this would never be necessary. Someone was wrong.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "raccoons bite": {
+    "id": "raccoons bite",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Raccoon’s Bite",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Small, vicious, and always reaching for something it should not have.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "escape tool": {
+    "id": "escape tool",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Escape Tool",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Every room has an exit if you bring the right tool.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "mercy seat": {
+    "id": "mercy seat",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Mercy Seat",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Take a seat. Mercy will be with you shortly.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "old habit": {
+    "id": "old habit",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Old Habit",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "A battered military-surplus M1911 rebuilt from components of several decades, with mismatched wood and road-sign grip panels and ‘1911?’ carved into its slide.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "the peacemaker": {
+    "id": "the peacemaker",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "The Peacemaker",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "A heavy M1911 with a drilled steel-pipe muzzle brake, worn white cloth grip wrap, flattened peace pendant, and ‘PEACE’ carved into the slide.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "one more round": {
+    "id": "one more round",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "One More Round",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "A severely worn M1911 with an oversized magazine welded from two extended magazine bodies and wrapped in tape.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "your rights": {
+    "id": "your rights",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Your Rights",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "You have the right to remain very, very still.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "burn notice": {
+    "id": "burn notice",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Burn Notice",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Official notice that something is about to get considerably warmer.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "hand cannon": {
+    "id": "hand cannon",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Hand Cannon",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Subtlety was considered and immediately rejected.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "last resort": {
+    "id": "last resort",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Last Resort",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Not the first choice. Usually the final one.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "jager": {
+    "id": "jager",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Jäger",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "The hunter has arrived. The prey just has not accepted it yet.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "double-tap": {
+    "id": "double-tap",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Double-Tap",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Once for certainty. Twice for good measure.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "panic button": {
+    "id": "panic button",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Panic Button",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Press only in an emergency. Every day qualifies now.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "chain reaction": {
+    "id": "chain reaction",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Chain Reaction",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "One bad decision connected to another.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "blackout protocol": {
+    "id": "blackout protocol",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Blackout Protocol",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "When the lights disappear, follow protocol.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "borrowed authority": {
+    "id": "borrowed authority",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Borrowed Authority",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Authority is easier to borrow when nobody is left to object.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "memento mori": {
+    "id": "memento mori",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Memento Mori",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "A practical reminder that everyone is mortal.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "crowd control": {
+    "id": "crowd control",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Crowd Control",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "For gatherings that have outlived their welcome.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "rush hour": {
+    "id": "rush hour",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Rush Hour",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Traffic clears quickly when Rush Hour begins.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "shredder": {
+    "id": "shredder",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Shredder",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Turns stubborn problems into smaller, more manageable pieces.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "best friend": {
+    "id": "best friend",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Best Friend",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Loyal, dependable, and always ready for a walk.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "quiet time": {
+    "id": "quiet time",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Quiet Time",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "A little Quiet Time can solve a surprising number of problems.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "dragons breath": {
+    "id": "dragons breath",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Dragon’s Breath",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "The dragon is gone. Its breath remains.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "flatline": {
+    "id": "flatline",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Flatline",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "A white medical-response Vector with stained compression bandages around the stock and a dismantled heart-monitor display built into its side. Green lights pulse while firing and flatten when empty.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "full control": {
+    "id": "full control",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Full Control",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "A 1990s arcade-themed Vector with red-dot sight, ergonomic foregrip, extended magazine, and brightly customized controls.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "kill switch": {
+    "id": "kill switch",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Kill Switch",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "A weathered taped Vector with a combined extended quick-eject magazine system and a red switch controlling its side-mounted flashlight.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "meta breaker": {
+    "id": "meta breaker",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Meta Breaker",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Built to break rules nobody remembers agreeing to.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "black box": {
+    "id": "black box",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Black Box",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Whatever happens next, the Black Box will not explain it.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "green flu": {
+    "id": "green flu",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Green Flu",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Symptoms may include panic, poor judgment, and sudden silence.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "nuclear winter": {
+    "id": "nuclear winter",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Nuclear Winter",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "The forecast calls for darkness with a chance of fallout.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "red october": {
+    "id": "red october",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Red October",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Something cold, silent, and dangerous is moving beneath the surface.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "metro line": {
+    "id": "metro line",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Metro Line",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "The fastest route from one bad stop to the next.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "walking terror": {
+    "id": "walking terror",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Walking Terror",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Terror learned to walk. This taught it to keep its distance.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "iron curtain": {
+    "id": "iron curtain",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Iron Curtain",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Heavy, uncompromising, and closed to further discussion.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "confidence": {
+    "id": "confidence",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Confidence",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Confidence is knowing the next shot will settle the argument.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "the deer hunter": {
+    "id": "the deer hunter",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "The Deer Hunter",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "The woods are quiet. The hunter is not.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "ol painless": {
+    "id": "ol painless",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Ol’ Painless",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "It never hurts to be prepared. The same cannot be said for the target.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "last stand": {
+    "id": "last stand",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "Last Stand",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "If this is the Last Stand, make it one worth remembering.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
+  },
+  "the punisher": {
+    "id": "the punisher",
+    "texture": "spareParts",
+    "tags": [
+      "Weapon"
+    ],
+    "label": "The Punisher",
+    "lootTags": [
+      "crafted_weapon"
+    ],
+    "description": "Judgment was quick. The punishment arrives faster.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "weaponOnly": true,
+    "weaponKind": "to_be_defined",
+    "hands": "to_be_defined",
+    "combatTuning": "to_be_defined",
+    "runtimeStatus": "planned_weapon_definition",
+    "craftable": true,
+    "craftingIngredient": false,
+    "baseConstructionIngredient": false,
+    "stationUpgradeIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/spare_parts.png"
   },
   "glock 17": {
     "id": "glock 17",
@@ -10075,6 +12381,2556 @@
     "scrappable": false,
     "containerEligible": true,
     "icon": "res://assets/items/medical_recipe_v3.png"
+  },
+  "9mm recipe": {
+    "id": "9mm recipe",
+    "texture": "ammo_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "9mm Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making 9mm. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "9mm",
+      "craftLabel": "9mm",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/ammo_recipe_v1.png"
+  },
+  ".45 acp recipe": {
+    "id": ".45 acp recipe",
+    "texture": "ammo_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": ".45 ACP Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making .45 ACP. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": ".45 acp",
+      "craftLabel": ".45 ACP",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/ammo_recipe_v1.png"
+  },
+  "rt 85 recipe": {
+    "id": "rt 85 recipe",
+    "texture": "ammo_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "RT 85 Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making RT 85. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "rt 85",
+      "craftLabel": "RT 85",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/ammo_recipe_v1.png"
+  },
+  ".44 magnum recipe": {
+    "id": ".44 magnum recipe",
+    "texture": "ammo_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": ".44 Magnum Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making .44 Magnum. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": ".44 magnum",
+      "craftLabel": ".44 Magnum",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/ammo_recipe_v1.png"
+  },
+  "20 gauge recipe": {
+    "id": "20 gauge recipe",
+    "texture": "ammo_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "20 Gauge Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making 20 Gauge. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "20 gauge",
+      "craftLabel": "20 Gauge",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/ammo_recipe_v1.png"
+  },
+  "12 gauge recipe": {
+    "id": "12 gauge recipe",
+    "texture": "ammo_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "12 Gauge Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making 12 Gauge. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "12 gauge",
+      "craftLabel": "12 Gauge",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/ammo_recipe_v1.png"
+  },
+  "5.56x45 recipe": {
+    "id": "5.56x45 recipe",
+    "texture": "ammo_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "5.56x45 Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making 5.56x45. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "5.56x45",
+      "craftLabel": "5.56x45",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/ammo_recipe_v1.png"
+  },
+  "7.62x39 recipe": {
+    "id": "7.62x39 recipe",
+    "texture": "ammo_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "7.62x39 Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making 7.62x39. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "7.62x39",
+      "craftLabel": "7.62x39",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/ammo_recipe_v1.png"
+  },
+  ".308 recipe": {
+    "id": ".308 recipe",
+    "texture": "ammo_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": ".308 Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making .308. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": ".308",
+      "craftLabel": ".308",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/ammo_recipe_v1.png"
+  },
+  "7.62x51 recipe": {
+    "id": "7.62x51 recipe",
+    "texture": "ammo_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "7.62x51 Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making 7.62x51. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "7.62x51",
+      "craftLabel": "7.62x51",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/ammo_recipe_v1.png"
+  },
+  "nailbiter recipe": {
+    "id": "nailbiter recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Nailbiter Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Nailbiter. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "nailbiter",
+      "craftLabel": "Nailbiter",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "bad intentions recipe": {
+    "id": "bad intentions recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Bad Intentions Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Bad Intentions. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "bad intentions",
+      "craftLabel": "Bad Intentions",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "bat-tery assault recipe": {
+    "id": "bat-tery assault recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Bat-tery Assault Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Bat-tery Assault. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "bat-tery assault",
+      "craftLabel": "Bat-tery Assault",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "hammer time recipe": {
+    "id": "hammer time recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Hammer Time Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Hammer Time. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "hammer time",
+      "craftLabel": "Hammer Time",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "gear head recipe": {
+    "id": "gear head recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Gear Head Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Gear Head. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "gear head",
+      "craftLabel": "Gear Head",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "open invitation recipe": {
+    "id": "open invitation recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Open Invitation Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Open Invitation. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "open invitation",
+      "craftLabel": "Open Invitation",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "pry and prejudice recipe": {
+    "id": "pry and prejudice recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Pry and Prejudice Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Pry and Prejudice. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "pry and prejudice",
+      "craftLabel": "Pry and Prejudice",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "axe-ident recipe": {
+    "id": "axe-ident recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Axe-ident Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Axe-ident. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "axe-ident",
+      "craftLabel": "Axe-ident",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "split decision recipe": {
+    "id": "split decision recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Split Decision Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Split Decision. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "split decision",
+      "craftLabel": "Split Decision",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "kindness recipe": {
+    "id": "kindness recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Kindness Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Kindness. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "kindness",
+      "craftLabel": "Kindness",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "little problem recipe": {
+    "id": "little problem recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Little Problem Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Little Problem. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "little problem",
+      "craftLabel": "Little Problem",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "chop-chop recipe": {
+    "id": "chop-chop recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Chop-Chop Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Chop-Chop. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "chop-chop",
+      "craftLabel": "Chop-Chop",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "minor adjustment recipe": {
+    "id": "minor adjustment recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Minor Adjustment Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Minor Adjustment. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "minor adjustment",
+      "craftLabel": "Minor Adjustment",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "gentle reminder recipe": {
+    "id": "gentle reminder recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Gentle Reminder Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Gentle Reminder. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "gentle reminder",
+      "craftLabel": "Gentle Reminder",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "oni giri recipe": {
+    "id": "oni giri recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Oni Giri Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Oni Giri. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "oni giri",
+      "craftLabel": "Oni Giri",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "raiden recipe": {
+    "id": "raiden recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Raiden Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Raiden. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "raiden",
+      "craftLabel": "Raiden",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "cerberus recipe": {
+    "id": "cerberus recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Cerberus Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Cerberus. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "cerberus",
+      "craftLabel": "Cerberus",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "point taken recipe": {
+    "id": "point taken recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Point Taken Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Point Taken. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "point taken",
+      "craftLabel": "Point Taken",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "no offense recipe": {
+    "id": "no offense recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "No Offense Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making No Offense. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "no offense",
+      "craftLabel": "No Offense",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "exit wound recipe": {
+    "id": "exit wound recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Exit Wound Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Exit Wound. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "exit wound",
+      "craftLabel": "Exit Wound",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "second helping recipe": {
+    "id": "second helping recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Second Helping Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Second Helping. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "second helping",
+      "craftLabel": "Second Helping",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "under pressure recipe": {
+    "id": "under pressure recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Under Pressure Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Under Pressure. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "under pressure",
+      "craftLabel": "Under Pressure",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "pipe dream recipe": {
+    "id": "pipe dream recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Pipe Dream Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Pipe Dream. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "pipe dream",
+      "craftLabel": "Pipe Dream",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "last light recipe": {
+    "id": "last light recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Last Light Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Last Light. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "last light",
+      "craftLabel": "Last Light",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "quiet hours recipe": {
+    "id": "quiet hours recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Quiet Hours Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Quiet Hours. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "quiet hours",
+      "craftLabel": "Quiet Hours",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "broken promise recipe": {
+    "id": "broken promise recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Broken Promise Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Broken Promise. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "broken promise",
+      "craftLabel": "Broken Promise",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "raccoons bite recipe": {
+    "id": "raccoons bite recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Raccoon’s Bite Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Raccoon’s Bite. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "raccoons bite",
+      "craftLabel": "Raccoon’s Bite",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "escape tool recipe": {
+    "id": "escape tool recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Escape Tool Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Escape Tool. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "escape tool",
+      "craftLabel": "Escape Tool",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "mercy seat recipe": {
+    "id": "mercy seat recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Mercy Seat Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Mercy Seat. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "mercy seat",
+      "craftLabel": "Mercy Seat",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "old habit recipe": {
+    "id": "old habit recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Old Habit Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Old Habit. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "old habit",
+      "craftLabel": "Old Habit",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "the peacemaker recipe": {
+    "id": "the peacemaker recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "The Peacemaker Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making The Peacemaker. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "the peacemaker",
+      "craftLabel": "The Peacemaker",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "one more round recipe": {
+    "id": "one more round recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "One More Round Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making One More Round. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "one more round",
+      "craftLabel": "One More Round",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "your rights recipe": {
+    "id": "your rights recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Your Rights Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Your Rights. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "your rights",
+      "craftLabel": "Your Rights",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "burn notice recipe": {
+    "id": "burn notice recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Burn Notice Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Burn Notice. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "burn notice",
+      "craftLabel": "Burn Notice",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "hand cannon recipe": {
+    "id": "hand cannon recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Hand Cannon Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Hand Cannon. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "hand cannon",
+      "craftLabel": "Hand Cannon",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "last resort recipe": {
+    "id": "last resort recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Last Resort Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Last Resort. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "last resort",
+      "craftLabel": "Last Resort",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "jager recipe": {
+    "id": "jager recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Jäger Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Jäger. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "jager",
+      "craftLabel": "Jäger",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "double-tap recipe": {
+    "id": "double-tap recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Double-Tap Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Double-Tap. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "double-tap",
+      "craftLabel": "Double-Tap",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "panic button recipe": {
+    "id": "panic button recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Panic Button Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Panic Button. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "panic button",
+      "craftLabel": "Panic Button",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "chain reaction recipe": {
+    "id": "chain reaction recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Chain Reaction Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Chain Reaction. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "chain reaction",
+      "craftLabel": "Chain Reaction",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "blackout protocol recipe": {
+    "id": "blackout protocol recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Blackout Protocol Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Blackout Protocol. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "blackout protocol",
+      "craftLabel": "Blackout Protocol",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "borrowed authority recipe": {
+    "id": "borrowed authority recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Borrowed Authority Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Borrowed Authority. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "borrowed authority",
+      "craftLabel": "Borrowed Authority",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "memento mori recipe": {
+    "id": "memento mori recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Memento Mori Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Memento Mori. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "memento mori",
+      "craftLabel": "Memento Mori",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "crowd control recipe": {
+    "id": "crowd control recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Crowd Control Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Crowd Control. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "crowd control",
+      "craftLabel": "Crowd Control",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "rush hour recipe": {
+    "id": "rush hour recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Rush Hour Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Rush Hour. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "rush hour",
+      "craftLabel": "Rush Hour",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "shredder recipe": {
+    "id": "shredder recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Shredder Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Shredder. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "shredder",
+      "craftLabel": "Shredder",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "best friend recipe": {
+    "id": "best friend recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Best Friend Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Best Friend. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "best friend",
+      "craftLabel": "Best Friend",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "quiet time recipe": {
+    "id": "quiet time recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Quiet Time Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Quiet Time. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "quiet time",
+      "craftLabel": "Quiet Time",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "dragons breath recipe": {
+    "id": "dragons breath recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Dragon’s Breath Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Dragon’s Breath. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "dragons breath",
+      "craftLabel": "Dragon’s Breath",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "flatline recipe": {
+    "id": "flatline recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Flatline Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Flatline. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "flatline",
+      "craftLabel": "Flatline",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "full control recipe": {
+    "id": "full control recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Full Control Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Full Control. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "full control",
+      "craftLabel": "Full Control",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "kill switch recipe": {
+    "id": "kill switch recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Kill Switch Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Kill Switch. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "kill switch",
+      "craftLabel": "Kill Switch",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "meta breaker recipe": {
+    "id": "meta breaker recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Meta Breaker Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Meta Breaker. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "meta breaker",
+      "craftLabel": "Meta Breaker",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "black box recipe": {
+    "id": "black box recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Black Box Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Black Box. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "black box",
+      "craftLabel": "Black Box",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "green flu recipe": {
+    "id": "green flu recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Green Flu Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Green Flu. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "green flu",
+      "craftLabel": "Green Flu",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "nuclear winter recipe": {
+    "id": "nuclear winter recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Nuclear Winter Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Nuclear Winter. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "nuclear winter",
+      "craftLabel": "Nuclear Winter",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "red october recipe": {
+    "id": "red october recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Red October Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Red October. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "red october",
+      "craftLabel": "Red October",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "metro line recipe": {
+    "id": "metro line recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Metro Line Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Metro Line. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "metro line",
+      "craftLabel": "Metro Line",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "walking terror recipe": {
+    "id": "walking terror recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Walking Terror Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Walking Terror. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "walking terror",
+      "craftLabel": "Walking Terror",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "iron curtain recipe": {
+    "id": "iron curtain recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Iron Curtain Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Iron Curtain. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "iron curtain",
+      "craftLabel": "Iron Curtain",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "confidence recipe": {
+    "id": "confidence recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Confidence Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Confidence. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "confidence",
+      "craftLabel": "Confidence",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "the deer hunter recipe": {
+    "id": "the deer hunter recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "The Deer Hunter Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making The Deer Hunter. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "the deer hunter",
+      "craftLabel": "The Deer Hunter",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "ol painless recipe": {
+    "id": "ol painless recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Ol’ Painless Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Ol’ Painless. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "ol painless",
+      "craftLabel": "Ol’ Painless",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "last stand recipe": {
+    "id": "last stand recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "Last Stand Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making Last Stand. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "last stand",
+      "craftLabel": "Last Stand",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
+  },
+  "the punisher recipe": {
+    "id": "the punisher recipe",
+    "texture": "weapon_recipe_v1",
+    "tags": [
+      "Recipe"
+    ],
+    "label": "The Punisher Recipe",
+    "lootTags": [
+      "recipe"
+    ],
+    "description": "Instructions for making The Punisher. Knowledge weighs less than supplies.",
+    "rarity": "to_be_defined",
+    "stackLimit": 1,
+    "spawnQuantity": {
+      "min": 1,
+      "max": 1
+    },
+    "usable": false,
+    "spawnArchitecture": "to_be_defined",
+    "itemType": "recipe",
+    "autoConsumeOnSafehouseReturn": true,
+    "recipeUnlock": {
+      "recipeId": "the punisher",
+      "craftLabel": "The Punisher",
+      "stationId": "workbench",
+      "stationLabel": "Workbench"
+    },
+    "craftingIngredient": false,
+    "iconStatus": "awaiting_implementation",
+    "tradeValue": null,
+    "scrappable": false,
+    "containerEligible": true,
+    "icon": "res://assets/items/weapon_recipe_v1.png"
   },
   "Key": {
     "id": "Key",

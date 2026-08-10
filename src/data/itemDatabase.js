@@ -8,6 +8,7 @@ export const LOOT_TAGS = Object.freeze({
   BASE_WEAPON: "base_weapon",
   COLLECTIBLE: "collectible",
   MELEE_WEAPON: "melee_weapon",
+  CRAFTED_WEAPON: "crafted_weapon",
   FIREARM: "firearm",
   AMMUNITION: "ammunition",
   FIREARM_ATTACHMENT: "firearm_attachment",
@@ -36,7 +37,8 @@ const ITEM_GROUPS = Object.freeze({
     "Tape Measure", "Level", "Pipe Wrench", "Pliers", "Wrench", "Hammer", "Safety Goggles",
     "Corrugated Hose", "Duct Tape", "Insulating Tape", "Plexiglass", "Screw Nuts",
     "Sealing Foam", "Silicone Tube", "Superglue", "Wood Glue", "Spark Plug", "USB Adapter",
-    "AA Battery", "WD-40", "Awl", "Multitool", "Wi-Fi Camera",
+    "AA Battery", "WD-40", "Awl", "Multitool", "Wi-Fi Camera", "Saw", "Welding Torch",
+    "Metal Chain",
   ],
   [LOOT_TAGS.BASE_TECHNICAL]: [
     "RAM", "Graphics Card", "Processor", "Motherboard", "Power Supply Unit", "Light Bulb", "Magnet",
@@ -71,7 +73,24 @@ const ITEM_GROUPS = Object.freeze({
   ],
   [LOOT_TAGS.MELEE_WEAPON]: [
     "Hammer", "Crowbar", "Axe", "Baseball Bat", "Hatchet", "Sledgehammer", "Katana",
-    "Combat Knife", "Kitchen Knife", "Pipe Wrench",
+    "Combat Knife", "Kitchen Knife", "Pipe Wrench", "Nailbiter", "Bad Intentions",
+    "Bat-tery Assault", "Hammer Time", "Gear Head", "Open Invitation",
+    "Pry and Prejudice", "Axe-ident", "Split Decision", "Kindness", "Little Problem",
+    "Chop-Chop", "Minor Adjustment", "Gentle Reminder", "Oni Giri", "Raiden",
+    "Cerberus", "Point Taken", "No Offense", "Exit Wound", "Second Helping",
+    "Under Pressure", "Pipe Dream",
+  ],
+  [LOOT_TAGS.CRAFTED_WEAPON]: [
+    "Last Light", "Quiet Hours", "Broken Promise", "Raccoon’s Bite", "Escape Tool",
+    "Mercy Seat", "Old Habit", "The Peacemaker", "One More Round",
+    "Your Rights", "Burn Notice", "Hand Cannon", "Last Resort", "Jäger",
+    "Double-Tap", "Panic Button", "Chain Reaction", "Blackout Protocol",
+    "Borrowed Authority", "Memento Mori", "Crowd Control", "Rush Hour", "Shredder",
+    "Best Friend", "Quiet Time", "Dragon’s Breath", "Flatline", "Full Control", "Kill Switch",
+    "Meta Breaker", "Black Box",
+    "Green Flu", "Nuclear Winter", "Red October", "Metro Line", "Walking Terror",
+    "Iron Curtain", "Confidence", "The Deer Hunter", "Ol’ Painless", "Last Stand",
+    "The Punisher",
   ],
   [LOOT_TAGS.FIREARM]: [
     "Glock 17", "Beretta M9", "M1911", "Taurus 38", "Model 629", "Mossberg 500",
@@ -105,6 +124,30 @@ const ITEM_GROUPS = Object.freeze({
     "First Aid Spray Recipe", "Medical Herbs Recipe", "Vitalis Recipe", "Bandage Recipe",
     "Saline Solution Recipe", "Military Bandage Recipe", "First Aid Kit Recipe",
     "Herbal Poultice Recipe", "Tourniquet Recipe", "Surgical Treatment Kit Recipe",
+    "9mm Recipe", ".45 ACP Recipe", "RT 85 Recipe", ".44 Magnum Recipe",
+    "20 Gauge Recipe", "12 Gauge Recipe", "5.56x45 Recipe", "7.62x39 Recipe",
+    ".308 Recipe", "7.62x51 Recipe",
+    "Nailbiter Recipe", "Bad Intentions Recipe", "Bat-tery Assault Recipe",
+    "Hammer Time Recipe", "Gear Head Recipe", "Open Invitation Recipe",
+    "Pry and Prejudice Recipe", "Axe-ident Recipe", "Split Decision Recipe",
+    "Kindness Recipe", "Little Problem Recipe", "Chop-Chop Recipe",
+    "Minor Adjustment Recipe", "Gentle Reminder Recipe", "Oni Giri Recipe",
+    "Raiden Recipe", "Cerberus Recipe", "Point Taken Recipe", "No Offense Recipe",
+    "Exit Wound Recipe", "Second Helping Recipe", "Under Pressure Recipe",
+    "Pipe Dream Recipe",
+    "Last Light Recipe", "Quiet Hours Recipe", "Broken Promise Recipe",
+    "Raccoon’s Bite Recipe", "Escape Tool Recipe", "Mercy Seat Recipe",
+    "Old Habit Recipe", "The Peacemaker Recipe", "One More Round Recipe",
+    "Your Rights Recipe", "Burn Notice Recipe", "Hand Cannon Recipe", "Last Resort Recipe",
+    "Jäger Recipe", "Double-Tap Recipe", "Panic Button Recipe", "Chain Reaction Recipe",
+    "Blackout Protocol Recipe", "Borrowed Authority Recipe", "Memento Mori Recipe",
+    "Crowd Control Recipe", "Rush Hour Recipe", "Shredder Recipe", "Best Friend Recipe",
+    "Quiet Time Recipe", "Dragon’s Breath Recipe", "Flatline Recipe", "Full Control Recipe",
+    "Kill Switch Recipe", "Meta Breaker Recipe", "Black Box Recipe",
+    "Green Flu Recipe", "Nuclear Winter Recipe", "Red October Recipe", "Metro Line Recipe",
+    "Walking Terror Recipe", "Iron Curtain Recipe", "Confidence Recipe",
+    "The Deer Hunter Recipe", "Ol’ Painless Recipe", "Last Stand Recipe",
+    "The Punisher Recipe",
   ],
   [LOOT_TAGS.SPECIAL]: ["Key"],
 });
@@ -197,6 +240,137 @@ const ITEM_ID_OVERRIDES = Object.freeze({
   "7.62x39": "7.62x39",
   ".308": ".308",
   "7.62x51": "7.62x51",
+  "9mm Recipe": "9mm recipe",
+  ".45 ACP Recipe": ".45 acp recipe",
+  "RT 85 Recipe": "rt 85 recipe",
+  ".44 Magnum Recipe": ".44 magnum recipe",
+  "20 Gauge Recipe": "20 gauge recipe",
+  "12 Gauge Recipe": "12 gauge recipe",
+  "5.56x45 Recipe": "5.56x45 recipe",
+  "7.62x39 Recipe": "7.62x39 recipe",
+  ".308 Recipe": ".308 recipe",
+  "7.62x51 Recipe": "7.62x51 recipe",
+  Nailbiter: "nailbiter",
+  "Bad Intentions": "bad intentions",
+  "Bat-tery Assault": "bat-tery assault",
+  "Nailbiter Recipe": "nailbiter recipe",
+  "Bad Intentions Recipe": "bad intentions recipe",
+  "Bat-tery Assault Recipe": "bat-tery assault recipe",
+  "Hammer Time": "hammer time",
+  "Hammer Time Recipe": "hammer time recipe",
+  "Gear Head": "gear head",
+  "Gear Head Recipe": "gear head recipe",
+  "Open Invitation": "open invitation",
+  "Open Invitation Recipe": "open invitation recipe",
+  "Pry and Prejudice": "pry and prejudice",
+  "Pry and Prejudice Recipe": "pry and prejudice recipe",
+  "Axe-ident": "axe-ident",
+  "Axe-ident Recipe": "axe-ident recipe",
+  "Split Decision": "split decision",
+  "Split Decision Recipe": "split decision recipe",
+  Kindness: "kindness",
+  "Kindness Recipe": "kindness recipe",
+  "Little Problem": "little problem",
+  "Little Problem Recipe": "little problem recipe",
+  "Chop-Chop": "chop-chop",
+  "Chop-Chop Recipe": "chop-chop recipe",
+  "Minor Adjustment": "minor adjustment",
+  "Minor Adjustment Recipe": "minor adjustment recipe",
+  Saw: "saw",
+  "Gentle Reminder": "gentle reminder",
+  "Gentle Reminder Recipe": "gentle reminder recipe",
+  "Oni Giri": "oni giri",
+  "Oni Giri Recipe": "oni giri recipe",
+  Raiden: "raiden",
+  "Raiden Recipe": "raiden recipe",
+  Cerberus: "cerberus",
+  "Cerberus Recipe": "cerberus recipe",
+  "Point Taken": "point taken",
+  "Point Taken Recipe": "point taken recipe",
+  "No Offense": "no offense",
+  "No Offense Recipe": "no offense recipe",
+  "Exit Wound": "exit wound",
+  "Exit Wound Recipe": "exit wound recipe",
+  "Welding Torch": "welding torch",
+  "Second Helping": "second helping",
+  "Second Helping Recipe": "second helping recipe",
+  "Under Pressure": "under pressure",
+  "Under Pressure Recipe": "under pressure recipe",
+  "Pipe Dream": "pipe dream",
+  "Pipe Dream Recipe": "pipe dream recipe",
+  "Last Light": "last light",
+  "Last Light Recipe": "last light recipe",
+  "Quiet Hours": "quiet hours",
+  "Quiet Hours Recipe": "quiet hours recipe",
+  "Broken Promise": "broken promise",
+  "Broken Promise Recipe": "broken promise recipe",
+  "Raccoon’s Bite": "raccoons bite",
+  "Raccoon’s Bite Recipe": "raccoons bite recipe",
+  "Escape Tool": "escape tool",
+  "Escape Tool Recipe": "escape tool recipe",
+  "Mercy Seat": "mercy seat",
+  "Mercy Seat Recipe": "mercy seat recipe",
+  "Your Rights": "your rights",
+  "Your Rights Recipe": "your rights recipe",
+  "Burn Notice": "burn notice",
+  "Burn Notice Recipe": "burn notice recipe",
+  "Hand Cannon": "hand cannon",
+  "Hand Cannon Recipe": "hand cannon recipe",
+  "Last Resort": "last resort",
+  "Last Resort Recipe": "last resort recipe",
+  Jäger: "jager",
+  "Jäger Recipe": "jager recipe",
+  "Double-Tap": "double-tap",
+  "Double-Tap Recipe": "double-tap recipe",
+  "Panic Button": "panic button",
+  "Panic Button Recipe": "panic button recipe",
+  "Chain Reaction": "chain reaction",
+  "Chain Reaction Recipe": "chain reaction recipe",
+  "Metal Chain": "metal chain",
+  "Blackout Protocol": "blackout protocol",
+  "Blackout Protocol Recipe": "blackout protocol recipe",
+  "Borrowed Authority": "borrowed authority",
+  "Borrowed Authority Recipe": "borrowed authority recipe",
+  "Memento Mori": "memento mori",
+  "Memento Mori Recipe": "memento mori recipe",
+  "Crowd Control": "crowd control",
+  "Crowd Control Recipe": "crowd control recipe",
+  "Rush Hour": "rush hour",
+  "Rush Hour Recipe": "rush hour recipe",
+  Shredder: "shredder",
+  "Shredder Recipe": "shredder recipe",
+  "Best Friend": "best friend",
+  "Best Friend Recipe": "best friend recipe",
+  "Quiet Time": "quiet time",
+  "Quiet Time Recipe": "quiet time recipe",
+  "Dragon’s Breath": "dragons breath",
+  "Dragon’s Breath Recipe": "dragons breath recipe",
+  "Meta Breaker": "meta breaker",
+  "Meta Breaker Recipe": "meta breaker recipe",
+  "Black Box": "black box",
+  "Black Box Recipe": "black box recipe",
+  "Green Flu": "green flu",
+  "Green Flu Recipe": "green flu recipe",
+  "Nuclear Winter": "nuclear winter",
+  "Nuclear Winter Recipe": "nuclear winter recipe",
+  "Red October": "red october",
+  "Red October Recipe": "red october recipe",
+  "Metro Line": "metro line",
+  "Metro Line Recipe": "metro line recipe",
+  "Walking Terror": "walking terror",
+  "Walking Terror Recipe": "walking terror recipe",
+  "Iron Curtain": "iron curtain",
+  "Iron Curtain Recipe": "iron curtain recipe",
+  Confidence: "confidence",
+  "Confidence Recipe": "confidence recipe",
+  "The Deer Hunter": "the deer hunter",
+  "The Deer Hunter Recipe": "the deer hunter recipe",
+  "Ol’ Painless": "ol painless",
+  "Ol’ Painless Recipe": "ol painless recipe",
+  "Last Stand": "last stand",
+  "Last Stand Recipe": "last stand recipe",
+  "The Punisher": "the punisher",
+  "The Punisher Recipe": "the punisher recipe",
   "Small Backpack": "small backpack",
   "Medium Backpack": "medium backpack",
   "Large Backpack": "large backpack",
@@ -280,7 +454,12 @@ const COLLECTIBLE_DESCRIPTIONS = Object.freeze({
   "fishing rod": "A weathered fishing rod from quieter days. The fish may be the only things unaware the world ended.",
 });
 
-function makeRecipeItemDetails(recipeId, craftLabel) {
+function makeRecipeItemDetails(
+  recipeId,
+  craftLabel,
+  stationId = "medical",
+  stationLabel = "Medical Unit"
+) {
   return {
     description: `Instructions for making ${craftLabel}. Knowledge weighs less than supplies.`,
     rarity: "to_be_defined",
@@ -293,10 +472,56 @@ function makeRecipeItemDetails(recipeId, craftLabel) {
     recipeUnlock: Object.freeze({
       recipeId,
       craftLabel,
-      stationId: "medical",
-      stationLabel: "Medical Unit",
+      stationId,
+      stationLabel,
     }),
     craftingIngredient: false,
+    iconStatus: "awaiting_implementation",
+    tradeValue: null,
+    scrappable: false,
+  };
+}
+
+function makePlannedCraftableMeleeDetails(description) {
+  return {
+    description,
+    rarity: "to_be_defined",
+    stackLimit: 1,
+    spawnQuantity: Object.freeze({ min: 1, max: 1 }),
+    usable: false,
+    spawnArchitecture: "to_be_defined",
+    weaponOnly: true,
+    weaponKind: "melee",
+    hands: "to_be_defined",
+    combatTuning: "to_be_defined",
+    runtimeStatus: "planned_weapon_definition",
+    craftable: true,
+    craftingIngredient: false,
+    baseConstructionIngredient: false,
+    stationUpgradeIngredient: false,
+    iconStatus: "awaiting_implementation",
+    tradeValue: null,
+    scrappable: false,
+  };
+}
+
+function makePlannedCraftableWeaponDetails(description) {
+  return {
+    description,
+    rarity: "to_be_defined",
+    stackLimit: 1,
+    spawnQuantity: Object.freeze({ min: 1, max: 1 }),
+    usable: false,
+    spawnArchitecture: "to_be_defined",
+    weaponOnly: true,
+    weaponKind: "to_be_defined",
+    hands: "to_be_defined",
+    combatTuning: "to_be_defined",
+    runtimeStatus: "planned_weapon_definition",
+    craftable: true,
+    craftingIngredient: false,
+    baseConstructionIngredient: false,
+    stationUpgradeIngredient: false,
     iconStatus: "awaiting_implementation",
     tradeValue: null,
     scrappable: false,
@@ -875,6 +1100,415 @@ const ITEM_DETAILS = Object.freeze({
   "herbal poultice recipe": makeRecipeItemDetails("herbal poultice", "Herbal Poultice"),
   "tourniquet recipe": makeRecipeItemDetails("tourniquet", "Tourniquet"),
   "surgical treatment kit recipe": makeRecipeItemDetails("surgical treatment kit", "Surgical Treatment Kit"),
+  "9mm recipe": makeRecipeItemDetails("9mm", "9mm", "workbench", "Workbench"),
+  ".45 acp recipe": makeRecipeItemDetails(".45 acp", ".45 ACP", "workbench", "Workbench"),
+  "rt 85 recipe": makeRecipeItemDetails("rt 85", "RT 85", "workbench", "Workbench"),
+  ".44 magnum recipe": makeRecipeItemDetails(".44 magnum", ".44 Magnum", "workbench", "Workbench"),
+  "20 gauge recipe": makeRecipeItemDetails("20 gauge", "20 Gauge", "workbench", "Workbench"),
+  "12 gauge recipe": makeRecipeItemDetails("12 gauge", "12 Gauge", "workbench", "Workbench"),
+  "5.56x45 recipe": makeRecipeItemDetails("5.56x45", "5.56x45", "workbench", "Workbench"),
+  "7.62x39 recipe": makeRecipeItemDetails("7.62x39", "7.62x39", "workbench", "Workbench"),
+  ".308 recipe": makeRecipeItemDetails(".308", ".308", "workbench", "Workbench"),
+  "7.62x51 recipe": makeRecipeItemDetails("7.62x51", "7.62x51", "workbench", "Workbench"),
+  "nailbiter recipe": makeRecipeItemDetails("nailbiter", "Nailbiter", "workbench", "Workbench"),
+  "bad intentions recipe": makeRecipeItemDetails("bad intentions", "Bad Intentions", "workbench", "Workbench"),
+  "bat-tery assault recipe": makeRecipeItemDetails("bat-tery assault", "Bat-tery Assault", "workbench", "Workbench"),
+  "hammer time recipe": makeRecipeItemDetails("hammer time", "Hammer Time", "workbench", "Workbench"),
+  "gear head recipe": makeRecipeItemDetails("gear head", "Gear Head", "workbench", "Workbench"),
+  "open invitation recipe": makeRecipeItemDetails("open invitation", "Open Invitation", "workbench", "Workbench"),
+  "pry and prejudice recipe": makeRecipeItemDetails("pry and prejudice", "Pry and Prejudice", "workbench", "Workbench"),
+  "axe-ident recipe": makeRecipeItemDetails("axe-ident", "Axe-ident", "workbench", "Workbench"),
+  "split decision recipe": makeRecipeItemDetails("split decision", "Split Decision", "workbench", "Workbench"),
+  "kindness recipe": makeRecipeItemDetails("kindness", "Kindness", "workbench", "Workbench"),
+  "little problem recipe": makeRecipeItemDetails("little problem", "Little Problem", "workbench", "Workbench"),
+  "chop-chop recipe": makeRecipeItemDetails("chop-chop", "Chop-Chop", "workbench", "Workbench"),
+  "minor adjustment recipe": makeRecipeItemDetails("minor adjustment", "Minor Adjustment", "workbench", "Workbench"),
+  "gentle reminder recipe": makeRecipeItemDetails("gentle reminder", "Gentle Reminder", "workbench", "Workbench"),
+  "oni giri recipe": makeRecipeItemDetails("oni giri", "Oni Giri", "workbench", "Workbench"),
+  "raiden recipe": makeRecipeItemDetails("raiden", "Raiden", "workbench", "Workbench"),
+  "cerberus recipe": makeRecipeItemDetails("cerberus", "Cerberus", "workbench", "Workbench"),
+  "point taken recipe": makeRecipeItemDetails("point taken", "Point Taken", "workbench", "Workbench"),
+  "no offense recipe": makeRecipeItemDetails("no offense", "No Offense", "workbench", "Workbench"),
+  "exit wound recipe": makeRecipeItemDetails("exit wound", "Exit Wound", "workbench", "Workbench"),
+  "second helping recipe": makeRecipeItemDetails("second helping", "Second Helping", "workbench", "Workbench"),
+  "under pressure recipe": makeRecipeItemDetails("under pressure", "Under Pressure", "workbench", "Workbench"),
+  "pipe dream recipe": makeRecipeItemDetails("pipe dream", "Pipe Dream", "workbench", "Workbench"),
+  "last light recipe": makeRecipeItemDetails("last light", "Last Light", "workbench", "Workbench"),
+  "quiet hours recipe": makeRecipeItemDetails("quiet hours", "Quiet Hours", "workbench", "Workbench"),
+  "broken promise recipe": makeRecipeItemDetails("broken promise", "Broken Promise", "workbench", "Workbench"),
+  "raccoons bite recipe": makeRecipeItemDetails("raccoons bite", "Raccoon’s Bite", "workbench", "Workbench"),
+  "escape tool recipe": makeRecipeItemDetails("escape tool", "Escape Tool", "workbench", "Workbench"),
+  "mercy seat recipe": makeRecipeItemDetails("mercy seat", "Mercy Seat", "workbench", "Workbench"),
+  "old habit recipe": makeRecipeItemDetails("old habit", "Old Habit", "workbench", "Workbench"),
+  "the peacemaker recipe": makeRecipeItemDetails("the peacemaker", "The Peacemaker", "workbench", "Workbench"),
+  "one more round recipe": makeRecipeItemDetails("one more round", "One More Round", "workbench", "Workbench"),
+  "your rights recipe": makeRecipeItemDetails("your rights", "Your Rights", "workbench", "Workbench"),
+  "burn notice recipe": makeRecipeItemDetails("burn notice", "Burn Notice", "workbench", "Workbench"),
+  "hand cannon recipe": makeRecipeItemDetails("hand cannon", "Hand Cannon", "workbench", "Workbench"),
+  "last resort recipe": makeRecipeItemDetails("last resort", "Last Resort", "workbench", "Workbench"),
+  "jager recipe": makeRecipeItemDetails("jager", "Jäger", "workbench", "Workbench"),
+  "double-tap recipe": makeRecipeItemDetails("double-tap", "Double-Tap", "workbench", "Workbench"),
+  "panic button recipe": makeRecipeItemDetails("panic button", "Panic Button", "workbench", "Workbench"),
+  "chain reaction recipe": makeRecipeItemDetails("chain reaction", "Chain Reaction", "workbench", "Workbench"),
+  "blackout protocol recipe": makeRecipeItemDetails("blackout protocol", "Blackout Protocol", "workbench", "Workbench"),
+  "borrowed authority recipe": makeRecipeItemDetails("borrowed authority", "Borrowed Authority", "workbench", "Workbench"),
+  "memento mori recipe": makeRecipeItemDetails("memento mori", "Memento Mori", "workbench", "Workbench"),
+  "crowd control recipe": makeRecipeItemDetails("crowd control", "Crowd Control", "workbench", "Workbench"),
+  "rush hour recipe": makeRecipeItemDetails("rush hour", "Rush Hour", "workbench", "Workbench"),
+  "shredder recipe": makeRecipeItemDetails("shredder", "Shredder", "workbench", "Workbench"),
+  "best friend recipe": makeRecipeItemDetails("best friend", "Best Friend", "workbench", "Workbench"),
+  "quiet time recipe": makeRecipeItemDetails("quiet time", "Quiet Time", "workbench", "Workbench"),
+  "dragons breath recipe": makeRecipeItemDetails("dragons breath", "Dragon’s Breath", "workbench", "Workbench"),
+  "flatline recipe": makeRecipeItemDetails("flatline", "Flatline", "workbench", "Workbench"),
+  "full control recipe": makeRecipeItemDetails("full control", "Full Control", "workbench", "Workbench"),
+  "kill switch recipe": makeRecipeItemDetails("kill switch", "Kill Switch", "workbench", "Workbench"),
+  "meta breaker recipe": makeRecipeItemDetails("meta breaker", "Meta Breaker", "workbench", "Workbench"),
+  "black box recipe": makeRecipeItemDetails("black box", "Black Box", "workbench", "Workbench"),
+  "green flu recipe": makeRecipeItemDetails("green flu", "Green Flu", "workbench", "Workbench"),
+  "nuclear winter recipe": makeRecipeItemDetails("nuclear winter", "Nuclear Winter", "workbench", "Workbench"),
+  "red october recipe": makeRecipeItemDetails("red october", "Red October", "workbench", "Workbench"),
+  "metro line recipe": makeRecipeItemDetails("metro line", "Metro Line", "workbench", "Workbench"),
+  "walking terror recipe": makeRecipeItemDetails("walking terror", "Walking Terror", "workbench", "Workbench"),
+  "iron curtain recipe": makeRecipeItemDetails("iron curtain", "Iron Curtain", "workbench", "Workbench"),
+  "confidence recipe": makeRecipeItemDetails("confidence", "Confidence", "workbench", "Workbench"),
+  "the deer hunter recipe": makeRecipeItemDetails("the deer hunter", "The Deer Hunter", "workbench", "Workbench"),
+  "ol painless recipe": makeRecipeItemDetails("ol painless", "Ol’ Painless", "workbench", "Workbench"),
+  "last stand recipe": makeRecipeItemDetails("last stand", "Last Stand", "workbench", "Workbench"),
+  "the punisher recipe": makeRecipeItemDetails("the punisher", "The Punisher", "workbench", "Workbench"),
+  nailbiter: {
+    description: "The name is a warning. The nails are the explanation.",
+    rarity: "to_be_defined",
+    stackLimit: 1,
+    spawnQuantity: Object.freeze({ min: 1, max: 1 }),
+    usable: false,
+    spawnArchitecture: "to_be_defined",
+    weaponOnly: true,
+    weaponKind: "melee",
+    hands: "to_be_defined",
+    combatTuning: "to_be_defined",
+    runtimeStatus: "planned_weapon_definition",
+    craftable: true,
+    craftingIngredient: false,
+    baseConstructionIngredient: false,
+    stationUpgradeIngredient: false,
+    iconStatus: "awaiting_implementation",
+    tradeValue: null,
+    scrappable: false,
+  },
+  "bad intentions": {
+    description: "Whatever this used to be, someone rebuilt it with Bad Intentions.",
+    rarity: "to_be_defined",
+    stackLimit: 1,
+    spawnQuantity: Object.freeze({ min: 1, max: 1 }),
+    usable: false,
+    spawnArchitecture: "to_be_defined",
+    weaponOnly: true,
+    weaponKind: "melee",
+    hands: "to_be_defined",
+    combatTuning: "to_be_defined",
+    runtimeStatus: "planned_weapon_definition",
+    craftable: true,
+    craftingIngredient: false,
+    baseConstructionIngredient: false,
+    stationUpgradeIngredient: false,
+    iconStatus: "awaiting_implementation",
+    tradeValue: null,
+    scrappable: false,
+  },
+  "bat-tery assault": {
+    description: "A charged-up answer to close-range problems. Batteries were included.",
+    rarity: "to_be_defined",
+    stackLimit: 1,
+    spawnQuantity: Object.freeze({ min: 1, max: 1 }),
+    usable: false,
+    spawnArchitecture: "to_be_defined",
+    weaponOnly: true,
+    weaponKind: "melee",
+    hands: "to_be_defined",
+    combatTuning: "to_be_defined",
+    runtimeStatus: "planned_weapon_definition",
+    craftable: true,
+    craftingIngredient: false,
+    baseConstructionIngredient: false,
+    stationUpgradeIngredient: false,
+    iconStatus: "awaiting_implementation",
+    tradeValue: null,
+    scrappable: false,
+  },
+  "hammer time": {
+    description: "A hard-hitting reminder that every problem eventually becomes a nail.",
+    rarity: "to_be_defined",
+    stackLimit: 1,
+    spawnQuantity: Object.freeze({ min: 1, max: 1 }),
+    usable: false,
+    spawnArchitecture: "to_be_defined",
+    weaponOnly: true,
+    weaponKind: "melee",
+    hands: "to_be_defined",
+    combatTuning: "to_be_defined",
+    runtimeStatus: "planned_weapon_definition",
+    craftable: true,
+    craftingIngredient: false,
+    baseConstructionIngredient: false,
+    stationUpgradeIngredient: false,
+    iconStatus: "awaiting_implementation",
+    tradeValue: null,
+    scrappable: false,
+  },
+  "gear head": {
+    description: "A mechanical masterpiece made for rearranging more than machinery.",
+    rarity: "to_be_defined",
+    stackLimit: 1,
+    spawnQuantity: Object.freeze({ min: 1, max: 1 }),
+    usable: false,
+    spawnArchitecture: "to_be_defined",
+    weaponOnly: true,
+    weaponKind: "melee",
+    hands: "to_be_defined",
+    combatTuning: "to_be_defined",
+    runtimeStatus: "planned_weapon_definition",
+    craftable: true,
+    craftingIngredient: false,
+    baseConstructionIngredient: false,
+    stationUpgradeIngredient: false,
+    iconStatus: "awaiting_implementation",
+    tradeValue: null,
+    scrappable: false,
+  },
+  "open invitation": makePlannedCraftableMeleeDetails(
+    "The door was locked. This is the less polite way to knock."
+  ),
+  "pry and prejudice": makePlannedCraftableMeleeDetails(
+    "First impressions matter. This one leaves a lasting mark."
+  ),
+  "axe-ident": makePlannedCraftableMeleeDetails(
+    "There are no accidents. Only poorly aimed Axe-idents."
+  ),
+  "split decision": makePlannedCraftableMeleeDetails(
+    "For those difficult choices best settled with a clean split."
+  ),
+  kindness: makePlannedCraftableMeleeDetails(
+    "A little Kindness goes a long way. Usually straight through."
+  ),
+  "little problem": makePlannedCraftableMeleeDetails(
+    "A compact solution for problems that refuse to stay little."
+  ),
+  "chop-chop": makePlannedCraftableMeleeDetails(
+    "No time to waste. Chop-Chop."
+  ),
+  "minor adjustment": makePlannedCraftableMeleeDetails(
+    "For situations that need one small, forceful correction."
+  ),
+  "gentle reminder": makePlannedCraftableMeleeDetails(
+    "A Gentle Reminder that personal space still matters."
+  ),
+  "oni giri": makePlannedCraftableMeleeDetails(
+    "A slice of bad fortune, served cold."
+  ),
+  raiden: makePlannedCraftableMeleeDetails(
+    "Thunder never asks permission before it strikes."
+  ),
+  cerberus: makePlannedCraftableMeleeDetails(
+    "Three times the bite. None of the barking."
+  ),
+  "point taken": makePlannedCraftableMeleeDetails(
+    "Some arguments only need one sharp counterpoint."
+  ),
+  "no offense": makePlannedCraftableMeleeDetails(
+    "No Offense intended. Plenty delivered."
+  ),
+  "exit wound": makePlannedCraftableMeleeDetails(
+    "The entrance is optional. The Exit Wound is not."
+  ),
+  "second helping": makePlannedCraftableMeleeDetails(
+    "Because the first serving was clearly not enough."
+  ),
+  "under pressure": makePlannedCraftableMeleeDetails(
+    "Built to perform when everything else is coming apart."
+  ),
+  "pipe dream": makePlannedCraftableMeleeDetails(
+    "A plumber's nightmare and a survivor's dream."
+  ),
+  "last light": makePlannedCraftableWeaponDetails(
+    "When the Last Light goes out, make sure you are not alone in the dark."
+  ),
+  "quiet hours": makePlannedCraftableWeaponDetails(
+    "Quiet Hours are strictly enforced."
+  ),
+  "broken promise": makePlannedCraftableWeaponDetails(
+    "Someone promised this would never be necessary. Someone was wrong."
+  ),
+  "raccoons bite": makePlannedCraftableWeaponDetails(
+    "Small, vicious, and always reaching for something it should not have."
+  ),
+  "escape tool": makePlannedCraftableWeaponDetails(
+    "Every room has an exit if you bring the right tool."
+  ),
+  "mercy seat": makePlannedCraftableWeaponDetails(
+    "Take a seat. Mercy will be with you shortly."
+  ),
+  "old habit": makePlannedCraftableWeaponDetails(
+    "A battered military-surplus M1911 rebuilt from components of several decades, with mismatched wood and road-sign grip panels and ‘1911?’ carved into its slide."
+  ),
+  "the peacemaker": makePlannedCraftableWeaponDetails(
+    "A heavy M1911 with a drilled steel-pipe muzzle brake, worn white cloth grip wrap, flattened peace pendant, and ‘PEACE’ carved into the slide."
+  ),
+  "one more round": makePlannedCraftableWeaponDetails(
+    "A severely worn M1911 with an oversized magazine welded from two extended magazine bodies and wrapped in tape."
+  ),
+  "your rights": makePlannedCraftableWeaponDetails(
+    "You have the right to remain very, very still."
+  ),
+  "burn notice": makePlannedCraftableWeaponDetails(
+    "Official notice that something is about to get considerably warmer."
+  ),
+  "hand cannon": makePlannedCraftableWeaponDetails(
+    "Subtlety was considered and immediately rejected."
+  ),
+  "last resort": makePlannedCraftableWeaponDetails(
+    "Not the first choice. Usually the final one."
+  ),
+  jager: makePlannedCraftableWeaponDetails(
+    "The hunter has arrived. The prey just has not accepted it yet."
+  ),
+  "double-tap": makePlannedCraftableWeaponDetails(
+    "Once for certainty. Twice for good measure."
+  ),
+  "panic button": makePlannedCraftableWeaponDetails(
+    "Press only in an emergency. Every day qualifies now."
+  ),
+  "chain reaction": makePlannedCraftableWeaponDetails(
+    "One bad decision connected to another."
+  ),
+  "blackout protocol": makePlannedCraftableWeaponDetails(
+    "When the lights disappear, follow protocol."
+  ),
+  "borrowed authority": makePlannedCraftableWeaponDetails(
+    "Authority is easier to borrow when nobody is left to object."
+  ),
+  "memento mori": makePlannedCraftableWeaponDetails(
+    "A practical reminder that everyone is mortal."
+  ),
+  "crowd control": makePlannedCraftableWeaponDetails(
+    "For gatherings that have outlived their welcome."
+  ),
+  "rush hour": makePlannedCraftableWeaponDetails(
+    "Traffic clears quickly when Rush Hour begins."
+  ),
+  shredder: makePlannedCraftableWeaponDetails(
+    "Turns stubborn problems into smaller, more manageable pieces."
+  ),
+  "best friend": makePlannedCraftableWeaponDetails(
+    "Loyal, dependable, and always ready for a walk."
+  ),
+  "quiet time": makePlannedCraftableWeaponDetails(
+    "A little Quiet Time can solve a surprising number of problems."
+  ),
+  "dragons breath": makePlannedCraftableWeaponDetails(
+    "The dragon is gone. Its breath remains."
+  ),
+  flatline: makePlannedCraftableWeaponDetails(
+    "A white medical-response Vector with stained compression bandages around the stock and a dismantled heart-monitor display built into its side. Green lights pulse while firing and flatten when empty."
+  ),
+  "full control": makePlannedCraftableWeaponDetails(
+    "A 1990s arcade-themed Vector with red-dot sight, ergonomic foregrip, extended magazine, and brightly customized controls."
+  ),
+  "kill switch": makePlannedCraftableWeaponDetails(
+    "A weathered taped Vector with a combined extended quick-eject magazine system and a red switch controlling its side-mounted flashlight."
+  ),
+  "meta breaker": makePlannedCraftableWeaponDetails(
+    "Built to break rules nobody remembers agreeing to."
+  ),
+  "black box": makePlannedCraftableWeaponDetails(
+    "Whatever happens next, the Black Box will not explain it."
+  ),
+  "green flu": makePlannedCraftableWeaponDetails(
+    "Symptoms may include panic, poor judgment, and sudden silence."
+  ),
+  "nuclear winter": makePlannedCraftableWeaponDetails(
+    "The forecast calls for darkness with a chance of fallout."
+  ),
+  "red october": makePlannedCraftableWeaponDetails(
+    "Something cold, silent, and dangerous is moving beneath the surface."
+  ),
+  "metro line": makePlannedCraftableWeaponDetails(
+    "The fastest route from one bad stop to the next."
+  ),
+  "walking terror": makePlannedCraftableWeaponDetails(
+    "Terror learned to walk. This taught it to keep its distance."
+  ),
+  "iron curtain": makePlannedCraftableWeaponDetails(
+    "Heavy, uncompromising, and closed to further discussion."
+  ),
+  confidence: makePlannedCraftableWeaponDetails(
+    "Confidence is knowing the next shot will settle the argument."
+  ),
+  "the deer hunter": makePlannedCraftableWeaponDetails(
+    "The woods are quiet. The hunter is not."
+  ),
+  "ol painless": makePlannedCraftableWeaponDetails(
+    "It never hurts to be prepared. The same cannot be said for the target."
+  ),
+  "last stand": makePlannedCraftableWeaponDetails(
+    "If this is the Last Stand, make it one worth remembering."
+  ),
+  "the punisher": makePlannedCraftableWeaponDetails(
+    "Judgment was quick. The punishment arrives faster."
+  ),
+  saw: {
+    description: "A sturdy hand saw. Still useful when the power grid is not.",
+    rarity: "to_be_defined",
+    stackLimit: 1,
+    spawnQuantity: Object.freeze({ min: 1, max: 1 }),
+    usable: false,
+    spawnArchitecture: "to_be_defined",
+    craftingIngredient: true,
+    craftingRole: "reusable_tool",
+    consumedByCrafting: false,
+    baseConstructionIngredient: false,
+    stationUpgradeIngredient: false,
+    stationUses: "to_be_defined",
+    recipes: "to_be_defined",
+    iconStatus: "awaiting_implementation",
+    tradeValue: null,
+    scrappable: false,
+  },
+  "welding torch": {
+    description: "A portable welding torch for joining metal and starting questionable ideas.",
+    rarity: "to_be_defined",
+    stackLimit: 1,
+    spawnQuantity: Object.freeze({ min: 1, max: 1 }),
+    usable: false,
+    spawnArchitecture: "to_be_defined",
+    craftingIngredient: true,
+    craftingRole: "reusable_tool",
+    consumedByCrafting: false,
+    baseConstructionIngredient: false,
+    stationUpgradeIngredient: false,
+    stationUses: "to_be_defined",
+    recipes: "to_be_defined",
+    iconStatus: "awaiting_implementation",
+    tradeValue: null,
+    scrappable: false,
+  },
+  "metal chain": {
+    description: "A length of heavy metal chain. Strong links for stronger ideas.",
+    rarity: "to_be_defined",
+    stackLimit: 1,
+    spawnQuantity: Object.freeze({ min: 1, max: 1 }),
+    usable: false,
+    spawnArchitecture: "to_be_defined",
+    craftingIngredient: true,
+    craftingRole: "consumable_ingredient",
+    consumedByCrafting: true,
+    baseConstructionIngredient: false,
+    stationUpgradeIngredient: false,
+    stationUses: "to_be_defined",
+    recipes: "to_be_defined",
+    iconStatus: "awaiting_implementation",
+    tradeValue: null,
+    scrappable: false,
+  },
   "goldenrod flowers": {
     description: "Bright yellow medicinal flowers. Pretty enough to pick, useful enough to keep.",
     rarity: "to_be_defined",

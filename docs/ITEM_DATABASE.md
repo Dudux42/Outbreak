@@ -4,9 +4,9 @@ This document is the human-readable inventory of Outbreak's canonical item datab
 
 Current registry totals:
 
-- 245 canonical item records.
+- 388 canonical item records.
 - 40 compatibility aliases.
-- 17 loot tags, including the cross-category `universal` tag and the dedicated `recipe` tag.
+- 18 loot tags, including the cross-category `universal` tag and the dedicated `recipe` and `crafted_weapon` tags.
 - 32 firearm attachments.
 
 An item may appear in more than one category when its loot tags intentionally overlap. The lists below preserve player-facing display names rather than internal IDs.
@@ -38,7 +38,7 @@ An item may appear in more than one category when its loot tags intentionally ov
 
 ### Explicitly Planned
 
-- Complete crafting definitions, including ingredient quantities, tools, station levels, and production times. Recipe-item acquisition rules also remain a dedicated future pass.
+- Crafting execution, production timing, and Recipe-item acquisition rules. Approved ingredient quantities, reusable tools, station levels, outputs, and repair formulas are specified in [`RECIPES.md`](RECIPES.md).
 - Spawn architecture, container pools, location weighting, rarity weighting, exclusions, and seeded placement. A dedicated spawning-system agent will own this work.
 - Map- and room-specific keys. Keys must feel like meaningful discoveries and rewards, not generic progress blockers. Their identities, doors, placement, and rewards will be defined with individual maps and room graphs.
 - Armor-repair materials, costs, station requirements, and repair limits.
@@ -141,6 +141,9 @@ Medical Herbs and First Aid Spray are craftable in future recipe data. Vitalis i
 - Awl
 - Multitool
 - Wi-Fi Camera
+- Saw
+- Welding Torch
+- Metal Chain
 
 Tool reusability and ingredient intent are recorded per item. Exact recipes, construction-room requirements, and upgrade costs remain planned.
 
@@ -215,8 +218,83 @@ These resources are intended primarily for future Medical Station recipes and up
 - Herbal Poultice Recipe
 - Tourniquet Recipe
 - Surgical Treatment Kit Recipe
+- 9mm Recipe
+- .45 ACP Recipe
+- RT 85 Recipe
+- .44 Magnum Recipe
+- 20 Gauge Recipe
+- 12 Gauge Recipe
+- 5.56x45 Recipe
+- 7.62x39 Recipe
+- .308 Recipe
+- 7.62x51 Recipe
+- Nailbiter Recipe
+- Bad Intentions Recipe
+- Bat-tery Assault Recipe
+- Hammer Time Recipe
+- Gear Head Recipe
+- Open Invitation Recipe
+- Pry and Prejudice Recipe
+- Axe-ident Recipe
+- Split Decision Recipe
+- Kindness Recipe
+- Little Problem Recipe
+- Chop-Chop Recipe
+- Minor Adjustment Recipe
+- Gentle Reminder Recipe
+- Oni Giri Recipe
+- Raiden Recipe
+- Cerberus Recipe
+- Point Taken Recipe
+- No Offense Recipe
+- Exit Wound Recipe
+- Second Helping Recipe
+- Under Pressure Recipe
+- Pipe Dream Recipe
+- Last Light Recipe
+- Quiet Hours Recipe
+- Broken Promise Recipe
+- Raccoon’s Bite Recipe
+- Escape Tool Recipe
+- Mercy Seat Recipe
+- Old Habit Recipe
+- The Peacemaker Recipe
+- One More Round Recipe
+- Your Rights Recipe
+- Burn Notice Recipe
+- Hand Cannon Recipe
+- Last Resort Recipe
+- Jäger Recipe
+- Double-Tap Recipe
+- Panic Button Recipe
+- Chain Reaction Recipe
+- Blackout Protocol Recipe
+- Borrowed Authority Recipe
+- Memento Mori Recipe
+- Crowd Control Recipe
+- Rush Hour Recipe
+- Shredder Recipe
+- Best Friend Recipe
+- Quiet Time Recipe
+- Dragon’s Breath Recipe
+- Flatline Recipe
+- Full Control Recipe
+- Kill Switch Recipe
+- Meta Breaker Recipe
+- Black Box Recipe
+- Green Flu Recipe
+- Nuclear Winter Recipe
+- Red October Recipe
+- Metro Line Recipe
+- Walking Terror Recipe
+- Iron Curtain Recipe
+- Confidence Recipe
+- The Deer Hunter Recipe
+- Ol’ Painless Recipe
+- Last Stand Recipe
+- The Punisher Recipe
 
-Recipe items are automatically consumed when the carrying survivor returns successfully to the safehouse. The first copy permanently unlocks its linked craft and opens a notification naming the station. Duplicate copies are also consumed but do not unlock the same craft twice. All current recipe items unlock their corresponding craft at the Medical Unit; `Saline Solution Recipe` unlocks the existing `Bottle of Saline Solution` output. Ingredient quantities, tools, station-level requirements, production times, and acquisition methods remain to be defined.
+Recipe items are automatically consumed when the carrying survivor returns successfully to the safehouse. The first copy permanently unlocks its linked craft and opens a notification naming the station. Duplicate copies are also consumed but do not unlock the same craft twice. Medical recipe items unlock their corresponding craft at the Medical Unit; `Saline Solution Recipe` unlocks the existing `Bottle of Saline Solution` output. Ammunition recipe items and all sixty-five named weapon recipe items unlock their matching crafts at the Workbench. Approved ingredient quantities, reusable tools, station levels, outputs, and repair formulas are specified in [`RECIPES.md`](RECIPES.md); crafting execution, production timing, acquisition methods, and the combat parameters of the newest forty-two crafted weapons remain to be implemented or defined.
 
 ## General Resources
 
@@ -250,7 +328,7 @@ Calculator and Walkie-Talkie intentionally overlap the Technical and General cat
 - Rifle Casing
 - Assault Rifle Casing
 
-Ammunition and weapon crafting are planned. Recipe quantities and station/tool requirements are not yet authoritative.
+Ammunition and weapon crafting execution is planned. Approved recipe quantities and station/tool requirements are authoritative in [`RECIPES.md`](RECIPES.md).
 
 ## Collectibles
 
@@ -296,8 +374,78 @@ Collectibles currently have no direct gameplay effect, crafting use, trade value
 - Combat Knife
 - Kitchen Knife
 - Pipe Wrench
+- Nailbiter
+- Bad Intentions
+- Bat-tery Assault
+- Hammer Time
+- Gear Head
+- Open Invitation
+- Pry and Prejudice
+- Axe-ident
+- Split Decision
+- Kindness
+- Little Problem
+- Chop-Chop
+- Minor Adjustment
+- Gentle Reminder
+- Oni Giri
+- Raiden
+- Cerberus
+- Point Taken
+- No Offense
+- Exit Wound
+- Second Helping
+- Under Pressure
+- Pipe Dream
 
-Weapon roles and handedness are recorded. Final combat values and melee-attachment plans belong to the dedicated combat pass.
+Weapon roles and handedness are recorded for the existing melee roster. The twenty-three named craftable melee weapons beginning with Nailbiter and ending with Pipe Dream have undefined handedness and combat values reserved for the dedicated combat pass. Final melee-attachment plans also belong to that pass.
+
+## Crafted Weapons — Class To Be Defined
+
+- Last Light
+- Quiet Hours
+- Broken Promise
+- Raccoon’s Bite
+- Escape Tool
+- Mercy Seat
+- Old Habit
+- The Peacemaker
+- One More Round
+- Your Rights
+- Burn Notice
+- Hand Cannon
+- Last Resort
+- Jäger
+- Double-Tap
+- Panic Button
+- Chain Reaction
+- Blackout Protocol
+- Borrowed Authority
+- Memento Mori
+- Crowd Control
+- Rush Hour
+- Shredder
+- Best Friend
+- Quiet Time
+- Dragon’s Breath
+- Flatline
+- Full Control
+- Kill Switch
+- Meta Breaker
+- Black Box
+- Green Flu
+- Nuclear Winter
+- Red October
+- Metro Line
+- Walking Terror
+- Iron Curtain
+- Confidence
+- The Deer Hunter
+- Ol’ Painless
+- Last Stand
+- The Punisher
+
+These are planned craftable weapons whose melee/firearm class, handedness, ammunition behavior, and combat values have not yet been assigned. Their physical recipe items already use the standard safehouse-return unlock flow and target the Workbench.
 
 ## Firearms
 

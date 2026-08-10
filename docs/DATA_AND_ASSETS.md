@@ -377,3 +377,33 @@ Approved `Polished Bolt` now uses `polished_bolt_v1.png`, a bright polished silv
 Approved `Extended M1A Magazine` now uses `extended_m1a_magazine_v1.png`, a long dark blued-steel M1A magazine with reinforced ribs, witness dimples, feed lips, and one visible pointed 7.62 projectile at the top. It is attached in the runtime texture mapping. The icon audit now reports no remaining placeholder-icon items in the item catalog.
 
 Approved `Medical Recipe` now uses `medical_recipe_v3.png`, a single dark muted-green rough paper sheet with thick generic black-ink writing and no readable text or diagrams. It is attached to all ten current medical recipe items. Recipe icon categories are standardized as: Medical (green), Weapon (blue), Ammo (tan), and Premium (red); future categories will reuse this shared sheet design with only the category color changed.
+
+Approved `Empty First-Aid Spray` now uses `empty_first_aid_spray_v1.png`, a transparent 128x128 rendering of the approved First Aid Spray canister with its lid removed and placed beside the empty can. It is attached in the runtime texture mapping. The next medical ingredient candidates are `Goldenrod Flowers`, `Broadleaf Plantain Leaves`, and `Empty Auto-Injector`.
+
+Approved `Goldenrod Flowers` now uses `goldenrod_flowers_v1.png`, a small loose bundle of yellow flower clusters with muted green stems and leaves, rendered as a transparent 128x128 inventory icon. It is attached in the runtime texture mapping. The next medical ingredient candidates are `Broadleaf Plantain Leaves`, `Empty Auto-Injector`, and `Herbal Poultice`.
+
+Approved `Broadleaf Plantain Leaves` now uses `broadleaf_plantain_leaves_v2.png`, a small bundle of thinner vivid-green leaves with clear central veins, rendered as a transparent 128x128 inventory icon. It is attached in the runtime texture mapping. The next medical ingredient candidates are `Empty Auto-Injector`, `Herbal Poultice`, and `Tourniquet`.
+
+Approved `Empty Auto-Injector` now uses `empty_auto_injector_v1.png`, a slim white-and-gray automatic injector with a dark teal end cap and visibly empty inspection window, rendered as a transparent 128x128 inventory icon. It is attached in the runtime texture mapping. The next medical craft candidates are `Herbal Poultice`, `Tourniquet`, and `Surgical Treatment Kit`.
+
+Approved `Herbal Poultice` now uses `herbal_poultice_v5.png`, an original pixel-art icon showing one mixed mound of green and yellow chopped herbs spread across a small sheet of rough parchment, rendered as a transparent 128x128 inventory icon. It is attached in the runtime texture mapping. The next medical craft candidates are `Tourniquet`, `Surgical Treatment Kit`, and `9mm Recipe`.
+
+Approved `Tourniquet` now uses `tourniquet_v1.png`, a compact dark olive emergency compression strap with a black buckle and rigid windlass rod, rendered as a transparent 128x128 inventory icon. It is attached in the runtime texture mapping. The next medical craft candidate is `Surgical Treatment Kit`, followed by the ammo recipe sequence.
+
+Approved `Surgical Treatment Kit` now uses `surgical_treatment_kit_v1.png`, an opened dark teal field case containing gauze, suture supplies, a scalpel, forceps, and other compact surgical tools with restrained red medical accents, rendered as a transparent 128x128 inventory icon. It is attached in the runtime texture mapping. Ammo recipes will share one red variant of the established rough-paper recipe sheet; the first candidate is `9mm Recipe`.
+
+Approved `Ammo Recipe` now uses `ammo_recipe_v1.png`, the exact established rough-paper recipe-sheet composition recolored to a worn deep red while preserving the thick generic black-ink writing and transparent corners. It is attached to all ten ammo recipe items (`9mm`, `.45 ACP`, `RT 85`, `.44 Magnum`, `20 Gauge`, `12 Gauge`, `5.56x45`, `7.62x39`, `.308`, and `7.62x51`). The next recipe category is Weapon (blue), beginning with `Nailbiter Recipe`.
+
+Approved `Weapon Recipe` now uses `weapon_recipe_v1.png`, the exact established rough-paper recipe-sheet composition recolored to a muted dark blue while preserving the thick generic black-ink writing and transparent corners. It is attached to all sixty-five weapon recipe items, from `Nailbiter Recipe` through `The Punisher Recipe`. No additional recipe categories are currently present in the item database.
+
+Approved `Nailbiter` now uses `nailbiter_v1.png`, a crude weathered wooden club with a dark wrapped grip and several large rusty nails driven through the striking end, rendered as a transparent 128x128 weapon icon. It is attached in the runtime texture mapping. The next weapon candidates are `Bad Intentions`, `Bat-tery Assault`, and `Hammer Time`.
+
+Approved `Bad Intentions` now uses `bad_intentions_v2.png`, a worn wooden baseball bat with two short knives securely bolted along one side, black bindings, and a wrapped grip, rendered as a transparent 128x128 weapon icon. The earlier machete candidate `bad_intentions_v1.png` remains saved but unattached for possible future use. The next weapon candidates are `Bat-tery Assault`, `Hammer Time`, and `Gear Head`.
+
+Approved `Bat-tery Assault` now uses `battery_assault_v1.png`, a worn wooden baseball bat carrying two AA batteries in a metal bracket with continuous red-and-black wires running to metal contacts at the striking end, rendered as a transparent 128x128 weapon icon. It is attached in the runtime texture mapping. The next weapon candidates are `Hammer Time`, `Gear Head`, and `Open Invitation`.
+
+Approved `Hammer Time` now uses `hammer_time_v1.png`, a sturdy wooden-handled hammer with a dark steel head, two AA batteries mounted around the head, and wires wrapped continuously around the assembly, rendered as a transparent 128x128 weapon icon. It is attached in the runtime texture mapping. The next weapon candidates are `Gear Head`, `Open Invitation`, and `Pry and Prejudice`.
+
+Approved `Gear Head` now uses `gear_head_v1.png`, a regular wooden-handled steel hammer with one worn metal gear mounted to each side of the hammerhead using brackets and bolts, rendered as a transparent 128x128 weapon icon. It is attached in the runtime texture mapping. The next weapon candidates are `Open Invitation`, `Pry and Prejudice`, and `Axe-ident`.
+
+Approved `Open Invitation` now uses `open_invitation_v5.png`, the approved red crowbar silhouette fitted with one straight combat knife at the outer end of its curved claw, secured by a dark duct-tape wrap and two visible bolts, rendered as a transparent 128x128 weapon icon. It is attached in the runtime texture mapping. The next weapon candidates are `Pry and Prejudice`, `Axe-ident`, and `Split Decision`.

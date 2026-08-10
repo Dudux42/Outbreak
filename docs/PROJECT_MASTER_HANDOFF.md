@@ -1,6 +1,6 @@
 # Outbreak Project Master Handoff
 
-> Comprehensive project snapshot audited against the browser runtime and repository documentation on 2026-08-02.
+> Comprehensive project snapshot audited against the browser runtime and repository documentation on 2026-08-10.
 
 This is the single starting point for future agents and contributors. It consolidates the product definition, implemented behavior, architecture, data contracts, content pipelines, art rules, testing expectations, migration status, known risks, and current work boundary. It is intentionally detailed.
 
@@ -40,7 +40,7 @@ The browser build is the only playable source of truth. The Godot directory cont
 | Future survivor art identities | Lara, Jasper, Bianca, Rachel, Davis have approved SOUTH reference sprites but are not playable |
 | Playable mission locations | 7 (including Combat Test Range) |
 | Handcrafted house layouts | 4 |
-| Item database | 245 canonical records plus 40 aliases |
+| Item database | 388 canonical records plus 40 aliases |
 | Independent survivor loadouts | Implemented |
 | Firearm, melee, zombie, door, loot, extraction, and corpse loops | Implemented prototype systems |
 | Save/load | Local browser save, version 3; loading always returns to the safehouse |
@@ -162,7 +162,7 @@ The safehouse is a navigable Three.js scene and the persistent hub. Survivors ap
 | Rest Station | Survivor selection and loadout presentation. |
 | Map / Map Table | Location selection and mission launch. |
 | Intel Center | Save interaction, Intel progression, and location unlock framing. |
-| Workbench | Upgrade/resource UI and planned crafting/repair framing. |
+| Workbench | Upgrade/resource UI, unlocked ammunition-craft listing, and planned crafting/repair execution. |
 | Medical Unit | Upgrade/resource UI, treatment framing, and unlocked medical-craft listing. |
 | Command Center | Hub/presentation role for future survivor and mission management. |
 | Kitchen/Bathroom | Environmental safehouse systems with deeper survival functions planned. |
@@ -275,14 +275,14 @@ Two item layers are active:
 
 The layers are merged. Database values can override runtime values where the merge permits. Adding a database field does not make a system functional. Gameplay behavior must be implemented and verified in the runtime layer.
 
-The audited database contains 245 canonical item records, 40 aliases, and 17 loot tags. The current expansion includes named firearm and ammunition families, healing-item metadata, recipe unlock items, and functional firearm-attachment definitions while retaining intentional compatibility aliases:
+The audited database contains 388 canonical item records, 40 aliases, and 18 loot tags. The current expansion includes named firearm and ammunition families, healing-item metadata, recipe unlock items, planned crafted weapons, and functional firearm-attachment definitions while retaining intentional compatibility aliases:
 
 The complete category-by-category roster is maintained in [`ITEM_DATABASE.md`](ITEM_DATABASE.md); do not duplicate or manually reconstruct that list elsewhere.
 
 - Firearms: Glock 17, Beretta M9, M1911, Taurus 38, Model 629, Mossberg 500, Benelli M4, Uzi, H&K MP5, Kriss Vector, M4A1, AKM, Winchester Model 70, and Springfield M1A.
 - Ammunition: 9mm, .45 ACP, RT 85, .44 Magnum, 20 Gauge, 12 Gauge, 5.56x45, 7.62x39, .308, and 7.62x51.
 - HP-restoring medical items: Medical Herbs, First Aid Spray, Vitalis, Trauma Bag, and Surgical Treatment Kit. Their healing values and charge counts are authoritative data, and First Aid Spray becomes Empty First-Aid Spray when depleted. Charge persistence, multi-use runtime behavior, depleted-item conversion, and selected-condition treatment remain planned.
-- Recipe progression: returning successfully with a recipe item consumes it, persists the linked craft unlock, and displays a station-specific notification. Ten medical recipe items now unlock their corresponding Medical Unit crafts; actual ingredient and production rules remain undefined.
+- Recipe progression: returning successfully with a recipe item consumes it, persists the linked craft unlock, and displays a station-specific notification. Ten medical recipes target the Medical Unit; ten ammunition recipes and sixty-five named weapon recipes target the Workbench. Approved ingredients, reusable tools, station levels, outputs, and repair formulas are specified in [`RECIPES.md`](RECIPES.md), while runtime crafting execution and production timing remain planned. The newest forty-two crafted weapons also have intentionally undefined combat classes, handedness, ammunition behavior, and final tuning. Saw and Welding Torch are reusable hardware tools/resources; Metal Chain is a consumable hardware crafting resource.
 - Firearm attachments: three sights; handgun, assault-rifle, M1A, and SMG magazine upgrades; one drum magazine; dedicated revolver attachments; three universal muzzle devices and one shotgun-exclusive Choke; two buttstocks; three tactical modules; shotgun support parts; rifle cheek, recoil, and bolt parts; and three foregrips. Compatibility, bounded modifier composition, capacity/reload changes, tactical lights, lasers, and combat effects are implemented; rarity placement and equipped-model visuals remain planned.
 - Retired generic Handgun, Shotgun, Submachine Gun, and Assault Rifle items and their old ammunition labels are not live aliases or catalog entries. Older saves convert those names to their canonical replacements during load. Rifle and Rifle Ammo remain intentional compatibility aliases for Winchester Model 70 and .308.
 

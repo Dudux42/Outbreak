@@ -2,7 +2,7 @@
 
 This document is the reality check for the current repository. It separates working systems from partial scaffolding and future design.
 
-Last documentation audit: 2026-08-02.
+Last documentation audit: 2026-08-10.
 
 For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PROJECT_MASTER_HANDOFF.md).
 
@@ -49,8 +49,8 @@ For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PRO
 - Quickbar slots `1` through `9`, with primary/sidearm ownership for slots `1` and `2`.
 - Item box stash transfers.
 - Loot-container search delay, per-item reveal, and transfers.
-- Item database with 245 canonical records, 40 compatibility aliases, 17 loot tags, named firearm/ammunition families, recipe unlock items, planned firearm attachments, runtime weapon/armor/backpack stats, and extended metadata for food, drinks, medical supplies, tools, electronics, collectibles, and construction resources.
-- Successful safehouse returns automatically consume carried recipe items, persist newly unlocked crafts, and show a station-specific unlock notification. Ten physical medical recipe items currently unlock their corresponding crafts at the Medical Unit.
+- Item database with 388 canonical records, 40 compatibility aliases, 18 loot tags, named firearm/ammunition families, recipe unlock items, planned firearm attachments, runtime weapon/armor/backpack stats, and extended metadata for food, drinks, medical supplies, tools, electronics, collectibles, and construction resources.
+- Successful safehouse returns automatically consume carried recipe items, persist newly unlocked crafts, and show a station-specific unlock notification. Ten physical medical recipes target the Medical Unit, while ten ammunition recipes and sixty-five planned weapon recipes target the Workbench. The newest forty-two crafted weapons intentionally have no assigned combat class or final combat parameters yet.
 - Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, construction-resource, technical-electronics, weapon-component, general-supply, and collectible icons through Sci-Fi VHS.
 - Newly attached collectible icons for Dog Statue, Tiger Statue, Teddy Bear, Cloth Doll, Toy Car, Wristwatch, Police Badge, Table Clock, Cookbook, and Sci-Fi VHS.
 
@@ -114,7 +114,7 @@ For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PRO
 
 ### Item Metadata and Use Effects
 
-- [`ITEM_DATABASE.md`](ITEM_DATABASE.md) is the complete human-readable roster for all 245 canonical items and their planned-system boundaries.
+- [`ITEM_DATABASE.md`](ITEM_DATABASE.md) is the complete human-readable roster for all 388 canonical items and their planned-system boundaries.
 - `ITEM_DATABASE` includes descriptions, rarity, stack limits, spawn quantities, intended use effects, buffs, returned-container data, exclusions, crafting flags, and tool/resource metadata for the currently detailed item groups.
 - The runtime use action still primarily understands `healHp` from `itemCatalog`.
 - Medical Herbs, First Aid Spray, Vitalis, Trauma Bag, and Surgical Treatment Kit define HP restoration and charge counts in data. First Aid Spray also records its depleted conversion into Empty First-Aid Spray; multi-charge use, charge persistence, depleted-item conversion, and Surgical Treatment Kit condition selection are not yet wired into the runtime.
@@ -127,8 +127,7 @@ For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PRO
 
 - Item Box, Intel, and survivor switching have functional gameplay value.
 - Medical healing and station upgrade costs exist in prototype form.
-- The Medical Unit lists unlocked crafts, but ingredient checks and production are not implemented yet.
-- Workbench crafts are displayed but not a complete crafting system.
+- The Workbench lists unlocked ammunition crafts and the Medical Unit lists unlocked medical crafts, but ingredient checks and production are not implemented yet.
 - Command Center construction/defense functionality is mostly presentation and roadmap.
 - Kitchen and Bathroom have limited prototype actions.
 - Upgrade bonuses are not all connected to their advertised long-term effects.
@@ -167,7 +166,7 @@ For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PRO
 - More survivor sprites for portrait-only future characters.
 - Full food, drink, stamina, injury, infection, and treatment systems.
 - Survivor stats, backgrounds, traits, abilities, and progression.
-- Complete crafting recipes, ingredient quantities, tool requirements, station requirements, production timing, repair, and station upgrade effects.
+- Implement the approved crafting recipes, ingredient consumption, reusable-tool checks, station-level requirements, output production, and repair formulas specified in [`RECIPES.md`](RECIPES.md); production timing and station upgrade effects still require balancing.
 - Dedicated item spawning architecture for location/container pools, weights, rarity, exclusions, and seeded placement.
 - Named map- and room-specific keys tied to exact locks and meaningful rewards.
 - Safehouse room clearing, construction, exterior structures, and fence tiers.

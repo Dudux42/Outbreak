@@ -252,6 +252,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/ammo_recipe_v1.png",
+    "source_path": "assets/items/ammo_recipe_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20683,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/angled_grip_v2.png",
     "source_path": "assets/items/angled_grip_v2.png",
     "category": "item_icon",
@@ -405,6 +414,24 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/bad_intentions_v1.png",
+    "source_path": "assets/items/bad_intentions_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 10368,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/bad_intentions_v2.png",
+    "source_path": "assets/items/bad_intentions_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9645,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/bag_of_chips.png",
     "source_path": "assets/items/bag_of_chips.png",
     "category": "item_icon",
@@ -509,6 +536,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 7645,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/battery_assault_v1.png",
+    "source_path": "assets/items/battery_assault_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9508,
     "width": 128,
     "height": 128
   },
@@ -653,6 +689,24 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 17767,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/broadleaf_plantain_leaves_v1.png",
+    "source_path": "assets/items/broadleaf_plantain_leaves_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 23373,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/broadleaf_plantain_leaves_v2.png",
+    "source_path": "assets/items/broadleaf_plantain_leaves_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 23916,
     "width": 128,
     "height": 128
   },
@@ -1053,6 +1107,24 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/empty_auto_injector_v1.png",
+    "source_path": "assets/items/empty_auto_injector_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 14307,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/empty_first_aid_spray_v1.png",
+    "source_path": "assets/items/empty_first_aid_spray_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18492,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/empty_iv_bag_v2.png",
     "source_path": "assets/items/empty_iv_bag_v2.png",
     "category": "item_icon",
@@ -1287,11 +1359,29 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/gear_head_v1.png",
+    "source_path": "assets/items/gear_head_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11624,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/glock_17_v1.png",
     "source_path": "assets/items/glock_17_v1.png",
     "category": "item_icon",
     "type": "png",
     "bytes": 11062,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/goldenrod_flowers_v1.png",
+    "source_path": "assets/items/goldenrod_flowers_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17770,
     "width": 128,
     "height": 128
   },
@@ -1373,6 +1463,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 9162,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/hammer_time_v1.png",
+    "source_path": "assets/items/hammer_time_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11079,
     "width": 128,
     "height": 128
   },
@@ -1481,6 +1580,51 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 17128,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/herbal_poultice_v1.png",
+    "source_path": "assets/items/herbal_poultice_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17860,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/herbal_poultice_v2.png",
+    "source_path": "assets/items/herbal_poultice_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 18444,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/herbal_poultice_v3.png",
+    "source_path": "assets/items/herbal_poultice_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 15378,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/herbal_poultice_v4.png",
+    "source_path": "assets/items/herbal_poultice_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 24710,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/herbal_poultice_v5.png",
+    "source_path": "assets/items/herbal_poultice_v5.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20672,
     "width": 128,
     "height": 128
   },
@@ -2097,6 +2241,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/nailbiter_v1.png",
+    "source_path": "assets/items/nailbiter_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 11097,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/nails_box_v2.png",
     "source_path": "assets/items/nails_box_v2.png",
     "category": "item_icon",
@@ -2120,6 +2273,51 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 18718,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/open_invitation_v1.png",
+    "source_path": "assets/items/open_invitation_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8883,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/open_invitation_v2.png",
+    "source_path": "assets/items/open_invitation_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8971,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/open_invitation_v3.png",
+    "source_path": "assets/items/open_invitation_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8250,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/open_invitation_v4.png",
+    "source_path": "assets/items/open_invitation_v4.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 9862,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/open_invitation_v5.png",
+    "source_path": "assets/items/open_invitation_v5.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 6949,
     "width": 128,
     "height": 128
   },
@@ -2363,6 +2561,33 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 16263,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/pry_and_prejudice_v1.png",
+    "source_path": "assets/items/pry_and_prejudice_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8313,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/pry_and_prejudice_v2.png",
+    "source_path": "assets/items/pry_and_prejudice_v2.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 7128,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/pry_and_prejudice_v3.png",
+    "source_path": "assets/items/pry_and_prejudice_v3.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 8216,
     "width": 128,
     "height": 128
   },
@@ -2880,6 +3105,15 @@
     "height": 128
   },
   {
+    "path": "res://assets/items/surgical_treatment_kit_v1.png",
+    "source_path": "assets/items/surgical_treatment_kit_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 24163,
+    "width": 128,
+    "height": 128
+  },
+  {
     "path": "res://assets/items/surgical_tubes_v2.png",
     "source_path": "assets/items/surgical_tubes_v2.png",
     "category": "item_icon",
@@ -3002,6 +3236,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 21182,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/tourniquet_v1.png",
+    "source_path": "assets/items/tourniquet_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 17752,
     "width": 128,
     "height": 128
   },
@@ -3182,6 +3425,15 @@
     "category": "item_icon",
     "type": "png",
     "bytes": 19443,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "path": "res://assets/items/weapon_recipe_v1.png",
+    "source_path": "assets/items/weapon_recipe_v1.png",
+    "category": "item_icon",
+    "type": "png",
+    "bytes": 20631,
     "width": 128,
     "height": 128
   },

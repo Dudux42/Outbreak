@@ -92,6 +92,7 @@ There is no automated test suite yet. `npm run build` plus focused browser verif
 - [Current Build](docs/CURRENT_BUILD.md)
 - [Gameplay Systems](docs/GAMEPLAY_SYSTEMS.md)
 - [Item Database Reference](docs/ITEM_DATABASE.md)
+- [Crafting Recipes](docs/RECIPES.md)
 - [Combat System Specification](docs/COMBAT_SYSTEM.md)
 - [Data and Asset Pipeline](docs/DATA_AND_ASSETS.md)
 - [Character Art Direction](docs/ART_DIRECTION.md)
