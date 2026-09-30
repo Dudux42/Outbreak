@@ -3036,6 +3036,10 @@ p {
   width: min(860px, 100%);
 }
 
+.weapon-hud {
+  bottom: 128px;
+}
+
 .item-detail-window__header {
   display: flex;
   align-items: center;
@@ -4157,5 +4161,374 @@ p {
   .settings-menu__body {
     height: calc(100vh - 20px);
     padding: 12px;
+  }
+}
+
+/* Responsive UI audit: keep dense interfaces inside their frame and make their
+   content panes, rather than the page, responsible for scrolling. */
+.inventory-window.inventory-window--reference {
+  overflow: hidden;
+}
+
+.item-detail-window__content {
+  padding-bottom: 48px;
+}
+
+.inventory-window--reference .inventory-layout {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.inventory-window--reference .inventory-pack {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.inventory-window--reference .inventory-pack__header {
+  flex: 0 0 auto;
+}
+
+.inventory-window--reference .inventory-slots,
+.inventory-window--reference .inventory-slots--six {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding-right: 5px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #59605b #090b0a;
+  scrollbar-width: thin;
+}
+
+.item-detail-window--modify {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.weapon-modify-content {
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #59605b #090b0a;
+  scrollbar-width: thin;
+}
+
+.weapon-modify-grid {
+  grid-template-columns: repeat(auto-fit, minmax(138px, 1fr));
+}
+
+.weapon-modify-slot {
+  grid-template-rows: auto minmax(76px, 1fr) auto auto;
+  min-height: 176px;
+}
+
+.weapon-modify-slot-effects {
+  display: flex;
+  align-content: start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3px;
+  min-height: 30px;
+  margin: 4px 0 7px;
+}
+
+.weapon-modify-slot-effects i {
+  padding: 2px 4px;
+  border: 1px solid rgba(117, 185, 133, 0.25);
+  background: rgba(117, 185, 133, 0.07);
+  color: #b9d8bd;
+  font-size: 0.55rem;
+  font-style: normal;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.weapon-modify-inventory > div {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.weapon-modify-inventory {
+  padding-bottom: 34px;
+}
+
+.weapon-modify-inventory button {
+  position: relative;
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: 3px 9px;
+  min-height: 174px;
+  padding: 10px;
+  overflow: hidden;
+  text-transform: none;
+}
+
+.weapon-modify-inventory button img {
+  grid-column: 1;
+  grid-row: 1 / 4;
+  width: 58px;
+  height: 58px;
+}
+
+.weapon-modify-inventory button .weapon-modify-attachment-name {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  color: #eee8d8;
+  font-size: 0.78rem;
+}
+
+.weapon-modify-inventory button .weapon-modify-attachment-slot {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: end;
+  color: #c5a565;
+  font-size: 0.58rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.weapon-modify-attachment-description {
+  display: block;
+  grid-column: 2 / -1;
+  grid-row: 2 / 4;
+  color: #aaa99f;
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.weapon-modify-attachment-effects {
+  display: flex;
+  grid-column: 1 / -1;
+  grid-row: 4;
+  align-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.weapon-modify-attachment-effects b {
+  width: 100%;
+  color: #c5a565;
+  font-size: 0.58rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.weapon-modify-attachment-effects i {
+  padding: 3px 6px;
+  border: 1px solid rgba(117, 185, 133, 0.32);
+  background: rgba(117, 185, 133, 0.08);
+  color: #b9d8bd;
+  font-size: 0.61rem;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+.weapon-modify-inventory button:disabled .weapon-modify-attachment-effects i {
+  border-color: rgba(201, 77, 70, 0.34);
+  background: rgba(201, 77, 70, 0.08);
+  color: #d2aaa5;
+}
+
+.weapon-modify-attachment-action {
+  grid-column: 1 / -1;
+  grid-row: 5;
+  justify-self: end;
+  color: #d9b15f;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1200px) {
+  .base-panel__body[data-station="itemBox"] #basePanelContent {
+    height: auto;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+  }
+
+  .base-panel__body[data-station="itemBox"] .item-box-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    height: auto;
+    overflow: visible;
+  }
+
+  .base-panel__body[data-station="itemBox"] .item-box-stash,
+  .base-panel__body[data-station="itemBox"] .item-box-inventory,
+  .base-panel__body[data-station="itemBox"] .item-box-upgrade {
+    grid-column: 1;
+    grid-row: auto;
+    height: auto;
+    overflow: visible;
+  }
+
+  .base-panel__body[data-station="itemBox"] .storage-grid--stash {
+    max-height: min(440px, 52vh);
+    overscroll-behavior: auto;
+  }
+
+  .weapon-modify-summary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-height: 740px) and (min-width: 761px) {
+  .inventory-window--reference .inventory-portrait {
+    height: 220px;
+  }
+
+  .inventory-window--reference .equipment-grid {
+    grid-template-rows: repeat(2, 134px);
+  }
+
+  .inventory-window--reference .equipment-slot {
+    height: 134px;
+  }
+}
+
+@media (max-width: 760px) {
+  .inventory-window.inventory-window--reference {
+    height: calc(100vh - 96px);
+    padding: 6px;
+  }
+
+  .item-detail-window__content {
+    padding-bottom: 48px;
+  }
+
+  .inventory-window--reference .inventory-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(220px, 1fr);
+    gap: 10px;
+    padding-right: 4px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-color: #59605b #090b0a;
+    scrollbar-width: thin;
+  }
+
+  .inventory-window--reference .survivor-preview {
+    grid-template-columns: 108px minmax(0, 1fr);
+    grid-template-rows: auto 108px;
+    gap: 6px 9px;
+    overflow: visible;
+  }
+
+  .inventory-window--reference .survivor-preview h2 {
+    grid-column: 1 / -1;
+  }
+
+  .inventory-window--reference .inventory-portrait {
+    grid-column: 1;
+    grid-row: 2;
+    width: 108px;
+    height: 108px;
+    border-width: 11px;
+    border-image-width: 11px;
+  }
+
+  .inventory-window--reference .survivor-stats {
+    grid-column: 2;
+    grid-row: 2;
+    grid-template-columns: 1fr;
+    align-content: stretch;
+  }
+
+  .inventory-window--reference .equipment-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, 126px);
+    width: 100%;
+  }
+
+  .inventory-window--reference .equipment-slot {
+    width: 100%;
+    height: 126px;
+    border-width: 11px;
+    border-image-width: 11px;
+  }
+
+  .inventory-window--reference .inventory-pack {
+    grid-column: 1;
+    align-self: auto;
+    height: auto;
+    overflow: visible;
+  }
+
+  .inventory-window--reference .inventory-slots,
+  .inventory-window--reference .inventory-slots--six {
+    flex: none;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: 108px;
+    overflow: visible;
+  }
+
+  .inventory-window--reference .inventory-slot {
+    width: 100%;
+    height: 108px;
+    border-width: 10px;
+    border-image-width: 10px;
+  }
+
+  .item-detail-window--modify {
+    width: 100%;
+  }
+
+  .weapon-modify-content {
+    padding: 12px;
+  }
+
+  .weapon-modify-grid,
+  .weapon-modify-inventory > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .weapon-modify-slot {
+    min-height: 154px;
+  }
+
+  .weapon-modify-inventory button {
+    min-height: 166px;
+  }
+}
+
+@media (max-width: 520px) {
+  .base-hud {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .base-hud > div {
+    padding: 8px 10px;
+    font-size: 0.72rem;
+  }
+
+  .weapon-modify-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .weapon-hud {
+    right: 8px;
+    bottom: 66px;
+  }
+
+  .item-detail-window__header {
+    min-height: 54px;
+    padding-left: 12px;
+  }
+
+  .item-detail-window__header h2 {
+    font-size: 0.9rem;
   }
 }

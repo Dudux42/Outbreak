@@ -6607,14 +6607,14 @@
       "melee_weapon"
     ],
     "description": "The name is a warning. The nails are the explanation.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -6626,7 +6626,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/nailbiter_v1.png"
   },
   "bad intentions": {
@@ -6641,14 +6646,14 @@
       "melee_weapon"
     ],
     "description": "Whatever this used to be, someone rebuilt it with Bad Intentions.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -6660,7 +6665,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/bad_intentions_v2.png"
   },
   "bat-tery assault": {
@@ -6675,14 +6685,14 @@
       "melee_weapon"
     ],
     "description": "A charged-up answer to close-range problems. Batteries were included.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -6694,7 +6704,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/battery_assault_v1.png"
   },
   "hammer time": {
@@ -6709,14 +6724,14 @@
       "melee_weapon"
     ],
     "description": "A hard-hitting reminder that every problem eventually becomes a nail.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -6728,7 +6743,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/hammer_time_v1.png"
   },
   "gear head": {
@@ -6743,14 +6763,14 @@
       "melee_weapon"
     ],
     "description": "A mechanical masterpiece made for rearranging more than machinery.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -6762,7 +6782,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/gear_head_v1.png"
   },
   "open invitation": {
@@ -6777,14 +6802,14 @@
       "melee_weapon"
     ],
     "description": "The door was locked. This is the less polite way to knock.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -6796,7 +6821,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/open_invitation_v5.png"
   },
   "pry and prejudice": {
@@ -6811,14 +6841,14 @@
       "melee_weapon"
     ],
     "description": "First impressions matter. This one leaves a lasting mark.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -6830,7 +6860,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "axe-ident": {
@@ -6845,14 +6880,14 @@
       "melee_weapon"
     ],
     "description": "There are no accidents. Only poorly aimed Axe-idents.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -6864,7 +6899,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "split decision": {
@@ -6879,14 +6919,14 @@
       "melee_weapon"
     ],
     "description": "For those difficult choices best settled with a clean split.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -6898,7 +6938,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "kindness": {
@@ -6913,14 +6958,14 @@
       "melee_weapon"
     ],
     "description": "A little Kindness goes a long way. Usually straight through.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -6932,7 +6977,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "little problem": {
@@ -6947,14 +6997,14 @@
       "melee_weapon"
     ],
     "description": "A compact solution for problems that refuse to stay little.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -6966,7 +7016,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "chop-chop": {
@@ -6981,14 +7036,14 @@
       "melee_weapon"
     ],
     "description": "No time to waste. Chop-Chop.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7000,7 +7055,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "minor adjustment": {
@@ -7015,14 +7075,14 @@
       "melee_weapon"
     ],
     "description": "For situations that need one small, forceful correction.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7034,7 +7094,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "gentle reminder": {
@@ -7049,14 +7114,14 @@
       "melee_weapon"
     ],
     "description": "A Gentle Reminder that personal space still matters.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7068,7 +7133,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "oni giri": {
@@ -7083,14 +7153,14 @@
       "melee_weapon"
     ],
     "description": "A slice of bad fortune, served cold.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7102,7 +7172,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "raiden": {
@@ -7117,14 +7192,14 @@
       "melee_weapon"
     ],
     "description": "Thunder never asks permission before it strikes.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7136,7 +7211,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "cerberus": {
@@ -7151,14 +7231,14 @@
       "melee_weapon"
     ],
     "description": "Three times the bite. None of the barking.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7170,7 +7250,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "point taken": {
@@ -7185,14 +7270,14 @@
       "melee_weapon"
     ],
     "description": "Some arguments only need one sharp counterpoint.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7204,7 +7289,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "no offense": {
@@ -7219,14 +7309,14 @@
       "melee_weapon"
     ],
     "description": "No Offense intended. Plenty delivered.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7238,7 +7328,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "exit wound": {
@@ -7253,14 +7348,14 @@
       "melee_weapon"
     ],
     "description": "The entrance is optional. The Exit Wound is not.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7272,7 +7367,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "second helping": {
@@ -7287,14 +7387,14 @@
       "melee_weapon"
     ],
     "description": "Because the first serving was clearly not enough.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7306,7 +7406,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "under pressure": {
@@ -7321,14 +7426,14 @@
       "melee_weapon"
     ],
     "description": "Built to perform when everything else is coming apart.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7340,7 +7445,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "pipe dream": {
@@ -7355,14 +7465,14 @@
       "melee_weapon"
     ],
     "description": "A plumber's nightmare and a survivor's dream.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "hands": "to_be_defined",
     "combatTuning": "to_be_defined",
@@ -7374,7 +7484,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "last light": {
@@ -7388,14 +7503,14 @@
       "crafted_weapon"
     ],
     "description": "When the Last Light goes out, make sure you are not alone in the dark.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7408,7 +7523,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "quiet hours": {
@@ -7422,14 +7542,14 @@
       "crafted_weapon"
     ],
     "description": "Quiet Hours are strictly enforced.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7442,7 +7562,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "broken promise": {
@@ -7456,14 +7581,14 @@
       "crafted_weapon"
     ],
     "description": "Someone promised this would never be necessary. Someone was wrong.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7476,7 +7601,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "raccoons bite": {
@@ -7490,14 +7620,14 @@
       "crafted_weapon"
     ],
     "description": "Small, vicious, and always reaching for something it should not have.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7510,7 +7640,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "escape tool": {
@@ -7524,14 +7659,14 @@
       "crafted_weapon"
     ],
     "description": "Every room has an exit if you bring the right tool.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7544,7 +7679,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "mercy seat": {
@@ -7558,14 +7698,14 @@
       "crafted_weapon"
     ],
     "description": "Take a seat. Mercy will be with you shortly.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7578,7 +7718,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "old habit": {
@@ -7592,14 +7737,14 @@
       "crafted_weapon"
     ],
     "description": "A battered military-surplus M1911 rebuilt from components of several decades, with mismatched wood and road-sign grip panels and ‘1911?’ carved into its slide.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7612,7 +7757,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "the peacemaker": {
@@ -7626,14 +7776,14 @@
       "crafted_weapon"
     ],
     "description": "A heavy M1911 with a drilled steel-pipe muzzle brake, worn white cloth grip wrap, flattened peace pendant, and ‘PEACE’ carved into the slide.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7646,7 +7796,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "one more round": {
@@ -7660,14 +7815,14 @@
       "crafted_weapon"
     ],
     "description": "A severely worn M1911 with an oversized magazine welded from two extended magazine bodies and wrapped in tape.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7680,7 +7835,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "your rights": {
@@ -7694,14 +7854,14 @@
       "crafted_weapon"
     ],
     "description": "You have the right to remain very, very still.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7714,7 +7874,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "burn notice": {
@@ -7728,14 +7893,14 @@
       "crafted_weapon"
     ],
     "description": "Official notice that something is about to get considerably warmer.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7748,7 +7913,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "hand cannon": {
@@ -7762,14 +7932,14 @@
       "crafted_weapon"
     ],
     "description": "Subtlety was considered and immediately rejected.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7782,7 +7952,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "last resort": {
@@ -7796,14 +7971,14 @@
       "crafted_weapon"
     ],
     "description": "Not the first choice. Usually the final one.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7816,7 +7991,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "jager": {
@@ -7830,14 +8010,14 @@
       "crafted_weapon"
     ],
     "description": "The hunter has arrived. The prey just has not accepted it yet.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7850,7 +8030,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "double-tap": {
@@ -7864,14 +8049,14 @@
       "crafted_weapon"
     ],
     "description": "Once for certainty. Twice for good measure.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7884,7 +8069,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "panic button": {
@@ -7898,14 +8088,14 @@
       "crafted_weapon"
     ],
     "description": "Press only in an emergency. Every day qualifies now.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7918,7 +8108,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "chain reaction": {
@@ -7932,14 +8127,14 @@
       "crafted_weapon"
     ],
     "description": "One bad decision connected to another.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7952,7 +8147,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "blackout protocol": {
@@ -7966,14 +8166,14 @@
       "crafted_weapon"
     ],
     "description": "When the lights disappear, follow protocol.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -7986,7 +8186,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "borrowed authority": {
@@ -8000,14 +8205,14 @@
       "crafted_weapon"
     ],
     "description": "Authority is easier to borrow when nobody is left to object.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8020,7 +8225,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "memento mori": {
@@ -8034,14 +8244,14 @@
       "crafted_weapon"
     ],
     "description": "A practical reminder that everyone is mortal.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8054,7 +8264,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "crowd control": {
@@ -8068,14 +8283,14 @@
       "crafted_weapon"
     ],
     "description": "For gatherings that have outlived their welcome.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8088,7 +8303,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "rush hour": {
@@ -8102,14 +8322,14 @@
       "crafted_weapon"
     ],
     "description": "Traffic clears quickly when Rush Hour begins.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8122,7 +8342,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "shredder": {
@@ -8136,14 +8361,14 @@
       "crafted_weapon"
     ],
     "description": "Turns stubborn problems into smaller, more manageable pieces.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8156,7 +8381,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "best friend": {
@@ -8170,14 +8400,14 @@
       "crafted_weapon"
     ],
     "description": "Loyal, dependable, and always ready for a walk.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8190,7 +8420,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "quiet time": {
@@ -8204,14 +8439,14 @@
       "crafted_weapon"
     ],
     "description": "A little Quiet Time can solve a surprising number of problems.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8224,7 +8459,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "dragons breath": {
@@ -8238,14 +8478,14 @@
       "crafted_weapon"
     ],
     "description": "The dragon is gone. Its breath remains.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8258,7 +8498,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "flatline": {
@@ -8272,14 +8517,14 @@
       "crafted_weapon"
     ],
     "description": "A white medical-response Vector with stained compression bandages around the stock and a dismantled heart-monitor display built into its side. Green lights pulse while firing and flatten when empty.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8292,7 +8537,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "full control": {
@@ -8306,14 +8556,14 @@
       "crafted_weapon"
     ],
     "description": "A 1990s arcade-themed Vector with red-dot sight, ergonomic foregrip, extended magazine, and brightly customized controls.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8326,7 +8576,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "kill switch": {
@@ -8340,14 +8595,14 @@
       "crafted_weapon"
     ],
     "description": "A weathered taped Vector with a combined extended quick-eject magazine system and a red switch controlling its side-mounted flashlight.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8360,7 +8615,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "meta breaker": {
@@ -8374,14 +8634,14 @@
       "crafted_weapon"
     ],
     "description": "Built to break rules nobody remembers agreeing to.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8394,7 +8654,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "black box": {
@@ -8408,14 +8673,14 @@
       "crafted_weapon"
     ],
     "description": "Whatever happens next, the Black Box will not explain it.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8428,7 +8693,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "green flu": {
@@ -8442,14 +8712,14 @@
       "crafted_weapon"
     ],
     "description": "Symptoms may include panic, poor judgment, and sudden silence.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8462,7 +8732,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "nuclear winter": {
@@ -8476,14 +8751,14 @@
       "crafted_weapon"
     ],
     "description": "The forecast calls for darkness with a chance of fallout.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8496,7 +8771,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "red october": {
@@ -8510,14 +8790,14 @@
       "crafted_weapon"
     ],
     "description": "Something cold, silent, and dangerous is moving beneath the surface.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8530,7 +8810,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "metro line": {
@@ -8544,14 +8829,14 @@
       "crafted_weapon"
     ],
     "description": "The fastest route from one bad stop to the next.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8564,7 +8849,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "walking terror": {
@@ -8578,14 +8868,14 @@
       "crafted_weapon"
     ],
     "description": "Terror learned to walk. This taught it to keep its distance.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8598,7 +8888,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "iron curtain": {
@@ -8612,14 +8907,14 @@
       "crafted_weapon"
     ],
     "description": "Heavy, uncompromising, and closed to further discussion.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8632,7 +8927,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "confidence": {
@@ -8646,14 +8946,14 @@
       "crafted_weapon"
     ],
     "description": "Confidence is knowing the next shot will settle the argument.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8666,7 +8966,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "the deer hunter": {
@@ -8680,14 +8985,14 @@
       "crafted_weapon"
     ],
     "description": "The woods are quiet. The hunter is not.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8700,7 +9005,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "ol painless": {
@@ -8714,14 +9024,14 @@
       "crafted_weapon"
     ],
     "description": "It never hurts to be prepared. The same cannot be said for the target.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8734,7 +9044,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "last stand": {
@@ -8748,14 +9063,14 @@
       "crafted_weapon"
     ],
     "description": "If this is the Last Stand, make it one worth remembering.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8768,7 +9083,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "the punisher": {
@@ -8782,14 +9102,14 @@
       "crafted_weapon"
     ],
     "description": "Judgment was quick. The punishment arrives faster.",
-    "rarity": "to_be_defined",
+    "rarity": "not_applicable",
     "stackLimit": 1,
     "spawnQuantity": {
       "min": 1,
       "max": 1
     },
     "usable": false,
-    "spawnArchitecture": "to_be_defined",
+    "spawnArchitecture": "craft_only",
     "weaponOnly": true,
     "weaponKind": "to_be_defined",
     "hands": "to_be_defined",
@@ -8802,7 +9122,12 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
-    "containerEligible": true,
+    "craftedOnly": true,
+    "lootable": false,
+    "acquisitionMethods": [
+      "crafting"
+    ],
+    "containerEligible": false,
     "icon": "res://assets/items/spare_parts.png"
   },
   "glock 17": {
@@ -12073,6 +12398,11 @@
     "iconStatus": "awaiting_implementation",
     "tradeValue": null,
     "scrappable": false,
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "containerEligible": true,
     "icon": "res://assets/items/medical_recipe_v3.png"
   },
@@ -12095,6 +12425,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12129,6 +12464,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12163,6 +12503,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12197,6 +12542,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12231,6 +12581,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12265,6 +12620,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12299,6 +12659,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12333,6 +12698,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12367,6 +12737,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12401,6 +12776,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12435,6 +12815,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12469,6 +12854,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12503,6 +12893,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12537,6 +12932,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12571,6 +12971,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12605,6 +13010,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12639,6 +13049,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12673,6 +13088,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12707,6 +13127,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12741,6 +13166,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12775,6 +13205,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12809,6 +13244,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12843,6 +13283,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12877,6 +13322,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12911,6 +13361,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12945,6 +13400,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -12979,6 +13439,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13013,6 +13478,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13047,6 +13517,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13081,6 +13556,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13115,6 +13595,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13149,6 +13634,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13183,6 +13673,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13217,6 +13712,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13251,6 +13751,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13285,6 +13790,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13319,6 +13829,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13353,6 +13868,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13387,6 +13907,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13421,6 +13946,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13455,6 +13985,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13489,6 +14024,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13523,6 +14063,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13557,6 +14102,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13591,6 +14141,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13625,6 +14180,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13659,6 +14219,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13693,6 +14258,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13727,6 +14297,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13761,6 +14336,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13795,6 +14375,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13829,6 +14414,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13863,6 +14453,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13897,6 +14492,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13931,6 +14531,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13965,6 +14570,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -13999,6 +14609,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14033,6 +14648,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14067,6 +14687,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14101,6 +14726,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14135,6 +14765,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14169,6 +14804,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14203,6 +14843,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14237,6 +14882,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14271,6 +14921,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14305,6 +14960,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14339,6 +14999,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14373,6 +15038,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14407,6 +15077,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14441,6 +15116,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14475,6 +15155,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14509,6 +15194,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14543,6 +15233,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14577,6 +15272,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14611,6 +15311,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14645,6 +15350,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14679,6 +15389,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14713,6 +15428,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14747,6 +15467,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14781,6 +15506,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14815,6 +15545,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14849,6 +15584,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14883,6 +15623,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {
@@ -14917,6 +15662,11 @@
     },
     "usable": false,
     "spawnArchitecture": "to_be_defined",
+    "acquisitionMode": "to_be_defined",
+    "acquisitionOptions": [
+      "quest_reward",
+      "super_rare_location_loot"
+    ],
     "itemType": "recipe",
     "autoConsumeOnSafehouseReturn": true,
     "recipeUnlock": {

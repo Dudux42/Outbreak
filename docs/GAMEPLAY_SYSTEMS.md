@@ -120,6 +120,7 @@ State and clip are separate. Missing final clips may use documented fallbacks.
 ## Doors and Keys
 
 All room connections have visible door meshes. Doors can be opened and closed through interaction and animate around a hinge.
+Closing is rejected while the swept door volume would overlap the player or a living zombie; unobstructed doors still update their movement, collision, sight-blocking, and fog state during the animation.
 
 Locked doors:
 
@@ -156,6 +157,7 @@ Melee:
 - Uses damage, reach, attack speed, knockback, and handedness.
 - Selects one-handed or two-handed action state.
 - Must respect walls and target distance.
+- The current prototype applies the weapon's legacy knockback value as collision-constrained displacement away from the player. The complete approved melee stagger, critical, condition, and phase model remains planned.
 
 The complete firearm roster is runtime-connected, but weapon values remain subject to individual testing. Final non-shotgun ranges, penetration, gravity/drop, caliber-specific projectile speeds, condition, repair, and mechanism-animation polish remain deferred.
 
@@ -178,13 +180,15 @@ Mission threat stars no longer increase zombie HP directly. They continue to aff
 
 Zombie flow:
 
-1. Idle until player detection range and line of sight are satisfied.
-2. Pursue using direct movement with collision sliding.
-3. Attack within range on a timer.
-4. Play directional damage/death feedback.
-5. On lethal damage, leave the active AI list.
-6. Play the death animation once.
-7. Freeze the last frame and remain in `deadZombies` as a visual corpse.
+1. Spawn only at collision-clear, extraction-safe positions; valid explicit Combat Test Range positions are preserved exactly, and bounded deterministic fallbacks or diagnostics handle invalid positions.
+2. Idle until player detection range and line of sight are satisfied.
+3. Pursue using direct movement with collision sliding.
+4. Attack within range on a timer only after current-distance, awareness, line-of-sight, and player-state checks pass.
+5. Stagger meter input is ignored during an active stagger reaction; damage and lethal resolution still apply.
+6. Play directional damage/death feedback.
+7. On lethal damage, leave the active AI list.
+8. Play the death animation once.
+9. Freeze the last frame and remain in `deadZombies` as a visual corpse.
 
 Corpses should not attack, path, or block normal gameplay unless a future corpse-collision system is explicitly designed.
 

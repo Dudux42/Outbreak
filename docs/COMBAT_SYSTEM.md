@@ -19,6 +19,7 @@ It records approved design values even when the browser prototype has not implem
 - Ammunition and loaded magazines.
 - Wall blocking and weapon range checks.
 - Zombie detection, pursuit, attacks, damage, death animations, and persistent corpses.
+- Collision-constrained legacy melee knockback, active-stagger reaction protection, and enemy attack validation for current range, awareness, line of sight, and player state.
 - Four seeded regular-zombie HP/resistance variants.
 - Combat Test Range debug mission with one large open room, four closed/unlocked doors, and one deterministic zombie per HP variant. Blue, green, yellow, and red floor markers identify Decomposed, Fresh, Tough, and Special Infected respectively.
 - The Glock 17 reference values used to calibrate zombie body-shot counts.
@@ -182,6 +183,8 @@ Every melee weapon defines:
 | Stagger force | Reaction tier used when the target's stagger meter fills. |
 | Stagger rate | Meter points added by a connected attack. |
 | Condition action interval | Connected attacks required to lose 4 condition. |
+
+The current browser prototype applies the legacy `knockback` field as horizontal displacement away from the player, constrained by the existing collision-slide helper. This is separate from the approved stagger-force model below; the complete melee timing, critical, condition, and stagger implementation remains in the approved-design section rather than being implied by this temporary reaction.
 
 Missed melee swings do not damage the weapon. A hit against an enemy or valid damageable world object counts as a connected attack.
 

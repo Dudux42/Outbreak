@@ -20,6 +20,7 @@ Crafting execution, ingredient consumption, repairs, per-instance weapon conditi
 - A Recipe item is consumed when it produces a new permanent unlock.
 - An already-unlocked duplicate must not be consumed by crafting or unlock the same craft again. The current automatic-return implementation still consumes duplicates and must be reconciled with this final design rule.
 - Repair services are the explicit exception: they require no physical Recipe item.
+- Recipe-item acquisition is assigned individually. Each physical Recipe is either a quest reward or a `super rare` item restricted to explicitly approved locations; no generic location pool is assumed.
 
 ### Ingredient sourcing and consumption
 
@@ -55,6 +56,7 @@ crafted condition = min(100, base weapon condition + 15 x current Workbench leve
 - The current Workbench level supplies the bonus.
 - The base weapon does not need to be at full condition.
 - Crafted variants remain repairable through their normal weapon-material category.
+- Crafted weapon outputs never enter mission loot pools. They can only be obtained by crafting after their Recipe has been unlocked.
 
 ### Crafted firearm rules
 
@@ -129,7 +131,7 @@ The following weapon entries compare each crafted variant with its base weapon. 
 
 ## 6. Crafted Melee Weapons
 
-All entries are Workbench crafts, use their matching physical Recipe item, produce one weapon, have no detachable modification system, and follow the crafted-condition formula.
+All entries are Workbench crafts, use their matching physical Recipe item, produce one weapon, have no detachable modification system, follow the crafted-condition formula, and are never available as loot.
 
 ### Baseball Bat variants
 
@@ -337,7 +339,7 @@ All entries are Workbench crafts, use their matching physical Recipe item, produ
 
 ## 7. Crafted Firearms
 
-The recipes below produce one permanent firearm variant. Unless stated otherwise, each variant retains the base weapon's ammunition, firing mechanism, and handedness. Suggested parameters include the effects of all visible built-in components.
+The recipes below produce one permanent firearm variant that is never available as loot. Unless stated otherwise, each variant retains the base weapon's ammunition, firing mechanism, and handedness. Suggested parameters include the effects of all visible built-in components.
 
 ### Glock 17 variants
 

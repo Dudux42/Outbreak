@@ -467,6 +467,8 @@ function makeRecipeItemDetails(
     spawnQuantity: Object.freeze({ min: 1, max: 1 }),
     usable: false,
     spawnArchitecture: "to_be_defined",
+    acquisitionMode: "to_be_defined",
+    acquisitionOptions: Object.freeze(["quest_reward", "super_rare_location_loot"]),
     itemType: "recipe",
     autoConsumeOnSafehouseReturn: true,
     recipeUnlock: Object.freeze({
@@ -5147,6 +5149,19 @@ function buildItemDatabase() {
       delete item.excludedLocationTags;
       Object.assign(item, PURE_COLLECTIBLE_DETAILS, { description });
     }
+    if (item.weaponOnly && item.craftable) {
+      delete item.allowedLocationTags;
+      delete item.excludedLocationTags;
+      item.rarity = "not_applicable";
+      item.spawnArchitecture = "craft_only";
+      item.craftedOnly = true;
+      item.lootable = false;
+      item.acquisitionMethods = Object.freeze(["crafting"]);
+    }
+    if (item.itemType === "recipe") {
+      item.acquisitionMode ||= "to_be_defined";
+      item.acquisitionOptions ||= Object.freeze(["quest_reward", "super_rare_location_loot"]);
+    }
     if (item.use && (item.use.consumedOnUse || item.use.consumeChargeOnComplete)) {
       item.use = Object.freeze({
         ...item.use,
@@ -5155,7 +5170,7 @@ function buildItemDatabase() {
       });
     }
     item.lootTags = Object.freeze(item.lootTags);
-    item.containerEligible = !item.lootTags.includes(LOOT_TAGS.SPECIAL);
+    item.containerEligible = !item.lootTags.includes(LOOT_TAGS.SPECIAL) && !item.craftedOnly;
     Object.freeze(item);
   }
 

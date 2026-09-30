@@ -296,6 +296,8 @@ These resources are intended primarily for future Medical Station recipes and up
 
 Recipe items are automatically consumed when the carrying survivor returns successfully to the safehouse. The first copy permanently unlocks its linked craft and opens a notification naming the station. Duplicate copies are also consumed but do not unlock the same craft twice. Medical recipe items unlock their corresponding craft at the Medical Unit; `Saline Solution Recipe` unlocks the existing `Bottle of Saline Solution` output. Ammunition recipe items and all sixty-five named weapon recipe items unlock their matching crafts at the Workbench. Approved ingredient quantities, reusable tools, station levels, outputs, and repair formulas are specified in [`RECIPES.md`](RECIPES.md); crafting execution, production timing, acquisition methods, and the combat parameters of the newest forty-two crafted weapons remain to be implemented or defined.
 
+Every physical Recipe item will be assigned one of two acquisition modes: a quest reward, or `super rare` loot restricted to specific approved locations. Those assignments and locations are defined per Recipe rather than through a generic Recipe loot pool.
+
 ## General Resources
 
 - Compass
@@ -400,6 +402,8 @@ Collectibles currently have no direct gameplay effect, crafting use, trade value
 
 Weapon roles and handedness are recorded for the existing melee roster. The twenty-three named craftable melee weapons beginning with Nailbiter and ending with Pipe Dream have undefined handedness and combat values reserved for the dedicated combat pass. Final melee-attachment plans also belong to that pass.
 
+All twenty-three named crafted melee weapons are crafting-only outputs. They are excluded from containers and every mission loot pool.
+
 ## Crafted Weapons — Class To Be Defined
 
 - Last Light
@@ -446,6 +450,8 @@ Weapon roles and handedness are recorded for the existing melee roster. The twen
 - The Punisher
 
 These are planned craftable weapons whose melee/firearm class, handedness, ammunition behavior, and combat values have not yet been assigned. Their physical recipe items already use the standard safehouse-return unlock flow and target the Workbench.
+
+All forty-two entries in this section are crafting-only outputs. They are excluded from containers and every mission loot pool; rarity therefore does not apply to the crafted weapon itself.
 
 ## Firearms
 

@@ -45,12 +45,13 @@ For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PRO
 - Four body-armor tiers with live damage mitigation, complete-hit negation, raw-damage condition degradation, movement penalties, and per-survivor save persistence keyed by armor model.
 - Equip, unequip, use, drop, drag-and-drop, item quantities, and tooltips.
 - Right-click item context menus across inventory, equipment, quickbar, Item Box, and loot containers, with source-aware inspect, equip, use, move, drop, reload, unload, modify, and unequip actions.
-- Layered item inspection and weapon-modification windows. Firearm attachments can be installed from the active survivor's inventory and persist per survivor by weapon model.
+- Layered item inspection and weapon-modification windows. Firearm attachments can be installed from the active survivor's inventory; the chooser and installed-slot cards show plain-language bonuses and tradeoffs, and configurations persist per survivor by weapon model.
 - Quickbar slots `1` through `9`, with primary/sidearm ownership for slots `1` and `2`.
 - Item box stash transfers.
 - Loot-container search delay, per-item reveal, and transfers.
 - Item database with 388 canonical records, 40 compatibility aliases, 18 loot tags, named firearm/ammunition families, recipe unlock items, planned firearm attachments, runtime weapon/armor/backpack stats, and extended metadata for food, drinks, medical supplies, tools, electronics, collectibles, and construction resources.
 - Successful safehouse returns automatically consume carried recipe items, persist newly unlocked crafts, and show a station-specific unlock notification. Ten physical medical recipes target the Medical Unit, while ten ammunition recipes and sixty-five planned weapon recipes target the Workbench. The newest forty-two crafted weapons intentionally have no assigned combat class or final combat parameters yet.
+- All sixty-five named crafted weapons are flagged as crafting-only outputs and excluded from mission containers and loot pools. Physical Recipe items will be assigned individually as either quest rewards or super-rare, location-specific loot.
 - Approved `128x128` inventory icon specification with dedicated consumable, medical, tool, construction-resource, technical-electronics, weapon-component, general-supply, and collectible icons through Sci-Fi VHS.
 - Newly attached collectible icons for Dog Statue, Tiger Statue, Teddy Bear, Cloth Doll, Toy Car, Wristwatch, Police Badge, Table Clock, Cookbook, and Sci-Fi VHS.
 
@@ -76,9 +77,11 @@ For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PRO
 - Firearms create visible travel-time projectiles. Accuracy, aim settling, walking, recoil, condition-ready effective stats, and attachments change launch direction; swept collision stops shots at walls or zombie hit circles; damage applies only on physical contact.
 - Magazine and per-round reload timers with an above-player progress wheel and interruption on firing or weapon switching.
 - Centered damage variance, critical kills, recoil accumulation/recovery, the 20-point stagger meter, force-tier interruption/knockback, and eight-pellet shotgun blasts with the approved point-blank guarantee.
+- Legacy melee knockback is collision-constrained and pushes living targets away from the player; active stagger reactions cannot be retriggered by additional hits.
 - Attachment compatibility enforcement and live modifiers for capacity, reload, accuracy, recoil, aim settling, walking spread, damage, RPM, muzzle flash, gunshot attraction, shotgun spread, tactical lights, and laser aiming dots.
 - Tactical lights reveal terrain and zombies to 12 units in a 45-degree cone but attract zombies only within 8 units.
-- Zombie spotting, pursuit, attacks, sound, and damage.
+- Zombie spotting, pursuit, attacks, sound, and damage with current-distance, awareness, line-of-sight, and player-state validation.
+- Zombie spawns validate collider clearance and extraction exclusion, use bounded deterministic fallback scanning, preserve valid explicit Combat Test Range positions, and report skipped or relocated spawns diagnostically.
 - Four seeded zombie combat variants built from 128 base HP: Decomposed (112 HP, -10% resistance), Fresh (128 HP, 0%), Tough (144 HP, 20%), and Special (160 HP, 35%).
 - Two zombie visual types selected from an enemy list.
 - Directional civilian-zombie walk and death sheets.
@@ -118,7 +121,7 @@ For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PRO
 - `ITEM_DATABASE` includes descriptions, rarity, stack limits, spawn quantities, intended use effects, buffs, returned-container data, exclusions, crafting flags, and tool/resource metadata for the currently detailed item groups.
 - The runtime use action still primarily understands `healHp` from `itemCatalog`.
 - Medical Herbs, First Aid Spray, Vitalis, Trauma Bag, and Surgical Treatment Kit define HP restoration and charge counts in data. First Aid Spray also records its depleted conversion into Empty First-Aid Spray; multi-charge use, charge persistence, depleted-item conversion, and Surgical Treatment Kit condition selection are not yet wired into the runtime.
-- The 32 firearm attachments have functional slots, compatibility enforcement, effect summaries, effective-stat previews, combat modifiers, and excess-ammunition routing. Until unique item instances exist, duplicate copies of one weapon model share that survivor's attachment configuration.
+- The 32 firearm attachments have functional slots, compatibility enforcement, plain-language effect summaries, effective-stat previews, combat modifiers, and excess-ammunition routing. Until unique item instances exist, duplicate copies of one weapon model share that survivor's attachment configuration.
 - Hunger, thirst, stamina, speed buffs, empty-container returns, spoilage, trading, scrapping, and location exclusions are not fully implemented.
 - Thirty firearm attachments still use generic fallback icons pending dedicated approved artwork; the healing items plus Short- and Medium-Range Sights now have approved mappings.
 - Approved `gaming_magazine_v3.png` is attached in the runtime texture mapping; v1 and v2 remain superseded historical candidates.
@@ -179,6 +182,8 @@ For the full consolidated project handoff, see [`PROJECT_MASTER_HANDOFF.md`](PRO
 - Eventual Godot rebuild following `godot_migration/`.
 
 ## Known Technical Risks
+
+- The 2026-09-10 [enemy AI audit and repair handoff](ENEMY_AI_DIRECTION.md) tracks the bounded AI-01 through AI-05 repairs as implemented pending final build/browser verification. Navigation around obstacles and awareness loss remain planned extensions.
 
 - `src/main.js` is large and tightly coupled.
 - Item behavior is split between database and runtime catalog layers.

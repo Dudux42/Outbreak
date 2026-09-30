@@ -742,6 +742,11 @@ const STAGGER_FORCE_REACTIONS = Object.freeze({
   strong: Object.freeze({ interruption: 0.90, knockback: 0.65 }),
   aggressive: Object.freeze({ interruption: 1.20, knockback: 1.10 }),
 });
+const ZOMBIE_SPAWN_RADIUS = 0.58;
+const ZOMBIE_SPAWN_EXTRACTION_CLEARANCE = 1.2;
+const ZOMBIE_SPAWN_RANDOM_ATTEMPTS = 20;
+const ZOMBIE_SPAWN_GRID_STEP = 1.5;
+const DOOR_CLOSE_SWEEP_STEPS = 8;
 const ATTACHMENT_EFFECT_LIMITS = Object.freeze({
   reloadTimeMultiplier: Object.freeze([0.55, 2]),
   recoilSpreadMultiplier: Object.freeze([0.5, 1.5]),
@@ -9439,40 +9444,51 @@ function getApplicableWeaponAttachmentSlots(weaponName) {
   )));
 }
 
-function getAttachmentEffectSummary(attachmentName, weaponName) {
+function formatAttachmentPercent(multiplier, lowerLabel, higherLabel) {
+  const percentage = Math.round(Math.abs(Number(multiplier) - 1) * 100);
+  if (!percentage) return null;
+  return Number(multiplier) < 1
+    ? `${percentage}% ${lowerLabel}`
+    : `${percentage}% ${higherLabel}`;
+}
+
+function getAttachmentEffectDetails(attachmentName, weaponName) {
   const attachment = getItem(attachmentName);
+  const weaponId = resolveItemId(weaponName);
   const effects = [];
   if (attachment.accuracyRatingModifier) {
     effects.push(`${attachment.accuracyRatingModifier > 0 ? "+" : ""}${attachment.accuracyRatingModifier} accuracy`);
   }
-  if (attachment.magazineCapacityByWeapon?.[resolveItemId(weaponName)]) {
-    effects.push(`${attachment.magazineCapacityByWeapon[resolveItemId(weaponName)]} rounds`);
+  const capacity = Number(attachment.magazineCapacityByWeapon?.[weaponId]);
+  if (Number.isFinite(capacity) && capacity > 0) {
+    const difference = capacity - getWeaponBaseMagazineSize(weaponId);
+    effects.push(difference
+      ? `${difference > 0 ? "+" : ""}${difference} magazine capacity`
+      : `${capacity}-round magazine`);
   }
-  if (attachment.reloadTypeOverride) effects.push(`${attachment.reloadTypeOverride.replace("_", " ")} reload`);
-  if (attachment.reloadTimeMultiplier && attachment.reloadTimeMultiplier !== 1) {
-    effects.push(`${Math.round((attachment.reloadTimeMultiplier - 1) * 100)}% reload time`);
-  }
-  if (attachment.recoilSpreadMultiplier && attachment.recoilSpreadMultiplier !== 1) {
-    effects.push(`${Math.round((attachment.recoilSpreadMultiplier - 1) * 100)}% recoil spread`);
-  }
-  if (attachment.aimSettleTimeMultiplier && attachment.aimSettleTimeMultiplier !== 1) {
-    effects.push(`${Math.round((attachment.aimSettleTimeMultiplier - 1) * 100)}% aim-settle time`);
-  }
-  if (attachment.walkingAimSpreadMultiplier && attachment.walkingAimSpreadMultiplier !== 1) {
-    effects.push(`${Math.round((attachment.walkingAimSpreadMultiplier - 1) * 100)}% walking spread`);
-  }
-  if (attachment.damageMultiplier && attachment.damageMultiplier !== 1) {
-    effects.push(`${Math.round((attachment.damageMultiplier - 1) * 100)}% damage`);
-  }
-  if (attachment.gunshotDetectionRadiusMultiplier && attachment.gunshotDetectionRadiusMultiplier !== 1) {
-    effects.push(`${Math.round((attachment.gunshotDetectionRadiusMultiplier - 1) * 100)}% gunshot radius`);
+  if (attachment.reloadTypeOverride) effects.push(`${attachment.reloadTypeOverride.replaceAll("_", " ")} reload`);
+  const percentageEffects = [
+    ["reloadTimeMultiplier", "faster reload", "slower reload"],
+    ["recoilSpreadMultiplier", "less recoil", "more recoil"],
+    ["aimSettleTimeMultiplier", "faster aim", "slower aim"],
+    ["walkingAimSpreadMultiplier", "less moving spread", "more moving spread"],
+    ["damageMultiplier", "less damage", "more damage"],
+    ["fireRateMultiplier", "slower fire rate", "faster fire rate"],
+    ["conditionLossRateMultiplier", "slower condition loss", "faster condition loss"],
+    ["gunshotDetectionRadiusMultiplier", "quieter gunshots", "louder gunshots"],
+    ["muzzleFlashMultiplier", "less muzzle flash", "more muzzle flash"],
+    ["pelletSpreadMultiplier", "tighter pellet spread", "wider pellet spread"],
+  ];
+  for (const [field, lowerLabel, higherLabel] of percentageEffects) {
+    const summary = formatAttachmentPercent(attachment[field], lowerLabel, higherLabel);
+    if (summary) effects.push(summary);
   }
   if (attachment.illuminationRangeUnits) effects.push(`${attachment.illuminationRangeUnits}-unit light`);
   if (attachment.aimReticleOverride === "red_dot") effects.push("laser aiming dot");
-  if (attachment.pelletSpreadOverridesDegrees?.[resolveItemId(weaponName)]) {
-    effects.push(`${attachment.pelletSpreadOverridesDegrees[resolveItemId(weaponName)]}° pellet spread`);
+  if (attachment.pelletSpreadOverridesDegrees?.[weaponId]) {
+    effects.push(`${attachment.pelletSpreadOverridesDegrees[weaponId]} degrees pellet spread`);
   }
-  return effects.join(" · ") || "No direct combat modifier";
+  return effects;
 }
 
 function returnExcessMagazineAmmo(weaponName, newCapacity) {
@@ -9549,6 +9565,13 @@ function renderWeaponModify() {
               ${installed ? `<img src="${getItemIconPath(installed)}" alt="" />` : ""}
               <strong>${installed ? getItemLabel(installed) : "Empty"}</strong>
             </div>
+            ${installed ? `
+              <span class="weapon-modify-slot-effects">
+                ${getAttachmentEffectDetails(installed, weaponName)
+                  .map((effect) => `<i>${escapeHtml(effect)}</i>`)
+                  .join("")}
+              </span>
+            ` : ""}
             ${installed ? `<button type="button" data-remove-attachment="${slot.id}">Remove</button>` : ""}
           </section>
         `;
@@ -9559,13 +9582,21 @@ function renderWeaponModify() {
       <div>
         ${availableAttachments.length ? availableAttachments.map(({ itemName, index }) => {
           const compatibility = getAttachmentCompatibility(weaponName, itemName);
+          const attachment = getItem(itemName);
+          const effectDetails = getAttachmentEffectDetails(itemName, weaponName);
           return `
           <button type="button" data-install-attachment="${index}" ${compatibility.compatible ? "" : "disabled"}>
             <img src="${getItemIconPath(itemName)}" alt="" />
-            <span>${getItemLabel(itemName)}</span>
-            <small>${compatibility.compatible
-              ? `${getItem(itemName).attachmentSlot} · ${getAttachmentEffectSummary(itemName, weaponName)}`
-              : compatibility.reason}</small>
+            <span class="weapon-modify-attachment-name">${getItemLabel(itemName)}</span>
+            <small class="weapon-modify-attachment-slot">${escapeHtml(attachment.attachmentSlot.replaceAll("_", " "))}</small>
+            <span class="weapon-modify-attachment-description">${escapeHtml(attachment.description || "No field notes available.")}</span>
+            <span class="weapon-modify-attachment-effects">
+              <b>${compatibility.compatible ? "Effects" : "Unavailable"}</b>
+              ${compatibility.compatible
+                ? effectDetails.map((effect) => `<i>${escapeHtml(effect)}</i>`).join("")
+                : `<i>${escapeHtml(compatibility.reason)}</i>`}
+            </span>
+            <strong class="weapon-modify-attachment-action">${compatibility.compatible ? "Install" : "Incompatible"}</strong>
           </button>
         `;
         }).join("") : "<p>No weapon attachments in the active survivor's inventory.</p>"}
@@ -10434,9 +10465,55 @@ function addDoor(edge, material) {
   if (door.userData.locked) lockedDoors.push(door);
 }
 
+function doesDoorBoundsOverlapActor(bounds, actor, radius) {
+  const closestX = THREE.MathUtils.clamp(actor.position.x, bounds.min.x, bounds.max.x);
+  const closestZ = THREE.MathUtils.clamp(actor.position.z, bounds.min.z, bounds.max.z);
+  const offsetX = actor.position.x - closestX;
+  const offsetZ = actor.position.z - closestZ;
+  return offsetX * offsetX + offsetZ * offsetZ < radius * radius;
+}
+
+function isDoorCloseBlocked(door) {
+  const hinge = door.userData.hinge;
+  if (!hinge) return false;
+  const startRotation = hinge.rotation.y;
+  const endRotation = door.userData.closedRotationY || 0;
+  const actors = [];
+  if (player && state.health > 0 && !isPlayerInTerminalAction()) {
+    actors.push({ actor: player, radius: player.userData.radius || 0.45, kind: "player" });
+  }
+  actors.push(...zombies
+    .filter((zombie) => !zombie.userData.dead && zombie.userData.health > 0)
+    .map((zombie) => ({ actor: zombie, radius: zombie.userData.radius || 0.5, kind: "zombie" })));
+
+  for (let step = 0; step <= DOOR_CLOSE_SWEEP_STEPS; step++) {
+    const progress = step / DOOR_CLOSE_SWEEP_STEPS;
+    hinge.rotation.y = THREE.MathUtils.lerp(startRotation, endRotation, progress);
+    door.updateWorldMatrix(true, false);
+    const bounds = new THREE.Box3().setFromObject(door);
+    const blockingActor = actors.find(({ actor, radius }) => doesDoorBoundsOverlapActor(bounds, actor, radius));
+    if (blockingActor) {
+      hinge.rotation.y = startRotation;
+      door.updateWorldMatrix(true, false);
+      return blockingActor.kind;
+    }
+  }
+
+  hinge.rotation.y = startRotation;
+  door.updateWorldMatrix(true, false);
+  return null;
+}
+
 function toggleDoor(door) {
   if (door.userData.opening) return;
   const opening = !door.userData.isOpen;
+  if (!opening) {
+    const blockingActor = isDoorCloseBlocked(door);
+    if (blockingActor) {
+      showPlayerNotice(`The doorway is blocked by the ${blockingActor}.`, 1.2);
+      return;
+    }
+  }
   door.userData.opening = true;
   door.userData.openTarget = opening ? 1 : 0;
   door.userData.openProgress = opening ? 0 : 1;
@@ -10447,6 +10524,7 @@ function toggleDoor(door) {
   else playDoorCloseSound();
   if (opening) colliders = colliders.filter((node) => node !== door);
   else if (!colliders.includes(door)) colliders.push(door);
+  colliderBounds.delete(door);
   markColliderGridDirty();
   door.userData.blocksSight = !opening;
   openingDoors.push(door);
@@ -10457,7 +10535,10 @@ function updateOpeningDoors(dt) {
     door.userData.animTime = Math.min(1, door.userData.animTime + dt * 2.8);
     const t = easeOutCubic(door.userData.animTime);
     door.userData.hinge.rotation.y = THREE.MathUtils.lerp(door.userData.startRotationY, door.userData.endRotationY, t);
-    if (colliders.includes(door)) markColliderGridDirty();
+    if (colliders.includes(door)) {
+      colliderBounds.delete(door);
+      markColliderGridDirty();
+    }
     if (door.userData.animTime >= 1) {
       door.userData.opening = false;
       door.userData.isOpen = door.userData.openTarget === 1;
@@ -11079,6 +11160,58 @@ function getRandomPointInRoom(room, inset = 0.9, y = 0.24) {
   );
 }
 
+function isValidZombieSpawnPoint(position) {
+  return Boolean(position)
+    && !hitsCollider(position, ZOMBIE_SPAWN_RADIUS)
+    && !isInsideExtractionZone(position, ZOMBIE_SPAWN_EXTRACTION_CLEARANCE);
+}
+
+function getZombieSpawnGridPoints(room, inset = 1.0, y = 1.05) {
+  const minX = room.x - room.halfW + inset;
+  const maxX = room.x + room.halfW - inset;
+  const minZ = room.z - room.halfH + inset;
+  const maxZ = room.z + room.halfH - inset;
+  const xValues = [];
+  const zValues = [];
+  for (let x = minX; x <= maxX + 0.001; x += ZOMBIE_SPAWN_GRID_STEP) xValues.push(Math.min(x, maxX));
+  for (let z = minZ; z <= maxZ + 0.001; z += ZOMBIE_SPAWN_GRID_STEP) zValues.push(Math.min(z, maxZ));
+  if (!xValues.length) xValues.push(room.x);
+  if (!zValues.length) zValues.push(room.z);
+  return xValues.flatMap((x) => zValues.map((z) => new THREE.Vector3(x, y, z)));
+}
+
+function findZombieSpawnPoint(preferredRoom, explicitSpawn = null) {
+  const spawnRooms = missionRooms.filter((room) => room.id !== 0);
+  if (!preferredRoom || !spawnRooms.includes(preferredRoom)) return null;
+
+  if (explicitSpawn) {
+    const requested = new THREE.Vector3(explicitSpawn.x, 1.05, explicitSpawn.z);
+    if (isValidZombieSpawnPoint(requested)) return { position: requested, source: "explicit" };
+  }
+
+  const inset = explicitSpawn ? 1.35 : 1.0;
+  let initialCandidate = null;
+  if (!explicitSpawn) initialCandidate = getRandomPointInRoom(preferredRoom, inset, 1.05);
+  for (let attempt = 0; attempt < ZOMBIE_SPAWN_RANDOM_ATTEMPTS; attempt++) {
+    const candidate = getRandomPointInRoom(preferredRoom, inset, 1.05);
+    if (isValidZombieSpawnPoint(candidate)) return { position: candidate, source: "random" };
+  }
+  if (initialCandidate && isValidZombieSpawnPoint(initialCandidate)) {
+    return { position: initialCandidate, source: "initial" };
+  }
+
+  const orderedRooms = [
+    preferredRoom,
+    ...spawnRooms.filter((room) => room !== preferredRoom),
+  ];
+  for (const room of orderedRooms) {
+    const gridPoints = getZombieSpawnGridPoints(room, inset, 1.05);
+    const fallback = gridPoints.find((candidate) => isValidZombieSpawnPoint(candidate));
+    if (fallback) return { position: fallback, source: "deterministic_fallback", roomId: room.id };
+  }
+  return null;
+}
+
 function createLootNode(itemName, position, qty = 1) {
   const isKey = itemName === "Key";
   const item = isKey ? { texture: "key" } : getItem(itemName);
@@ -11142,16 +11275,41 @@ function pickZombieVariant() {
 
 function addZombies(location, layout = null) {
   const debugZombies = layout?.combatTest ? layout.testZombies : null;
+  if (layout && !Array.isArray(layout.spawnDiagnostics)) layout.spawnDiagnostics = [];
   const count = debugZombies?.length || (3 + location.stars * 4);
   for (let i = 0; i < count; i++) {
     const debugDefinition = debugZombies?.[i] || null;
     const spawnRooms = missionRooms.filter((candidate) => candidate.id !== 0);
     const room = debugDefinition
-      ? missionRooms.find((candidate) => candidate.id === debugDefinition.roomId) || missionRooms[0]
-      : pick(spawnRooms.length ? spawnRooms : missionRooms);
+      ? spawnRooms.find((candidate) => candidate.id === debugDefinition.roomId)
+      : pick(spawnRooms);
     const zombieVariant = debugDefinition
       ? ZOMBIE_VARIANTS.find((variant) => variant.id === debugDefinition.variantId) || ZOMBIE_VARIANTS[0]
       : pickZombieVariant();
+    const spawnResult = findZombieSpawnPoint(room, debugDefinition?.spawn || null);
+    if (!spawnResult || !isValidZombieSpawnPoint(spawnResult.position)) {
+      const diagnostic = {
+        index: i,
+        roomId: room?.id ?? null,
+        variantId: zombieVariant.id,
+        requestedSpawn: debugDefinition?.spawn || null,
+      };
+      layout?.spawnDiagnostics?.push(diagnostic);
+      console.warn("[Outbreak] Skipped zombie spawn: no legal position found.", diagnostic);
+      continue;
+    }
+    if (debugDefinition?.spawn && spawnResult.source !== "explicit") {
+      const diagnostic = {
+        index: i,
+        roomId: room?.id ?? null,
+        variantId: zombieVariant.id,
+        requestedSpawn: debugDefinition.spawn,
+        finalSpawn: { x: spawnResult.position.x, z: spawnResult.position.z },
+        source: spawnResult.source,
+      };
+      layout?.spawnDiagnostics?.push(diagnostic);
+      console.warn("[Outbreak] Relocated invalid explicit zombie spawn.", diagnostic);
+    }
     const enemyType = enemyTypes.find((type) => type.id === zombieVariant.visualTypeId) || enemyTypes[0];
     const animator = createSpriteSheetAnimator(enemyType.animations);
     const material = new THREE.SpriteMaterial({
@@ -11163,17 +11321,7 @@ function addZombies(location, layout = null) {
       depthTest: true,
     });
     const zombie = new THREE.Sprite(material);
-    let spawnPoint = debugDefinition?.spawn
-      ? new THREE.Vector3(debugDefinition.spawn.x, 1.05, debugDefinition.spawn.z)
-      : getRandomPointInRoom(room, 1.0, 1.05);
-    for (let attempt = 0; attempt < 20; attempt++) {
-      const candidate = getRandomPointInRoom(room, debugDefinition ? 1.35 : 1.0, 1.05);
-      if (!hitsCollider(candidate, 0.58) && !isInsideExtractionZone(candidate, 1.2)) {
-        spawnPoint = candidate;
-        break;
-      }
-    }
-    zombie.position.copy(spawnPoint);
+    zombie.position.copy(spawnResult.position);
     zombie.scale.set(2.5, 2.5, 1);
     const maxHealth = Math.round(ZOMBIE_BASE_HP * zombieVariant.maxHpMultiplier);
     zombie.userData = {
@@ -11196,6 +11344,7 @@ function addZombies(location, layout = null) {
       zombieVariantName: zombieVariant.name,
       debugRoomId: debugDefinition?.roomId || null,
       debugMarkerColor: debugDefinition?.markerColor || null,
+      spawnSource: spawnResult.source,
       baseColor: zombieVariant.tint,
       animator,
       facing: "south",
@@ -11838,7 +11987,19 @@ function updateZombies(dt) {
       }
     }
     updateZombieAnimation(zombie, dt, movedDistance);
-    if (distance < 1.1 && zombie.userData.attackTimer <= 0) {
+    const currentDistance = zombie.position.distanceTo(player.position);
+    const canAttack = (
+      state.mode === "mission"
+      && state.health > 0
+      && !isPlayerInTerminalAction()
+      && !zombie.userData.dead
+      && !zombie.userData.staggerTimer
+      && zombie.userData.hasSpottedPlayer
+      && currentDistance < 1.1
+      && zombie.userData.attackTimer <= 0
+      && hasLineOfSight(zombie.position, player.position)
+    );
+    if (canAttack) {
       zombie.userData.attackTimer = 1.1;
       applyPlayerDamage(8, { source: "zombie_attack" });
       if (state.health <= 0) {
@@ -12407,6 +12568,12 @@ function applyProjectileDamage(zombie, projectile) {
     killZombie(zombie);
     return;
   }
+  if (zombie.userData.staggerTimer > 0) return;
+  const knockback = Math.max(0, Number(projectile.knockback) || 0);
+  const knockbackDirection = projectile.direction?.clone().setY(0);
+  if (knockback > 0 && knockbackDirection?.lengthSq() > 0.0001) {
+    moveWithSlide(zombie, knockbackDirection.normalize().multiplyScalar(knockback), zombie.userData.radius);
+  }
   const staggerAdded = (Number(projectile.staggerRate) || 0) / Math.max(1, projectile.pelletCount || 1);
   zombie.userData.staggerMeter = Math.min(20, (zombie.userData.staggerMeter || 0) + staggerAdded);
   zombie.userData.staggerDecayDelay = 2;
@@ -12414,11 +12581,13 @@ function applyProjectileDamage(zombie, projectile) {
     const reaction = STAGGER_FORCE_REACTIONS[projectile.staggerForce] || STAGGER_FORCE_REACTIONS.weak;
     zombie.userData.staggerMeter = 0;
     zombie.userData.staggerTimer = reaction.interruption;
-    moveWithSlide(
-      zombie,
-      projectile.direction.clone().multiplyScalar(reaction.knockback),
-      zombie.userData.radius
-    );
+    if (projectile.direction) {
+      moveWithSlide(
+        zombie,
+        projectile.direction.clone().multiplyScalar(reaction.knockback),
+        zombie.userData.radius
+      );
+    }
   }
 }
 
@@ -12623,7 +12792,11 @@ function attack() {
   }
 
   if (!best) return;
-  applyProjectileDamage(best, { damage });
+  applyProjectileDamage(best, {
+    damage,
+    direction: best.position.clone().sub(player.position).setY(0).normalize(),
+    knockback: heldData.knockback,
+  });
   updateHud();
 }
 

@@ -89,6 +89,7 @@ There is no automated test suite yet. `npm run build` plus focused browser verif
 - [Architecture](Architecture.md)
 - [Game Design](docs/GAME_DESIGN.md)
 - [City Canon and Map Foundation](docs/CITY_CANON.md)
+- [Opening Act and Basic Tutorial](docs/OPENING_ACT.md)
 - [Current Build](docs/CURRENT_BUILD.md)
 - [Gameplay Systems](docs/GAMEPLAY_SYSTEMS.md)
 - [Item Database Reference](docs/ITEM_DATABASE.md)
